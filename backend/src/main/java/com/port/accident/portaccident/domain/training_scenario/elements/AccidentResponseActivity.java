@@ -1,6 +1,9 @@
-package com.port.accident.portaccident.domain.training_scenario.scenario_activity;
+package com.port.accident.portaccident.domain.training_scenario.elements;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -8,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "accident_response_activity")
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccidentResponseActivity {
 
     @Id
@@ -23,4 +27,8 @@ public class AccidentResponseActivity {
 
     @Column(name = "accident_response_complete_planing_time")
     private LocalDateTime completePlaningTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scenario_id")
+    private Scenario scenario;
 }
