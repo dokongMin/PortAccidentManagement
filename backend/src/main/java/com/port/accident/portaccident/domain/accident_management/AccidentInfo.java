@@ -1,13 +1,21 @@
 package com.port.accident.portaccident.domain.accident_management;
 
+import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccident;
+import com.port.accident.portaccident.domain.accident_management.elements.DamageFacility;
+import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "accident_info")
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccidentInfo {
 
     @Id
@@ -35,4 +43,14 @@ public class AccidentInfo {
 
     @Column(name = "victim")
     private String victim;
+
+    @OneToMany(mappedBy = "accident_info")
+    private List<AccidentType> accidentTypeList= new ArrayList<>();
+
+    @OneToMany(mappedBy = "accident_info")
+    private List<CausesSafetyAccident> causesSafetyAccidentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "accident_info")
+    private List<DamageFacility> damageFacilityList = new ArrayList<>();
+
 }
