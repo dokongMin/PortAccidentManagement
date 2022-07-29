@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.domain.code;
 
+import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,5 +43,9 @@ public class RepresentativeCode {
     public void setDetailedCode(DetailedCode code){
         detailedCode.add(code);
 
+    }
+    public void updateRepCode(RepresentativeCodeDto dto){
+        this.code = dto.getCode();
+        this.name = dto.getName();
     }
 }
