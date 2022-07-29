@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.domain.code;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,12 +20,27 @@ public class RepresentativeCode {
     @Column(name = "representative_code_id")
     private Integer id;
 
+    //대표코드번호
+    @Column(name = "representative_code")
+    private String code;
+
+    //대표코드명
     @Column(name = "representative_code_name")
     private String name;
 
-    @Column(name = "representative_code_comment")
-    private String comment;
-
-    @OneToMany(mappedBy = "representative_code")
+    @OneToMany(mappedBy = "representativeCode")
     private List<DetailedCode> detailedCode = new ArrayList<>();
+
+    @Builder
+    public RepresentativeCode(Integer id, String name, String code, List<DetailedCode> detailedCode) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.detailedCode = detailedCode;
+    }
+
+    public void setDetailedCode(DetailedCode code){
+        detailedCode.add(code);
+
+    }
 }

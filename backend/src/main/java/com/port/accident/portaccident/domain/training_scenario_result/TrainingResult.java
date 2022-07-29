@@ -61,12 +61,12 @@ public class TrainingResult {
     @Column(name = "training_port_area")
     private String trainingArea;
 
-    @OneToMany(mappedBy = "training_result")
+    @OneToMany(mappedBy = "trainingResult")
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "training_result")
+    @OneToMany(mappedBy = "trainingResult")
     private List<TrainingByDate> trainingByDateList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "training_result")
+    @OneToMany(mappedBy = "trainingResult")
     private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
 }
