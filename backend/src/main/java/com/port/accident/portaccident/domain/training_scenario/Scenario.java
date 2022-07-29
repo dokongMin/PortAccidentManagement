@@ -4,7 +4,10 @@ package com.port.accident.portaccident.domain.training_scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -58,4 +61,25 @@ public class Scenario {
 
     @OneToMany(mappedBy = "scenario")
     private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
+
+    @Builder
+    public Scenario(Integer id, String name, String level, String impact, String precedingType, String accidentType,
+                    String disasterType, String portArea, String responseStage,
+                    List<AccidentPortFacility> accidentPortFacilityList,
+                    List<AccidentResponseActivity> accidentResponseActivityList,
+                    List<ScenarioEvaluation> scenarioEvaluationList) {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+        this.impact = impact;
+        this.precedingType = precedingType;
+        this.accidentType = accidentType;
+        this.disasterType = disasterType;
+        this.portArea = portArea;
+        this.responseStage = responseStage;
+        this.accidentPortFacilityList = accidentPortFacilityList;
+        this.accidentResponseActivityList = accidentResponseActivityList;
+        this.scenarioEvaluationList = scenarioEvaluationList;
+    }
+
 }

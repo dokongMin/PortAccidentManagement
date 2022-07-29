@@ -1,7 +1,9 @@
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
 
+import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,4 +31,14 @@ public class ScenarioEvaluationStandard {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scenario_evaluation_id")
     private ScenarioEvaluation scenarioEvaluation;
+
+    @Builder
+    public ScenarioEvaluationStandard(Integer id, String name,
+                                      List<ScenarioEvaluationDetailsStandard> scenarioEvaluationDetailsStandardList,
+                                      ScenarioEvaluation scenarioEvaluation) {
+        this.id = id;
+        this.name = name;
+        this.scenarioEvaluationDetailsStandardList = scenarioEvaluationDetailsStandardList;
+        this.scenarioEvaluation = scenarioEvaluation;
+    }
 }
