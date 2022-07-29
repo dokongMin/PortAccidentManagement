@@ -34,6 +34,6 @@ public class TrainingByDate {
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;
 
-    @OneToMany(mappedBy = "training_by_date")
+    @OneToMany(mappedBy = "trainingByDate")
     private List<EvaluationDetails> evaluationDetailsList = new ArrayList<>();
 }

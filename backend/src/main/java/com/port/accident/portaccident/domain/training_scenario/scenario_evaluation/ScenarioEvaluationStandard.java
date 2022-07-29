@@ -23,7 +23,7 @@ public class ScenarioEvaluationStandard {
     @Column(name = "scenario_evaluation_standard_name")
     private String name;
 
-    @OneToMany(mappedBy = "scenario_evaluation_standard")
+    @OneToMany(mappedBy = "scenarioEvaluationStandard")
     private List<ScenarioEvaluationDetailsStandard> scenarioEvaluationDetailsStandardList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

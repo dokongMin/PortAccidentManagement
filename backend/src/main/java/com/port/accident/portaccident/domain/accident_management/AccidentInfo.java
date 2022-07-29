@@ -44,13 +44,13 @@ public class AccidentInfo {
     @Column(name = "victim")
     private String victim;
 
-    @OneToMany(mappedBy = "accident_info")
+    @OneToMany(mappedBy = "accidentInfo")
     private List<AccidentType> accidentTypeList= new ArrayList<>();
 
-    @OneToMany(mappedBy = "accident_info")
+    @OneToMany(mappedBy = "accidentInfo")
     private List<CausesSafetyAccident> causesSafetyAccidentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "accident_info")
+    @OneToMany(mappedBy = "accidentInfo")
     private List<DamageFacility> damageFacilityList = new ArrayList<>();
 
 }
