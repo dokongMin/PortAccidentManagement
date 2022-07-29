@@ -18,17 +18,17 @@ public class ScenarioEvaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "scenario_evaluation_id")
+    @Column(name = "scenario_evaluation_id") // 시나리오 평가 id
     private Integer id;
 
-    @Column(name = "scenario_evaluation_name")
+    @Column(name = "scenario_evaluation_name") // 시나리오명
     private String name;
 
-    @OneToMany(mappedBy = "scenarioEvaluation")
+    @OneToMany(mappedBy = "scenarioEvaluation") // 시나리오 평가 기준
     private List<ScenarioEvaluationStandard> scenarioEvaluationStandardList = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "scenario_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scenario_id") // 시나리오 id
     private Scenario scenario;
 
     @Builder

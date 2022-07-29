@@ -23,51 +23,52 @@ public class Scenario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "scenario_id")
+    @Column(name = "scenario_id") // 훈련 시나리오 id
     private Integer id;
 
-    @Column(name = "scenario_name")
+    @Column(name = "scenario_name") // 시나리오명
     private String name;
 
-    @Column(name = "scenario_level")
+    @Column(name = "scenario_level") // 사고 수준
     private String level;
 
-    @Column(name = "scenario_impact")
+    @Column(name = "scenario_impact") // 사고 영향
     private String impact;
 
     /**
      * precedingType : 사고 - 재난 둘 중에 어떤 유형인지 선택하기 위함
      */
-    @Column(name = "accident_disaster_type")
+
+    @Column(name = "accident_disaster_type") // 사고/재난
     private String precedingType;
 
-    @Column(name = "accident_type")
+    @Column(name = "accident_type") // 사고 유형
     private String accidentType;
 
-    @Column(name = "disaster_type")
+    @Column(name = "disaster_type") // 재난 유형
     private String disasterType;
 
-    @Column(name = "scenario_port_area")
+    @Column(name = "scenario_port_area") // 사고 항만 구역
     private String portArea;
 
-    @Column(name = "scenario_response_stage")
+    @Column(name = "scenario_response_stage") // 사고 대응 단계
     private String responseStage;
 
-    @OneToMany(mappedBy = "scenario")
+    @OneToMany(mappedBy = "scenario") // 안전 사고 항만 설비
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scenario")
+    @OneToMany(mappedBy = "scenario") // 안전 사고 대응 활동
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scenario")
-    private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
+    @OneToOne(mappedBy = "scenario") // 시나리오 평가
+    private ScenarioEvaluation scenarioEvaluation;
 
     @Builder
     public Scenario(Integer id, String name, String level, String impact, String precedingType, String accidentType,
                     String disasterType, String portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
-                    List<ScenarioEvaluation> scenarioEvaluationList) {
+                    ScenarioEvaluation scenarioEvaluation) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -79,7 +80,7 @@ public class Scenario {
         this.responseStage = responseStage;
         this.accidentPortFacilityList = accidentPortFacilityList;
         this.accidentResponseActivityList = accidentResponseActivityList;
-        this.scenarioEvaluationList = scenarioEvaluationList;
+        this.scenarioEvaluation = scenarioEvaluation;
     }
 
 }

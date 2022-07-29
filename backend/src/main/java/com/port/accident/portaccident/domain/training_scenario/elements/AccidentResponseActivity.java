@@ -17,26 +17,26 @@ public class AccidentResponseActivity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "accident_response_activity_id")
+    @Column(name = "accident_response_activity_id") // 안전 사고 대응 활동 id
     private Integer id;
 
-    @Column(name = "accident_response_activity_name")
-    private String name;
+    @Column(name = "accident_response_activity_comment") // 사고 대응 활동 내용
+    private String comment;
 
-    @Column(name = "accident_response_activity_manager")
+    @Column(name = "accident_response_activity_manager") // 사고 대응 활동 담당
     private String manager;
 
-    @Column(name = "accident_response_complete_planing_time")
+    @Column(name = "accident_response_complete_planing_time") // 사고 대응 활동 완료 계획 시간
     private LocalDateTime completePlaningTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "scenario_id")
+    @JoinColumn(name = "scenario_id") // 훈련 시나리오 id
     private Scenario scenario;
 
     @Builder
-    public AccidentResponseActivity(Integer id, String name, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
+    public AccidentResponseActivity(Integer id, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
         this.id = id;
-        this.name = name;
+        this.comment = comment;
         this.manager = manager;
         this.completePlaningTime = completePlaningTime;
         this.scenario = scenario;
