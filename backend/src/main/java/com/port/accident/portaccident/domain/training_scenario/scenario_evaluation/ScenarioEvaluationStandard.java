@@ -1,7 +1,6 @@
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
 
-import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,17 +18,17 @@ public class ScenarioEvaluationStandard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "scenario_evaluation_standard_id")
+    @Column(name = "scenario_evaluation_standard_id") // 시나리오 평가 기준 id
     private Integer id;
 
-    @Column(name = "scenario_evaluation_standard_name")
+    @Column(name = "scenario_evaluation_standard_name") // 평가 기준명
     private String name;
 
-    @OneToMany(mappedBy = "scenarioEvaluationStandard")
+    @OneToMany(mappedBy = "scenarioEvaluationStandard") // 시나리오 평가 상세기준
     private List<ScenarioEvaluationDetailsStandard> scenarioEvaluationDetailsStandardList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "scenario_evaluation_id")
+    @JoinColumn(name = "scenario_evaluation_id") // 시나리오 평가 id
     private ScenarioEvaluation scenarioEvaluation;
 
     @Builder
