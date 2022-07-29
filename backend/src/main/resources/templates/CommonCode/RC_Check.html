@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/backend/src/main/resources/static/css/commoncode/dccheck.css">
+  <link rel="stylesheet" href="/backend/src/main/resources/static/css/commoncode/rccheck.css">
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
@@ -105,19 +105,19 @@
       </div>
       </nav>
   </header>
-  <!-- Detailed code management -->
-  <div class="Detailed-code-management">
+  <!-- Representative code management -->
+  <div class="Representative-code-management">
 
-    <div class="Detailed-code-title">
-      <p>상세코드 수정</p>
+    <div class="Representative-code-title">
+      <p>대표코드 조회</p>
     </div>
 
-    <div class="Detailed-code-line">
+    <div class="Representative-code-line">
       <p> 
         <span class="fonts">
           <select>
-            <option>상세코드</option>
-            <option>상세코드명</option>
+            <option>대표코드</option>
+            <option>대표코드명</option>
           </select>
         </span>       
         <span class="fonts">
@@ -125,104 +125,73 @@
         </span>  
       </p>
     </div>
-    <div class="Detailed-code-button">
+    <div class="Representative-code-button">
       <a href="#">
         <span class="imsi-button">
           &nbsp;&nbsp;검색&nbsp;&nbsp;
       </span></a>
     </div>
     <br>
-  <table>
-    <thead>
-      <tr>
-        <th class="fonts">id</th>
-        <th class="fonts">대표코드</th>
-        <th class="fonts">상세코드</th>
-        <th class="fonts">상세코드명</th>
-        <th class="fonts">상세설명</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>AT01</td>
-        <td>AD01</td>
-        <td>크레인</td>
-        <td>하물을 들어올려서 상하/좌우/전후로 운반하는 기계장치</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>AT01</td>
-        <td>AD02</td>
-        <td>컨테이너</td>
-        <td>화물을 능률적이고 경제적으로 수송하기 위해 사용하는 상자형 용기</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>AT01</td>
-        <td>AD03</td>
-        <td>지게차</td>
-        <td>중량물을 싣거나 내리는 하역 전용의 특수 자동차</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>AT01</td>
-        <td>AD04</td>
-        <td>사다리</td>
-        <td>높은 곳이나 낮은 곳을 오르내릴 때 디딜 수 있도록 만든 기구</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>BT01</td>
-        <td>BD01</td>
-        <td>무역항 수상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>BT01</td>
-        <td>BD02</td>
-        <td>무역항 육상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>BT01</td>
-        <td>BD03</td>
-        <td>연안항 수상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>BT01</td>
-        <td>BD04</td>
-        <td>연안항 육상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>BT01</td>
-        <td>BD05</td>
-        <td>하역구역</td>
-        <td>항만 안에서 화물을 싣고 내리는 일과 이에 따르는 일체의 작업</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>10</td>
-        <td>CT01</td>
-        <td>CD01</td>
-        <td>모의훈련</td>
-        <td>실제의 상황에 대비하여 그것을 본떠 실시하는 훈련</td>
-      </tr>
-    </tfoot>
-  </table>
-
-  <div class="regist-button">
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+<center>
+    <table>
+      <thead>
+        <tr>
+          <th class="fonts">id</th>
+          <th class="fonts">대표코드</th>
+          <th class="fonts">대표코드명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>AT01</td>
+          <td>항만설비</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>BT01</td>
+          <td>항만구역</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>CT01</td>
+          <td>훈련정보</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>DT01</td>
+          <td>사고유형</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>ET01</td>
+          <td>사고영향</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>FT01</td>
+          <td>사고대응조직</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>GT01</td>
+          <td>안전사고발생원인</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>8</td>
+          <td>HT01</td>
+          <td>평가기준</td>
+        </tr>
+      </tfoot>
+    </table>
+  </center>
+    <div class="regist-button">
+      <a href="/backend/src/main/resources/templates/CommonCode/RC_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+      <a href="/backend/src/main/resources/templates/CommonCode/RC_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+    </div>
   </div>
-</div>
   <!-- footer -->
   <footer>
     <div class="inner">

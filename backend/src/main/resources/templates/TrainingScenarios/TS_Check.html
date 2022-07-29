@@ -6,22 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSA관리시스템</title>
 
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="/backend/src/main/resources/static/img/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/backend/src/main/resources/static/css/commoncode/dccheck.css">
+  <link rel="stylesheet" href="/backend/src/main/resources/static/css/traningscenarios/tscheck.css">
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
-
-
 </head>
 <body>
-  <!-- HEADER -->
   <header>
     <div class="inner">
       <a href="/backend/src/main/resources/templates/MainPage.html" class="logo">
@@ -43,8 +40,11 @@
           <li><a href="#">공통코드<br>관리</a>           
             <ul id="sub-menu">
               <div class="line"></div>
-              <li><a href="/CommonCode/RepresentativeCode/RC_check/index.html" aria-label="submenu">대표코드 관리</a></li>
-              <li><a href="/CommonCode/DetailedCode/DC_check/index.html" aria-label="submenu">상세코드 관리</a></li>
+              <li><a href="#" aria-label="submenu">대표코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">상세코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 등록</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 수정</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 삭제</a></li>
             </ul>
           </li>
           <li><a href="#">안전사고<br>정보 관리</a>
@@ -59,9 +59,9 @@
           <li><a href="#">안전사고 대응훈련<br>시나리오 관리</a>
             <ul id="sub-menu">
               <div class="line35"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 수정</a></li>
+              <li><a href="/TrainingScenarios/TS_check/index.html" aria-label="submenu">대응훈련 시나리오 조회</a></li>
+              <li><a href="/TrainingScenarios/TS_registration/index.html" aria-label="submenu">대응훈련 시나리오 등록</a></li>
+              <li><a href="/TrainingScenarios/TS_modify/index.html" aria-label="submenu">대응훈련 시나리오 수정</a></li>
               <li><a href="#" aria-label="submenu">대응훈련 시나리오 <br>사용 중지</a></li>
             </ul>
           </li>
@@ -105,124 +105,134 @@
       </div>
       </nav>
   </header>
-  <!-- Detailed code management -->
-  <div class="Detailed-code-management">
 
-    <div class="Detailed-code-title">
-      <p>상세코드 수정</p>
-    </div>
+<!--training-scenarios-inquiry-->
 
-    <div class="Detailed-code-line">
-      <p> 
-        <span class="fonts">
-          <select>
-            <option>상세코드</option>
-            <option>상세코드명</option>
-          </select>
-        </span>       
-        <span class="fonts">
-          <input type="text" placeholder="검색어 입력" style="width: 150px;">
-        </span>  
-      </p>
-    </div>
-    <div class="Detailed-code-button">
-      <a href="#">
-        <span class="imsi-button">
-          &nbsp;&nbsp;검색&nbsp;&nbsp;
-      </span></a>
-    </div>
-    <br>
+<div class="training-scenarios-inquiry">
+
+  <div class="inquiry-title">
+    <p>대응훈련 시나리오 조회</p>
+  </div>
+  <span class="fonts">시나리오 유형&nbsp; 
+    <select id="choose" onchange="ChangeValue()">
+      <option value="사고">사고</option>
+      <option value="재난">재난</option>
+    </select></span>
+  <br><br>
+  <div class="inquiry-line-1">
+    <p> <span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder="   SY2" style="width: 90px;"> </span>
+      &nbsp; &nbsp; &nbsp;
+      <span><span class="fonts" id="ch1">사고 수준</span> 
+        <input type="radio" name="l1" checked> Level1
+        <input type="radio" name="l1"> Level2
+        <input type="radio" name="l1"> Level3 </span>
+
+      &nbsp; &nbsp;
+
+      <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select>
+          <option>추락</option>
+          <option>넘어짐</option>
+          <option>부딪힘</option>
+          <option>끼임</option>
+          <option>맞음</option>
+        </select>
+
+      &nbsp; &nbsp; &nbsp; &nbsp;
+
+      <span class="fonts" id="ch3">사고대응활동 담당자</span>&nbsp; <input type="text" style="width: 100px;">
+
+    </p>
+  </div>
+  <div class="inquiry-button">
+    <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+  </div><br>
+
+
   <table>
     <thead>
       <tr>
         <th class="fonts">id</th>
-        <th class="fonts">대표코드</th>
-        <th class="fonts">상세코드</th>
-        <th class="fonts">상세코드명</th>
-        <th class="fonts">상세설명</th>
+        <th class="fonts">시나리오 유형</th>
+        <th class="fonts">시나리오명</th>
+        <th class="fonts">수준</th>
+        <th class="fonts">유형</th>
+        <th class="fonts">영향</th>
+        <th class="fonts">담당자</th>
+        <th class="fonts">대응활동 내용</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>1</td>
-        <td>AT01</td>
-        <td>AD01</td>
-        <td>크레인</td>
-        <td>하물을 들어올려서 상하/좌우/전후로 운반하는 기계장치</td>
+        <td>사고</td>
+        <td>SY2</td>
+        <td>3</td>
+        <td>추락</td>
+        <td>경상</td>
+        <td>정민환</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>AT01</td>
-        <td>AD02</td>
-        <td>컨테이너</td>
-        <td>화물을 능률적이고 경제적으로 수송하기 위해 사용하는 상자형 용기</td>
+        <td>사고</td>
+        <td>SR1</td>
+        <td>1</td>
+        <td>넘어짐</td>
+        <td>중상</td>
+        <td>이혜원</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
       <tr>
         <td>3</td>
-        <td>AT01</td>
-        <td>AD03</td>
-        <td>지게차</td>
-        <td>중량물을 싣거나 내리는 하역 전용의 특수 자동차</td>
+        <td>사고</td>
+        <td>SV1</td>
+        <td>1</td>
+        <td>부딪힘</td>
+        <td>경상</td>
+        <td>박태영</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
       <tr>
         <td>4</td>
-        <td>AT01</td>
-        <td>AD04</td>
-        <td>사다리</td>
-        <td>높은 곳이나 낮은 곳을 오르내릴 때 디딜 수 있도록 만든 기구</td>
+        <td>재난</td>
+        <td>SR3</td>
+        <td>3</td>
+        <td>끼임</td>
+        <td>경상</td>
+        <td>송영주</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
       <tr>
         <td>5</td>
-        <td>BT01</td>
-        <td>BD01</td>
-        <td>무역항 수상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>BT01</td>
-        <td>BD02</td>
-        <td>무역항 육상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>BT01</td>
-        <td>BD03</td>
-        <td>연안항 수상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>BT01</td>
-        <td>BD04</td>
-        <td>연안항 육상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>BT01</td>
-        <td>BD05</td>
-        <td>하역구역</td>
-        <td>항만 안에서 화물을 싣고 내리는 일과 이에 따르는 일체의 작업</td>
+        <td>사고</td>
+        <td>ST1</td>
+        <td>2</td>
+        <td>맞음</td>
+        <td>중상</td>
+        <td>주현정</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
     </tbody>
     <tfoot>
       <tr>
-        <td>10</td>
-        <td>CT01</td>
-        <td>CD01</td>
-        <td>모의훈련</td>
-        <td>실제의 상황에 대비하여 그것을 본떠 실시하는 훈련</td>
+        <td>6</td>
+        <td>재난</td>
+        <td>SV2</td>
+        <td>3</td>
+        <td>추락</td>
+        <td>중상</td>
+        <td>홍길동</td>
+        <td>사고가 발생한 상황을 가정하여 상세하게 작성</td>
       </tr>
     </tfoot>
   </table>
 
   <div class="regist-button">
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+    <a href="/backend/src/main/resources/templates/TrainingScenarios/TS_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+    <a href="/backend/src/main/resources/templates/TrainingScenarios/TS_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
   </div>
 </div>
+
   <!-- footer -->
   <footer>
     <div class="inner">
@@ -242,4 +252,5 @@
     </div>
   </footer>
 </body>
+<script src="/backend/src/main/resources/static/js/traningscenarios/tscheck.js"> </script>
 </html>

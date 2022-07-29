@@ -6,22 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSA관리시스템</title>
 
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="/backend/src/main/resources/static/img/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/backend/src/main/resources/static/css/commoncode/dccheck.css">
+  <link rel="stylesheet" href="/backend/src/main/resources/static/css/tsassessment/tsacheck.css">
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
-
-
 </head>
 <body>
-  <!-- HEADER -->
   <header>
     <div class="inner">
       <a href="/backend/src/main/resources/templates/MainPage.html" class="logo">
@@ -43,8 +40,11 @@
           <li><a href="#">공통코드<br>관리</a>           
             <ul id="sub-menu">
               <div class="line"></div>
-              <li><a href="/CommonCode/RepresentativeCode/RC_check/index.html" aria-label="submenu">대표코드 관리</a></li>
-              <li><a href="/CommonCode/DetailedCode/DC_check/index.html" aria-label="submenu">상세코드 관리</a></li>
+              <li><a href="#" aria-label="submenu">대표코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">상세코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 등록</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 수정</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 삭제</a></li>
             </ul>
           </li>
           <li><a href="#">안전사고<br>정보 관리</a>
@@ -68,9 +68,9 @@
           <li><a href="#">안전사고 대응훈련<br>시나리오 평가 관리</a>
             <ul id="sub-menu">
               <div class="line4"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>
+              <li><a href="/TS_Assessment/TSA_check/index.html" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>
+              <li><a href="/TS_Assessment/TSA_registration/index.html" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>
+              <li><a href="/TS_Assessment/TSA_modify/index.html" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>
               <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 삭제</a></li>
             </ul>
           </li>
@@ -105,124 +105,123 @@
       </div>
       </nav>
   </header>
-  <!-- Detailed code management -->
-  <div class="Detailed-code-management">
 
-    <div class="Detailed-code-title">
-      <p>상세코드 수정</p>
-    </div>
+<!--training-scenarios-assessment-inquiry-->
 
-    <div class="Detailed-code-line">
-      <p> 
-        <span class="fonts">
-          <select>
-            <option>상세코드</option>
-            <option>상세코드명</option>
-          </select>
-        </span>       
-        <span class="fonts">
-          <input type="text" placeholder="검색어 입력" style="width: 150px;">
-        </span>  
-      </p>
-    </div>
-    <div class="Detailed-code-button">
-      <a href="#">
-        <span class="imsi-button">
-          &nbsp;&nbsp;검색&nbsp;&nbsp;
-      </span></a>
-    </div>
-    <br>
-  <table>
-    <thead>
-      <tr>
-        <th class="fonts">id</th>
-        <th class="fonts">대표코드</th>
-        <th class="fonts">상세코드</th>
-        <th class="fonts">상세코드명</th>
-        <th class="fonts">상세설명</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>AT01</td>
-        <td>AD01</td>
-        <td>크레인</td>
-        <td>하물을 들어올려서 상하/좌우/전후로 운반하는 기계장치</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>AT01</td>
-        <td>AD02</td>
-        <td>컨테이너</td>
-        <td>화물을 능률적이고 경제적으로 수송하기 위해 사용하는 상자형 용기</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>AT01</td>
-        <td>AD03</td>
-        <td>지게차</td>
-        <td>중량물을 싣거나 내리는 하역 전용의 특수 자동차</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>AT01</td>
-        <td>AD04</td>
-        <td>사다리</td>
-        <td>높은 곳이나 낮은 곳을 오르내릴 때 디딜 수 있도록 만든 기구</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>BT01</td>
-        <td>BD01</td>
-        <td>무역항 수상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>BT01</td>
-        <td>BD02</td>
-        <td>무역항 육상구역</td>
-        <td>외국 무역선이 출입하고, 무역화물이 취급되는 항만</td>
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>BT01</td>
-        <td>BD03</td>
-        <td>연안항 수상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>BT01</td>
-        <td>BD04</td>
-        <td>연안항 육상구역</td>
-        <td>연안구역을 항해하는 선박이 입출항하는 항만</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>BT01</td>
-        <td>BD05</td>
-        <td>하역구역</td>
-        <td>항만 안에서 화물을 싣고 내리는 일과 이에 따르는 일체의 작업</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>10</td>
-        <td>CT01</td>
-        <td>CD01</td>
-        <td>모의훈련</td>
-        <td>실제의 상황에 대비하여 그것을 본떠 실시하는 훈련</td>
-      </tr>
-    </tfoot>
-  </table>
+<div class="training-scenarios-assessment-inquiry">
 
-  <div class="regist-button">
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+  <div class="inquiry-title">
+    <p>대응훈련 시나리오 평가 조회</p>
   </div>
+
+  <div class="inquiry-line-1">
+    <p> <span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder="   SY2" style="width: 130px;"> </span>
+      &nbsp; &nbsp; &nbsp;
+    </p>
+  </div>
+
+  <div class="inquiry-button">
+    <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+  </div>
+<br>
+<table>
+<thead>
+  <tr>
+    <td colspan="1" rowspan="2" class="fonts">id</td>
+    <td colspan="1" rowspan="2" class="fonts">시나리오</td>
+    <td colspan="2" rowspan="1" class="fonts">발전가능성</td>
+    <td colspan="2" rowspan="1" class="fonts">적절성</td>
+    <td colspan="2" rowspan="1" class="fonts">완전성</td>
+  </tr>
+  <tr>
+    <td class="fonts">①</td>
+    <td class="fonts">②</td>
+    <td class="fonts">①</td>
+    <td class="fonts">②</td>
+    <td class="fonts">①</td>
+    <td class="fonts">②</td>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SY2</td>
+<td>적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>적합</td>
+<td>부적합</td>
+<td>적합</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SR1</td>
+<td>부적합</td>
+<td>적합</td>
+<td>적합</td>
+<td>적합</td>
+<td>적합</td>
+<td>적합</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SV1</td>
+<td>적합</td>
+<td>부적합</td>
+<td>적합</td>
+<td>부적합</td>
+<td>적합</td>
+<td>부적합</td>
+</tr>
+<tr>
+<td>4</td>
+<td>SR3</td>
+<td>적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>적합</td>
+<td>적합</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ST1</td>
+<td>부적합</td>
+<td>적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>적합</td>
+<td>적합</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>6</td>
+<td>SV2</td>
+<td>적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>부적합</td>
+<td>적합</td>
+</tr>
+</tfoot>
+</table>
+  <div class="regist-button">
+    <a href="/backend/src/main/resources/templates/TS_Assessment/TSA_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+    <a href="/backend/src/main/resources/templates/TS_Assessment/TSA_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+  </div>
+  <p class="font" style="text-align: left;">
+    &nbsp;&nbsp;&nbsp;발전가능성①: 사고원인 발생 가능 여부<br>
+    &nbsp;&nbsp;&nbsp;발전가능성②: 사고결과 발생 가능 여부<br>
+    &nbsp;&nbsp;&nbsp;적절성①: 계획시간 배치<br>
+    &nbsp;&nbsp;&nbsp;적절성②: 사고 대응 로직 구성<br>
+    &nbsp;&nbsp;&nbsp;완전성①: 관련 설비 포함 여부<br>
+    &nbsp;&nbsp;&nbsp;완전성②: 사고대응 설비 포함 여부<br>
+   </p>
+   <br>
 </div>
+
   <!-- footer -->
   <footer>
     <div class="inner">
