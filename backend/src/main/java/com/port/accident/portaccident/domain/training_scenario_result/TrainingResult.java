@@ -4,6 +4,7 @@ import com.port.accident.portaccident.domain.training_scenario_result.evaluation
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -69,4 +70,29 @@ public class TrainingResult {
 
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
+
+    @Builder
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, String place,
+                          String trainingType, String accidentLevel, String accidentImpact, String precedingType,
+                          String accidentType, String disasterType, String department, String trainingArea,
+                          List<TrainingPortFacility> trainingPortFacilityList,
+                          List<TrainingByDate> trainingByDateList,
+                          List<TrainingParticipants> trainingParticipantsList) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.place = place;
+        this.trainingType = trainingType;
+        this.accidentLevel = accidentLevel;
+        this.accidentImpact = accidentImpact;
+        this.precedingType = precedingType;
+        this.accidentType = accidentType;
+        this.disasterType = disasterType;
+        this.department = department;
+        this.trainingArea = trainingArea;
+        this.trainingPortFacilityList = trainingPortFacilityList;
+        this.trainingByDateList = trainingByDateList;
+        this.trainingParticipantsList = trainingParticipantsList;
+    }
 }
