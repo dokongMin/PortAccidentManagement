@@ -42,10 +42,14 @@ public class RepresentativeCode {
 
     public void setDetailedCode(DetailedCode code){
         detailedCode.add(code);
-
     }
-    public void updateRepCode(RepresentativeCodeDto dto){
-        this.code = dto.getCode();
-        this.name = dto.getName();
+
+    public void removeDetailedCode(DetailedCode code){
+        detailedCode.remove(code);
+    }
+
+
+    public void updateRepCode(String name){
+        this.name = name;
     }
 }

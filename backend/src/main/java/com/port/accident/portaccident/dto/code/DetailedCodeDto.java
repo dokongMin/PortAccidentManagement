@@ -8,13 +8,15 @@ import lombok.*;
 @Getter
 @Setter
 public class DetailedCodeDto {
+    private Integer id;
     private String name;
     private String code;
     private String comment;
     private RepresentativeCode representativeCode;
 
     @Builder
-    public DetailedCodeDto(String name,String code, String comment, RepresentativeCode representativeCode) {
+    public DetailedCodeDto(Integer id, String name,String code, String comment, RepresentativeCode representativeCode) {
+        this.id = id;
         this.name = name;
         this.code = code;
         this.comment = comment;
@@ -23,6 +25,7 @@ public class DetailedCodeDto {
 
     public DetailedCode toEntity() {
         return DetailedCode.builder()
+                .id(id)
                 .name(name)
                 .code(code)
                 .comment(comment)
