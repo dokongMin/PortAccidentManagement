@@ -14,14 +14,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.port.accident.portaccident.exception.*;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
+@Transactional
 @RunWith(SpringRunner.class)
 @Rollback(value = false)
 public class CodeServiceTest {
+    EntityManager em;
+
     @Autowired
     CodeService codeService;
 
@@ -82,20 +88,21 @@ public class CodeServiceTest {
     }
 
     @Test
+    @Transactional
     public void updateReqCode(){
         //given
-        RepresentativeCodeDto dto = RepresentativeCodeDto.builder()
-                .code("AT01")
-                .name("변경된 대표코드명")
-                .build();
+        Integer updateId = 1;
+        String updateName = "변경된 대표코드명";
 
         //when
-        Integer updateRepCodeId = codeService.updateRepresentativeCode(dto);
-        RepresentativeCode updateRepCode = representativeCodeRepository.findById(updateRepCodeId).get();
+        codeService.updateRepresentativeCode(updateId,updateName);
+        RepresentativeCode updateRepCode = representativeCodeRepository.findById(updateId).get();
 
         //then
         assertEquals(updateRepCode.getName(), "변경된 대표코드명");
     }
+
+
 
     @Test
     public void updateDetCode(){
@@ -108,7 +115,8 @@ public class CodeServiceTest {
         RepresentativeCode repCode = representativeCodeRepository.findById(repCodeId).get();
 
         DetailedCodeDto dto = DetailedCodeDto.builder()
-                .code("AD01")
+                .id(1)
+                .code("BT01")
                 .name("무역항 수상구역")
                 .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
                 .representativeCode(repCode)
@@ -121,6 +129,9 @@ public class CodeServiceTest {
         //then
         assertEquals(updateDetCode.getName(), "무역항 수상구역");
         assertEquals(updateDetCode.getRepresentativeCode().getCode(), "BT01");
+        for (DetailedCode detailedCode : updateDetCode.getRepresentativeCode().getDetailedCode()) {
+            System.out.println("detCode : "+detailedCode.getCode());
+        }
 
     }
 }

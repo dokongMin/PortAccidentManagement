@@ -34,7 +34,7 @@ public class DetailedCode {
     private RepresentativeCode representativeCode;
 
     @Builder
-    public DetailedCode(Integer id,String code, String name, String comment, RepresentativeCode representativeCode) {
+    public DetailedCode(Integer id, String code, String name, String comment, RepresentativeCode representativeCode) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -42,9 +42,21 @@ public class DetailedCode {
         this.representativeCode = representativeCode;
     }
 
-    public void updateDetCode(DetailedCodeDto dto){
-        this.code = dto.getCode();
+    public void updateDetCode(DetailedCodeDto dto) {
+        updateRepCodeList(dto);
         this.name = dto.getName();
         this.comment = dto.getComment();
+    }
+
+    private void updateRepCodeList(DetailedCodeDto dto) {
+        if (!this.code.equals(dto.getCode())) {
+            if (!this.representativeCode.equals(dto.getRepresentativeCode())) {
+                this.representativeCode.removeDetailedCode(this);
+                this.code = dto.getCode();
+                this.representativeCode = dto.getRepresentativeCode();
+                this.representativeCode.setDetailedCode(this);
+            }
+            this.code = dto.getCode();
+        }
     }
 }

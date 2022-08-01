@@ -13,6 +13,7 @@ import com.port.accident.portaccident.exception.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -59,14 +60,15 @@ public class CodeService {
         representativeCode.setDetailedCode(code);
     }
 
-    public Integer updateRepresentativeCode(RepresentativeCodeDto dto) {
-        RepresentativeCode code = representRepository.findByCode(dto.getCode()).orElseThrow(() -> new DoesNotExistException());
-        code.updateRepCode(dto);
-        return code.getId();
+    public void updateRepresentativeCode(Integer id, String name) {
+        Optional<RepresentativeCode> repCode = representRepository.findById(id);
+        repCode.orElseThrow(() -> new DoesNotExistException());
+        repCode.get().updateRepCode(name);
     }
 
+    @Transactional
     public Integer updateDetailedCode(DetailedCodeDto dto) {
-        DetailedCode code = detailedRepository.findByCode(dto.getCode()).orElseThrow(() -> new DoesNotExistException());
+        DetailedCode code = detailedRepository.findById(dto.getId()).orElseThrow(() -> new DoesNotExistException());
         code.updateDetCode(dto);
         return code.getId();
     }

@@ -7,17 +7,20 @@ import lombok.*;
 @Getter
 @Setter
 public class RepresentativeCodeDto {
+    private Integer id;
     private String name;
     private String code;
 
     @Builder
-    public RepresentativeCodeDto(String name, String code) {
+    public RepresentativeCodeDto(Integer id, String name, String code) {
+        this.id = id;
         this.name = name;
         this.code = code;
     }
 
     public RepresentativeCode toEntity() {
         return RepresentativeCode.builder()
+                .id(id)
                 .name(name)
                 .code(code)
                 .build();
