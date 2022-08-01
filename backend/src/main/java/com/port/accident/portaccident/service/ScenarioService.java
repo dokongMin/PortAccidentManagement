@@ -1,12 +1,10 @@
 package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
-import com.port.accident.portaccident.repository.training_scenario.ScenarioRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +17,19 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ScenarioService {
     private final ScenarioRepository scenarioRepository;
-    private final ScenarioRepositoryCustom scenarioRepositoryCustom;
     private final AccidentPortFacilityRepository accidentPortFacilityRepository;
+
+    @Transactional
+    public Integer registerScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        Integer scenarioId = saveScenario(scenarioDto);
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
+
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            accidentPortFacilityDto.setScenario(scenario);
+            saveAccidentPortFacility(accidentPortFacilityDto);
+        }
+        return scenarioId;
+    }
 
     @Transactional
     public Integer saveScenario(ScenarioDto scenarioDto) {
@@ -30,9 +39,9 @@ public class ScenarioService {
     }
 
     private void validateDuplicateScenario(ScenarioDto scenarioDto) {
-        List<Scenario> findScenarios = scenarioRepository.findByName(scenarioDto.getName());
+        Optional<Scenario> findScenario = scenarioRepository.findByName(scenarioDto.getName());
 
-        if (!findScenarios.isEmpty()) {
+        if (findScenario.isPresent()) {
             throw new IllegalStateException("이미 존재하는 시나리오입니다.");
         }
     }
@@ -48,5 +57,45 @@ public class ScenarioService {
     @Transactional
     public Integer saveAccidentPortFacility(AccidentPortFacilityDto accidentPortFacilityDto) {
         return accidentPortFacilityRepository.save(accidentPortFacilityDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Integer updateScenario(ScenarioDto scenarioDto) {
+        Scenario scenario = scenarioRepository.findByName(scenarioDto.getName()).get();
+        scenario.update(scenarioDto);
+
+        return scenarioRepository.save(scenario).getId();
+    }
+
+    @Transactional
+    public Integer modifyAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        Scenario scenario = accidentPortFacilityDtoList.get(0).getScenario();
+
+        deleteAccidentPortFacility(scenario);
+        System.out.println("deleteAccidentPortFacility"+scenario.getAccidentPortFacilityList().size());
+
+        updateAccidentPortFacility(accidentPortFacilityDtoList);
+        System.out.println("updateAccidentPortFacility"+scenario.getAccidentPortFacilityList().size());
+
+        scenario.addAccidentPortFacility(accidentPortFacilityDtoList);
+
+        return scenario.getId();
+    }
+
+    @Transactional
+    public void deleteAccidentPortFacility(Scenario scenario) {
+        accidentPortFacilityRepository.deleteByScenarioId(scenario.getId());
+    }
+
+    @Transactional
+    public void updateAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            saveAccidentPortFacility(accidentPortFacilityDto);
+        }
+    }
+
+    @Transactional
+    public void deleteScenario(Integer scenarioId) {
+        scenarioRepository.deleteById(scenarioId);
     }
 }

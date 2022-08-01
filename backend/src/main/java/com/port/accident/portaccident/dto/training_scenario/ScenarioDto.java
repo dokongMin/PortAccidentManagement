@@ -60,14 +60,4 @@ public class ScenarioDto {
                 .scenarioEvaluation(scenarioEvaluation)
                 .build();
     }
-
-    public ScenarioDto addAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
-            AccidentPortFacility accidentPortFacility = accidentPortFacilityDto.toEntity();
-            accidentPortFacilityList.add(accidentPortFacility);
-
-        }
-        return this;
-    }
-
 }

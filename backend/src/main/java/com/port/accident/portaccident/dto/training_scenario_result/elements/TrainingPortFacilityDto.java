@@ -1,7 +1,6 @@
 package com.port.accident.portaccident.dto.training_scenario_result.elements;
 
 
-import com.port.accident.portaccident.domain.staff.Staff;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import lombok.*;
