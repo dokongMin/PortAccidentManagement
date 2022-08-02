@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - PortaccidentApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>PortaccidentApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.port.accident.portaccident.html">com.port.accident.portaccident</a> &gt; PortaccidentApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.004s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="contextLoads()"></a>
+<h3 class="failures">contextLoads()</h3>
+<span class="code">
+<pre>java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'scenarioService' defined in file [C:\marine\22_hp086\backend\build\classes\java\main\com\port\accident\portaccident\service\ScenarioService.class]: Unsatisfied dependency expressed through constructor parameter 3; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at app//org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229)
+	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372)
+	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222)
+	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at app//org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at app//org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at app//org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at app//org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at app//org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at app//org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at app//org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at app//org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at app//org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at app//org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at app//org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132)
+	at app//org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at app//org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 85 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801)
+	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357)
+	at app//org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at app//org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887)
+	at app//org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 103 more
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="failures">contextLoads()</td>
+<td class="failures">0.004s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>21:52:23.496 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+21:52:23.518 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+21:52:23.563 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.port.accident.portaccident.PortaccidentApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+21:52:23.580 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.port.accident.portaccident.PortaccidentApplicationTests], using SpringBootContextLoader
+21:52:23.587 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.port.accident.portaccident.PortaccidentApplicationTests]: class path resource [com/port/accident/portaccident/PortaccidentApplicationTests-context.xml] does not exist
+21:52:23.588 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.port.accident.portaccident.PortaccidentApplicationTests]: class path resource [com/port/accident/portaccident/PortaccidentApplicationTestsContext.groovy] does not exist
+21:52:23.588 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.port.accident.portaccident.PortaccidentApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+21:52:23.589 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.port.accident.portaccident.PortaccidentApplicationTests]: PortaccidentApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:52:23.657 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.port.accident.portaccident.PortaccidentApplicationTests]
+21:52:23.740 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\marine\22_hp086\backend\build\classes\java\main\com\port\accident\portaccident\PortaccidentApplication.class]
+21:52:23.742 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.port.accident.portaccident.PortaccidentApplication for test class com.port.accident.portaccident.PortaccidentApplicationTests
+21:52:23.895 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.port.accident.portaccident.PortaccidentApplicationTests]: using defaults.
+21:52:23.896 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+21:52:23.915 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@324dcd31, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@503d56b5, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@72bca894, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@433ffad1, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1fc793c2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2575f671, org.springframework.test.context.transaction.TransactionalTestExecutionListener@329a1243, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@ecf9fb3, org.springframework.test.context.event.EventPublishingTestExecutionListener@2d35442b, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@27f9e982, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4593ff34, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@37d3d232, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@30c0ccff, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@581d969c, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@22db8f4]
+21:52:23.921 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@5949eba8 testClass = PortaccidentApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6e0ff644 testClass = PortaccidentApplicationTests, locations = '{}', classes = '{class com.port.accident.portaccident.PortaccidentApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@58fe0499, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@75390459, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@57fd91c9, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@565b064f, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@63b1d4fa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@3f1d2e23], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.1)
+
+2022-08-01 21:52:24.430  INFO 3284 --- [    Test worker] c.p.a.p.PortaccidentApplicationTests     : Starting PortaccidentApplicationTests using Java 11.0.14.1 on DESKTOP-QOOJ5U3 with PID 3284 (started by LHW in C:\marine\22_hp086\backend)
+2022-08-01 21:52:24.433  INFO 3284 --- [    Test worker] c.p.a.p.PortaccidentApplicationTests     : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-08-01 21:52:25.520  INFO 3284 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-08-01 21:52:25.645  INFO 3284 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 113 ms. Found 4 JPA repository interfaces.
+2022-08-01 21:52:26.518  INFO 3284 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-08-01 21:52:26.602  INFO 3284 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-08-01 21:52:26.846  INFO 3284 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-08-01 21:52:26.900 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@3b57dba4
+2022-08-01 21:52:26.900 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration boolean -&gt; org.hibernate.type.BooleanType@3b57dba4
+2022-08-01 21:52:26.901 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Boolean -&gt; org.hibernate.type.BooleanType@3b57dba4
+2022-08-01 21:52:26.902 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration numeric_boolean -&gt; org.hibernate.type.NumericBooleanType@42d9e8d2
+2022-08-01 21:52:26.903 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration true_false -&gt; org.hibernate.type.TrueFalseType@2616b618
+2022-08-01 21:52:26.904 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration yes_no -&gt; org.hibernate.type.YesNoType@60deefed
+2022-08-01 21:52:26.906 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@38811103
+2022-08-01 21:52:26.907 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte -&gt; org.hibernate.type.ByteType@38811103
+2022-08-01 21:52:26.907 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Byte -&gt; org.hibernate.type.ByteType@38811103
+2022-08-01 21:52:26.909 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration character -&gt; org.hibernate.type.CharacterType@625487a6
+2022-08-01 21:52:26.909 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char -&gt; org.hibernate.type.CharacterType@625487a6
+2022-08-01 21:52:26.909 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Character -&gt; org.hibernate.type.CharacterType@625487a6
+2022-08-01 21:52:26.912 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@5ba1b62e
+2022-08-01 21:52:26.913 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration short -&gt; org.hibernate.type.ShortType@5ba1b62e
+2022-08-01 21:52:26.913 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Short -&gt; org.hibernate.type.ShortType@5ba1b62e
+2022-08-01 21:52:26.915 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration integer -&gt; org.hibernate.type.IntegerType@3d1c933
+2022-08-01 21:52:26.916 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration int -&gt; org.hibernate.type.IntegerType@3d1c933
+2022-08-01 21:52:26.916 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Integer -&gt; org.hibernate.type.IntegerType@3d1c933
+2022-08-01 21:52:26.917 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@6744707b
+2022-08-01 21:52:26.917 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration long -&gt; org.hibernate.type.LongType@6744707b
+2022-08-01 21:52:26.918 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Long -&gt; org.hibernate.type.LongType@6744707b
+2022-08-01 21:52:26.919 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@24a4e2c5
+2022-08-01 21:52:26.919 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration float -&gt; org.hibernate.type.FloatType@24a4e2c5
+2022-08-01 21:52:26.919 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Float -&gt; org.hibernate.type.FloatType@24a4e2c5
+2022-08-01 21:52:26.921 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@3a3883c4
+2022-08-01 21:52:26.921 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration double -&gt; org.hibernate.type.DoubleType@3a3883c4
+2022-08-01 21:52:26.921 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Double -&gt; org.hibernate.type.DoubleType@3a3883c4
+2022-08-01 21:52:26.923 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_decimal -&gt; org.hibernate.type.BigDecimalType@433ef204
+2022-08-01 21:52:26.923 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigDecimal -&gt; org.hibernate.type.BigDecimalType@433ef204
+2022-08-01 21:52:26.924 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration big_integer -&gt; org.hibernate.type.BigIntegerType@23ee2ccf
+2022-08-01 21:52:26.925 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.math.BigInteger -&gt; org.hibernate.type.BigIntegerType@23ee2ccf
+2022-08-01 21:52:26.926 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration string -&gt; org.hibernate.type.StringType@103c97ff
+2022-08-01 21:52:26.927 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.String -&gt; org.hibernate.type.StringType@103c97ff
+2022-08-01 21:52:26.927 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nstring -&gt; org.hibernate.type.StringNVarcharType@6206b4a7
+2022-08-01 21:52:26.928 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ncharacter -&gt; org.hibernate.type.CharacterNCharType@175581eb
+2022-08-01 21:52:26.930 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration url -&gt; org.hibernate.type.UrlType@25ad25f5
+2022-08-01 21:52:26.930 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.net.URL -&gt; org.hibernate.type.UrlType@25ad25f5
+2022-08-01 21:52:26.931 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Duration -&gt; org.hibernate.type.DurationType@3e03046d
+2022-08-01 21:52:26.931 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Duration -&gt; org.hibernate.type.DurationType@3e03046d
+2022-08-01 21:52:26.933 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Instant -&gt; org.hibernate.type.InstantType@69f080ad
+2022-08-01 21:52:26.933 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.Instant -&gt; org.hibernate.type.InstantType@69f080ad
+2022-08-01 21:52:26.935 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@569348e1
+2022-08-01 21:52:26.935 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDateTime -&gt; org.hibernate.type.LocalDateTimeType@569348e1
+2022-08-01 21:52:26.937 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalDate -&gt; org.hibernate.type.LocalDateType@414b2df5
+2022-08-01 21:52:26.937 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalDate -&gt; org.hibernate.type.LocalDateType@414b2df5
+2022-08-01 21:52:26.939 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration LocalTime -&gt; org.hibernate.type.LocalTimeType@2d70f312
+2022-08-01 21:52:26.939 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.LocalTime -&gt; org.hibernate.type.LocalTimeType@2d70f312
+2022-08-01 21:52:26.941 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@5fe46d52
+2022-08-01 21:52:26.941 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetDateTime -&gt; org.hibernate.type.OffsetDateTimeType@5fe46d52
+2022-08-01 21:52:26.943 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration OffsetTime -&gt; org.hibernate.type.OffsetTimeType@2aa5bd48
+2022-08-01 21:52:26.943 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.OffsetTime -&gt; org.hibernate.type.OffsetTimeType@2aa5bd48
+2022-08-01 21:52:26.945 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@68aec50
+2022-08-01 21:52:26.946 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.time.ZonedDateTime -&gt; org.hibernate.type.ZonedDateTimeType@68aec50
+2022-08-01 21:52:26.948 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration date -&gt; org.hibernate.type.DateType@22f8adc2
+2022-08-01 21:52:26.949 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Date -&gt; org.hibernate.type.DateType@22f8adc2
+2022-08-01 21:52:26.951 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration time -&gt; org.hibernate.type.TimeType@66451058
+2022-08-01 21:52:26.952 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Time -&gt; org.hibernate.type.TimeType@66451058
+2022-08-01 21:52:26.953 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timestamp -&gt; org.hibernate.type.TimestampType@25f0c5e7
+2022-08-01 21:52:26.954 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Timestamp -&gt; org.hibernate.type.TimestampType@25f0c5e7
+2022-08-01 21:52:26.954 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Date -&gt; org.hibernate.type.TimestampType@25f0c5e7
+2022-08-01 21:52:26.957 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration dbtimestamp -&gt; org.hibernate.type.DbTimestampType@282c4da0
+2022-08-01 21:52:26.961 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar -&gt; org.hibernate.type.CalendarType@5002fde9
+2022-08-01 21:52:26.961 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Calendar -&gt; org.hibernate.type.CalendarType@5002fde9
+2022-08-01 21:52:26.961 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.GregorianCalendar -&gt; org.hibernate.type.CalendarType@5002fde9
+2022-08-01 21:52:26.963 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_date -&gt; org.hibernate.type.CalendarDateType@5e99e2cb
+2022-08-01 21:52:26.964 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration calendar_time -&gt; org.hibernate.type.CalendarTimeType@2c60ce47
+2022-08-01 21:52:26.966 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration locale -&gt; org.hibernate.type.LocaleType@2776fd8f
+2022-08-01 21:52:26.967 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Locale -&gt; org.hibernate.type.LocaleType@2776fd8f
+2022-08-01 21:52:26.968 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration currency -&gt; org.hibernate.type.CurrencyType@4a1dda83
+2022-08-01 21:52:26.968 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.Currency -&gt; org.hibernate.type.CurrencyType@4a1dda83
+2022-08-01 21:52:26.970 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration timezone -&gt; org.hibernate.type.TimeZoneType@18c880ea
+2022-08-01 21:52:26.970 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.TimeZone -&gt; org.hibernate.type.TimeZoneType@18c880ea
+2022-08-01 21:52:26.972 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration class -&gt; org.hibernate.type.ClassType@1abcd059
+2022-08-01 21:52:26.972 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Class -&gt; org.hibernate.type.ClassType@1abcd059
+2022-08-01 21:52:26.974 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-binary -&gt; org.hibernate.type.UUIDBinaryType@105db94d
+2022-08-01 21:52:26.974 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.util.UUID -&gt; org.hibernate.type.UUIDBinaryType@105db94d
+2022-08-01 21:52:26.975 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration uuid-char -&gt; org.hibernate.type.UUIDCharType@7c0df4ab
+2022-08-01 21:52:26.977 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration binary -&gt; org.hibernate.type.BinaryType@24e5389c
+2022-08-01 21:52:26.977 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration byte[] -&gt; org.hibernate.type.BinaryType@24e5389c
+2022-08-01 21:52:26.977 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [B -&gt; org.hibernate.type.BinaryType@24e5389c
+2022-08-01 21:52:26.978 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-binary -&gt; org.hibernate.type.WrapperBinaryType@54326e9
+2022-08-01 21:52:26.979 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Byte[] -&gt; org.hibernate.type.WrapperBinaryType@54326e9
+2022-08-01 21:52:26.979 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Byte; -&gt; org.hibernate.type.WrapperBinaryType@54326e9
+2022-08-01 21:52:26.980 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration row_version -&gt; org.hibernate.type.RowVersionType@78b0ec3a
+2022-08-01 21:52:26.981 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration image -&gt; org.hibernate.type.ImageType@5a47730c
+2022-08-01 21:52:26.983 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration characters -&gt; org.hibernate.type.CharArrayType@693f2213
+2022-08-01 21:52:26.983 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration char[] -&gt; org.hibernate.type.CharArrayType@693f2213
+2022-08-01 21:52:26.983 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [C -&gt; org.hibernate.type.CharArrayType@693f2213
+2022-08-01 21:52:26.984 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration wrapper-characters -&gt; org.hibernate.type.CharacterArrayType@33bdd01
+2022-08-01 21:52:26.985 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration [Ljava.lang.Character; -&gt; org.hibernate.type.CharacterArrayType@33bdd01
+2022-08-01 21:52:26.985 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration Character[] -&gt; org.hibernate.type.CharacterArrayType@33bdd01
+2022-08-01 21:52:26.985 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration text -&gt; org.hibernate.type.TextType@27ffd9f8
+2022-08-01 21:52:26.986 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration ntext -&gt; org.hibernate.type.NTextType@17216605
+2022-08-01 21:52:26.988 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration blob -&gt; org.hibernate.type.BlobType@1144a02b
+2022-08-01 21:52:26.989 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Blob -&gt; org.hibernate.type.BlobType@1144a02b
+2022-08-01 21:52:26.990 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_blob -&gt; org.hibernate.type.MaterializedBlobType@7159d601
+2022-08-01 21:52:26.993 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration clob -&gt; org.hibernate.type.ClobType@5d7f8467
+2022-08-01 21:52:26.993 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.Clob -&gt; org.hibernate.type.ClobType@5d7f8467
+2022-08-01 21:52:26.995 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration nclob -&gt; org.hibernate.type.NClobType@5a4464c5
+2022-08-01 21:52:26.995 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.sql.NClob -&gt; org.hibernate.type.NClobType@5a4464c5
+2022-08-01 21:52:26.995 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_clob -&gt; org.hibernate.type.MaterializedClobType@370c7cc5
+2022-08-01 21:52:26.996 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration materialized_nclob -&gt; org.hibernate.type.MaterializedNClobType@a056b26
+2022-08-01 21:52:26.996 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration serializable -&gt; org.hibernate.type.SerializableType@74c121d4
+2022-08-01 21:52:27.001 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration object -&gt; org.hibernate.type.ObjectType@5514579e
+2022-08-01 21:52:27.001 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration java.lang.Object -&gt; org.hibernate.type.ObjectType@5514579e
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_date -&gt; org.hibernate.type.AdaptedImmutableType@54895681
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_time -&gt; org.hibernate.type.AdaptedImmutableType@2dd0a0d0
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_timestamp -&gt; org.hibernate.type.AdaptedImmutableType@6bf570c
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_dbtimestamp -&gt; org.hibernate.type.AdaptedImmutableType@1796b2d4
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar -&gt; org.hibernate.type.AdaptedImmutableType@935d3f9
+2022-08-01 21:52:27.002 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_calendar_date -&gt; org.hibernate.type.AdaptedImmutableType@214b342f
+2022-08-01 21:52:27.003 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_binary -&gt; org.hibernate.type.AdaptedImmutableType@5db0003d
+2022-08-01 21:52:27.003 DEBUG 3284 --- [    Test worker] org.hibernate.type.BasicTypeRegistry     : Adding type registration imm_serializable -&gt; org.hibernate.type.AdaptedImmutableType@7f12094d
+2022-08-01 21:52:27.064  INFO 3284 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-08-01 21:52:27.199  INFO 3284 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-08-01 21:52:27.225  INFO 3284 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-08-01 21:52:27.287 DEBUG 3284 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@d504137] to MetadataBuildingContext [org.hibernate.boot.internal.MetadataBuildingContextRootImpl@8432469]
+2022-08-01 21:52:27.713 DEBUG 3284 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration@d504137] to SessionFactoryImpl [org.hibernate.internal.SessionFactoryImpl@37806be6]
+2022-08-01 21:52:28.338 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists accident_info CASCADE 
+2022-08-01 21:52:28.344 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists accident_port_facility CASCADE 
+2022-08-01 21:52:28.345 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists accident_response_activity CASCADE 
+2022-08-01 21:52:28.346 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists accident_type CASCADE 
+2022-08-01 21:52:28.347 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists causes_safety_accident CASCADE 
+2022-08-01 21:52:28.348 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists damage_facility CASCADE 
+2022-08-01 21:52:28.348 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists detailed_code CASCADE 
+2022-08-01 21:52:28.348 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists disaster_type CASCADE 
+2022-08-01 21:52:28.350 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists evaluation_details CASCADE 
+2022-08-01 21:52:28.350 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists representative_code CASCADE 
+2022-08-01 21:52:28.350 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists scenario CASCADE 
+2022-08-01 21:52:28.351 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists scenario_evaluation CASCADE 
+2022-08-01 21:52:28.352 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists scenario_evaluation_standard CASCADE 
+2022-08-01 21:52:28.353 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists scenario_evlauation_details_standard CASCADE 
+2022-08-01 21:52:28.354 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists staff CASCADE 
+2022-08-01 21:52:28.355 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists training_by_date CASCADE 
+2022-08-01 21:52:28.355 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists training_participants CASCADE 
+2022-08-01 21:52:28.355 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists training_port_facility CASCADE 
+2022-08-01 21:52:28.356 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists training_result CASCADE 
+2022-08-01 21:52:28.360 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table accident_info (
+       accident_info_id integer generated by default as identity,
+        accident_area varchar(255),
+        accident_date timestamp,
+        accident_impact varchar(255),
+        accident_level varchar(255),
+        accident_manager varchar(255),
+        accident_path varchar(255),
+        victim varchar(255),
+        primary key (accident_info_id)
+    )
+2022-08-01 21:52:28.362 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table accident_port_facility (
+       accident_port_facility_id integer generated by default as identity,
+        accident_port_facility_name varchar(255),
+        scenario_id integer,
+        primary key (accident_port_facility_id)
+    )
+2022-08-01 21:52:28.363 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table accident_response_activity (
+       accident_response_activity_id integer generated by default as identity,
+        accident_response_activity_comment varchar(255),
+        accident_response_complete_planing_time timestamp,
+        accident_response_activity_manager varchar(255),
+        scenario_id integer,
+        primary key (accident_response_activity_id)
+    )
+2022-08-01 21:52:28.365 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table accident_type (
+       accident_type_id integer generated by default as identity,
+        accident_type_name varchar(255),
+        accident_info_id integer,
+        primary key (accident_type_id)
+    )
+2022-08-01 21:52:28.366 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table causes_safety_accident (
+       causes_safety_accident_id integer generated by default as identity,
+        causes_safety_accident_name varchar(255),
+        accident_info_id integer,
+        primary key (causes_safety_accident_id)
+    )
+2022-08-01 21:52:28.366 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table damage_facility (
+       damage_facility_id integer generated by default as identity,
+        damage_facility_name varchar(255),
+        accident_info_id integer,
+        primary key (damage_facility_id)
+    )
+2022-08-01 21:52:28.367 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table detailed_code (
+       detailed_code_id integer generated by default as identity,
+        detailed_code varchar(255),
+        detailed_code_comment varchar(255),
+        detailed_code_name varchar(255),
+        representative_code_id integer,
+        primary key (detailed_code_id)
+    )
+2022-08-01 21:52:28.369 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table disaster_type (
+       disaster_type_id integer generated by default as identity,
+        disaster_type_name varchar(255),
+        accident_info_id integer,
+        primary key (disaster_type_id)
+    )
+2022-08-01 21:52:28.369 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table evaluation_details (
+       evaluation_details_id integer generated by default as identity,
+        evaluation_details_name varchar(255),
+        evaluation_details_score integer,
+        training_by_date_id integer,
+        primary key (evaluation_details_id)
+    )
+2022-08-01 21:52:28.370 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table representative_code (
+       representative_code_id integer generated by default as identity,
+        representative_code varchar(255),
+        representative_code_name varchar(255),
+        primary key (representative_code_id)
+    )
+2022-08-01 21:52:28.371 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table scenario (
+       scenario_id integer generated by default as identity,
+        accident_type varchar(255),
+        disaster_type varchar(255),
+        scenario_impact varchar(255),
+        scenario_level varchar(255),
+        scenario_name varchar(255),
+        scenario_port_area varchar(255),
+        accident_disaster_type varchar(255),
+        scenario_response_stage varchar(255),
+        primary key (scenario_id)
+    )
+2022-08-01 21:52:28.372 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table scenario_evaluation (
+       scenario_evaluation_id integer generated by default as identity,
+        scenario_evaluation_name varchar(255),
+        scenario_id integer,
+        primary key (scenario_evaluation_id)
+    )
+2022-08-01 21:52:28.373 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table scenario_evaluation_standard (
+       scenario_evaluation_standard_id integer generated by default as identity,
+        scenario_evaluation_standard_name varchar(255),
+        scenario_evaluation_id integer,
+        primary key (scenario_evaluation_standard_id)
+    )
+2022-08-01 21:52:28.374 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table scenario_evlauation_details_standard (
+       scenario_evaluation_details_standard_id integer generated by default as identity,
+        scenario_evaluation_details_standard_name varchar(255),
+        suitable_check char(255),
+        scenario_evaluation_standard_id integer,
+        primary key (scenario_evaluation_details_standard_id)
+    )
+2022-08-01 21:52:28.375 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table staff (
+       staff_id integer generated by default as identity,
+        staff_co varchar(255),
+        staff_email varchar(255),
+        staff_group varchar(255),
+        staff_name varchar(255),
+        staff_phone varchar(255),
+        staff_position varchar(255),
+        primary key (staff_id)
+    )
+2022-08-01 21:52:28.375 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table training_by_date (
+       training_by_date_id integer generated by default as identity,
+        training_completion_check char(255),
+        training_details varchar(255),
+        training_evaluation_name varchar(255),
+        training_result_id integer,
+        primary key (training_by_date_id)
+    )
+2022-08-01 21:52:28.376 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table training_participants (
+       training_participants_id integer generated by default as identity,
+        participants_id integer,
+        training_result_id integer,
+        primary key (training_participants_id)
+    )
+2022-08-01 21:52:28.376 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table training_port_facility (
+       training_port_facility_id integer generated by default as identity,
+        training_port_facility_name varchar(255),
+        training_result_id integer,
+        primary key (training_port_facility_id)
+    )
+2022-08-01 21:52:28.377 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table training_result (
+       training_result_id integer generated by default as identity,
+        accident_impact varchar(255),
+        accident_level varchar(255),
+        accident_type varchar(255),
+        training_department varchar(255),
+        disaster_type varchar(255),
+        training_end_date timestamp,
+        training_name varchar(255),
+        training_place varchar(255),
+        accident_disaster_type varchar(255),
+        training_start_date timestamp,
+        training_port_area varchar(255),
+        training_type varchar(255),
+        primary key (training_result_id)
+    )
+2022-08-01 21:52:28.379 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table accident_port_facility 
+       add constraint FKthwdi3v2ptnp5qnoit8tehahp 
+       foreign key (scenario_id) 
+       references scenario
+2022-08-01 21:52:28.382 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table accident_response_activity 
+       add constraint FK6c95f15bbcb29t6ewm3yn4xu9 
+       foreign key (scenario_id) 
+       references scenario
+2022-08-01 21:52:28.385 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table accident_type 
+       add constraint FK1mumknv6nxda0rdsf6rx483hk 
+       foreign key (accident_info_id) 
+       references accident_info
+2022-08-01 21:52:28.386 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table causes_safety_accident 
+       add constraint FKm3b6ncyoxg5hrygt7531uhpn0 
+       foreign key (accident_info_id) 
+       references accident_info
+2022-08-01 21:52:28.388 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table damage_facility 
+       add constraint FK9ylfv69658jdue5kfnwq3rvvy 
+       foreign key (accident_info_id) 
+       references accident_info
+2022-08-01 21:52:28.389 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table detailed_code 
+       add constraint FKaa7ydd4yricctspqk5vest3em 
+       foreign key (representative_code_id) 
+       references representative_code
+2022-08-01 21:52:28.390 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table disaster_type 
+       add constraint FK12oshupcq7k3iy6m4xdkvnmt4 
+       foreign key (accident_info_id) 
+       references accident_info
+2022-08-01 21:52:28.392 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table evaluation_details 
+       add constraint FKipkvmwipdevagc0v8bqr8nd61 
+       foreign key (training_by_date_id) 
+       references training_by_date
+2022-08-01 21:52:28.394 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table scenario_evaluation 
+       add constraint FKdjejbi81bqgmmra1e1dybbkdy 
+       foreign key (scenario_id) 
+       references scenario
+2022-08-01 21:52:28.395 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table scenario_evaluation_standard 
+       add constraint FKhikjpbahvd1rglbhhg063ton3 
+       foreign key (scenario_evaluation_id) 
+       references scenario_evaluation
+2022-08-01 21:52:28.396 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table scenario_evlauation_details_standard 
+       add constraint FK1q88wn1cj18iq08macs7qjie8 
+       foreign key (scenario_evaluation_standard_id) 
+       references scenario_evaluation_standard
+2022-08-01 21:52:28.398 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table training_by_date 
+       add constraint FKdsvjk2r5k8tu2w3vq3dxueujy 
+       foreign key (training_result_id) 
+       references training_result
+2022-08-01 21:52:28.399 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table training_participants 
+       add constraint FKsjc3w06gka27cefl9bvin8497 
+       foreign key (training_result_id) 
+       references training_result
+2022-08-01 21:52:28.401 DEBUG 3284 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table training_port_facility 
+       add constraint FKp828jqu3sdsc3ta53c2axo8sn 
+       foreign key (training_result_id) 
+       references training_result
+2022-08-01 21:52:28.404  INFO 3284 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-08-01 21:52:28.414 TRACE 3284 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryCreated from [org.hibernate.internal.SessionFactoryImpl@37806be6] for TypeConfiguration
+2022-08-01 21:52:28.415  INFO 3284 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-08-01 21:52:29.339  WARN 3284 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'scenarioService' defined in file [C:\marine\22_hp086\backend\build\classes\java\main\com\port\accident\portaccident\service\ScenarioService.class]: Unsatisfied dependency expressed through constructor parameter 3; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2022-08-01 21:52:29.340  INFO 3284 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-01 21:52:29.342 TRACE 3284 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@37806be6] for TypeConfiguration
+2022-08-01 21:52:29.343 DEBUG 3284 --- [    Test worker] o.h.type.spi.TypeConfiguration$Scope     : Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@34ea86ff] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@37806be6]
+2022-08-01 21:52:29.344  INFO 3284 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-08-01 21:52:29.358  INFO 3284 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-08-01 21:52:29.369  INFO 3284 --- [    Test worker] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-08-01 21:52:29.406 ERROR 3284 --- [    Test worker] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 3 of constructor in com.port.accident.portaccident.service.ScenarioService required a bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' in your configuration.
+
+2022-08-01 21:52:29.420 ERROR 3284 --- [    Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@324dcd31] to prepare test instance [com.port.accident.portaccident.PortaccidentApplicationTests@7d60bd5a]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474) ~[na:na]
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[na:na]
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at java.base/java.util.Optional.orElseGet(Optional.java:369) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66) ~[junit-jupiter-engine-5.8.2.jar:5.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.8.2.jar:1.8.2]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[na:na]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[na:na]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[na:na]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) ~[na:na]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) ~[na:na]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96) ~[na:na]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
+	at com.sun.proxy.$Proxy2.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'scenarioService' defined in file [C:\marine\22_hp086\backend\build\classes\java\main\com\port\accident\portaccident\service\ScenarioService.class]: Unsatisfied dependency expressed through constructor parameter 3; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.21.jar:5.3.21]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.21.jar:5.3.21]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-2.7.1.jar:2.7.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.1.jar:2.7.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-2.7.1.jar:2.7.1]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:132) ~[spring-boot-test-2.7.1.jar:2.7.1]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.3.21.jar:5.3.21]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124) ~[spring-test-5.3.21.jar:5.3.21]
+	... 85 common frames omitted
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepositoryCustom' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1801) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1357) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.21.jar:5.3.21]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.21.jar:5.3.21]
+	... 103 common frames omitted
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.4.1</a> at 2022. 8. 1. 오후 9:52:29</p>
+</div>
+</div>
+</body>
+</html>
