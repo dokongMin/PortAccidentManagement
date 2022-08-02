@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class RepresentativeCode {
     @Column(name = "representative_code_name")
     private String name;
 
+    @Nullable
     @OneToMany(mappedBy = "representativeCode")
     private List<DetailedCode> detailedCode = new ArrayList<>();
 
@@ -40,16 +42,16 @@ public class RepresentativeCode {
         this.detailedCode = detailedCode;
     }
 
-    public void setDetailedCode(DetailedCode code){
+    public void setDetailedCode(DetailedCode code) {
         detailedCode.add(code);
     }
 
-    public void removeDetailedCode(DetailedCode code){
+    public void removeDetailedCode(DetailedCode code) {
         detailedCode.remove(code);
     }
 
 
-    public void updateRepCode(String name){
+    public void updateRepCode(String name) {
         this.name = name;
     }
 }
