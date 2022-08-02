@@ -2,6 +2,7 @@ package com.port.accident.portaccident.domain.training_scenario_result.evaluatio
 
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +35,17 @@ public class TrainingByDate {
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;
 
-    @OneToMany(mappedBy = "training_by_date")
+    @OneToMany(mappedBy = "trainingByDate")
     private List<EvaluationDetails> evaluationDetailsList = new ArrayList<>();
+
+    @Builder
+    public TrainingByDate(Integer id, String details, Character completionCheck, String evaluationName,
+                          TrainingResult trainingResult, List<EvaluationDetails> evaluationDetailsList) {
+        this.id = id;
+        this.details = details;
+        this.completionCheck = completionCheck;
+        this.evaluationName = evaluationName;
+        this.trainingResult = trainingResult;
+        this.evaluationDetailsList = evaluationDetailsList;
+    }
 }

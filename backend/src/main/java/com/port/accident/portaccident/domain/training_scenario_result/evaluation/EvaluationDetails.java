@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.domain.training_scenario_result.evaluation;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,12 @@ public class EvaluationDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_by_date_id")
     private TrainingByDate trainingByDate;
+
+    @Builder
+    public EvaluationDetails(Integer id, String name, Integer score, TrainingByDate trainingByDate) {
+        this.id = id;
+        this.name = name;
+        this.score = score;
+        this.trainingByDate = trainingByDate;
+    }
 }

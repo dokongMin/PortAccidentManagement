@@ -3,6 +3,7 @@ package com.port.accident.portaccident.domain.training_scenario_result.elements;
 
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,11 @@ public class TrainingPortFacility {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;
+
+    @Builder
+    public TrainingPortFacility(Integer id, String name, TrainingResult trainingResult) {
+        this.id = id;
+        this.name = name;
+        this.trainingResult = trainingResult;
+    }
 }
