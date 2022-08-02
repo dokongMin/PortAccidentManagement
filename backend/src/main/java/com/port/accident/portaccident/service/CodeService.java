@@ -84,7 +84,7 @@ public class CodeService {
     }
 
     @Transactional(readOnly = true)
-    public Page<RepresentativeCode> searchReqCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
+    public Page<RepresentativeCode> searchRepCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
         return representRepository.searchPageRepCode(condition, pageable);
     }
 
