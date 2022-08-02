@@ -112,8 +112,6 @@ public class Scenario {
         }
     }
 
-
-
     @Transactional(readOnly = true)
     public void update(ScenarioDto scenarioDto) {
         this.level = scenarioDto.getLevel();
