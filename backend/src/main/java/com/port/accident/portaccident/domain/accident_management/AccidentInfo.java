@@ -4,6 +4,7 @@ import com.port.accident.portaccident.domain.accident_management.elements.Causes
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacility;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -44,13 +45,29 @@ public class AccidentInfo {
     @Column(name = "victim")
     private String victim;
 
-    @OneToMany(mappedBy = "accident_info")
-    private List<AccidentType> accidentTypeList= new ArrayList<>();
+    @OneToMany(mappedBy = "accidentInfo")
+    private List<AccidentType> accidentTypeList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "accident_info")
+    @OneToMany(mappedBy = "accidentInfo")
     private List<CausesSafetyAccident> causesSafetyAccidentList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "accident_info")
+    @OneToMany(mappedBy = "accidentInfo")
     private List<DamageFacility> damageFacilityList = new ArrayList<>();
 
+    @Builder
+    public AccidentInfo(Integer id, LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
+                        String accidentPath, String accidentManager, String victim, List<AccidentType> accidentTypeList,
+                        List<CausesSafetyAccident> causesSafetyAccidentList, List<DamageFacility> damageFacilityList) {
+        this.id = id;
+        this.accidentDate = accidentDate;
+        this.accidentArea = accidentArea;
+        this.accidentLevel = accidentLevel;
+        this.accidentImpact = accidentImpact;
+        this.accidentPath = accidentPath;
+        this.accidentManager = accidentManager;
+        this.victim = victim;
+        this.accidentTypeList = accidentTypeList;
+        this.causesSafetyAccidentList = causesSafetyAccidentList;
+        this.damageFacilityList = damageFacilityList;
+    }
 }
