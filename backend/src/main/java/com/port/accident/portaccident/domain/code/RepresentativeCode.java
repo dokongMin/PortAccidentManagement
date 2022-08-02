@@ -30,7 +30,6 @@ public class RepresentativeCode {
     @Column(name = "representative_code_name")
     private String name;
 
-    @Nullable
     @OneToMany(mappedBy = "representativeCode")
     private List<DetailedCode> detailedCode = new ArrayList<>();
 
@@ -42,6 +41,11 @@ public class RepresentativeCode {
         this.detailedCode = detailedCode;
     }
 
+    public RepresentativeCode(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public void setDetailedCode(DetailedCode code) {
         detailedCode.add(code);
     }
@@ -50,8 +54,7 @@ public class RepresentativeCode {
         detailedCode.remove(code);
     }
 
-
-    public void updateRepCode(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
