@@ -9,11 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -56,7 +56,7 @@ public class ScenarioRepositoryTest {
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        scenarioDto.addAccidentPortFacility(accidentPortFacilityDtoList);
+        scenarioDto.toEntity().addAccidentPortFacility(accidentPortFacilityDtoList);
 
         //when
         Scenario scenario = scenarioRepository.save(scenarioDto.toEntity());
@@ -70,4 +70,41 @@ public class ScenarioRepositoryTest {
         assertEquals(accidentPortFacilityDto2.toEntity().getName(), accidentPortFacility2.getName());
         assertEquals(2, scenario.getAccidentPortFacilityList().size());
     }
+
+    /*@Test
+    public void 시나리오_수정() {
+        //given
+        ScenarioDto scenarioDto = ScenarioDto.builder()
+                .name("SY2")
+                .level("3")
+                .impact("경상")
+                .precedingType("사고")
+                .accidentType("추락")
+                .portArea("무역항 수상구역")
+                .responseStage("2")
+                .build();
+
+        Scenario scenario = scenarioRepository.save(scenarioDto.toEntity());
+
+        ScenarioDto updateScenarioDto = ScenarioDto.builder()
+                .name("SY2")
+                .level("1")
+                .impact("중상")
+                .precedingType("사고")
+                .accidentType("넘어짐")
+                .portArea("무역항 수상구역")
+                .responseStage("2")
+                .build();
+
+        //when
+        Scenario updateScenario = scenarioRepository.findByName(updateScenarioDto.getName()).get();
+        updateScenario.update(scenarioDto);
+        scenarioRepository.save(updateScenario).getId();
+
+        //then
+        assertEquals(updateScenarioDto.toEntity().getName(), updateScenario.getName());
+        assertEquals(updateScenarioDto.toEntity().getLevel(), updateScenario.getLevel());
+        assertEquals(updateScenarioDto.toEntity().getImpact(), updateScenario.getImpact());
+        assertEquals(updateScenarioDto.toEntity().getAccidentType(), updateScenario.getAccidentType());
+    }*/
 }
