@@ -42,6 +42,11 @@ public class DetailedCode {
         this.representativeCode = representativeCode;
     }
 
+    public DetailedCode(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public void updateDetCode(DetailedCodeDto dto) {
         updateRepCodeList(dto);
         this.name = dto.getName();

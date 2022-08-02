@@ -175,7 +175,7 @@ public class CodeServiceTest {
     public void searchRetCodeWithPagingTest(){
         CodeSearchCondition condition = new CodeSearchCondition();
         PageRequest pageRequest = PageRequest.of(0,2);  //0페이지부터 시작해서 3개씩 가져옴
-        Page<RepresentativeCode> result = codeService.searchReqCodeListWithPaging(condition, pageRequest);
+        Page<RepresentativeCode> result = codeService.searchRepCodeListWithPaging(condition, pageRequest);
         assertEquals(result.getSize(),2);
         assertEquals(result.getContent().get(0).getCode(),"AT01");
         assertEquals(result.getContent().get(1).getCode(),"AT02");
