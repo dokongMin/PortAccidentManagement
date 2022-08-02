@@ -6,7 +6,9 @@ import com.port.accident.portaccident.domain.training_scenario.elements.Accident
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -54,10 +56,10 @@ public class Scenario {
     @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 항만 설비
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scenario") // 안전 사고 대응 활동
+    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 대응 활동
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "scenario") // 시나리오 평가
+    @OneToOne(mappedBy = "scenario", fetch = FetchType.LAZY) // 시나리오 평가
     private ScenarioEvaluation scenarioEvaluation;
 
     @Builder
@@ -80,13 +82,39 @@ public class Scenario {
         this.scenarioEvaluation = scenarioEvaluation;
     }
 
-    public Scenario addAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+    @Transactional(readOnly = true)
+    public void addAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
         for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
-            accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
+            accidentPortFacilityDto.setScenario(this);
+            this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
         }
-        return this;
     }
 
+    @Transactional(readOnly = true)
+    public void addAccidentResponseActivity(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
+            accidentResponseActivityDto.setScenario(this);
+            this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
+        }
+    }
+
+    @Transactional
+    public void removeAccidentPortFacility(List<AccidentPortFacility> accidentPortFacilityList) {
+        for (AccidentPortFacility accidentPortFacility : accidentPortFacilityList) {
+            this.accidentPortFacilityList.remove(accidentPortFacility);
+        }
+    }
+
+    @Transactional
+    public void removeAccidentResponseActivity(List<AccidentResponseActivity> accidentResponseActivityList) {
+        for (AccidentResponseActivity accidentResponseActivity : accidentResponseActivityList) {
+            this.accidentResponseActivityList.remove(accidentResponseActivity);
+        }
+    }
+
+
+
+    @Transactional(readOnly = true)
     public void update(ScenarioDto scenarioDto) {
         this.level = scenarioDto.getLevel();
         this.impact = scenarioDto.getImpact();
