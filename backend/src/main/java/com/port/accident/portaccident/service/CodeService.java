@@ -2,11 +2,15 @@ package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.code.DetailedCode;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
+import com.port.accident.portaccident.dto.code.CodeSearchCondition;
+import com.port.accident.portaccident.dto.code.DetRepJoinDto;
 import com.port.accident.portaccident.dto.code.DetailedCodeDto;
 import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
 import com.port.accident.portaccident.repository.code.DetailedCodeRepository;
 import com.port.accident.portaccident.repository.code.RepresentativeCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.port.accident.portaccident.exception.*;
@@ -25,6 +29,13 @@ public class CodeService {
     @Autowired
     RepresentativeCodeRepository representRepository;
 
+    public RepresentativeCode findByRepCode(String code){
+        return representRepository.findByCode(code).get();
+    }
+
+    public DetailedCode findByDetCode(String code){
+        return detailedRepository.findByCode(code).get();
+    }
 
     public List<DetailedCode> getDetailedCodeList() {
         return detailedRepository.findAll();
@@ -44,7 +55,6 @@ public class CodeService {
     }
 
     public Integer createDetailedCode(DetailedCode code) {
-        //싱세코드명 조회
         if (detailedRepository.findByCode(code.getCode()).isPresent()) {
             throw new DuplicateCreateCodeException("이미 존재하는 상세코드명입니다.");
         } else {
@@ -71,5 +81,15 @@ public class CodeService {
         DetailedCode code = detailedRepository.findById(dto.getId()).orElseThrow(() -> new DoesNotExistException());
         code.updateDetCode(dto);
         return code.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RepresentativeCode> searchReqCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
+        return representRepository.searchPageRepCode(condition, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<DetRepJoinDto> searchDetCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
+        return detailedRepository.searchPageDetCode(condition, pageable);
     }
 }
