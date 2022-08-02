@@ -1,26 +1,30 @@
 package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.staff.Staff;
-import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.staff.StaffDto;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.repository.staff.StaffRepository;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.junit.jupiter.api.BeforeEach;
+
+import javax.persistence.EntityManager;
+
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -115,9 +119,9 @@ public class StaffServiceTest {
         //then
         Staff updateStaff = staffRepository.findById(updateStaffId).get();
 
-        Assertions.assertEquals(staffId, updateStaffId);
-        Assertions.assertEquals(updateStaffDto.getName(), updateStaff.getName());
-        Assertions.assertEquals(updateStaffDto.getCorporation(), updateStaff.getCorporation());
+        assertEquals(staffId, updateStaffId);
+        assertEquals(updateStaffDto.getName(), updateStaff.getName());
+        assertEquals(updateStaffDto.getCorporation(), updateStaff.getCorporation());
     }
 
     @Test
@@ -142,4 +146,63 @@ public class StaffServiceTest {
         assertFalse(deleteScenario.isPresent());
     }
 
+    @Test
+    public void 비상연락망_조회_페이징() {
+        //given
+        IntStream.rangeClosed(1, 5).forEach(i -> {
+            StaffDto staffDto = StaffDto.builder()
+                    .name("이혜원" + i)
+                    .build();
+
+            staffService.saveStaff(staffDto);
+        });
+
+        SearchCondition searchCondition = new SearchCondition();
+        PageRequest pageRequest = PageRequest.of(0, 3); // Sort.by(Sort.Direction.DESC, "name")
+
+        //when
+        Page<Staff> staff = staffService.searchPage(searchCondition, pageRequest);
+
+        //then
+        List<Staff> content = staff.getContent();
+        assertEquals("조회된 데이터 수", 3, content.size());
+        assertEquals("전체 데이터 수", 5, staff.getTotalElements());
+        assertEquals("페이지 번호", 0, staff.getNumber());
+        assertEquals("전체 페이지 번호", 2, staff.getTotalPages());
+        assertTrue("첫번째 항목인가?", staff.isFirst());
+        assertTrue("다음 페이지가 있는가?", staff.hasNext());
+    }
+
+    @Test
+    public void 비상연락망_검색_페이징() {
+        IntStream.rangeClosed(1, 5).forEach(i -> {
+            StaffDto staffDto = StaffDto.builder()
+                    .name("이혜원" + i)
+                    .build();
+
+            staffService.saveStaff(staffDto);
+
+            StaffDto staffDto2 = StaffDto.builder()
+                    .name("박태영" + i)
+                    .build();
+
+            staffService.saveStaff(staffDto2);
+        });
+
+        SearchCondition searchCondition = new SearchCondition();
+        searchCondition.setType("name");
+        searchCondition.setKeyword("이혜원");
+
+        PageRequest pageRequest = PageRequest.of(0, 3);
+
+        //when
+        Page<Staff> staff = staffService.searchPage(searchCondition, pageRequest);
+        List<Staff> content = staff.getContent();
+        assertEquals("조회된 데이터 수", 3, content.size());
+        assertEquals("전체 데이터 수", 5, staff.getTotalElements());
+        assertEquals("페이지 번호", 0, staff.getNumber());
+        assertEquals("전체 페이지 번호", 2, staff.getTotalPages());
+        assertTrue("첫번째 항목인가?", staff.isFirst());
+        assertTrue("다음 페이지가 있는가?", staff.hasNext());
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface StaffRepository extends JpaRepository<Staff, Integer> {
+public interface StaffRepository extends JpaRepository<Staff, Integer>, StaffRepositoryCustom {
 
     @Query("select s from Staff s where s.phoneNumber = :phoneNumber")
     Optional<Staff> findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
