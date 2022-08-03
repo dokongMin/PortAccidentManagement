@@ -18,35 +18,24 @@ public class QAccidentType extends EntityPathBase<AccidentType> {
 
     private static final long serialVersionUID = 16189303L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QAccidentType accidentType = new QAccidentType("accidentType");
 
-    public final com.port.accident.portaccident.domain.accident_management.QAccidentInfo accidentInfo;
+    public final ListPath<com.port.accident.portaccident.domain.accident_management.AccidentInfo, com.port.accident.portaccident.domain.accident_management.QAccidentInfo> accidentInfoList = this.<com.port.accident.portaccident.domain.accident_management.AccidentInfo, com.port.accident.portaccident.domain.accident_management.QAccidentInfo>createList("accidentInfoList", com.port.accident.portaccident.domain.accident_management.AccidentInfo.class, com.port.accident.portaccident.domain.accident_management.QAccidentInfo.class, PathInits.DIRECT2);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath name = createString("name");
 
     public QAccidentType(String variable) {
-        this(AccidentType.class, forVariable(variable), INITS);
+        super(AccidentType.class, forVariable(variable));
     }
 
     public QAccidentType(Path<? extends AccidentType> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QAccidentType(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QAccidentType(PathMetadata metadata, PathInits inits) {
-        this(AccidentType.class, metadata, inits);
-    }
-
-    public QAccidentType(Class<? extends AccidentType> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.accidentInfo = inits.isInitialized("accidentInfo") ? new com.port.accident.portaccident.domain.accident_management.QAccidentInfo(forProperty("accidentInfo")) : null;
+        super(AccidentType.class, metadata);
     }
 
 }
