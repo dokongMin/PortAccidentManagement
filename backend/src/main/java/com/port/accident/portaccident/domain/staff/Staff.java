@@ -1,13 +1,13 @@
 package com.port.accident.portaccident.domain.staff;
 
-import com.port.accident.portaccident.domain.code.DetailedCode;
+import com.port.accident.portaccident.dto.staff.StaffDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Table(name = "staff")
 @Entity
@@ -47,5 +47,15 @@ public class Staff {
         this.position = position;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    @Transactional(readOnly = true)
+    public void update(StaffDto staffDto) {
+        this.name = staffDto.getName();
+        this.corporation = staffDto.getCorporation();
+        this.group = staffDto.getGroup();
+        this.position = staffDto.getPosition();
+        this.email = staffDto.getEmail();
+        this.phoneNumber = staffDto.getPhoneNumber();
     }
 }

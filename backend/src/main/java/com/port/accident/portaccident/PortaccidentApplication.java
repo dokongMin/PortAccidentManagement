@@ -14,8 +14,8 @@ public class PortaccidentApplication {
 		SpringApplication.run(PortaccidentApplication.class, args);
 	}
 
-	@Bean
-	JPAQueryFactory jpaQueryFactory(EntityManager em){
-		return new JPAQueryFactory(em);
-	}
+//	@Bean
+//	JPAQueryFactory jpaQueryFactory(EntityManager em){
+//		return new JPAQueryFactory(em);
+//	}
 }
