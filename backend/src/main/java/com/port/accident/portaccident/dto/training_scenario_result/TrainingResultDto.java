@@ -6,6 +6,7 @@ import com.port.accident.portaccident.domain.training_scenario_result.elements.T
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
+import com.port.accident.portaccident.enums.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,16 +17,15 @@ import java.util.List;
 @Getter
 @Setter
 public class TrainingResultDto {
+    private Integer id;
     private String name;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String place;
-    private String trainingType;
-    private String accidentLevel;
-    private String accidentImpact;
-    private String precedingType;
-    private String accidentType;
-    private String disasterType;
+    private TrainingPlace place;
+    private TrainingType trainingType;
+    private IncidentLevel incidentLevel;
+    private IncidentImpact incidentImpact;
+    private IncidentType incidentType;
     private String department;
     private String trainingArea;
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
@@ -33,28 +33,24 @@ public class TrainingResultDto {
     private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
 
     @Builder
-    public TrainingResultDto(String name, LocalDateTime startDate, LocalDateTime endDate, String place,
-                             String trainingType, String accidentLevel, String accidentImpact, String precedingType,
-                             String accidentType, String disasterType, String department, String trainingArea,
-                             List<TrainingPortFacility> trainingPortFacilityList,
-                             List<TrainingByDate> trainingByDateList,
-                             List<TrainingParticipants> trainingParticipantsList) {
+    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String department, String trainingArea, List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList, List<TrainingParticipants> trainingParticipantsList) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place;
         this.trainingType = trainingType;
-        this.accidentLevel = accidentLevel;
-        this.accidentImpact = accidentImpact;
-        this.precedingType = precedingType;
-        this.accidentType = accidentType;
-        this.disasterType = disasterType;
+        this.incidentLevel = incidentLevel;
+        this.incidentImpact = incidentImpact;
+        this.incidentType = incidentType;
         this.department = department;
         this.trainingArea = trainingArea;
         this.trainingPortFacilityList = trainingPortFacilityList;
         this.trainingByDateList = trainingByDateList;
         this.trainingParticipantsList = trainingParticipantsList;
     }
+
+
 
     public TrainingResult toEntity() {
         return TrainingResult.builder()
@@ -63,16 +59,11 @@ public class TrainingResultDto {
                 .endDate(endDate)
                 .place(place)
                 .trainingType(trainingType)
-                .accidentLevel(accidentLevel)
-                .accidentImpact(accidentImpact)
-                .precedingType(precedingType)
-                .accidentType(accidentType)
-                .disasterType(disasterType)
+                .incidentLevel(incidentLevel)
+                .incidentImpact(incidentImpact)
+                .incidentType(incidentType)
                 .department(department)
                 .trainingArea(trainingArea)
-                .trainingPortFacilityList(trainingPortFacilityList)
-                .trainingByDateList(trainingByDateList)
-                .trainingParticipantsList(trainingParticipantsList)
                 .build();
     }
 }
