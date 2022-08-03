@@ -3,6 +3,7 @@ package com.port.accident.portaccident.runner;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
 import com.port.accident.portaccident.dto.code.DetailedCodeDto;
 import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
+import com.port.accident.portaccident.repository.code.DetailedCodeRepository;
 import com.port.accident.portaccident.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -19,6 +20,9 @@ public class CodeRunner implements org.springframework.boot.ApplicationRunner {
 
     @Autowired
     CodeService codeService;
+
+    @Autowired
+    DetailedCodeRepository detailedCodeRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -57,7 +61,7 @@ public class CodeRunner implements org.springframework.boot.ApplicationRunner {
                     .build());
             DetailedCodeDto poll = detDtoQueue.poll();
 
-            codeService.createDetailedCode(poll.toEntity());
+            detailedCodeRepository.save(poll.toEntity());
 
         }
 

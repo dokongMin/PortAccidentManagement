@@ -42,26 +42,20 @@ public class DetailedCode {
         this.representativeCode = representativeCode;
     }
 
-    public DetailedCode(String code, String name) {
+    public DetailedCode(String code, String name, String comment) {
         this.code = code;
         this.name = name;
+        this.comment = comment;
+    }
+
+    public void setRepresentativeCode(RepresentativeCode representativeCode) {
+        this.representativeCode = representativeCode;
     }
 
     public void updateDetCode(DetailedCodeDto dto) {
-        updateRepCodeList(dto);
         this.name = dto.getName();
         this.comment = dto.getComment();
     }
 
-    private void updateRepCodeList(DetailedCodeDto dto) {
-        if (!this.code.equals(dto.getCode())) {
-            if (!this.representativeCode.equals(dto.getRepresentativeCode())) {
-                this.representativeCode.removeDetailedCode(this);
-                this.code = dto.getCode();
-                this.representativeCode = dto.getRepresentativeCode();
-                this.representativeCode.setDetailedCode(this);
-            }
-            this.code = dto.getCode();
-        }
-    }
+
 }
