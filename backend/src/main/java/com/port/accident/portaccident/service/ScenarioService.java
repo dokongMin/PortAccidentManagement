@@ -3,6 +3,7 @@ package com.port.accident.portaccident.service;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
+import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
@@ -10,6 +11,9 @@ import com.port.accident.portaccident.repository.training_scenario.AccidentPortF
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -110,5 +114,9 @@ public class ScenarioService {
     @Transactional
     public void deleteScenario(Integer scenarioId) {
         scenarioRepository.deleteById(scenarioId);
+    }
+
+    public Page<Scenario> searchPage(String nameCondition, Pageable pageable) {
+        return scenarioRepository.searchPage(nameCondition, pageable);
     }
 }
