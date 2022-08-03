@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "causes_safety_accident")
 @Entity
@@ -22,14 +24,14 @@ public class CausesSafetyAccident {
     @Column(name = "causes_safety_accident_name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accident_info_id")
-    private AccidentInfo accidentInfo;
+
+    @OneToMany(mappedBy = "causesSafetyAccident")
+    private List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList = new ArrayList<>();
 
     @Builder
-    public CausesSafetyAccident(Integer id, String name, AccidentInfo accidentInfo) {
+    public CausesSafetyAccident(Integer id, String name, List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList) {
         this.id = id;
         this.name = name;
-        this.accidentInfo = accidentInfo;
+        this.causesSafetyAccidentInfoList = causesSafetyAccidentInfoList;
     }
 }
