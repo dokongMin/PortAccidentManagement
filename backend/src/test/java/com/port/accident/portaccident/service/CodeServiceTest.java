@@ -32,7 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 @RunWith(SpringRunner.class)
 public class CodeServiceTest {
-    EntityManager em;
 
     @Autowired
     CodeService codeService;
@@ -140,34 +139,24 @@ public class CodeServiceTest {
 
 
 
-//    @Test
-//    @Transactional
-//    @Rollback(value = false)
-//    public void updateDetCode(){
-//        //given
-//        Integer repCodeId = 2;  //대표코드를 1에서 2로 변경
-//        RepresentativeCode repCode = representativeCodeRepository.findById(2).get();
-//
-//        DetailedCodeDto dto = DetailedCodeDto.builder()
-//                .id(1)
-//                .code("BT01")
-//                .name("무역항 수상구역")
-//                .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
-//                .representativeCode(repCode)
-//                .build();
-//
-//        //when
-//        Integer updateDetCodeId = codeService.updateDetailedCode(dto);
-//        DetailedCode updateDetCode = detailedCodeRepository.findById(updateDetCodeId).get();
-//
-//        //then
-//        assertEquals(updateDetCode.getName(), "무역항 수상구역");
-//        assertEquals(updateDetCode.getRepresentativeCode().getCode(), "BT01");
-//        for (DetailedCode detailedCode : updateDetCode.getRepresentativeCode().getDetailedCode()) {
-//            System.out.println("detCode : "+detailedCode.getCode());
-//        }
-//
-//    }
+    @Test
+    @Transactional
+    public void updateDetCode(){
+        //given
+        DetailedCodeDto dto = DetailedCodeDto.builder()
+                .id(10)
+                .name("무역항 수상구역")
+                .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
+                .build();
+
+        //when
+        Integer updateDetCodeId = codeService.updateDetailedCode(dto);
+        DetailedCode updateDetCode = detailedCodeRepository.findById(updateDetCodeId).get();
+
+        //then
+        assertEquals(updateDetCode.getName(), "무역항 수상구역");
+        assertEquals(updateDetCode.getCode(), "AD01");  //기존값
+    }
 
     @Test
     public void searchRetCodeWithPagingTest(){
