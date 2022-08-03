@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Rollback(value = false)
 public class CodeRepositoryTest {
 
     @Autowired
@@ -77,7 +76,7 @@ public class CodeRepositoryTest {
     public void create_representativeCode(){
         //given
         RepresentativeCodeDto codeDto = RepresentativeCodeDto.builder()
-                .code("AT01")
+                .code("AT04")
                 .name("대표코드명")
                 .build();
 
@@ -85,15 +84,15 @@ public class CodeRepositoryTest {
         RepresentativeCode savedCode = representativeCodeRepository.save(codeDto.toEntity());
 
         //then
-        assertEquals(savedCode.getCode(), "AT01");
+        assertEquals(savedCode.getCode(), "AT04");
     }
 
     @Test
     public void create_detailedCode(){
         //given
-        RepresentativeCode repCode = representativeCodeRepository.findByCode("AT01").get();
+        RepresentativeCode repCode = representativeCodeRepository.findByCode("AT04").get();
         DetailedCodeDto codeDto = DetailedCodeDto.builder()
-                .code("AD01")
+                .code("AD04")
                 .name("크레인")
                 .comment("하물을 들어올려서 상하/좌우/전후로 운반하는 기계장치")
                 .representativeCode(repCode)
@@ -103,8 +102,8 @@ public class CodeRepositoryTest {
         DetailedCode savedCode = detailedCodeRepository.save(codeDto.toEntity());
 
         //then
-        assertEquals(savedCode.getCode(), "AD01");
-        assertEquals(savedCode.getRepresentativeCode().getCode(), "AT01");
+        assertEquals(savedCode.getCode(), "AD04");
+        assertEquals(savedCode.getRepresentativeCode().getCode(), "AT04");
 
     }
 
@@ -116,7 +115,6 @@ public class CodeRepositoryTest {
         assertEquals(result.getSize(),2);
         assertEquals(result.getContent().get(0).getCode(),"AT01");
         assertEquals(result.getContent().get(1).getCode(),"AT02");
-
     }
 
     @Test
