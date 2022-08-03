@@ -1,6 +1,5 @@
 package com.port.accident.portaccident.repository.code;
 
-import com.port.accident.portaccident.domain.code.DetailedCode;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
 import com.port.accident.portaccident.dto.code.CodeSearchCondition;
 import com.port.accident.portaccident.dto.code.DetRepJoinDto;
