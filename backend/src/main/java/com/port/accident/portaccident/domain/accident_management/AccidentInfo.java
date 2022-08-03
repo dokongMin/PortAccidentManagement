@@ -2,7 +2,9 @@ package com.port.accident.portaccident.domain.accident_management;
 
 import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccident;
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacility;
+import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
+import com.port.accident.portaccident.domain.accident_management.type.DisasterType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,19 +47,25 @@ public class AccidentInfo {
     @Column(name = "victim")
     private String victim;
 
-    @OneToMany(mappedBy = "accidentInfo")
-    private List<AccidentType> accidentTypeList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accident_type_id")
+    private AccidentType accidentType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "disaster_type_id")
+    private DisasterType disasterType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "causes_safety_accident_id")
+    private CausesSafetyAccident causesSafetyAccident;
 
     @OneToMany(mappedBy = "accidentInfo")
-    private List<CausesSafetyAccident> causesSafetyAccidentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "accidentInfo")
-    private List<DamageFacility> damageFacilityList = new ArrayList<>();
+    private List<DamageFacilityInfo> damageFacilityList = new ArrayList<>();
 
     @Builder
     public AccidentInfo(Integer id, LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
-                        String accidentPath, String accidentManager, String victim, List<AccidentType> accidentTypeList,
-                        List<CausesSafetyAccident> causesSafetyAccidentList, List<DamageFacility> damageFacilityList) {
+                        String accidentPath, String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
+                        CausesSafetyAccident causesSafetyAccident, List<DamageFacilityInfo> damageFacilityList) {
         this.id = id;
         this.accidentDate = accidentDate;
         this.accidentArea = accidentArea;
@@ -66,8 +74,11 @@ public class AccidentInfo {
         this.accidentPath = accidentPath;
         this.accidentManager = accidentManager;
         this.victim = victim;
-        this.accidentTypeList = accidentTypeList;
-        this.causesSafetyAccidentList = causesSafetyAccidentList;
+        this.accidentType = accidentType;
+        this.disasterType = disasterType;
+        this.causesSafetyAccident = causesSafetyAccident;
         this.damageFacilityList = damageFacilityList;
     }
+
+
 }
