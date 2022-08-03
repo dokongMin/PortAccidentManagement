@@ -5,6 +5,7 @@ import com.port.accident.portaccident.domain.code.DetailedCode;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
 import com.port.accident.portaccident.dto.code.CodeSearchCondition;
 import com.port.accident.portaccident.dto.code.DetRepJoinDto;
+import com.port.accident.portaccident.dto.code.DetailedCodeDto;
 import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
 import com.port.accident.portaccident.service.CodeService;
 import lombok.RequiredArgsConstructor;
@@ -51,21 +52,24 @@ public class CodeController {
     }
 
     @RequestMapping("/detailedCode_register")
-    public String registerDetCode(@RequestParam("code") String code,
-                                  @RequestParam("name") String name) {
+    public String registerDetCode(@RequestBody DetailedCodeDto dto,
+                                  @RequestParam(value = "repCodeId") Integer repCodeId) {
         //TODO::태영 현정님
-        /* form형식으로 동작한다고 가정하고 작성한 코드이므로
-         * 화면상에서 js를 이용해 null값 제한을 걸어줘야 함 */
-        codeService.createDetailedCode(new DetailedCode(code, name));
+        /* 1.   form형식으로 동작한다고 가정하고 작성한 코드이므로
+         *      화면상에서 js를 이용해 null값 제한을 걸어줘야 함
+         * 2.   repCodeId는 get방식으로(파라미터로), dto는 post방식으로 데이터를 넘겨줌 */
+        String code = dto.getCode();
+        String name = dto.getName();
+        String comment = dto.getComment();
+
+        ;
+        codeService.createDetailedCode(new DetailedCode(code, name, comment), repCodeId);
 
         return "redirect:/Code/detailedCode_list";   //저장이 완료되면 상세코드 조회 페이지로 이동
     }
 
 
-    @GetMapping("/detailedCode_modify")
-    public String detCodeModifyPage() {
-        return "CommonCode/DC_Modify";
-    }
+
 
     @GetMapping("/representativeCode_list")
     public String repCodeListPage(Model model,
@@ -110,6 +114,25 @@ public class CodeController {
         return result;
     }
 
+    @RequestMapping(value = "/find_detCode", method = RequestMethod.POST)
+    @ResponseBody
+    public Object findDetCode(@RequestBody DetailedCodeDto dto) {
+        //TODO::태영 현정님
+        /* 단일 값을 가져와야 하므로 유니크 제약조건이 없는 name조건은 제거 */
+        DetailedCode result = null;
+
+        Integer id = dto.getId();
+        String code = dto.getCode();
+
+        if (id != null) {
+            result = codeService.findByDetCodeId(id);
+        }
+        if (hasText(code))
+            result = codeService.findByDetCode(code);
+
+        return result;
+    }
+
     @GetMapping("/representativeCode_modifyPage")
     public String repCodeModifyPage(Model model) {
         return "CommonCode/RC_Modify";
@@ -122,4 +145,18 @@ public class CodeController {
         codeService.updateRepresentativeCode(dto.getId(), dto.getName());
         return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
     }
+
+    @GetMapping("/detailedCode_modifyPage")
+    public String detCodeModifyPage() {
+        return "CommonCode/DC_Modify";
+    }
+
+//    @RequestMapping("/detailedCode_modify")
+//    public String modifyDetCode(@RequestBody DetailedCodeDto dto) {
+//        //TODO::태영 현정님
+//        /* 데이터 무결성을 위해 상세코드명, 상세설명만 변경 가능하도록 작성 */
+//        codeService.
+//    (dto.getId(), dto.getName());
+//        return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
+//    }
 }

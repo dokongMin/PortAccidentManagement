@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.domain.code;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public class RepresentativeCode {
     @Column(name = "representative_code_name")
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "representativeCode")
     private List<DetailedCode> detailedCode = new ArrayList<>();
 
