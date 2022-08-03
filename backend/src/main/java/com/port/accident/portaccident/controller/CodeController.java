@@ -151,12 +151,12 @@ public class CodeController {
         return "CommonCode/DC_Modify";
     }
 
-//    @RequestMapping("/detailedCode_modify")
-//    public String modifyDetCode(@RequestBody DetailedCodeDto dto) {
-//        //TODO::태영 현정님
-//        /* 데이터 무결성을 위해 상세코드명, 상세설명만 변경 가능하도록 작성 */
-//        codeService.
-//    (dto.getId(), dto.getName());
-//        return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
-//    }
+    @RequestMapping("/detailedCode_modify")
+    public String modifyDetCode(@RequestBody DetailedCodeDto dto) {
+        //TODO::태영 현정님
+        /* 데이터 무결성을 위해 상세코드명, 상세설명만 변경 가능하도록 작성 */
+        codeService.updateDetailedCode(dto);
+
+        return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
+    }
 }
