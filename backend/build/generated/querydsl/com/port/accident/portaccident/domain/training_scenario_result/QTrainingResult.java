@@ -20,25 +20,21 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
 
     public static final QTrainingResult trainingResult = new QTrainingResult("trainingResult");
 
-    public final StringPath accidentImpact = createString("accidentImpact");
-
-    public final StringPath accidentLevel = createString("accidentLevel");
-
-    public final StringPath accidentType = createString("accidentType");
-
     public final StringPath department = createString("department");
-
-    public final StringPath disasterType = createString("disasterType");
 
     public final DateTimePath<java.time.LocalDateTime> endDate = createDateTime("endDate", java.time.LocalDateTime.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentImpact> incidentImpact = createEnum("incidentImpact", com.port.accident.portaccident.enums.IncidentImpact.class);
+
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel = createEnum("incidentLevel", com.port.accident.portaccident.enums.IncidentLevel.class);
+
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentType> incidentType = createEnum("incidentType", com.port.accident.portaccident.enums.IncidentType.class);
+
     public final StringPath name = createString("name");
 
-    public final StringPath place = createString("place");
-
-    public final StringPath precedingType = createString("precedingType");
+    public final EnumPath<com.port.accident.portaccident.enums.TrainingPlace> place = createEnum("place", com.port.accident.portaccident.enums.TrainingPlace.class);
 
     public final DateTimePath<java.time.LocalDateTime> startDate = createDateTime("startDate", java.time.LocalDateTime.class);
 
@@ -50,7 +46,7 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
 
     public final ListPath<com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility, com.port.accident.portaccident.domain.training_scenario_result.elements.QTrainingPortFacility> trainingPortFacilityList = this.<com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility, com.port.accident.portaccident.domain.training_scenario_result.elements.QTrainingPortFacility>createList("trainingPortFacilityList", com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility.class, com.port.accident.portaccident.domain.training_scenario_result.elements.QTrainingPortFacility.class, PathInits.DIRECT2);
 
-    public final StringPath trainingType = createString("trainingType");
+    public final EnumPath<com.port.accident.portaccident.enums.TrainingType> trainingType = createEnum("trainingType", com.port.accident.portaccident.enums.TrainingType.class);
 
     public QTrainingResult(String variable) {
         super(TrainingResult.class, forVariable(variable));
