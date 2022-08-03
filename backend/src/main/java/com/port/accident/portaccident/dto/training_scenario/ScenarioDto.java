@@ -28,8 +28,8 @@ public class ScenarioDto {
     @Builder
     public ScenarioDto(String name, String level, String impact, String precedingType, String accidentType,
                        String disasterType, String portArea, String responseStage,
-                       List<AccidentPortFacility> accidentPortFacilityList,
-                       List<AccidentResponseActivity> accidentResponseActivityList,
+//                       List<AccidentPortFacility> accidentPortFacilityList,
+//                       List<AccidentResponseActivity> accidentResponseActivityList,
                        ScenarioEvaluation scenarioEvaluation) {
         this.name = name;
         this.level = level;
@@ -39,8 +39,8 @@ public class ScenarioDto {
         this.disasterType = disasterType;
         this.portArea = portArea;
         this.responseStage = responseStage;
-        this.accidentPortFacilityList = accidentPortFacilityList;
-        this.accidentResponseActivityList = accidentResponseActivityList;
+//        this.accidentPortFacilityList = accidentPortFacilityList;
+//        this.accidentResponseActivityList = accidentResponseActivityList;
         this.scenarioEvaluation = scenarioEvaluation;
     }
 

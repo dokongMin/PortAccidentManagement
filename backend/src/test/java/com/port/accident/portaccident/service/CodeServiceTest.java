@@ -11,6 +11,8 @@ import com.port.accident.portaccident.repository.code.RepresentativeCodeReposito
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +44,7 @@ public class CodeServiceTest {
     DetailedCodeRepository detailedCodeRepository;
 
     @Before
+    @Rollback(value = false)
     public void setup(){
         RepresentativeCodeDto repCodeDto1 = RepresentativeCodeDto.builder()
                 .code("AT01")
@@ -57,6 +60,7 @@ public class CodeServiceTest {
                 .build();
 
         RepresentativeCode repCode = representativeCodeRepository.save(repCodeDto1.toEntity());
+        System.out.println("repCode : "+repCode.getId());
         representativeCodeRepository.save(repCodeDto2.toEntity());
         representativeCodeRepository.save(repCodeDto3.toEntity());
 
@@ -121,10 +125,9 @@ public class CodeServiceTest {
 
     @Test
     @Transactional
-    @Rollback(value = false)
     public void updateReqCode(){
         //given
-        Integer findRepCodeId = 1;
+        Integer findRepCodeId = 7;
         String updateName = "변경된 대표코드명";
 
         //when
@@ -137,34 +140,34 @@ public class CodeServiceTest {
 
 
 
-    @Test
-    @Transactional
-    @Rollback(value = false)
-    public void updateDetCode(){
-        //given
-        Integer repCodeId = 2;  //대표코드를 1에서 2로 변경
-        RepresentativeCode repCode = representativeCodeRepository.findById(2).get();
-
-        DetailedCodeDto dto = DetailedCodeDto.builder()
-                .id(1)
-                .code("BT01")
-                .name("무역항 수상구역")
-                .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
-                .representativeCode(repCode)
-                .build();
-
-        //when
-        Integer updateDetCodeId = codeService.updateDetailedCode(dto);
-        DetailedCode updateDetCode = detailedCodeRepository.findById(updateDetCodeId).get();
-
-        //then
-        assertEquals(updateDetCode.getName(), "무역항 수상구역");
-        assertEquals(updateDetCode.getRepresentativeCode().getCode(), "BT01");
-        for (DetailedCode detailedCode : updateDetCode.getRepresentativeCode().getDetailedCode()) {
-            System.out.println("detCode : "+detailedCode.getCode());
-        }
-
-    }
+//    @Test
+//    @Transactional
+//    @Rollback(value = false)
+//    public void updateDetCode(){
+//        //given
+//        Integer repCodeId = 2;  //대표코드를 1에서 2로 변경
+//        RepresentativeCode repCode = representativeCodeRepository.findById(2).get();
+//
+//        DetailedCodeDto dto = DetailedCodeDto.builder()
+//                .id(1)
+//                .code("BT01")
+//                .name("무역항 수상구역")
+//                .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
+//                .representativeCode(repCode)
+//                .build();
+//
+//        //when
+//        Integer updateDetCodeId = codeService.updateDetailedCode(dto);
+//        DetailedCode updateDetCode = detailedCodeRepository.findById(updateDetCodeId).get();
+//
+//        //then
+//        assertEquals(updateDetCode.getName(), "무역항 수상구역");
+//        assertEquals(updateDetCode.getRepresentativeCode().getCode(), "BT01");
+//        for (DetailedCode detailedCode : updateDetCode.getRepresentativeCode().getDetailedCode()) {
+//            System.out.println("detCode : "+detailedCode.getCode());
+//        }
+//
+//    }
 
     @Test
     public void searchRetCodeWithPagingTest(){
