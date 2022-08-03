@@ -33,18 +33,23 @@ public class TrainingResult {
     @Column(name = "training_end_date")
     private LocalDateTime endDate;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_place")
     private TrainingPlace place;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_type")
     private TrainingType trainingType;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "accident_level")
     private IncidentLevel incidentLevel;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "incident_impact")
     private IncidentImpact incidentImpact;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "incident_type")
     private IncidentType incidentType;
 
@@ -81,15 +86,15 @@ public class TrainingResult {
         this.trainingArea = trainingArea;
     }
 
-    public void setTrainingPortFacilityList(List<TrainingPortFacility> trainingPortFacilityList) {
-        this.trainingPortFacilityList = trainingPortFacilityList;
+    public void updateTrainingPortFacilityList(TrainingPortFacility facility) {
+        trainingPortFacilityList.add(facility);
     }
 
-    public void setTrainingByDateList(List<TrainingByDate> trainingByDateList) {
-        this.trainingByDateList = trainingByDateList;
+    public void updateTrainingByDateList(TrainingByDate byDate) {
+        trainingByDateList.add(byDate);
     }
 
-    public void setTrainingParticipantsList(List<TrainingParticipants> trainingParticipantsList) {
-        this.trainingParticipantsList = trainingParticipantsList;
+    public void updateTrainingParticipantsList(TrainingParticipants participants) {
+        trainingParticipantsList.add(participants);
     }
 }

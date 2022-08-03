@@ -21,6 +21,7 @@ public class TrainingPortFacility {
     @Column(name = "training_port_facility_id")
     private Integer id;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_port_facility_name")
     private PortFacility name;
 
