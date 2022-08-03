@@ -1,6 +1,5 @@
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
-import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
