@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -40,12 +41,20 @@ public class RepresentativeCode {
         this.detailedCode = detailedCode;
     }
 
-    public void setDetailedCode(DetailedCode code){
-        detailedCode.add(code);
-
+    public RepresentativeCode(String code, String name) {
+        this.code = code;
+        this.name = name;
     }
-    public void updateRepCode(RepresentativeCodeDto dto){
-        this.code = dto.getCode();
-        this.name = dto.getName();
+
+    public void setDetailedCode(DetailedCode code) {
+        detailedCode.add(code);
+    }
+
+    public void removeDetailedCode(DetailedCode code) {
+        detailedCode.remove(code);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

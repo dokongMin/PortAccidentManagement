@@ -1,10 +1,7 @@
 package com.port.accident.portaccident.domain.training_scenario.elements;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 

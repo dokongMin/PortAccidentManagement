@@ -2,51 +2,77 @@ package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.code.DetailedCode;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
+import com.port.accident.portaccident.dto.code.CodeSearchCondition;
+import com.port.accident.portaccident.dto.code.DetRepJoinDto;
 import com.port.accident.portaccident.dto.code.DetailedCodeDto;
 import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
 import com.port.accident.portaccident.repository.code.DetailedCodeRepository;
 import com.port.accident.portaccident.repository.code.RepresentativeCodeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.port.accident.portaccident.exception.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CodeService {
 
-    @Autowired
-    DetailedCodeRepository detailedRepository;
+    private final DetailedCodeRepository detailedRepository;
 
-    @Autowired
-    RepresentativeCodeRepository representRepository;
+    private final RepresentativeCodeRepository representRepository;
 
+    public RepresentativeCode findByRepCode(String code){
+        Optional<RepresentativeCode> byCode = representRepository.findByCode(code);
+        return byCode.orElse(null);
+    }
 
-    public List<DetailedCode> getDetailedCodeList(){
+    public RepresentativeCode findByRepCodeId(Integer id){
+//        System.out.println("id ==> "+id);
+//        System.out.println(representRepository.findById(id).get().getCode());
+        Optional<RepresentativeCode> byId = representRepository.findById(id);
+        return byId.orElse(null);
+    }
+
+    public DetailedCode findByDetCode(String code){
+        Optional<DetailedCode> byCode = detailedRepository.findByCode(code);
+        return byCode.orElse(null);
+    }
+
+    public DetailedCode findByDetCodeId(Integer id){
+        Optional<DetailedCode> byId = detailedRepository.findById(id);
+        return byId.orElse(null);
+
+    }
+
+    public List<DetailedCode> getDetailedCodeList() {
         return detailedRepository.findAll();
     }
 
-    public List<RepresentativeCode> getRepresentativeCodeList(){
+    public List<RepresentativeCode> getRepresentativeCodeList() {
         return representRepository.findAll();
     }
 
-    public Integer createRepresentativeCode(RepresentativeCode code){
-        if(representRepository.findByCode(code.getCode()).isPresent()) {
+    public Integer createRepresentativeCode(RepresentativeCode code) {
+        if (representRepository.findByCode(code.getCode()).isPresent()) {
             throw new DuplicateCreateCodeException("이미 존재하는 대표코드명입니다.");
-        }else{
+        } else {
             RepresentativeCode savedCode = representRepository.save(code);
             return savedCode.getId();
         }
     }
 
-    public Integer createDetailedCode(DetailedCode code){
-        //싱세코드명 조회
-        if(detailedRepository.findByCode(code.getCode()).isPresent()) {
+    public Integer createDetailedCode(DetailedCode code) {
+        if (detailedRepository.findByCode(code.getCode()).isPresent()) {
             throw new DuplicateCreateCodeException("이미 존재하는 상세코드명입니다.");
-        }else{
+        } else {
             updateRepCodeDetailList(code);
             DetailedCode savedCode = detailedRepository.save(code);
             return savedCode.getId();
@@ -54,19 +80,33 @@ public class CodeService {
     }
 
     private void updateRepCodeDetailList(DetailedCode code) {
-        RepresentativeCode representativeCode = representRepository.findByCode(code.getRepresentativeCode().getCode()).get();
+        RepresentativeCode representativeCode = representRepository.findByCode(code.getRepresentativeCode().getCode())
+                .orElseThrow(() -> new DoesNotExistException());
         representativeCode.setDetailedCode(code);
     }
 
-    public Integer updateRepresentativeCode(RepresentativeCodeDto dto){
-        RepresentativeCode code = representRepository.findByCode(dto.getCode()).get();
-        code.updateRepCode(dto);
+    @Transactional
+    public void updateRepresentativeCode(Integer id, String name) {
+        Optional<RepresentativeCode> repCode = representRepository.findById(id);
+        repCode.orElseThrow(() -> new DoesNotExistException());
+        RepresentativeCode transRepCode = repCode.get();
+        transRepCode.setName(name);
+    }
+
+    @Transactional
+    public Integer updateDetailedCode(DetailedCodeDto dto) {
+        DetailedCode code = detailedRepository.findById(dto.getId()).orElseThrow(() -> new DoesNotExistException());
+        code.updateDetCode(dto);
         return code.getId();
     }
 
-    public Integer updateDetailedCode(DetailedCodeDto dto){
-        DetailedCode code = detailedRepository.findByCode(dto.getCode()).get();
-        code.updateDetCode(dto);
-        return code.getId();
+    @Transactional(readOnly = true)
+    public Page<RepresentativeCode> searchRepCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
+        return representRepository.searchPageRepCode(condition, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<DetRepJoinDto> searchDetCodeListWithPaging(CodeSearchCondition condition, Pageable pageable) {
+        return detailedRepository.searchPageDetCode(condition, pageable);
     }
 }
