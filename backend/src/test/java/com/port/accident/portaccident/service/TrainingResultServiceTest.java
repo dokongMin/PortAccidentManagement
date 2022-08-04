@@ -109,6 +109,23 @@ public class TrainingResultServiceTest {
     }
 
     @Test
+    public void duplicateTrainingResultName() {
+        //given
+        TrainingResultDto dto = TrainingResultDto.builder()
+                .name("대응훈련결과명")
+                .build();
+
+        //when
+        try {
+            resultService.createTrainingResult(dto.toEntity());
+        } catch (RuntimeException e) {
+            //then
+            Assertions.assertEquals("훈련명(name)은 유니크한 값이여야 합니다.", e.getMessage());
+        }
+
+    }
+
+    @Test
     public void createTrainingParticipants() {
         //given
         TrainingResult trainingResult = resultService.findByTrainingResultId(trainingResultId);
