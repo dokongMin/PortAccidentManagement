@@ -22,6 +22,8 @@ public class QAccidentType extends EntityPathBase<AccidentType> {
 
     public final ListPath<com.port.accident.portaccident.domain.accident_management.AccidentInfo, com.port.accident.portaccident.domain.accident_management.QAccidentInfo> accidentInfoList = this.<com.port.accident.portaccident.domain.accident_management.AccidentInfo, com.port.accident.portaccident.domain.accident_management.QAccidentInfo>createList("accidentInfoList", com.port.accident.portaccident.domain.accident_management.AccidentInfo.class, com.port.accident.portaccident.domain.accident_management.QAccidentInfo.class, PathInits.DIRECT2);
 
+    public final EnumPath<AccidentTypeEnum> accidentTypeEnum = createEnum("accidentTypeEnum", AccidentTypeEnum.class);
+
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath name = createString("name");

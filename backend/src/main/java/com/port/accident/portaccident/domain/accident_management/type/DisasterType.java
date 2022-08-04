@@ -24,7 +24,8 @@ public class DisasterType {
     @Column(name = "disaster_type_name")
     private String name;
 
-
+    @Enumerated(EnumType.STRING)
+    private DisasterTypeEnum disasterTypeEnum;
     @OneToMany(mappedBy = "disasterType")
     private List<AccidentInfo> accidentInfoList = new ArrayList<>();
 

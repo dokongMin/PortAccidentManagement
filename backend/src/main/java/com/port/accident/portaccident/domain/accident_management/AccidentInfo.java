@@ -4,6 +4,7 @@ import com.port.accident.portaccident.domain.accident_management.elements.Causes
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
 import com.port.accident.portaccident.domain.accident_management.type.DisasterType;
+import com.port.accident.portaccident.dto.accident_management.AccidentInfoDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,8 +38,8 @@ public class AccidentInfo {
     @Column(name = "accident_impact")
     private String accidentImpact;
 
-    @Column(name = "accident_path")
-    private String accidentPath;
+    @Column(name = "accident_inspect")
+    private String accidentInspect;
 
     @Column(name = "accident_manager")
     private String accidentManager;
@@ -57,23 +58,19 @@ public class AccidentInfo {
     @OneToMany(mappedBy = "accidentInfo")
     private List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "causes_safety_accident_id")
-    private CausesSafetyAccident causesSafetyAccident;
-
     @OneToMany(mappedBy = "accidentInfo")
     private List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
 
     @Builder
     public AccidentInfo(Integer id, LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
-                        String accidentPath, String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
+                        String accidentInspect, String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
                         List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.id = id;
         this.accidentDate = accidentDate;
         this.accidentArea = accidentArea;
         this.accidentLevel = accidentLevel;
         this.accidentImpact = accidentImpact;
-        this.accidentPath = accidentPath;
+        this.accidentInspect = accidentInspect;
         this.accidentManager = accidentManager;
         this.victim = victim;
         this.accidentType = accidentType;
@@ -91,6 +88,19 @@ public class AccidentInfo {
 //            disasterType.getAccidentInfoList().remove(this);
 //        }
 //        disasterType.getAccidentInfoList().add(this);
+    }
+    public void update(AccidentInfoDto dto){
+        this.accidentDate = dto.getAccidentDate();
+        this.accidentArea = dto.getAccidentArea();
+        this.accidentLevel = dto.getAccidentLevel();
+        this.accidentImpact = dto.getAccidentImpact();
+        this.accidentInspect = dto.getAccidentInspect();
+        this.accidentManager = dto.getAccidentManager();
+        this.victim = dto.getVictim();
+        this.accidentType = dto.getAccidentType();
+        this.disasterType = dto.getDisasterType();
+        this.causesSafetyAccidentInfoList = dto.getCausesSafetyAccidentInfoList();
+        this.damageFacilityInfoList = dto.getDamageFacilityInfoList();
     }
 
 
