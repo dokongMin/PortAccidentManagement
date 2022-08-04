@@ -22,13 +22,23 @@ public class QScenarioEvaluation extends EntityPathBase<ScenarioEvaluation> {
 
     public static final QScenarioEvaluation scenarioEvaluation = new QScenarioEvaluation("scenarioEvaluation");
 
+    public final EnumPath<SuitableCheck> completeStandard1 = createEnum("completeStandard1", SuitableCheck.class);
+
+    public final EnumPath<SuitableCheck> completeStandard2 = createEnum("completeStandard2", SuitableCheck.class);
+
+    public final EnumPath<SuitableCheck> developmentStandard1 = createEnum("developmentStandard1", SuitableCheck.class);
+
+    public final EnumPath<SuitableCheck> developmentStandard2 = createEnum("developmentStandard2", SuitableCheck.class);
+
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath name = createString("name");
 
-    public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;
+    public final EnumPath<SuitableCheck> possibleStandard1 = createEnum("possibleStandard1", SuitableCheck.class);
 
-    public final ListPath<ScenarioEvaluationStandard, QScenarioEvaluationStandard> scenarioEvaluationStandardList = this.<ScenarioEvaluationStandard, QScenarioEvaluationStandard>createList("scenarioEvaluationStandardList", ScenarioEvaluationStandard.class, QScenarioEvaluationStandard.class, PathInits.DIRECT2);
+    public final EnumPath<SuitableCheck> possibleStandard2 = createEnum("possibleStandard2", SuitableCheck.class);
+
+    public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;
 
     public QScenarioEvaluation(String variable) {
         this(ScenarioEvaluation.class, forVariable(variable), INITS);
@@ -48,7 +58,7 @@ public class QScenarioEvaluation extends EntityPathBase<ScenarioEvaluation> {
 
     public QScenarioEvaluation(Class<? extends ScenarioEvaluation> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario"), inits.get("scenario")) : null;
+        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario")) : null;
     }
 
 }

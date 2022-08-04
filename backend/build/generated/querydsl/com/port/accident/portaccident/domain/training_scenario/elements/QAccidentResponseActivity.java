@@ -50,7 +50,7 @@ public class QAccidentResponseActivity extends EntityPathBase<AccidentResponseAc
 
     public QAccidentResponseActivity(Class<? extends AccidentResponseActivity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario"), inits.get("scenario")) : null;
+        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario")) : null;
     }
 
 }

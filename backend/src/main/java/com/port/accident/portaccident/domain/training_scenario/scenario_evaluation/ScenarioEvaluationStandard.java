@@ -1,3 +1,4 @@
+/*
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
 
@@ -48,3 +49,4 @@ public class ScenarioEvaluationStandard {
         this.scenarioEvaluation = scenarioEvaluation;
     }
 }
+*/

@@ -22,13 +22,15 @@ public class QScenarioEvaluationStandard extends EntityPathBase<ScenarioEvaluati
 
     public static final QScenarioEvaluationStandard scenarioEvaluationStandard = new QScenarioEvaluationStandard("scenarioEvaluationStandard");
 
-    public final NumberPath<Integer> id = createNumber("id", Integer.class);
+    public final StringPath evaluationDetailsStandard = createString("evaluationDetailsStandard");
 
-    public final StringPath name = createString("name");
+    public final EnumPath<EvaluationStandard> evaluationStandard = createEnum("evaluationStandard", EvaluationStandard.class);
+
+    public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final QScenarioEvaluation scenarioEvaluation;
 
-    public final ListPath<ScenarioEvaluationDetailsStandard, QScenarioEvaluationDetailsStandard> scenarioEvaluationDetailsStandardList = this.<ScenarioEvaluationDetailsStandard, QScenarioEvaluationDetailsStandard>createList("scenarioEvaluationDetailsStandardList", ScenarioEvaluationDetailsStandard.class, QScenarioEvaluationDetailsStandard.class, PathInits.DIRECT2);
+    public final EnumPath<SuitableCheck> suitableCheck = createEnum("suitableCheck", SuitableCheck.class);
 
     public QScenarioEvaluationStandard(String variable) {
         this(ScenarioEvaluationStandard.class, forVariable(variable), INITS);

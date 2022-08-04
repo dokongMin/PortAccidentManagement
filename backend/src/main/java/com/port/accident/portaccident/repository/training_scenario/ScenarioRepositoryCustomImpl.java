@@ -1,6 +1,6 @@
 package com.port.accident.portaccident.repository.training_scenario;
 
-import com.port.accident.portaccident.dto.training_scenario.QScenarioActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.QScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -29,7 +29,7 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
     @Override
     public Page<ScenarioAccidentResponseActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
         List<ScenarioAccidentResponseActivityDto> content = queryFactory
-                .select(new QScenarioActivityDto(
+                .select(new QScenarioAccidentResponseActivityDto(
                         scenario.name,
                         scenario.level,
                         scenario.impact,
