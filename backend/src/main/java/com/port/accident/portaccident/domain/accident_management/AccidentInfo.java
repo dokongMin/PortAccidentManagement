@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class AccidentInfo {
     private Integer id;
 
     @Column(name = "accident_date")
-    private LocalDateTime accidentDate;
+    private LocalDate accidentDate;
 
     @Column(name = "accident_area")
     private String accidentArea;
@@ -62,7 +63,7 @@ public class AccidentInfo {
     private List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
 
     @Builder
-    public AccidentInfo(Integer id, LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
+    public AccidentInfo(Integer id, LocalDate accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
                         String accidentInspect, String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
                         List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.id = id;

@@ -21,6 +21,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public class AccidentManagementServiceTests {
          * AccidentInfo 저장
          */
         AccidentInfoDto accidentInfoDto = AccidentInfoDto.builder()
-                .accidentDate(LocalDateTime.now())
+                .accidentDate(LocalDate.now())
                 .accidentArea("연안항")
                 .accidentLevel("Level 1")
                 .accidentImpact("경상")
@@ -157,7 +158,7 @@ public class AccidentManagementServiceTests {
          * AccidentInfo 저장
          */
         AccidentInfoDto accidentInfoDto = AccidentInfoDto.builder()
-                .accidentDate(LocalDateTime.now())
+                .accidentDate(LocalDate.now())
                 .accidentArea("연안항")
                 .accidentLevel("Level 1")
                 .accidentImpact("경상")
@@ -168,7 +169,7 @@ public class AccidentManagementServiceTests {
         Integer accidentId = accidentManagementService.saveAccidentInfo(accidentInfoDto);
 
         AccidentInfoDto accidentInfoDto2 = AccidentInfoDto.builder()
-                .accidentDate(LocalDateTime.now())
+                .accidentDate(LocalDate.now())
                 .accidentArea("무역항")
                 .accidentLevel("Level 2")
                 .accidentImpact("중상")
