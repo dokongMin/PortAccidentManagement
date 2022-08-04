@@ -2,15 +2,15 @@ package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.SuitableCheck;
-import com.port.accident.portaccident.dto.staff.StaffDto;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
+import com.port.accident.portaccident.enums.SuitableCheck;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
+import com.port.accident.portaccident.enums.IncidentImpact;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import org.junit.Before;
@@ -50,10 +50,10 @@ public class TrainingScenarioEvaluationServiceTest {
     public void 시나리오_등록() {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();

@@ -2,10 +2,10 @@
 package com.port.accident.portaccident.dto.training_scenario.scenario_evaluation;
 
 
-import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.EvaluationStandard;
+import com.port.accident.portaccident.enums.EvaluationStandard;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluationStandard;
-import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.SuitableCheck;
+import com.port.accident.portaccident.enums.SuitableCheck;
 import lombok.*;
 
 import java.util.ArrayList;

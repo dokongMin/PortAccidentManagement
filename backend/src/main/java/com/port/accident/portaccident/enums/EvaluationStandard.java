@@ -1,4 +1,4 @@
-package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
+package com.port.accident.portaccident.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -2,12 +2,8 @@ package com.port.accident.portaccident.dto.training_scenario.scenario_evaluation
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.SuitableCheck;
+import com.port.accident.portaccident.enums.SuitableCheck;
 import lombok.*;
-
-import javax.persistence.Column;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
