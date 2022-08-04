@@ -46,6 +46,8 @@ public class QScenario extends EntityPathBase<Scenario> {
 
     public final com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation scenarioEvaluation;
 
+    public final ListPath<com.port.accident.portaccident.domain.training_scenario_result.TrainingResult, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult> trainingResultArrayList = this.<com.port.accident.portaccident.domain.training_scenario_result.TrainingResult, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult>createList("trainingResultArrayList", com.port.accident.portaccident.domain.training_scenario_result.TrainingResult.class, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult.class, PathInits.DIRECT2);
+
     public QScenario(String variable) {
         this(Scenario.class, forVariable(variable), INITS);
     }

@@ -42,6 +42,8 @@ public class CodeServiceTest {
     @Autowired
     DetailedCodeRepository detailedCodeRepository;
 
+    Integer findCodeId = 0;
+
     @Before
     @Rollback(value = false)
     public void setup(){
@@ -59,7 +61,7 @@ public class CodeServiceTest {
                 .build();
 
         RepresentativeCode repCode = representativeCodeRepository.save(repCodeDto1.toEntity());
-        System.out.println("repCode : "+repCode.getId());
+        findCodeId = repCode.getId();
         representativeCodeRepository.save(repCodeDto2.toEntity());
         representativeCodeRepository.save(repCodeDto3.toEntity());
 
@@ -126,12 +128,11 @@ public class CodeServiceTest {
     @Transactional
     public void updateReqCode(){
         //given
-        Integer findRepCodeId = 7;
         String updateName = "변경된 대표코드명";
 
         //when
-        codeService.updateRepresentativeCode(findRepCodeId,updateName);
-        RepresentativeCode updateRepCode = representativeCodeRepository.findById(findRepCodeId).get();
+        codeService.updateRepresentativeCode(findCodeId,updateName);
+        RepresentativeCode updateRepCode = representativeCodeRepository.findById(findCodeId).get();
 
         //then
         assertEquals(updateRepCode.getName(), "변경된 대표코드명");
@@ -144,7 +145,7 @@ public class CodeServiceTest {
     public void updateDetCode(){
         //given
         DetailedCodeDto dto = DetailedCodeDto.builder()
-                .id(10)
+                .id(findCodeId)
                 .name("무역항 수상구역")
                 .comment("외국 무역선이 출입하고, 무역화물이 취급되는 항만")
                 .build();

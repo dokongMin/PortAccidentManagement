@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.domain.training_scenario_result.evaluation;
 
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.enums.CompletionStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class TrainingByDate {
     private String details;
 
     @Column(name = "training_completion_check")
-    private Character completionCheck;
+    private CompletionStatus completionCheck;
 
     @Column(name = "training_evaluation_name")
     private String evaluationName;
@@ -39,7 +40,7 @@ public class TrainingByDate {
     private List<EvaluationDetails> evaluationDetailsList = new ArrayList<>();
 
     @Builder
-    public TrainingByDate(Integer id, String details, Character completionCheck, String evaluationName,
+    public TrainingByDate(Integer id, String details, CompletionStatus completionCheck, String evaluationName,
                           TrainingResult trainingResult, List<EvaluationDetails> evaluationDetailsList) {
         this.id = id;
         this.details = details;
