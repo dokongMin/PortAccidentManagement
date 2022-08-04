@@ -64,6 +64,7 @@ public class TrainingResultDto {
 
     public TrainingResult toEntity() {
         return TrainingResult.builder()
+                .id(id)
                 .name(name)
                 .startDate(startDate)
                 .endDate(endDate)
