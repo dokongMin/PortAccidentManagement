@@ -106,7 +106,6 @@ public class TrainingScenarioServiceTest {
         assertEquals(1, accidentResponseActivityList.size());
         assertEquals(scenarioId, accidentResponseActivityList.get(0).getScenario().getId());
         assertEquals(accidentResponseActivityDto.getManager(), accidentResponseActivityList.get(0).getManager());
-
     }
 
     @Test(expected = IllegalStateException.class)
@@ -127,6 +126,56 @@ public class TrainingScenarioServiceTest {
         //Then
         fail("이미 존재하는 시나리오입니다.");
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void 시나리오_사고수준_중복_예외() {
+        //Given
+        ScenarioDto scenarioDto = ScenarioDto.builder()
+                .name("SY2")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
+                .portArea("무역항 수상구역")
+                .responseStage("2")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                .name("크레인")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                .name("컨테이너")
+                .build();
+
+        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                .manager("홍길동")
+                .completePlaningTime(LocalDateTime.now())
+                .build();
+
+        AccidentResponseActivityDto accidentResponseActivityDto2 = AccidentResponseActivityDto.builder()
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                .manager("홍길동")
+                .completePlaningTime(LocalDateTime.now())
+                .build();
+
+        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
+        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
+        accidentResponseActivityDtoList.add(accidentResponseActivityDto2);
+
+        //When
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+
+        //Then
+        fail("이미 존재하는 사고수준입니다.");
+    }
+
 
     @Test
     public void 시나리오_수정() {

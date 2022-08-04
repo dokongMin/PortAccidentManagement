@@ -84,19 +84,15 @@ public class Scenario {
     }
 
     @Transactional(readOnly = true)
-    public void addAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
-            accidentPortFacilityDto.setScenario(this);
-            this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
-        }
+    public void addAccidentPortFacility(AccidentPortFacilityDto accidentPortFacilityDto) {
+        accidentPortFacilityDto.setScenario(this);
+        this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
     }
 
     @Transactional(readOnly = true)
-    public void addAccidentResponseActivity(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
-            accidentResponseActivityDto.setScenario(this);
-            this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
-        }
+    public void addAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        accidentResponseActivityDto.setScenario(this);
+        this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
     }
 
     @Transactional(readOnly = true)

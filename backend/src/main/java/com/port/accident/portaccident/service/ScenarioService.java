@@ -73,12 +73,26 @@ public class ScenarioService {
 
     @Transactional
     public void saveAccidentPortFacility(Scenario scenario, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        scenario.addAccidentPortFacility(accidentPortFacilityDtoList);
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            scenario.addAccidentPortFacility(accidentPortFacilityDto);
+        }
     }
 
     @Transactional
     public void saveAccidentResponseActivity(Scenario scenario, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        scenario.addAccidentResponseActivity(accidentResponseActivityDtoList);
+        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
+            validateDuplicateAccidentResponseActivity(accidentResponseActivityDto);
+            scenario.addAccidentResponseActivity(accidentResponseActivityDto);
+        }
+    }
+
+    private void validateDuplicateAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        Optional<AccidentResponseActivity> findAccidentResponseActivity
+                = accidentResponseActivityRepository.findByIncidentLevel(accidentResponseActivityDto.getIncidentLevel());
+
+        if (findAccidentResponseActivity.isPresent()) {
+            throw new IllegalStateException("이미 존재하는 사고 수준입니다.");
+        }
     }
 
     @Transactional
@@ -127,8 +141,8 @@ public class ScenarioService {
     }
 
     /*
-    * 시나리오 평가
-    * */
+     * 시나리오 평가
+     * */
 
     public Integer registerScenarioEvaluation(String scenarioName, ScenarioEvaluationDto scenarioEvaluationDto) {
         Scenario scenario = scenarioRepository.findByName(scenarioName).get();
