@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 @Getter
 @Setter
 public class AccidentInfoDto {
-    private LocalDateTime accidentDate;
+    private LocalDate accidentDate;
     private String accidentArea;
     private String accidentLevel;
     private String accidentImpact;
@@ -37,7 +38,7 @@ public class AccidentInfoDto {
     private List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
 
     @Builder
-    public AccidentInfoDto(LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact, String accidentInspect,
+    public AccidentInfoDto(LocalDate accidentDate, String accidentArea, String accidentLevel, String accidentImpact, String accidentInspect,
                            String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
                            List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.accidentDate = accidentDate;

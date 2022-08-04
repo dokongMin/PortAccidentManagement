@@ -24,7 +24,7 @@ public class QAccidentInfo extends EntityPathBase<AccidentInfo> {
 
     public final StringPath accidentArea = createString("accidentArea");
 
-    public final DateTimePath<java.time.LocalDateTime> accidentDate = createDateTime("accidentDate", java.time.LocalDateTime.class);
+    public final DatePath<java.time.LocalDate> accidentDate = createDate("accidentDate", java.time.LocalDate.class);
 
     public final StringPath accidentImpact = createString("accidentImpact");
 
