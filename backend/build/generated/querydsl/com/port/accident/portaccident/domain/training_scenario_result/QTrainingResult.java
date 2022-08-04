@@ -28,6 +28,8 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
+    public final StringPath incidentDetailType = createString("incidentDetailType");
+
     public final EnumPath<com.port.accident.portaccident.enums.IncidentImpact> incidentImpact = createEnum("incidentImpact", com.port.accident.portaccident.enums.IncidentImpact.class);
 
     public final EnumPath<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel = createEnum("incidentLevel", com.port.accident.portaccident.enums.IncidentLevel.class);
