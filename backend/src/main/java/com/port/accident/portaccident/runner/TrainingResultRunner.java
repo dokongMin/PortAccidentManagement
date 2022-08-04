@@ -1,10 +1,14 @@
 package com.port.accident.portaccident.runner;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
+import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
+import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.service.ScenarioService;
 import com.port.accident.portaccident.service.TrainingResultService;
@@ -30,6 +34,9 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        Integer trainingResultId = 0;
+
         /* create scenario */
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
@@ -118,8 +125,28 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .build();
             }
 
-            resultService.createTrainingResult(dto.toEntity());
-
+             trainingResultId = resultService.createTrainingResult(dto.toEntity());
         }
+        TrainingResult trainingResult = resultService.findByTrainingResultId(trainingResultId);
+
+        /* create TrainingPortFacilityRepository */
+        //given
+        TrainingPortFacilityDto facilityDto = TrainingPortFacilityDto.builder()
+                .name(PortFacility.CONTAINER)
+                .trainingResult(trainingResult)
+                .build();
+
+        //when
+        resultService.createPortFacility(facilityDto.toEntity());
+
+        /* create TrainingParticipants */
+        //given
+        TrainingParticipantsDto participantsDto = TrainingParticipantsDto.builder()
+                .participantsId(1)
+                .trainingResult(trainingResult)
+                .build();
+
+        //when
+        resultService.createTrainingParticipants(participantsDto.toEntity());
     }
 }
