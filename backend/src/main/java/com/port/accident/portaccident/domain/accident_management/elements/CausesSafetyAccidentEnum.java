@@ -7,8 +7,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum CausesSafetyAccidentEnum {
 
-    Fall("추락"),
-    Hit("부딪힘");
+    Carelessness("추락"),
+    WeakSafetyManagement("안전관리 부주의"),
+    WeakFacility("부실 시설");
+
 
     private final String value;
 }

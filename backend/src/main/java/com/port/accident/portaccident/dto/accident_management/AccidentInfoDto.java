@@ -24,7 +24,7 @@ public class AccidentInfoDto {
     private String accidentArea;
     private String accidentLevel;
     private String accidentImpact;
-    private String accidentPath;
+    private String accidentInspect;
     private String accidentManager;
     private String victim;
 
@@ -37,14 +37,14 @@ public class AccidentInfoDto {
     private List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
 
     @Builder
-    public AccidentInfoDto(LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact, String accidentPath,
+    public AccidentInfoDto(LocalDateTime accidentDate, String accidentArea, String accidentLevel, String accidentImpact, String accidentInspect,
                            String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
                            List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.accidentDate = accidentDate;
         this.accidentArea = accidentArea;
         this.accidentLevel = accidentLevel;
         this.accidentImpact = accidentImpact;
-        this.accidentPath = accidentPath;
+        this.accidentInspect = accidentInspect;
         this.accidentManager = accidentManager;
         this.victim = victim;
         this.accidentType = accidentType;
@@ -60,7 +60,7 @@ public class AccidentInfoDto {
                 .accidentArea(accidentArea)
                 .accidentLevel(accidentLevel)
                 .accidentImpact(accidentImpact)
-                .accidentPath(accidentPath)
+                .accidentInspect(accidentInspect)
                 .accidentManager(accidentManager)
                 .victim(victim)
                 .accidentType(accidentType)

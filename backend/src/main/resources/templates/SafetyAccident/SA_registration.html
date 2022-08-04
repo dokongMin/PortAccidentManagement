@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -116,27 +117,30 @@
     <div class="regist-title">
       <p>안전사고 정보 등록</p>
     </div>
+
+    <form action="SA_registration.html" th:action method="post" >
     <span class="fonts">안전사고 유형&nbsp; 
-      <select id="choose" onchange="ChangeValue()">
-        <option value="사고">사고</option>
-        <option value="재난">재난</option>
+      <select id="choose" name="choose" onchange="ChangeValue()">
+        <option value="accident">사고</option>
+        <option value="disaster">재난</option>
       </select></span>
     <br><br>
     <div class="regist-line-1">
       <p> <span class="fonts" id="ch0"> 사고일시</span>&nbsp;&nbsp;<input type="date" style="width: 150px;">
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;<select>
-            <option>추락</option>
-            <option>넘어짐</option>
-            <option>부딪힘</option>
-            <option>끼임</option>
-            <option>맞음</option>
+        <span class="fonts" id="types">사고 유형</span>
+        <select name="type" id="accidentType" th:name="accidentType">
+            <option value="falldown">추락</option>
+            <option value="tripover">넘어짐</option>
+            <option value="hit">부딪힘</option>
+            <option value="stuck">끼임</option>
+            <option value="strike">맞음</option>
           </select>
       </p>
     </div>
   
     <div class="regist-line-2">
-      <p><span class="fonts" id="ch1">사고 수준</span> &nbsp;&nbsp; 
+      <p><span class="fonts" id="ch1">사고 수준</span> &nbsp;
         <input type="radio" name="l1" checked> Level1
         <input type="radio" name="l1"> Level2
         <input type="radio" name="l1"> Level3 
@@ -145,16 +149,16 @@
   
     <div class="regist-line-3">
       <p> <span class="fonts" id="ch3">사고 영향</span> &nbsp;&nbsp;<select>
-            <option>경상</option>
-            <option>중상</option>
+            <option value="slight">경상</option>
+            <option value="serious">중상</option>
           </select>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="fonts" id="ch4">사고항만구역</span> &nbsp;&nbsp;<select>
-            <option>무역항 수상구역</option>
-            <option>무역항 육상구역</option>
-            <option>연안항 수상구역</option>
-            <option>연안항 육상구역</option>
-            <option>하역</option>
+            <option value="tradingWater">무역항 수상구역</option>
+            <option value="tradingLand">무역항 육상구역</option>
+            <option value="coastalWater">연안항 수상구역</option>
+            <option value="coastalLand">연안항 육상구역</option>
+            <option value="unloading">하역</option>
           </select>
       </p>
     </div>
@@ -194,6 +198,7 @@
         &nbsp;&nbsp;
       </p>
     </div>
+    </form>
   
     <div class="regist-button">
       <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>

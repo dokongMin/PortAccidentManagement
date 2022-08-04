@@ -8,7 +8,9 @@ import lombok.Getter;
 public enum DamageFacilityEnum {
 
     Container("컨테이너"),
-    Crane("크레인");
+    Crane("크레인"),
+    ForkLift("지게차"),
+    Ladder("사다리");
 
     private final String value;
 }

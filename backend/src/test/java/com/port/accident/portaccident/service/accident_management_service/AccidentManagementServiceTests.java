@@ -6,11 +6,13 @@ import com.port.accident.portaccident.domain.accident_management.elements.Causes
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityEnum;
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
+import com.port.accident.portaccident.domain.accident_management.type.AccidentTypeEnum;
 import com.port.accident.portaccident.dto.accident_management.AccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.CausesSafetyAccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.DamageFacilityInfoDto;
 import com.port.accident.portaccident.dto.accident_management.type.AccidentTypeDto;
 import com.port.accident.portaccident.repository.accident_management.*;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +61,10 @@ public class AccidentManagementServiceTests {
          * Accident Type 저장
          */
         AccidentTypeDto typeDto = AccidentTypeDto.builder()
-                .name("추락")
+                .name(AccidentTypeEnum.FallDown.getValue())
                 .build();
         Integer typeId = accidentTypeService.saveAccidentType(typeDto);
-        AccidentType accidentType = accidentTypeRepository.findByName("추락").orElseThrow(() -> new Exception("해당 사고유형은 존재하지 않습니다."));
+        AccidentType accidentType = accidentTypeRepository.findById(typeId).get();
 
 
         /**
@@ -87,17 +89,17 @@ public class AccidentManagementServiceTests {
          */
 
         CausesSafetyAccidentInfoDto causesSafetyAccidentInfoDto = CausesSafetyAccidentInfoDto.builder()
-                .name(CausesSafetyAccidentEnum.Fall.getValue())
+                .name(CausesSafetyAccidentEnum.Carelessness.getValue())
                 .accidentInfo(accidentInfo)
-                .causesSafetyAccidentEnum(CausesSafetyAccidentEnum.Fall)
+                .causesSafetyAccidentEnum(CausesSafetyAccidentEnum.Carelessness)
                 .build();
         Integer causesSafetyAccidentInfoId = causesSafetyAccidentService.saveCausesSafetyAccidentInfo(causesSafetyAccidentInfoDto);
         CausesSafetyAccidentInfo cause1 = causesSafetyAccidentInfoRepository.findById(causesSafetyAccidentInfoId).get();
 
         CausesSafetyAccidentInfoDto causesSafetyAccidentInfoDto2 = CausesSafetyAccidentInfoDto.builder()
-                .name(CausesSafetyAccidentEnum.Hit.getValue())
+                .name(CausesSafetyAccidentEnum.WeakFacility.getValue())
                 .accidentInfo(accidentInfo)
-                .causesSafetyAccidentEnum(CausesSafetyAccidentEnum.Hit)
+                .causesSafetyAccidentEnum(CausesSafetyAccidentEnum.WeakFacility)
                 .build();
         Integer causesSafetyAccidentInfoId2 = causesSafetyAccidentService.saveCausesSafetyAccidentInfo(causesSafetyAccidentInfoDto2);
         CausesSafetyAccidentInfo cause2 = causesSafetyAccidentInfoRepository.findById(causesSafetyAccidentInfoId2).get();
@@ -128,11 +130,57 @@ public class AccidentManagementServiceTests {
         List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
         damageFacilityInfoList.add(damage1);
         damageFacilityInfoList.add(damage2);
-        
 
-        // when
 
         // then
-
+        Assertions.assertThat(accidentInfoDto.getAccidentManager()).isEqualTo("정민환");
+        Assertions.assertThat(causesSafetyAccidentInfoDto.getAccidentInfo().getAccidentType().getName()).isEqualTo("추락");
+        Assertions.assertThat(causesSafetyAccidentInfoDto.getAccidentInfo().getAccidentManager()).isEqualTo("정민환");
     }
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    public void 사고수정 () throws Exception{
+        // given
+        /**
+         * Accident Type 저장
+         */
+        AccidentTypeDto typeDto = AccidentTypeDto.builder()
+                .name(AccidentTypeEnum.FallDown.getValue())
+                .build();
+        Integer typeId = accidentTypeService.saveAccidentType(typeDto);
+        AccidentType accidentType = accidentTypeRepository.findById(typeId).get();
+
+
+        /**
+         * AccidentInfo 저장
+         */
+        AccidentInfoDto accidentInfoDto = AccidentInfoDto.builder()
+                .accidentDate(LocalDateTime.now())
+                .accidentArea("연안항")
+                .accidentLevel("Level 1")
+                .accidentImpact("경상")
+                .accidentManager("정민환")
+                .victim("희생자1")
+                .accidentType(accidentType)
+                .build();
+        Integer accidentId = accidentManagementService.saveAccidentInfo(accidentInfoDto);
+
+        AccidentInfoDto accidentInfoDto2 = AccidentInfoDto.builder()
+                .accidentDate(LocalDateTime.now())
+                .accidentArea("무역항")
+                .accidentLevel("Level 2")
+                .accidentImpact("중상")
+                .accidentManager("초코쿠키")
+                .victim("희생자2")
+                .accidentType(accidentType)
+                .build();
+
+        // when
+        accidentManagementService.update(accidentId, accidentInfoDto2);
+        // then
+        AccidentInfo accidentInfo = accidentManagementRepository.findById(accidentId).get();
+        Assertions.assertThat(accidentInfo.getAccidentManager()).isEqualTo("초코쿠키");
+     }
 }

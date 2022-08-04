@@ -28,11 +28,11 @@ public class QAccidentInfo extends EntityPathBase<AccidentInfo> {
 
     public final StringPath accidentImpact = createString("accidentImpact");
 
+    public final StringPath accidentInspect = createString("accidentInspect");
+
     public final StringPath accidentLevel = createString("accidentLevel");
 
     public final StringPath accidentManager = createString("accidentManager");
-
-    public final StringPath accidentPath = createString("accidentPath");
 
     public final com.port.accident.portaccident.domain.accident_management.type.QAccidentType accidentType;
 

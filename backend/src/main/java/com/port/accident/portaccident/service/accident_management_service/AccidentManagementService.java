@@ -30,8 +30,10 @@ public class AccidentManagementService {
         return accidentManagementRepository.save(accidentInfoDto.toEntity()).getId();
     }
 
-    public List<AccidentInfo> findAll(){
-        return accidentManagementRepository.findAll();
+    @Transactional
+    public void update(Integer id, AccidentInfoDto dto) throws Exception {
+        AccidentInfo accidentInfo = accidentManagementRepository.findById(id).orElseThrow(() -> new Exception("해당 사고는 존재하지 않습니다."));
+        accidentInfo.update(dto);
     }
 
     /**
