@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.domain.training_scenario_result;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
@@ -68,11 +69,15 @@ public class TrainingResult {
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
 
-    @Builder
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scenario_id")
+    private Scenario scenario;
 
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
-                          TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType,
-                          String department, String trainingArea) {
+    @Builder
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate,
+                          TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel,
+                          IncidentImpact incidentImpact, IncidentType incidentType, String department,
+                          String trainingArea, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -84,7 +89,10 @@ public class TrainingResult {
         this.incidentType = incidentType;
         this.department = department;
         this.trainingArea = trainingArea;
+        this.scenario = scenario;
     }
+
+
 
     public void updateTrainingPortFacilityList(TrainingPortFacility facility) {
         trainingPortFacilityList.add(facility);
@@ -97,4 +105,5 @@ public class TrainingResult {
     public void updateTrainingParticipantsList(TrainingParticipants participants) {
         trainingParticipantsList.add(participants);
     }
+
 }

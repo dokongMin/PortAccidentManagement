@@ -52,7 +52,7 @@ public class QTrainingByDate extends EntityPathBase<TrainingByDate> {
 
     public QTrainingByDate(Class<? extends TrainingByDate> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.trainingResult = inits.isInitialized("trainingResult") ? new com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult(forProperty("trainingResult")) : null;
+        this.trainingResult = inits.isInitialized("trainingResult") ? new com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult(forProperty("trainingResult"), inits.get("trainingResult")) : null;
     }
 
 }

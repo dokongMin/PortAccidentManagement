@@ -1,10 +1,16 @@
 package com.port.accident.portaccident.service;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
@@ -24,7 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -35,10 +43,51 @@ public class TrainingResultServiceTest {
     @Autowired
     TrainingResultService resultService;
 
+    @Autowired
+    ScenarioService scenarioService;
+
     Integer trainingResultId = 0;
 
     @Before
     public void createTrainingResult() {
+        /* create scenario */
+        //Given
+        ScenarioDto scenarioDto = ScenarioDto.builder()
+                .name("SY2")
+                .level("3")
+                .impact("경상")
+                .precedingType("사고")
+                .accidentType("추락")
+                .portArea("무역항 수상구역")
+                .responseStage("2")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                .name("크레인")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                .name("컨테이너")
+                .build();
+
+        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                .manager("홍길동")
+                .completePlaningTime(LocalDateTime.now())
+                .build();
+
+        //When
+        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
+        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
+
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Scenario scenario = scenarioService.findById(scenarioId).get();
+
+        /* create TrainingResult */
         //given
         TrainingResultDto dto = TrainingResultDto.builder()
                 .name("대응훈련결과명")
@@ -51,6 +100,7 @@ public class TrainingResultServiceTest {
                 .incidentType(IncidentType.ACCIDNET)
                 .department("안전관리부서")
                 .trainingArea("훈련대상 항만구역")
+                .scenario(scenario)
                 .build();
 
         //when
@@ -73,7 +123,7 @@ public class TrainingResultServiceTest {
         TrainingParticipants participants = resultService.findByParticipantId(participantId);
 
         //then
-        assertEquals(participants.getParticipantsId(), 1);
+        assertEquals(java.util.OptionalInt.of(participants.getParticipantsId()), OptionalInt.of(1));
         assertEquals(participants.getTrainingResult().getId(), trainingResultId);
 
     }
@@ -112,7 +162,7 @@ public class TrainingResultServiceTest {
 
         //when
         Integer resultByDateId = resultService.createTrainingByDate(dto.toEntity());
-        TrainingByDate resultByDate = resultService.findTrainingByDate(resultByDateId);
+        TrainingByDate resultByDate = resultService.findTrainingByDateById(resultByDateId);
 
         //then
         assertEquals(resultByDate.getCompletionCheck(), CompletionStatus.COMPLETE);
@@ -133,7 +183,7 @@ public class TrainingResultServiceTest {
                 .build();
 
         Integer resultByDateId = resultService.createTrainingByDate(byDateDto.toEntity());
-        TrainingByDate resultByDate = resultService.findTrainingByDate(resultByDateId);
+        TrainingByDate resultByDate = resultService.findTrainingByDateById(resultByDateId);
 
         /* create EvaluationDetails */
         EvaluationDetailsDto detailsDto = EvaluationDetailsDto.builder()
@@ -147,9 +197,10 @@ public class TrainingResultServiceTest {
         EvaluationDetails details = resultService.findByEvaluationDetailId(detailId);
 
         //then
-        assertEquals(details.getScore(), 5);
+        assertEquals(java.util.OptionalInt.of(details.getScore()), OptionalInt.of(5));
         assertEquals(details.getTrainingByDate().getId(), resultByDateId);
 
 
     }
+
 }

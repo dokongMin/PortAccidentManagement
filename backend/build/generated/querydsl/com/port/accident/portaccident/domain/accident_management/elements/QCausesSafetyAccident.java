@@ -18,35 +18,24 @@ public class QCausesSafetyAccident extends EntityPathBase<CausesSafetyAccident> 
 
     private static final long serialVersionUID = 1921442748L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QCausesSafetyAccident causesSafetyAccident = new QCausesSafetyAccident("causesSafetyAccident");
 
-    public final com.port.accident.portaccident.domain.accident_management.QAccidentInfo accidentInfo;
+    public final ListPath<CausesSafetyAccidentInfo, QCausesSafetyAccidentInfo> causesSafetyAccidentInfoList = this.<CausesSafetyAccidentInfo, QCausesSafetyAccidentInfo>createList("causesSafetyAccidentInfoList", CausesSafetyAccidentInfo.class, QCausesSafetyAccidentInfo.class, PathInits.DIRECT2);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath name = createString("name");
 
     public QCausesSafetyAccident(String variable) {
-        this(CausesSafetyAccident.class, forVariable(variable), INITS);
+        super(CausesSafetyAccident.class, forVariable(variable));
     }
 
     public QCausesSafetyAccident(Path<? extends CausesSafetyAccident> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QCausesSafetyAccident(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QCausesSafetyAccident(PathMetadata metadata, PathInits inits) {
-        this(CausesSafetyAccident.class, metadata, inits);
-    }
-
-    public QCausesSafetyAccident(Class<? extends CausesSafetyAccident> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.accidentInfo = inits.isInitialized("accidentInfo") ? new com.port.accident.portaccident.domain.accident_management.QAccidentInfo(forProperty("accidentInfo")) : null;
+        super(CausesSafetyAccident.class, metadata);
     }
 
 }
