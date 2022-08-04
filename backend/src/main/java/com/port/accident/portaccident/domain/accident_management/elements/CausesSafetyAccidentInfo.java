@@ -27,15 +27,29 @@ public class CausesSafetyAccidentInfo {
     @JoinColumn(name = "accident_info_id")
     private AccidentInfo accidentInfo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "causes_safety_accident_id")
-    private CausesSafetyAccident causesSafetyAccident;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "causes_safety_accident_id")
+//    private CausesSafetyAccident causesSafetyAccident;
 
+    @Enumerated(EnumType.STRING)
+    private CausesSafetyAccidentEnum causesSafetyAccidentEnum;
     @Builder
-    public CausesSafetyAccidentInfo(Integer id, String name, AccidentInfo accidentInfo, CausesSafetyAccident causesSafetyAccident) {
+    public CausesSafetyAccidentInfo(Integer id, String name, AccidentInfo accidentInfo, CausesSafetyAccidentEnum causesSafetyAccidentEnum) {
         this.id = id;
         this.name = name;
         this.accidentInfo = accidentInfo;
-        this.causesSafetyAccident = causesSafetyAccident;
+        this.causesSafetyAccidentEnum = causesSafetyAccidentEnum;
+
+//        if(this.accidentInfo != null){
+//            accidentInfo.getCausesSafetyAccidentInfoList().remove(this);
+//        }
+//        this.accidentInfo = accidentInfo;
+//        accidentInfo.getCausesSafetyAccidentInfoList().add(this);
+//
+//        if(this.causesSafetyAccident != null){
+//            causesSafetyAccident.getCausesSafetyAccidentInfoList().remove(this);
+//        }
+//        this.causesSafetyAccident = causesSafetyAccident;
+//        causesSafetyAccident.getCausesSafetyAccidentInfoList().add(this);
     }
 }

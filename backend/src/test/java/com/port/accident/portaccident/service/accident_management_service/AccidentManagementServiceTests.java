@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +54,7 @@ public class AccidentManagementServiceTests {
 
     @Test
     @Transactional
+    @Rollback(value = false)
     public void 사고등록() throws Exception {
         // given
         /**
@@ -68,11 +70,16 @@ public class AccidentManagementServiceTests {
          * CausesSafety 저장
          */
         CausesSafetyAccidentDto causesDto1 = CausesSafetyAccidentDto.builder()
-                .name("부주의")
                 .name("안전관리 소홀")
                 .build();
         Integer causesId1 = causesSafetyAccidentService.saveCausesSafetyAccident(causesDto1);
         CausesSafetyAccident causesSafetyAccident = causesSafetyAccidentRepository.findById(causesId1).get();
+
+        CausesSafetyAccidentDto causesDto2 = CausesSafetyAccidentDto.builder()
+                .name("부주의")
+                .build();
+        Integer causesId2 = causesSafetyAccidentService.saveCausesSafetyAccident(causesDto1);
+        CausesSafetyAccident causesSafetyAccident2 = causesSafetyAccidentRepository.findById(causesId2).get();
         List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList = causesSafetyAccident.getCausesSafetyAccidentInfoList();
         /**
          * DamageFacility 저장
