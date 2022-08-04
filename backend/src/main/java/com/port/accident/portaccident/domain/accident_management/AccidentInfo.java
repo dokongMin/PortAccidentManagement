@@ -78,5 +78,16 @@ public class AccidentInfo {
         this.disasterType = disasterType;
         this.causesSafetyAccidentInfoList = causesSafetyAccidentInfoList;
         this.damageFacilityInfoList = damageFacilityInfoList;
+
+//        if(this.accidentType != null){
+//            accidentType.getAccidentInfoList().remove(this);
+//        }
+//        this.accidentType = accidentType;
+//        accidentType.getAccidentInfoList().add(this);
+
+//        if(this.disasterType != null){
+//            disasterType.getAccidentInfoList().remove(this);
+//        }
+//        disasterType.getAccidentInfoList().add(this);
     }
 }
