@@ -4,24 +4,30 @@ import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
 import com.port.accident.portaccident.domain.accident_management.type.DisasterType;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 public class DisasterTypeDto {
     private Integer id;
     private String name;
-    private AccidentInfo accidentInfo;
+    private List<AccidentInfo> accidentInfoList = new ArrayList<>();
 
     @Builder
-    public DisasterTypeDto(String name, AccidentInfo accidentInfo) {
+    public DisasterTypeDto(Integer id, String name, List<AccidentInfo> accidentInfoList) {
+        this.id = id;
         this.name = name;
-        this.accidentInfo = accidentInfo;
+        this.accidentInfoList = accidentInfoList;
     }
+
+
 
     public DisasterType toEntity() {
         return DisasterType.builder()
                 .name(name)
-                .accidentInfo(accidentInfo)
+                .accidentInfoList(accidentInfoList)
                 .build();
     }
 }

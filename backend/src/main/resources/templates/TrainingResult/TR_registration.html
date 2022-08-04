@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSA관리시스템</title>
+
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/static/css/TrainingResult/TR_registration.css">
+  
+
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+
+
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="inner">
+      <a href="javascript:void(0)" class="logo">
+        <img src="/static/img/favicon.png" alt="PSA">
+      </a>
+      <div class="sub-menu1">
+        <ul class="menu">
+          <li>
+            <a href="javascript:void(0)">로그인</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">회원가입</a>
+          </li>
+        </ul>
+      </div>
+      <nav role="navigation">
+        <div class="main">
+        <ul id="main-menu">
+          <li><a href="#">공통코드<br>관리</a>           
+            <ul id="sub-menu">
+              <div class="line"></div>
+              <li><a href="/CommonCode/RepresentativeCode/RC_check/index.html" aria-label="submenu">대표코드 관리</a></li>
+              <li><a href="/CommonCode/DetailedCode/DC_check/index.html" aria-label="submenu">상세코드 관리</a></li>
+            </ul>
+          </li>
+          <li><a href="#">안전사고<br>정보 관리</a>
+            <ul id="sub-menu">
+              <div class="line2"></div>
+              <li><a href="#" aria-label="submenu">안전사고 정보 조회</a></li>
+              <li><a href="#" aria-label="submenu">안전사고 정보 등록</a></li>
+              <li><a href="#" aria-label="submenu">안전사고 정보 수정</a></li>
+              <li><a href="#" aria-label="submenu">안전사고 정보<br>사용 중지</a></li>
+            </ul>
+          </li>
+          <li><a href="#">안전사고 대응훈련<br>시나리오 관리</a>
+            <ul id="sub-menu">
+              <div class="line35"></div>
+              <li><a href="/TrainingScenarios/TS_check/index.html" aria-label="submenu">대응훈련 시나리오 조회</a></li>
+              <li><a href="/TrainingScenarios/TS_registration/index.html" aria-label="submenu">대응훈련 시나리오 등록</a></li>
+              <li><a href="/TrainingScenarios/TS_modify/index.html" aria-label="submenu">대응훈련 시나리오 수정</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 시나리오 <br>사용 중지</a></li>
+            </ul>
+          </li>
+          <li><a href="#">안전사고 대응훈련<br>시나리오 평가 관리</a>
+            <ul id="sub-menu">
+              <div class="line4"></div>
+              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 삭제</a></li>
+            </ul>
+          </li>
+          <li><a href="#">안전사고 대응훈련<br>결과 관리</a>
+            <ul id="sub-menu">
+              <div class="line35"></div>
+              <li><a href="#" aria-label="submenu">대응훈련 결과 조회</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 결과 등록</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 일자별<br>수행 결과 등록</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 결과 수정</a></li>
+              <li><a href="#" aria-label="submenu">대응훈련 결과 삭제</a></li>
+            </ul>
+          </li>
+          <li><a href="#">비상연락망<br>관리</a>
+            <ul id="sub-menu">
+              <div class="line6"></div>
+              <li><a href="#" aria-label="submenu">비상연락망 조회</a></li>
+              <li><a href="#" aria-label="submenu">비상연락망 등록</a></li>
+              <li><a href="#" aria-label="submenu">비상연락망 수정</a></li>
+              <li><a href="#" aria-label="submenu">비상연락망 삭제</a></li>
+            </ul>
+          </li>
+          <li><a href="#">help<br>&nbsp;</a>
+            <ul id="sub-menu">
+              <div class="line7"></div>
+              <li><a href="#" aria-label="submenu">항만 안전사고 현황</a></li>
+              <li><a href="#" aria-label="submenu">FAQ</a></li>
+              <li><a href="#" aria-label="submenu">자료실</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      </nav>
+  </header>
+
+
+
+  <!--training-results-->
+  
+  <div class="training-results">
+  
+    <div class="regist-title">
+      <p>대응훈련 결과 등록</p>
+    </div>
+
+    <span class="fonts">안전사고 유형&nbsp; 
+      <select id="choose" onchange="ChangeValue()">
+        <option value="사고">사고</option>
+        <option value="재난">재난</option>
+      </select></span>
+    <br><br>
+
+    <div class="regist-line-1">
+      <span class="fonts">시나리오명&nbsp;&nbsp; <select>
+        <option>SY2</option>
+        <option>SY1</option>
+        <option>SR1</option>
+        <option>SV1</option>
+        <option>SR3</option>
+      </select>
+      </span>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <span class="fonts"> 훈련명&nbsp;&nbsp; </span><input type="text" placeholder="추락 예방 훈련">
+    </div>
+
+    <div class="regist-line-1-0">
+      <p> 
+        <span class="fonts">훈련 종류&nbsp;&nbsp; <select>
+          <option>도상 훈련</option>
+          <option>실전 훈련</option>
+        </select>
+        </span>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <span class="fonts">훈련 장소&nbsp;&nbsp; <select>
+          <option>무역항 수상구역</option>
+          <option>무역항 육상구역</option>
+          <option>연안항 수상구역</option>
+          <option>연안항 육상구역</option>
+          <option>하역</option>
+        </select>
+      </span>
+      </p>
+    </div>
+
+    <div class="regist-line-1-1">
+      <p>
+        <span class="fonts"> 훈련 시작 일시</span>&nbsp;&nbsp;<input type="date">
+        &nbsp; &nbsp; &nbsp;&nbsp;
+        <span class="fonts"> 훈련 종료 일시</span>&nbsp;&nbsp;<input type="date">
+        
+      </p>
+    </div>
+
+    <div class="regist-line-2-0">
+      <p class="fonts" id="ch0">[ 사고 분류 ]</p>
+    </div><br>
+
+    <div class="regist-line-2">
+      <p>
+        <span class="fonts" id="ch1">사고 수준</span> &nbsp;
+        <input type="text" placeholder="Level1"> &nbsp;&nbsp;
+        
+        <span class="fonts" id="ch2">사고 유형</span> &nbsp;
+        <input type="text" placeholder="추락"> &nbsp;&nbsp;
+  
+        <span class="fonts" id="ch3">사고 영향</span> &nbsp;
+        <input type="text" placeholder="경상"> &nbsp;&nbsp;
+      </p> 
+    </div>
+  
+    <div class="regist-line-3">
+      <p class="fonts">[ 훈련 상세 ]</p>
+    </div>
+  
+    <div class="regist-line-4">
+      <p class="fonts">훈련 대상 항만 구역</p>
+    </div><br>
+  
+  
+    <div class="regist-line-5">
+      <p><textarea placeholder="text"></textarea></p>
+    </div>
+
+    <div class="regist-line-6">
+      <p><span class="fonts">훈련 대상 항만 설비</span> &nbsp; &nbsp;
+        <input type="checkbox" name="machine1" checked>크레인
+        &nbsp;<input type="checkbox" name="machine2">컨테이너
+        &nbsp;<input type="checkbox" name="machine3">지게차
+        &nbsp;<input type="checkbox" name="machine4">사다리
+      </p>
+    </div>
+
+  
+    <div class="regist-line-7">
+      <p> <span class="fonts"> 훈련 수행 부서 &nbsp;&nbsp;<input type="text" placeholder="안전관리"></span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="fonts"> 훈련 참여 인원 &nbsp;&nbsp;<input type="text" placeholder="정민환,박태영,이혜원,송영주,주현정"> </span>
+      </p>
+    </div>
+  
+    <div class="regist-button">
+      <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+      <a href="/TrainingResult/TR_check/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+    </div>
+  </div>
+
+
+  <!-- footer -->
+  <footer>
+    <div class="inner">
+      <p class="title">DEVELOPED BY TEAM</p>
+      <ul class="menu">
+        <li><p>스마트 해상물류 프로젝트</p></li>
+        <li><p>항만 안전사고 대응 관리 시스템</p></li>
+      </ul>
+      <div class="info">
+        <span>MENTOR: 김인수</span>
+        <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+        <span>FRONTEND TEAM: 송영주 주현정</span>
+      </div>
+      <p class="copyright">
+        <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+</body>
+<script src="/static/js/TrainingResult/TR_registration.js"> </script>
+</html>

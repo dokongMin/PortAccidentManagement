@@ -4,6 +4,7 @@ package com.port.accident.portaccident.domain.training_scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
+import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
@@ -65,6 +66,9 @@ public class Scenario {
 
     @OneToMany(mappedBy = "scenario") // 시나리오 평가
     private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 훈련 결과
+    private List<TrainingResult> trainingResultArrayList = new ArrayList<>();
 
     @Builder
     public Scenario(Integer id, String name, String level, String impact, String precedingType, String accidentType,

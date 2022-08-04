@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "disaster_type")
 @Entity
@@ -22,14 +24,17 @@ public class DisasterType {
     @Column(name = "disaster_type_name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accident_info_id")
-    private AccidentInfo accidentInfo;
+    @Enumerated(EnumType.STRING)
+    private DisasterTypeEnum disasterTypeEnum;
+    @OneToMany(mappedBy = "disasterType")
+    private List<AccidentInfo> accidentInfoList = new ArrayList<>();
 
     @Builder
-    public DisasterType(Integer id, String name, AccidentInfo accidentInfo) {
+    public DisasterType(Integer id, String name, List<AccidentInfo> accidentInfoList) {
         this.id = id;
         this.name = name;
-        this.accidentInfo = accidentInfo;
+        this.accidentInfoList = accidentInfoList;
     }
+
+
 }
