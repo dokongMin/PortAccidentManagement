@@ -3,6 +3,7 @@ package com.port.accident.portaccident.service;
 import com.port.accident.portaccident.domain.staff.Staff;
 import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.staff.StaffDto;
+import com.port.accident.portaccident.dto.staff.StaffSearchCondition;
 import com.port.accident.portaccident.repository.staff.StaffRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +46,7 @@ public class StaffServiceTest {
                 .build();
 
         //when
-        Integer staffId = staffService.saveStaff(staffDto);
+        Integer staffId = staffService.registerStaff(staffDto);
 
         //then
         Staff staff = staffRepository.findById(staffId).get();
@@ -77,8 +78,8 @@ public class StaffServiceTest {
                 .build();
 
         //when
-        staffService.saveStaff(staffDto);
-        staffService.saveStaff(staffDto2);
+        staffService.registerStaff(staffDto);
+        staffService.registerStaff(staffDto2);
 
         //then
         fail("이미 존재하는 비상연락망입니다.");
@@ -96,7 +97,7 @@ public class StaffServiceTest {
                 .phoneNumber("01012345678")
                 .build();
 
-        Integer staffId = staffService.saveStaff(staffDto);
+        Integer staffId = staffService.registerStaff(staffDto);
 
         StaffDto updateStaffDto = StaffDto.builder()
                 .name("이혜원")
@@ -130,10 +131,10 @@ public class StaffServiceTest {
                 .phoneNumber("01012345678")
                 .build();
 
-        Integer staffId = staffService.saveStaff(staffDto);
+        Integer staffId = staffService.registerStaff(staffDto);
 
         //when
-        staffService.deleteScenario(staffId);
+        staffService.deleteStaff(staffId);
 
         //then
         Optional<Staff> deleteScenario = staffRepository.findById(staffId);
@@ -148,14 +149,14 @@ public class StaffServiceTest {
                     .name("이혜원" + i)
                     .build();
 
-            staffService.saveStaff(staffDto);
+            staffService.registerStaff(staffDto);
         });
 
-        SearchCondition searchCondition = new SearchCondition();
+        StaffSearchCondition searchCondition = new StaffSearchCondition();
         PageRequest pageRequest = PageRequest.of(0, 3); // Sort.by(Sort.Direction.DESC, "name")
 
         //when
-        Page<Staff> staff = staffService.searchPage(searchCondition, pageRequest);
+        Page<Staff> staff = staffService.searchPageStaff(searchCondition, pageRequest);
 
         //then
         List<Staff> content = staff.getContent();
@@ -169,28 +170,33 @@ public class StaffServiceTest {
 
     @Test
     public void 비상연락망_검색_페이징() {
+        //given
         IntStream.rangeClosed(1, 5).forEach(i -> {
             StaffDto staffDto = StaffDto.builder()
                     .name("이혜원" + i)
+                    .corporation("AAA")
                     .build();
 
-            staffService.saveStaff(staffDto);
+            staffService.registerStaff(staffDto);
 
             StaffDto staffDto2 = StaffDto.builder()
                     .name("박태영" + i)
+                    .corporation("AAA")
                     .build();
 
-            staffService.saveStaff(staffDto2);
+            staffService.registerStaff(staffDto2);
         });
 
-        SearchCondition searchCondition = new SearchCondition();
-        searchCondition.setType("name");
-        searchCondition.setKeyword("이혜원");
+        StaffSearchCondition searchCondition = new StaffSearchCondition();
+        searchCondition.setName("이혜원");
+        searchCondition.setCorporation("AAA");
 
         PageRequest pageRequest = PageRequest.of(0, 3);
 
         //when
-        Page<Staff> staff = staffService.searchPage(searchCondition, pageRequest);
+        Page<Staff> staff = staffService.searchPageStaff(searchCondition, pageRequest);
+
+        //then
         List<Staff> content = staff.getContent();
         assertEquals("조회된 데이터 수", 3, content.size());
         assertEquals("전체 데이터 수", 5, staff.getTotalElements());
