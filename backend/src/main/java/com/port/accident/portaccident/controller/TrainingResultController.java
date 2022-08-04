@@ -138,7 +138,7 @@ public class TrainingResultController {
     public String updateTrainingResult(@RequestBody Map<String, Object> param) {
         //TODO::태영 영주님
         /* 아래의 JSON코드 형식 참고하셔서 프론트에서 JSON 만드시면 됩니다! */
-        /* JSON example - registerTrainingResult()에서 각각 id만 추가됨
+        /* JSON example - registerTrainingResult()에서 TrainingResult.id만 추가됨
         {
             "TrainingResult": {
                 "id" : 1,
