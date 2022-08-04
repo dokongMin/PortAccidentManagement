@@ -54,7 +54,7 @@ public class TrainingResultController {
         */
         resultService.createTrainingResultUsingJsonString(param);
 
-        return "register success";
+        return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
 
     @GetMapping("/trainingResult_modifyPage")
