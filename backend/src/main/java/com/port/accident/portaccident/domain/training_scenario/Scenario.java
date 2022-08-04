@@ -62,15 +62,15 @@ public class Scenario {
     @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 대응 활동
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "scenario", fetch = FetchType.LAZY) // 시나리오 평가
-    private ScenarioEvaluation scenarioEvaluation;
+    @OneToMany(mappedBy = "scenario") // 시나리오 평가
+    private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
 
     @Builder
     public Scenario(Integer id, String name, String level, String impact, String precedingType, String accidentType,
                     String disasterType, String portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
-                    ScenarioEvaluation scenarioEvaluation) {
+                    List<ScenarioEvaluation> scenarioEvaluationList) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -82,7 +82,7 @@ public class Scenario {
         this.responseStage = responseStage;
         this.accidentPortFacilityList = accidentPortFacilityList;
         this.accidentResponseActivityList = accidentResponseActivityList;
-        this.scenarioEvaluation = scenarioEvaluation;
+        this.scenarioEvaluationList = scenarioEvaluationList;
     }
 
     @Transactional(readOnly = true)

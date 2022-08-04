@@ -1,7 +1,6 @@
 package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.staff.Staff;
-import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.staff.StaffDto;
 import com.port.accident.portaccident.dto.staff.StaffSearchCondition;
 import com.port.accident.portaccident.repository.staff.StaffRepository;

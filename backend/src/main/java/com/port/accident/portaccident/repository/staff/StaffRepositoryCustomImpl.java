@@ -1,7 +1,6 @@
 package com.port.accident.portaccident.repository.staff;
 
 import com.port.accident.portaccident.domain.staff.Staff;
-import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.staff.StaffSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
