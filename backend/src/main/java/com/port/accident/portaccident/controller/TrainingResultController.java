@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.controller;
 
+import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
 import com.port.accident.portaccident.enums.*;
@@ -63,11 +64,6 @@ public class TrainingResultController {
         return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
 
-    @GetMapping("/trainingResult_modifyPage")
-    public String trainingResultModifyPage() {
-        return "TrainingResult/TR_modify";
-    }
-
     @GetMapping("/trainingResult_daysPage")
     public String trainingResultDetailByDays() {
         return "TrainingResult/TR_days";
@@ -88,16 +84,16 @@ public class TrainingResultController {
                 "evaluationName":"evaluationName-ex1"
             },
             {
-              "name": "evaluation_details_name1",
-              "score": 5
+                "name": "evaluation_details_name1",
+                "score": 5
             },
             {
-             "name": "evaluation_details_name2",
-              "score": 4
+                "name": "evaluation_details_name2",
+                "score": 4
             },
             {
-             "name": "evaluation_details_name3",
-              "score": 3
+                "name": "evaluation_details_name3",
+                "score": 3
             }
         ]
         */
@@ -129,5 +125,44 @@ public class TrainingResultController {
             System.out.println(trainingResultJoinScenarioDto.toString());
         }
         return "TrainingResult/TR_check";
+    }
+
+    @GetMapping("/trainingResult_modifyPage")
+    public String trainingResultModifyPage(@RequestParam("trainingResultId") Integer trainingResultId, Model model) {
+        TrainingResult result = resultService.findByTrainingResultId(trainingResultId);
+        model.addAttribute("trainingResult",result);
+        return "TrainingResult/TR_modify";
+    }
+
+    @RequestMapping(value = "/trainingResult_modify", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+    public String updateTrainingResult(@RequestBody Map<String, Object> param) {
+        //TODO::태영 영주님
+        /* 아래의 JSON코드 형식 참고하셔서 프론트에서 JSON 만드시면 됩니다! */
+        /* JSON example - registerTrainingResult()에서 TrainingResult.id만 추가됨
+        {
+            "TrainingResult": {
+                "id" : 1,
+                "name" : "name",
+                "place":"PLACE1",
+                "startDate":"2022-07-24T22:00:00.000Z",
+                "endDate":"2022-07-30T22:00:00.000Z",
+                "trainingType" : "VIRTUAL",
+                "incidentLevel" : "LEVEL_1",
+                "incidentImpact" : "INCIDENT_IMPACT_A",
+                "department":"안전관리부서"
+                .... (생략)
+            },
+            "TrainingPortFacilitys": [
+                "CONTAINER", "FORKLIFT", "LADDER"
+            ],
+            "TrainingParticipants":[
+                1,2,3,4,5
+            ]
+        }
+        */
+
+        resultService.updateTrainingResultUsingJsonString(param);
+
+        return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
 }
