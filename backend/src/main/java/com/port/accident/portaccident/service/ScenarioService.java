@@ -83,7 +83,7 @@ public class ScenarioService {
 
     @Transactional
     public Integer updateScenario(ScenarioDto scenarioDto) {
-        Scenario scenario = scenarioRepository.findByName(scenarioDto.getName()).get();
+        Scenario scenario = scenarioRepository.findById(scenarioDto.getId()).get();
         scenario.update(scenarioDto);
 
         return scenarioRepository.save(scenario).getId();

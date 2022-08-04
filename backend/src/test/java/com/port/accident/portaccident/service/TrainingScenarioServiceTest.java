@@ -57,7 +57,6 @@ public class TrainingScenarioServiceTest {
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
@@ -74,6 +73,7 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .incidentLevel(IncidentLevel.LEVEL_3)
                 .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
                 .manager("홍길동")
                 .completePlaningTime(LocalDateTime.now())
@@ -133,7 +133,6 @@ public class TrainingScenarioServiceTest {
         //given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
@@ -144,8 +143,8 @@ public class TrainingScenarioServiceTest {
         Integer scenarioId = scenarioService.saveScenario(scenarioDto);
 
         ScenarioDto updateScenarioDto = ScenarioDto.builder()
+                .id(scenarioId)
                 .name("SY2")
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
@@ -161,7 +160,6 @@ public class TrainingScenarioServiceTest {
 
         Assertions.assertEquals(scenarioId, updateScenarioId);
         Assertions.assertEquals(updateScenarioDto.getName(), updateScenario.getName());
-        Assertions.assertEquals(updateScenarioDto.getIncidentLevel(), updateScenario.getIncidentLevel());
         Assertions.assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
         Assertions.assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
     }
