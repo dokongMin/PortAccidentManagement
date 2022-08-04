@@ -7,6 +7,10 @@ import com.port.accident.portaccident.dto.training_scenario_result.QTrainingResu
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -17,6 +21,7 @@ import java.util.List;
 
 import static com.port.accident.portaccident.domain.training_scenario.QScenario.scenario;
 import static com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult.trainingResult;
+import static org.springframework.util.StringUtils.hasText;
 
 public class TrainingResultRepositoryCustomImpl implements TrainingResultRepositoryCustom {
 
@@ -26,17 +31,6 @@ public class TrainingResultRepositoryCustomImpl implements TrainingResultReposit
         this.queryFactory = queryFactory;
     }
 
-    /*
-    *  this.scenarioId = scenarioId;
-            this.scenarioName = scenarioName;
-            this.trainingResultId = trainingResultId;
-            this.trainingName = trainingName;
-            this.incidentLevel = incidentLevel;
-            this.incidentDetailType = incidentDetailType;
-            this.place = place;
-            this.department = department;
-            this.trainingArea = trainingArea;
-    * */
     @Override
     public Page<TrainingResultJoinScenarioDto> searchPageTrainingResults(TrainingResultCondition condition, Pageable pageable) {
         List<TrainingResultJoinScenarioDto> content = queryFactory.select(new QTrainingResultJoinScenarioDto(
@@ -53,7 +47,11 @@ public class TrainingResultRepositoryCustomImpl implements TrainingResultReposit
                 .from(trainingResult)
                 .leftJoin(trainingResult.scenario, scenario)
                 .where(
-                        /*검색조건*/
+                        incidentTypeEq(condition.getIncidentType()),
+                        trainingNameEq(condition.getName()),
+                        incidentLevelEq(condition.getIncidentLevel()),
+                        incidentDetailTypeEq(condition.getIncidentDetailType()),
+                        departmentEq(condition.getDepartment())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -63,10 +61,36 @@ public class TrainingResultRepositoryCustomImpl implements TrainingResultReposit
                 .selectFrom(trainingResult)
                 .leftJoin(trainingResult.scenario, scenario)
                 .where(
-                        /*검색조건*/
+                        incidentTypeEq(condition.getIncidentType()),
+                        trainingNameEq(condition.getName()),
+                        incidentLevelEq(condition.getIncidentLevel()),
+                        incidentDetailTypeEq(condition.getIncidentDetailType()),
+                        departmentEq(condition.getDepartment())
+
                 );
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
 
+    }
+
+    private BooleanExpression incidentTypeEq(IncidentType incidentType) {
+        return incidentType != null ? trainingResult.incidentType.eq(incidentType) : null;
+
+    }
+
+    private BooleanExpression trainingNameEq(String name) {
+        return hasText(name) ? trainingResult.name.eq(name) : null;
+    }
+
+    private BooleanExpression incidentLevelEq(IncidentLevel incidentLevel) {
+        return incidentLevel != null ? trainingResult.incidentLevel.eq(incidentLevel) : null;
+    }
+
+    private BooleanExpression incidentDetailTypeEq(String incidentDetailType) {
+        return hasText(incidentDetailType) ? trainingResult.incidentDetailType.eq(incidentDetailType) : null;
+    }
+
+    private BooleanExpression departmentEq(String department) {
+        return hasText(department) ? trainingResult.department.eq(department) : null;
     }
 }

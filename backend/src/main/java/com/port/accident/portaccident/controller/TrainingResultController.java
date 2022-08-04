@@ -1,20 +1,25 @@
 package com.port.accident.portaccident.controller;
 
-import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
-import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
-import com.port.accident.portaccident.dto.training_scenario_result.evaluation.TrainingByDateDto;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.service.TrainingResultService;
 import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.util.StringUtils.hasText;
 
 @Controller
 @RequiredArgsConstructor
@@ -99,12 +104,30 @@ public class TrainingResultController {
         resultService.createEvaluationDetailsByDays(param);
 
 
-
         return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
 
     @GetMapping("/trainingResult_list")
-    public String trainingResultList() {
+    public String trainingResultList(Model model,
+                                     @RequestParam(required = false, defaultValue = "") String incidentType,
+                                     @RequestParam(required = false, defaultValue = "") String name,
+                                     @RequestParam(required = false, defaultValue = "") String incidentLevel,
+                                     @RequestParam(required = false, defaultValue = "") String incidentDetailType,
+                                     @RequestParam(required = false, defaultValue = "") String department,
+                                     @PageableDefault Pageable pageable) {
+
+        TrainingResultCondition condition = new TrainingResultCondition(name, incidentDetailType, department);
+        if (hasText(incidentType))
+            condition.setIncidentType(IncidentType.valueOf(incidentType));
+        if(hasText(incidentLevel))
+            condition.setIncidentLevel(IncidentLevel.valueOf(incidentLevel));
+        Page<TrainingResultJoinScenarioDto> result = resultService.searchTrainingResultListWithPaging(condition, pageable);
+        model.addAttribute("condition", condition);
+        model.addAttribute("detList", result);
+
+        for (TrainingResultJoinScenarioDto trainingResultJoinScenarioDto : result) {
+            System.out.println(trainingResultJoinScenarioDto.toString());
+        }
         return "TrainingResult/TR_check";
     }
 }
