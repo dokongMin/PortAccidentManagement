@@ -5,7 +5,11 @@ import com.port.accident.portaccident.domain.training_scenario_result.elements.T
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
+import com.port.accident.portaccident.dto.code.CodeSearchCondition;
+import com.port.accident.portaccident.dto.code.DetRepJoinDto;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
@@ -20,6 +24,8 @@ import com.port.accident.portaccident.repository.training_scenario_result.elemen
 import com.port.accident.portaccident.repository.training_scenario_result.evaluation.EvaluationDetailsRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.evaluation.TrainingByDateRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +43,10 @@ public class TrainingResultService {
     private final TrainingByDateRepository byDateRepository;
     private final EvaluationDetailsRepository evaluationRepository;
 
+    @Transactional(readOnly = true)
+    public Page<TrainingResultJoinScenarioDto> searchTrainingResultListWithPaging(TrainingResultCondition condition, Pageable pageable) {
+        return trainingResultRepository.searchPageTrainingResults(condition, pageable);
+    }
 
     public Integer createTrainingResult(TrainingResult trainingResult) {
         if (trainingResultRepository.findByName(trainingResult.getName()).isPresent()) {
