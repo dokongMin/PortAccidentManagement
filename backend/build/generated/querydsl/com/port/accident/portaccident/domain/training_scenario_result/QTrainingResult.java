@@ -18,6 +18,8 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
 
     private static final long serialVersionUID = 1112766195L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QTrainingResult trainingResult = new QTrainingResult("trainingResult");
 
     public final StringPath department = createString("department");
@@ -36,6 +38,8 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
 
     public final EnumPath<com.port.accident.portaccident.enums.TrainingPlace> place = createEnum("place", com.port.accident.portaccident.enums.TrainingPlace.class);
 
+    public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;
+
     public final DateTimePath<java.time.LocalDateTime> startDate = createDateTime("startDate", java.time.LocalDateTime.class);
 
     public final StringPath trainingArea = createString("trainingArea");
@@ -49,15 +53,24 @@ public class QTrainingResult extends EntityPathBase<TrainingResult> {
     public final EnumPath<com.port.accident.portaccident.enums.TrainingType> trainingType = createEnum("trainingType", com.port.accident.portaccident.enums.TrainingType.class);
 
     public QTrainingResult(String variable) {
-        super(TrainingResult.class, forVariable(variable));
+        this(TrainingResult.class, forVariable(variable), INITS);
     }
 
     public QTrainingResult(Path<? extends TrainingResult> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QTrainingResult(PathMetadata metadata) {
-        super(TrainingResult.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QTrainingResult(PathMetadata metadata, PathInits inits) {
+        this(TrainingResult.class, metadata, inits);
+    }
+
+    public QTrainingResult(Class<? extends TrainingResult> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario"), inits.get("scenario")) : null;
     }
 
 }

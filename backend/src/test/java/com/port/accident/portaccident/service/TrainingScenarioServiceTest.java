@@ -1,20 +1,27 @@
 package com.port.accident.portaccident.service;
 
+import com.port.accident.portaccident.domain.staff.Staff;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
+import com.port.accident.portaccident.dto.SearchCondition;
+import com.port.accident.portaccident.dto.staff.StaffDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
+import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationStandardDto;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +29,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -43,6 +51,7 @@ public class TrainingScenarioServiceTest {
 
     @Autowired
     AccidentResponseActivityRepository accidentResponseActivityRepository;
+
 
     @Test
     public void 시나리오_등록() {
@@ -274,7 +283,6 @@ public class TrainingScenarioServiceTest {
         assertEquals(updateScenarioId, updateScenarioAccidentResponseActivityList.get(0).getScenario().getId());
     }
 
-
     @Test
     public void 시나리오_삭제() {
         //given
@@ -318,4 +326,87 @@ public class TrainingScenarioServiceTest {
 
     }
 
+    @Test
+    public void 시나리오_조회_페이징() {
+        //given
+        IntStream.rangeClosed(1, 5).forEach(i -> {
+            ScenarioDto scenarioDto = ScenarioDto.builder()
+                    .name("SY" + i)
+                    .build();
+
+            AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                    .name("크레인" + i)
+                    .build();
+
+            AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                    .name("컨테이너" + i)
+                    .build();
+
+            AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                    .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                    .manager("홍길동" + i)
+                    .completePlaningTime(LocalDateTime.now())
+                    .build();
+
+            List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+            accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+            accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+            List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
+            accidentResponseActivityDtoList.add(accidentResponseActivityDto);
+
+            scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        });
+
+        PageRequest pageRequest = PageRequest.of(0, 3); // Sort.by(Sort.Direction.DESC, "name")
+
+        //when
+        Page<Scenario> scenario = scenarioService.searchPage(null, pageRequest);
+
+        //then
+        List<Scenario> content = scenario.getContent();
+        assertEquals("조회된 데이터 수", 3, content.size());
+        assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
+        assertEquals("페이지 번호", 0, scenario.getNumber());
+        assertEquals("전체 페이지 번호", 2, scenario.getTotalPages());
+        assertTrue("첫번째 항목인가?", scenario.isFirst());
+        assertTrue("다음 페이지가 있는가?", scenario.hasNext());
+        assertEquals("SY1", content.get(0).getName());
+        assertEquals("크레인1", content.get(0).getAccidentPortFacilityList().get(0).getName());
+        assertEquals("홍길동1", content.get(0).getAccidentResponseActivityList().get(0).getManager());
+    }
+
+    @Test
+    public void 시나리오_검색_페이징() {
+        //given
+        IntStream.rangeClosed(1, 5).forEach(i -> {
+            ScenarioDto scenarioDto = ScenarioDto.builder()
+                    .name("SY" + i)
+                    .build();
+
+            scenarioService.saveScenario(scenarioDto);
+
+            ScenarioDto scenarioDto2 = ScenarioDto.builder()
+                    .name("SN" + i)
+                    .build();
+
+            scenarioService.saveScenario(scenarioDto2);
+
+        });
+
+        PageRequest pageRequest = PageRequest.of(0, 3);
+
+        //when
+        Page<Scenario> scenario = scenarioService.searchPage("SN", pageRequest);
+
+        //then
+        List<Scenario> content = scenario.getContent();
+        assertEquals("조회된 데이터 수", 3, content.size());
+        assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
+        assertEquals("페이지 번호", 0, scenario.getNumber());
+        assertEquals("전체 페이지 번호", 2, scenario.getTotalPages());
+        assertTrue("첫번째 항목인가?", scenario.isFirst());
+        assertTrue("다음 페이지가 있는가?", scenario.hasNext());
+        assertEquals("SN1", content.get(0).getName());
+    }
 }

@@ -8,6 +8,8 @@ import com.port.accident.portaccident.domain.training_scenario_result.evaluation
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
+import com.port.accident.portaccident.dto.training_scenario_result.evaluation.TrainingByDateDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.exception.DoesNotExistException;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
@@ -21,9 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -61,7 +61,7 @@ public class TrainingResultService {
         return savedResult.getId();
     }
 
-    public TrainingByDate findTrainingByDate(Integer id) {
+    public TrainingByDate findTrainingByDateById(Integer id) {
         Optional<TrainingByDate> byId = byDateRepository.findById(id);
         return byId.orElseThrow(() -> new DoesNotExistException());
     }
@@ -230,4 +230,75 @@ public class TrainingResultService {
         return parsingJsonString(param, "TrainingResult", "{", "}");
     }
 
+    public void createEvaluationDetailsByDays(List<Map<String, Object>> param) {
+        boolean isEvaluationDetails = false;
+        int count = 0;
+        TrainingByDateDto byDateDto = new TrainingByDateDto();
+        List<String> names = new ArrayList<>();
+        List<Integer> scores = new ArrayList<>();
+
+        for (Map<String, Object> stringObjectMap : param) {
+            Object[] keys = stringObjectMap.keySet().stream().toArray();
+            for (Object key : keys) {
+                if (count == 4) isEvaluationDetails = true;
+                if (isEvaluationDetails) {
+                    settingNamesAndScoresList(names, scores, stringObjectMap, key);
+                } else {
+                    count = settingTrainingByDateDto(count, byDateDto, stringObjectMap, key);
+                }
+            }
+        }
+        Integer trainingByDateId = createTrainingByDate(byDateDto.toEntity());
+        TrainingByDate trainingByDate = findTrainingByDateById(trainingByDateId);
+
+        createEvaluationDetailsList(names, scores, trainingByDate);
+
+    }
+
+    private void createEvaluationDetailsList(List<String> names, List<Integer> scores, TrainingByDate trainingByDate) {
+        for (int i = 0; i < names.size(); i++) {
+            EvaluationDetailsDto detailsDto = settingEvaluationDetailsDto(names, scores, trainingByDate, i);
+            createEvaluationDetails(detailsDto.toEntity());
+        }
+    }
+
+    private EvaluationDetailsDto settingEvaluationDetailsDto(List<String> names, List<Integer> scores, TrainingByDate trainingByDate, int i) {
+        EvaluationDetailsDto detailsDto = EvaluationDetailsDto.builder()
+                .name(names.get(i))
+                .score(scores.get(i))
+                .trainingByDate(trainingByDate)
+                .build();
+        return detailsDto;
+    }
+
+    private void settingNamesAndScoresList(List<String> names, List<Integer> scores, Map<String, Object> stringObjectMap, Object key) {
+        if (key.toString().equals("name")) {
+            names.add((String) stringObjectMap.get(key));
+        } else if (key.toString().equals("score")) {
+            scores.add((Integer) stringObjectMap.get(key));
+        }
+    }
+
+    private int settingTrainingByDateDto(int count, TrainingByDateDto byDateDto, Map<String, Object> stringObjectMap, Object key) {
+        if (key.toString().equals("details")) {
+            count++;
+            byDateDto.setDetails((String) stringObjectMap.get(key));
+        } else if (key.toString().equals("completionCheck")) {
+            count++;
+            if (stringObjectMap.get(key).toString().equals("COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.COMPLETE);
+            } else if (stringObjectMap.get(key).toString().equals("NOT_COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.NOT_COMPLETE);
+            }
+        } else if (key.toString().equals("evaluationName")) {
+            count++;
+            byDateDto.setEvaluationName((String) stringObjectMap.get(key));
+        } else if (key.toString().equals("trainingResultId")) {
+            TrainingResult trainingResult = findByTrainingResultId((Integer) stringObjectMap.get(key));
+            count++;
+            System.out.println("trainingResult : " + trainingResult.getId());
+            byDateDto.setTrainingResult(trainingResult);
+        }
+        return count;
+    }
 }

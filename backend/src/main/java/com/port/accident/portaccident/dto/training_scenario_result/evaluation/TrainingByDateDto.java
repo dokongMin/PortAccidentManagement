@@ -10,7 +10,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 @Setter
 public class TrainingByDateDto {
@@ -36,4 +36,5 @@ public class TrainingByDateDto {
                 .trainingResult(trainingResult)
                 .build();
     }
+
 }
