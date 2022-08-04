@@ -31,24 +31,22 @@ public class CodeService {
 
     public RepresentativeCode findByRepCode(String code) {
         Optional<RepresentativeCode> byCode = representRepository.findByCode(code);
-        return byCode.orElse(null);
+        return byCode.orElseThrow(() -> new DoesNotExistException());
     }
 
     public RepresentativeCode findByRepCodeId(Integer id) {
-//        System.out.println("id ==> "+id);
-//        System.out.println(representRepository.findById(id).get().getCode());
         Optional<RepresentativeCode> byId = representRepository.findById(id);
-        return byId.orElse(null);
+        return byId.orElseThrow(() -> new DoesNotExistException());
     }
 
     public DetailedCode findByDetCode(String code) {
         Optional<DetailedCode> byCode = detailedRepository.findByCode(code);
-        return byCode.orElse(null);
+        return byCode.orElseThrow(() -> new DoesNotExistException());
     }
 
     public DetailedCode findByDetCodeId(Integer id) {
         Optional<DetailedCode> byId = detailedRepository.findById(id);
-        return byId.orElse(null);
+        return byId.orElseThrow(() -> new DoesNotExistException());
 
     }
 
