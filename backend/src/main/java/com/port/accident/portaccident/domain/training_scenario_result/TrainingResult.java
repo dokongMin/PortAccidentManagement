@@ -54,6 +54,9 @@ public class TrainingResult {
     @Column(name = "incident_type")
     private IncidentType incidentType;
 
+    @Column(name = "incident_detail_type")
+    private String incidentDetailType;
+
     @Column(name = "training_department")
     private String department;
 
@@ -74,10 +77,9 @@ public class TrainingResult {
     private Scenario scenario;
 
     @Builder
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate,
-                          TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel,
-                          IncidentImpact incidentImpact, IncidentType incidentType, String department,
-                          String trainingArea, Scenario scenario) {
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
+                          TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
+                          IncidentType incidentType, String incidentDetailType, String department, String trainingArea, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -87,12 +89,11 @@ public class TrainingResult {
         this.incidentLevel = incidentLevel;
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
+        this.incidentDetailType = incidentDetailType;
         this.department = department;
         this.trainingArea = trainingArea;
         this.scenario = scenario;
     }
-
-
 
     public void updateTrainingPortFacilityList(TrainingPortFacility facility) {
         trainingPortFacilityList.add(facility);
