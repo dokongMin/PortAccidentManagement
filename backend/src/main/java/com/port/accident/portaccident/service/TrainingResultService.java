@@ -5,8 +5,6 @@ import com.port.accident.portaccident.domain.training_scenario_result.elements.T
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
-import com.port.accident.portaccident.dto.code.CodeSearchCondition;
-import com.port.accident.portaccident.dto.code.DetRepJoinDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
@@ -15,7 +13,6 @@ import com.port.accident.portaccident.dto.training_scenario_result.elements.Trai
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.TrainingByDateDto;
 import com.port.accident.portaccident.enums.*;
-import com.port.accident.portaccident.exception.CanNotCreateEntityException;
 import com.port.accident.portaccident.exception.DoesNotExistException;
 import com.port.accident.portaccident.exception.DuplicateTrainingResultNameException;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
@@ -196,7 +193,7 @@ public class TrainingResultService {
 
     private void matchingStringToEnumIncidentType(TrainingResultDto trainingResultDto, String[] split) {
         if (split[1].equals("ACCIDNET"))
-            trainingResultDto.setIncidentType(IncidentType.ACCIDNET);
+            trainingResultDto.setIncidentType(IncidentType.INCIDENT);
         else if (split[1].equals("DISASTER"))
             trainingResultDto.setIncidentType(IncidentType.DISASTER);
     }

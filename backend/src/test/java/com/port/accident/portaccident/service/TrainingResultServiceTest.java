@@ -1,8 +1,6 @@
 package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
@@ -20,7 +18,6 @@ import com.port.accident.portaccident.enums.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +30,6 @@ import java.util.List;
 import java.util.OptionalInt;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -54,10 +50,10 @@ public class TrainingResultServiceTest {
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -97,7 +93,7 @@ public class TrainingResultServiceTest {
                 .trainingType(TrainingType.ACTUAL)
                 .incidentLevel(IncidentLevel.LEVEL_1)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
-                .incidentType(IncidentType.ACCIDNET)
+                .incidentType(IncidentType.INCIDENT)
                 .department("안전관리부서")
                 .trainingArea("훈련대상 항만구역")
                 .scenario(scenario)

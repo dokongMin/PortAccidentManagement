@@ -1,8 +1,8 @@
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
+import com.port.accident.portaccident.enums.SuitableCheck;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "scenario_evaluation")
 @Entity

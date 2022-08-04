@@ -9,6 +9,9 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
+import com.port.accident.portaccident.enums.IncidentImpact;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,24 +36,20 @@ public class Scenario {
     @Column(name = "scenario_name") // 시나리오명
     private String name;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_level") // 사고 수준
-    private String level;
+    private IncidentLevel incidentLevel;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_impact") // 사고 영향
-    private String impact;
+    private IncidentImpact incidentImpact;
 
-    /**
-     * precedingType : 사고 - 재난 둘 중에 어떤 유형인지 선택하기 위함
-     */
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "scenario_incident_type") // 사고/재난
+    private IncidentType incidentType;
 
-    @Column(name = "accident_disaster_type") // 사고/재난
-    private String precedingType;
-
-    @Column(name = "accident_type") // 사고 유형
-    private String accidentType;
-
-    @Column(name = "disaster_type") // 재난 유형
-    private String disasterType;
+    @Column(name = "scenario_incident_detail_type") // 사고 유형
+    private String incidentDetailType;
 
     @Column(name = "scenario_port_area") // 사고 항만 구역
     private String portArea;
@@ -71,18 +70,17 @@ public class Scenario {
     private List<TrainingResult> trainingResultArrayList = new ArrayList<>();
 
     @Builder
-    public Scenario(Integer id, String name, String level, String impact, String precedingType, String accidentType,
-                    String disasterType, String portArea, String responseStage,
+    public Scenario(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
+                    IncidentType incidentType, String incidentDetailType, String portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
                     List<ScenarioEvaluation> scenarioEvaluationList) {
         this.id = id;
         this.name = name;
-        this.level = level;
-        this.impact = impact;
-        this.precedingType = precedingType;
-        this.accidentType = accidentType;
-        this.disasterType = disasterType;
+        this.incidentLevel = incidentLevel;
+        this.incidentImpact = incidentImpact;
+        this.incidentType = incidentType;
+        this.incidentDetailType = incidentDetailType;
         this.portArea = portArea;
         this.responseStage = responseStage;
         this.accidentPortFacilityList = accidentPortFacilityList;
@@ -133,11 +131,10 @@ public class Scenario {
 
     @Transactional(readOnly = true)
     public void update(ScenarioDto scenarioDto) {
-        this.level = scenarioDto.getLevel();
-        this.impact = scenarioDto.getImpact();
-        this.precedingType = scenarioDto.getPrecedingType();
-        this.accidentType = scenarioDto.getAccidentType();
-        this.disasterType = scenarioDto.getDisasterType();
+        this.incidentLevel = scenarioDto.getIncidentLevel();
+        this.incidentImpact = scenarioDto.getIncidentImpact();
+        this.incidentType = scenarioDto.getIncidentType();
+        this.incidentDetailType = scenarioDto.getIncidentDetailType();
         this.portArea = scenarioDto.getPortArea();
         this.responseStage = scenarioDto.getResponseStage();
     }

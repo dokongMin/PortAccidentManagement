@@ -8,6 +8,9 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
+import com.port.accident.portaccident.enums.IncidentImpact;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
@@ -54,10 +57,10 @@ public class TrainingScenarioServiceTest {
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -130,10 +133,10 @@ public class TrainingScenarioServiceTest {
         //given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -142,10 +145,10 @@ public class TrainingScenarioServiceTest {
 
         ScenarioDto updateScenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("1")
-                .impact("중상")
-                .precedingType("사고")
-                .accidentType("넘어짐")
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -158,9 +161,9 @@ public class TrainingScenarioServiceTest {
 
         Assertions.assertEquals(scenarioId, updateScenarioId);
         Assertions.assertEquals(updateScenarioDto.getName(), updateScenario.getName());
-        Assertions.assertEquals(updateScenarioDto.getLevel(), updateScenario.getLevel());
-        Assertions.assertEquals(updateScenarioDto.getImpact(), updateScenario.getImpact());
-        Assertions.assertEquals(updateScenarioDto.getAccidentType(), updateScenario.getAccidentType());
+        Assertions.assertEquals(updateScenarioDto.getIncidentLevel(), updateScenario.getIncidentLevel());
+        Assertions.assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
+        Assertions.assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
     }
 
     @Test
