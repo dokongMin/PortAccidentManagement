@@ -24,7 +24,7 @@ public class QDamageFacilityInfo extends EntityPathBase<DamageFacilityInfo> {
 
     public final com.port.accident.portaccident.domain.accident_management.QAccidentInfo accidentInfo;
 
-    public final QDamageFacility damageFacility;
+    public final EnumPath<DamageFacilityEnum> damageFacilityEnum = createEnum("damageFacilityEnum", DamageFacilityEnum.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
@@ -49,7 +49,6 @@ public class QDamageFacilityInfo extends EntityPathBase<DamageFacilityInfo> {
     public QDamageFacilityInfo(Class<? extends DamageFacilityInfo> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.accidentInfo = inits.isInitialized("accidentInfo") ? new com.port.accident.portaccident.domain.accident_management.QAccidentInfo(forProperty("accidentInfo"), inits.get("accidentInfo")) : null;
-        this.damageFacility = inits.isInitialized("damageFacility") ? new QDamageFacility(forProperty("damageFacility")) : null;
     }
 
 }

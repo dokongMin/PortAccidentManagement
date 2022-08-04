@@ -1,7 +1,7 @@
 package com.port.accident.portaccident.dto.accident_management.elements;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
-import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccident;
+import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccidentEnum;
 import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccidentInfo;
 import lombok.*;
 
@@ -16,20 +16,20 @@ public class CausesSafetyAccidentInfoDto {
 
     private AccidentInfo accidentInfo;
 
-    private CausesSafetyAccident causesSafetyAccident;
+    private CausesSafetyAccidentEnum causesSafetyAccidentEnum;
 
     @Builder
-    public CausesSafetyAccidentInfoDto(String name, AccidentInfo accidentInfo, CausesSafetyAccident causesSafetyAccident) {
+    public CausesSafetyAccidentInfoDto(String name, AccidentInfo accidentInfo, CausesSafetyAccidentEnum causesSafetyAccidentEnum) {
         this.name = name;
         this.accidentInfo = accidentInfo;
-        this.causesSafetyAccident = causesSafetyAccident;
+        this.causesSafetyAccidentEnum = causesSafetyAccidentEnum;
     }
 
     public CausesSafetyAccidentInfo toEntity(){
         return CausesSafetyAccidentInfo.builder()
                 .name(name)
                 .accidentInfo(accidentInfo)
-                .causesSafetyAccident(causesSafetyAccident)
+                .causesSafetyAccidentEnum(causesSafetyAccidentEnum)
                 .build();
     }
 }

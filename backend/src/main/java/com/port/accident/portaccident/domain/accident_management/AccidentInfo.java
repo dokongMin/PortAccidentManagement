@@ -1,8 +1,6 @@
 package com.port.accident.portaccident.domain.accident_management;
 
-import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccident;
 import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccidentInfo;
-import com.port.accident.portaccident.domain.accident_management.elements.DamageFacility;
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
 import com.port.accident.portaccident.domain.accident_management.type.DisasterType;
