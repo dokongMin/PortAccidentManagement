@@ -31,10 +31,10 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
         List<ScenarioAccidentResponseActivityDto> content = queryFactory
                 .select(new QScenarioAccidentResponseActivityDto(
                         scenario.name,
-                        scenario.incidentLevel,
                         scenario.incidentImpact,
                         scenario.incidentType,
                         scenario.incidentDetailType,
+                        accidentResponseActivity.incidentLevel,
                         accidentResponseActivity.comment,
                         accidentResponseActivity.manager))
                 .from(scenario)

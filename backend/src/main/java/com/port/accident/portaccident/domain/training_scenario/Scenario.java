@@ -37,10 +37,6 @@ public class Scenario {
     private String name;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "scenario_level") // 사고 수준
-    private IncidentLevel incidentLevel;
-
-    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_impact") // 사고 영향
     private IncidentImpact incidentImpact;
 
@@ -70,14 +66,13 @@ public class Scenario {
     private List<TrainingResult> trainingResultArrayList = new ArrayList<>();
 
     @Builder
-    public Scenario(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
+    public Scenario(Integer id, String name, IncidentImpact incidentImpact,
                     IncidentType incidentType, String incidentDetailType, String portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
                     List<ScenarioEvaluation> scenarioEvaluationList) {
         this.id = id;
         this.name = name;
-        this.incidentLevel = incidentLevel;
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
@@ -131,7 +126,6 @@ public class Scenario {
 
     @Transactional(readOnly = true)
     public void update(ScenarioDto scenarioDto) {
-        this.incidentLevel = scenarioDto.getIncidentLevel();
         this.incidentImpact = scenarioDto.getIncidentImpact();
         this.incidentType = scenarioDto.getIncidentType();
         this.incidentDetailType = scenarioDto.getIncidentDetailType();

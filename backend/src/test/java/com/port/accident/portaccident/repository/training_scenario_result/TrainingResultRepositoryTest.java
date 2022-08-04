@@ -35,7 +35,6 @@ public class TrainingResultRepositoryTest {
         /* create scenario */
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")

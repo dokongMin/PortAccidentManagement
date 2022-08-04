@@ -19,22 +19,23 @@ public class ScenarioAccidentResponseActivityDto {
     private String responseStage;*/
 
     private String name;
-    private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
     private IncidentType incidentType;
     private String incidentDetailType;
+
+    private IncidentLevel incidentLevel;
     private String comment;
     private String manager;
 
     @QueryProjection
-    public ScenarioAccidentResponseActivityDto(String name, IncidentLevel incidentLevel, IncidentImpact impact,
-                                               IncidentType incidentType, String incidentDetailType, String comment, String manager) {
+    public ScenarioAccidentResponseActivityDto(String name, IncidentImpact impact, IncidentType incidentType,
+                                               String incidentDetailType, IncidentLevel incidentLevel, String comment, String manager) {
 
         this.name = name;
-        this.incidentLevel = incidentLevel;
         this.incidentImpact = impact;
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
+        this.incidentLevel = incidentLevel;
         this.comment = comment;
         this.manager = manager;
     }

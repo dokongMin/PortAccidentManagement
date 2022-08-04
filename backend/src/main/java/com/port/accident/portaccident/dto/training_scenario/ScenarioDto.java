@@ -17,8 +17,8 @@ import java.util.List;
 @Setter
 public class ScenarioDto {
 
+    private Integer id;
     private String name;
-    private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
     private IncidentType incidentType;
     private String incidentDetailType;
@@ -29,13 +29,13 @@ public class ScenarioDto {
     private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
 
     @Builder
-    public ScenarioDto(String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType,
+    public ScenarioDto(Integer id, String name, IncidentImpact incidentImpact, IncidentType incidentType,
                        String incidentDetailType, String portArea, String responseStage) {
 //                       List<AccidentPortFacility> accidentPortFacilityList,
 //                       List<AccidentResponseActivity> accidentResponseActivityList,
 //                       List<ScenarioEvaluation> scenarioEvaluationList
+        this.id = id;
         this.name = name;
-        this.incidentLevel = incidentLevel;
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
@@ -48,8 +48,8 @@ public class ScenarioDto {
 
     public Scenario toEntity() {
         return Scenario.builder()
+                .id(id)
                 .name(name)
-                .incidentLevel(incidentLevel)
                 .incidentImpact(incidentImpact)
                 .incidentType(incidentType)
                 .incidentDetailType(incidentDetailType)
