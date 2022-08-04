@@ -24,7 +24,7 @@ public class QCausesSafetyAccidentInfo extends EntityPathBase<CausesSafetyAccide
 
     public final com.port.accident.portaccident.domain.accident_management.QAccidentInfo accidentInfo;
 
-    public final QCausesSafetyAccident causesSafetyAccident;
+    public final EnumPath<CausesSafetyAccidentEnum> causesSafetyAccidentEnum = createEnum("causesSafetyAccidentEnum", CausesSafetyAccidentEnum.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
@@ -49,7 +49,6 @@ public class QCausesSafetyAccidentInfo extends EntityPathBase<CausesSafetyAccide
     public QCausesSafetyAccidentInfo(Class<? extends CausesSafetyAccidentInfo> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.accidentInfo = inits.isInitialized("accidentInfo") ? new com.port.accident.portaccident.domain.accident_management.QAccidentInfo(forProperty("accidentInfo"), inits.get("accidentInfo")) : null;
-        this.causesSafetyAccident = inits.isInitialized("causesSafetyAccident") ? new QCausesSafetyAccident(forProperty("causesSafetyAccident")) : null;
     }
 
 }

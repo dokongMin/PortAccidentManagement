@@ -1,7 +1,7 @@
 package com.port.accident.portaccident.dto.accident_management.elements;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
-import com.port.accident.portaccident.domain.accident_management.elements.DamageFacility;
+import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityEnum;
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import lombok.*;
 
@@ -14,13 +14,13 @@ public class DamageFacilityInfoDto {
 
     private AccidentInfo accidentInfo;
 
-    private DamageFacility damageFacility;
+    private DamageFacilityEnum damageFacilityEnum;
 
     @Builder
-    public DamageFacilityInfoDto(String name, AccidentInfo accidentInfo, DamageFacility damageFacility) {
+    public DamageFacilityInfoDto(String name, AccidentInfo accidentInfo, DamageFacilityEnum damageFacilityEnum) {
         this.name = name;
         this.accidentInfo = accidentInfo;
-        this.damageFacility = damageFacility;
+        this.damageFacilityEnum = damageFacilityEnum;
     }
 
 
@@ -28,7 +28,7 @@ public class DamageFacilityInfoDto {
         return DamageFacilityInfo.builder()
                 .name(name)
                 .accidentInfo(accidentInfo)
-                .damageFacility(damageFacility)
+                .damageFacilityEnum(damageFacilityEnum)
                 .build();
     }
 }
