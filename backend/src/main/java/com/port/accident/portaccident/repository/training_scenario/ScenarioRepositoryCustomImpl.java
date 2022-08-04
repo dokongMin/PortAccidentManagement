@@ -1,8 +1,7 @@
 package com.port.accident.portaccident.repository.training_scenario;
 
-import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.dto.training_scenario.QScenarioActivityDto;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -28,8 +27,8 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public Page<ScenarioActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
-        List<ScenarioActivityDto> content = queryFactory
+    public Page<ScenarioAccidentResponseActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+        List<ScenarioAccidentResponseActivityDto> content = queryFactory
                 .select(new QScenarioActivityDto(
                         scenario.name,
                         scenario.level,

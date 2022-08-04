@@ -3,7 +3,7 @@ package com.port.accident.portaccident.service;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
@@ -358,10 +358,10 @@ public class TrainingScenarioServiceTest {
         PageRequest pageRequest = PageRequest.of(0, 3); // Sort.by(Sort.Direction.DESC, "name")
 
         //when
-        Page<ScenarioActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
+        Page<ScenarioAccidentResponseActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
 
         //then
-        List<ScenarioActivityDto> content = scenario.getContent();
+        List<ScenarioAccidentResponseActivityDto> content = scenario.getContent();
         assertEquals("조회된 데이터 수", 3, content.size());
         assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
         assertEquals("페이지 번호", 0, scenario.getNumber());
@@ -416,10 +416,10 @@ public class TrainingScenarioServiceTest {
         PageRequest pageRequest = PageRequest.of(0, 3);
 
         //when
-        Page<ScenarioActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
+        Page<ScenarioAccidentResponseActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
 
         //then
-        List<ScenarioActivityDto> content = scenario.getContent();
+        List<ScenarioAccidentResponseActivityDto> content = scenario.getContent();
         assertEquals("조회된 데이터 수", 3, content.size());
         assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
         assertEquals("페이지 번호", 0, scenario.getNumber());

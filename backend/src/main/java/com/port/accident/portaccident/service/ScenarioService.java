@@ -3,7 +3,7 @@ package com.port.accident.portaccident.service;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
@@ -116,7 +116,7 @@ public class ScenarioService {
         scenarioRepository.deleteById(scenarioId);
     }
 
-    public Page<ScenarioActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+    public Page<ScenarioAccidentResponseActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
         return scenarioRepository.searchPageScenario(condition, pageable);
     }
 }

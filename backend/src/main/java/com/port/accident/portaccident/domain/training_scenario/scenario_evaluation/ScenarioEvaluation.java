@@ -24,10 +24,10 @@ public class ScenarioEvaluation {
     @Column(name = "scenario_evaluation_name") // 시나리오명
     private String name;
 
-    @OneToMany(mappedBy = "scenarioEvaluation") // 시나리오 평가 기준
+    @OneToMany(mappedBy = "scenarioEvaluation")  // 시나리오 평가 기준
     private List<ScenarioEvaluationStandard> scenarioEvaluationStandardList = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scenario_id") // 시나리오 id
     private Scenario scenario;
 

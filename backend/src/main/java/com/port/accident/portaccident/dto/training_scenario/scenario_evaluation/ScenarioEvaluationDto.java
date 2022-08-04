@@ -17,10 +17,10 @@ public class ScenarioEvaluationDto {
     private Scenario scenario;
 
     @Builder
-    public ScenarioEvaluationDto(String name, List<ScenarioEvaluationStandard> scenarioEvaluationStandardList,
+    public ScenarioEvaluationDto(String name, /*List<ScenarioEvaluationStandard> scenarioEvaluationStandardList,*/
                                  Scenario scenario) {
         this.name = name;
-        this.scenarioEvaluationStandardList = scenarioEvaluationStandardList;
+        /*this.scenarioEvaluationStandardList = scenarioEvaluationStandardList;*/
         this.scenario = scenario;
     }
 
