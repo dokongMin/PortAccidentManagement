@@ -22,21 +22,21 @@ public class QScenarioEvaluation extends EntityPathBase<ScenarioEvaluation> {
 
     public static final QScenarioEvaluation scenarioEvaluation = new QScenarioEvaluation("scenarioEvaluation");
 
-    public final EnumPath<SuitableCheck> completeStandard1 = createEnum("completeStandard1", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> completeStandard1 = createEnum("completeStandard1", com.port.accident.portaccident.enums.SuitableCheck.class);
 
-    public final EnumPath<SuitableCheck> completeStandard2 = createEnum("completeStandard2", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> completeStandard2 = createEnum("completeStandard2", com.port.accident.portaccident.enums.SuitableCheck.class);
 
-    public final EnumPath<SuitableCheck> developmentStandard1 = createEnum("developmentStandard1", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> developmentStandard1 = createEnum("developmentStandard1", com.port.accident.portaccident.enums.SuitableCheck.class);
 
-    public final EnumPath<SuitableCheck> developmentStandard2 = createEnum("developmentStandard2", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> developmentStandard2 = createEnum("developmentStandard2", com.port.accident.portaccident.enums.SuitableCheck.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath name = createString("name");
 
-    public final EnumPath<SuitableCheck> possibleStandard1 = createEnum("possibleStandard1", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> possibleStandard1 = createEnum("possibleStandard1", com.port.accident.portaccident.enums.SuitableCheck.class);
 
-    public final EnumPath<SuitableCheck> possibleStandard2 = createEnum("possibleStandard2", SuitableCheck.class);
+    public final EnumPath<com.port.accident.portaccident.enums.SuitableCheck> possibleStandard2 = createEnum("possibleStandard2", com.port.accident.portaccident.enums.SuitableCheck.class);
 
     public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;
 

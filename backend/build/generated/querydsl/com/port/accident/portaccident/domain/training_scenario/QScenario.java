@@ -24,25 +24,25 @@ public class QScenario extends EntityPathBase<Scenario> {
 
     public final ListPath<com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentResponseActivity> accidentResponseActivityList = this.<com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentResponseActivity>createList("accidentResponseActivityList", com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity.class, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentResponseActivity.class, PathInits.DIRECT2);
 
-    public final StringPath accidentType = createString("accidentType");
-
-    public final StringPath disasterType = createString("disasterType");
-
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final StringPath impact = createString("impact");
+    public final StringPath incidentDetailType = createString("incidentDetailType");
 
-    public final StringPath level = createString("level");
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentImpact> incidentImpact = createEnum("incidentImpact", com.port.accident.portaccident.enums.IncidentImpact.class);
+
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel = createEnum("incidentLevel", com.port.accident.portaccident.enums.IncidentLevel.class);
+
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentType> incidentType = createEnum("incidentType", com.port.accident.portaccident.enums.IncidentType.class);
 
     public final StringPath name = createString("name");
 
     public final StringPath portArea = createString("portArea");
 
-    public final StringPath precedingType = createString("precedingType");
-
     public final StringPath responseStage = createString("responseStage");
 
     public final ListPath<com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation> scenarioEvaluationList = this.<com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation>createList("scenarioEvaluationList", com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation.class, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation.class, PathInits.DIRECT2);
+
+    public final ListPath<com.port.accident.portaccident.domain.training_scenario_result.TrainingResult, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult> trainingResultArrayList = this.<com.port.accident.portaccident.domain.training_scenario_result.TrainingResult, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult>createList("trainingResultArrayList", com.port.accident.portaccident.domain.training_scenario_result.TrainingResult.class, com.port.accident.portaccident.domain.training_scenario_result.QTrainingResult.class, PathInits.DIRECT2);
 
     public QScenario(String variable) {
         super(Scenario.class, forVariable(variable));
