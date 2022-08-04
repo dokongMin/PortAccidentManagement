@@ -1,8 +1,10 @@
 package com.port.accident.portaccident.domain.training_scenario_result;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
+import com.port.accident.portaccident.enums.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,35 +34,31 @@ public class TrainingResult {
     @Column(name = "training_end_date")
     private LocalDateTime endDate;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_place")
-    private String place;
+    private TrainingPlace place;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_type")
-    private String trainingType;
+    private TrainingType trainingType;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "accident_level")
-    private String accidentLevel;
+    private IncidentLevel incidentLevel;
 
-    @Column(name = "accident_impact")
-    private String accidentImpact;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "incident_impact")
+    private IncidentImpact incidentImpact;
 
-    /**
-     * precedingType : 사고 - 재난 둘 중에 어떤 유형인지 선택하기 위함
-     */
-    @Column(name = "accident_disaster_type")
-    private String precedingType;
-
-    @Column(name = "accident_type")
-    private String accidentType;
-
-    @Column(name = "disaster_type")
-    private String disasterType;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "incident_type")
+    private IncidentType incidentType;
 
     @Column(name = "training_department")
     private String department;
 
     @Column(name = "training_port_area")
-    private String trainingArea;
+    private String trainingArea;    //훈련대상 항만구역
 
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
@@ -71,28 +69,41 @@ public class TrainingResult {
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "scenario_id")
+    private Scenario scenario;
+
     @Builder
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, String place,
-                          String trainingType, String accidentLevel, String accidentImpact, String precedingType,
-                          String accidentType, String disasterType, String department, String trainingArea,
-                          List<TrainingPortFacility> trainingPortFacilityList,
-                          List<TrainingByDate> trainingByDateList,
-                          List<TrainingParticipants> trainingParticipantsList) {
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate,
+                          TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel,
+                          IncidentImpact incidentImpact, IncidentType incidentType, String department,
+                          String trainingArea, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.place = place;
         this.trainingType = trainingType;
-        this.accidentLevel = accidentLevel;
-        this.accidentImpact = accidentImpact;
-        this.precedingType = precedingType;
-        this.accidentType = accidentType;
-        this.disasterType = disasterType;
+        this.incidentLevel = incidentLevel;
+        this.incidentImpact = incidentImpact;
+        this.incidentType = incidentType;
         this.department = department;
         this.trainingArea = trainingArea;
-        this.trainingPortFacilityList = trainingPortFacilityList;
-        this.trainingByDateList = trainingByDateList;
-        this.trainingParticipantsList = trainingParticipantsList;
+        this.scenario = scenario;
     }
+
+
+
+    public void updateTrainingPortFacilityList(TrainingPortFacility facility) {
+        trainingPortFacilityList.add(facility);
+    }
+
+    public void updateTrainingByDateList(TrainingByDate byDate) {
+        trainingByDateList.add(byDate);
+    }
+
+    public void updateTrainingParticipantsList(TrainingParticipants participants) {
+        trainingParticipantsList.add(participants);
+    }
+
 }
