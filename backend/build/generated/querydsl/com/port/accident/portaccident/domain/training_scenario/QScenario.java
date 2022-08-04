@@ -18,8 +18,6 @@ public class QScenario extends EntityPathBase<Scenario> {
 
     private static final long serialVersionUID = -1651469484L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QScenario scenario = new QScenario("scenario");
 
     public final ListPath<com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentPortFacility> accidentPortFacilityList = this.<com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentPortFacility>createList("accidentPortFacilityList", com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility.class, com.port.accident.portaccident.domain.training_scenario.elements.QAccidentPortFacility.class, PathInits.DIRECT2);
@@ -44,27 +42,18 @@ public class QScenario extends EntityPathBase<Scenario> {
 
     public final StringPath responseStage = createString("responseStage");
 
-    public final com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation scenarioEvaluation;
+    public final ListPath<com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation> scenarioEvaluationList = this.<com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation>createList("scenarioEvaluationList", com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation.class, com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation.class, PathInits.DIRECT2);
 
     public QScenario(String variable) {
-        this(Scenario.class, forVariable(variable), INITS);
+        super(Scenario.class, forVariable(variable));
     }
 
     public QScenario(Path<? extends Scenario> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QScenario(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QScenario(PathMetadata metadata, PathInits inits) {
-        this(Scenario.class, metadata, inits);
-    }
-
-    public QScenario(Class<? extends Scenario> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.scenarioEvaluation = inits.isInitialized("scenarioEvaluation") ? new com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation(forProperty("scenarioEvaluation"), inits.get("scenarioEvaluation")) : null;
+        super(Scenario.class, metadata);
     }
 
 }

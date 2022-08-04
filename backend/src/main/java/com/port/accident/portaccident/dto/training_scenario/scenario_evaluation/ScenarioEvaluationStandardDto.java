@@ -1,3 +1,4 @@
+/*
 package com.port.accident.portaccident.dto.training_scenario.scenario_evaluation;
 
 
@@ -36,3 +37,4 @@ public class ScenarioEvaluationStandardDto {
                 .build();
     }
 }
+*/

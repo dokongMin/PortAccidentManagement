@@ -7,6 +7,7 @@ import com.port.accident.portaccident.domain.training_scenario.scenario_evaluati
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -101,6 +102,12 @@ public class Scenario {
         }
     }
 
+    @Transactional(readOnly = true)
+    public void addScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+        scenarioEvaluationDto.setScenario(this);
+        this.scenarioEvaluationList.add(scenarioEvaluationDto.toEntity());
+    }
+
     @Transactional
     public void removeAccidentPortFacility(List<AccidentPortFacility> accidentPortFacilityList) {
         for (AccidentPortFacility accidentPortFacility : accidentPortFacilityList) {
@@ -113,6 +120,11 @@ public class Scenario {
         for (AccidentResponseActivity accidentResponseActivity : accidentResponseActivityList) {
             this.accidentResponseActivityList.remove(accidentResponseActivity);
         }
+    }
+
+    @Transactional
+    public void removeScenarioEvaluation(ScenarioEvaluation scenarioEvaluation) {
+        this.scenarioEvaluationList.remove(scenarioEvaluation);
     }
 
     @Transactional(readOnly = true)

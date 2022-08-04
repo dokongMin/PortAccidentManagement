@@ -46,7 +46,7 @@ public class QAccidentPortFacility extends EntityPathBase<AccidentPortFacility> 
 
     public QAccidentPortFacility(Class<? extends AccidentPortFacility> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario"), inits.get("scenario")) : null;
+        this.scenario = inits.isInitialized("scenario") ? new com.port.accident.portaccident.domain.training_scenario.QScenario(forProperty("scenario")) : null;
     }
 
 }
