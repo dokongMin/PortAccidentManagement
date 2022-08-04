@@ -27,6 +27,7 @@ public class TrainingResultDto {
     private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
     private IncidentType incidentType;
+    private String incidentDetailType;
     private String department;
     private String trainingArea;
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
@@ -35,10 +36,11 @@ public class TrainingResultDto {
     private Scenario scenario;
 
     @Builder
-    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place
-            , TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType
-            , String department, String trainingArea, List<TrainingPortFacility> trainingPortFacilityList,
-                             List<TrainingByDate> trainingByDateList, List<TrainingParticipants> trainingParticipantsList, Scenario scenario) {
+    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
+                             TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
+                             IncidentType incidentType, String incidentDetailType, String department, String trainingArea,
+                             List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList,
+                             List<TrainingParticipants> trainingParticipantsList, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -48,6 +50,7 @@ public class TrainingResultDto {
         this.incidentLevel = incidentLevel;
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
+        this.incidentDetailType = incidentDetailType;
         this.department = department;
         this.trainingArea = trainingArea;
         this.trainingPortFacilityList = trainingPortFacilityList;
@@ -55,6 +58,8 @@ public class TrainingResultDto {
         this.trainingParticipantsList = trainingParticipantsList;
         this.scenario = scenario;
     }
+
+
 
 
     public TrainingResult toEntity() {
@@ -67,6 +72,7 @@ public class TrainingResultDto {
                 .incidentLevel(incidentLevel)
                 .incidentImpact(incidentImpact)
                 .incidentType(incidentType)
+                .incidentDetailType(incidentDetailType)
                 .department(department)
                 .trainingArea(trainingArea)
                 .scenario(scenario)

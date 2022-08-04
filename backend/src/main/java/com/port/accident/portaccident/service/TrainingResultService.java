@@ -11,7 +11,9 @@ import com.port.accident.portaccident.dto.training_scenario_result.elements.Trai
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.TrainingByDateDto;
 import com.port.accident.portaccident.enums.*;
+import com.port.accident.portaccident.exception.CanNotCreateEntityException;
 import com.port.accident.portaccident.exception.DoesNotExistException;
+import com.port.accident.portaccident.exception.DuplicateTrainingResultNameException;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.element.TrainingParticipantsRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.element.TrainingPortFacilityRepository;
@@ -37,6 +39,9 @@ public class TrainingResultService {
 
 
     public Integer createTrainingResult(TrainingResult trainingResult) {
+        if (trainingResultRepository.findByName(trainingResult.getName()).isPresent()) {
+            throw new DuplicateTrainingResultNameException();
+        }
         TrainingResult savedResult = trainingResultRepository.save(trainingResult);
         return savedResult.getId();
     }
