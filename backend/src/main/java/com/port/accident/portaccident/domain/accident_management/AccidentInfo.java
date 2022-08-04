@@ -57,6 +57,10 @@ public class AccidentInfo {
     @OneToMany(mappedBy = "accidentInfo")
     private List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "causes_safety_accident_id")
+    private CausesSafetyAccident causesSafetyAccident;
+
     @OneToMany(mappedBy = "accidentInfo")
     private List<DamageFacilityInfo> damageFacilityInfoList = new ArrayList<>();
 
@@ -88,4 +92,6 @@ public class AccidentInfo {
 //        }
 //        disasterType.getAccidentInfoList().add(this);
     }
+
+
 }
