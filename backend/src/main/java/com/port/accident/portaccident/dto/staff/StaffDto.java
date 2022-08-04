@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 public class StaffDto {
+    private Integer id;
     private String name;
     private String corporation;
     private String group;
@@ -15,7 +16,8 @@ public class StaffDto {
     private String phoneNumber;
 
     @Builder
-    public StaffDto(String name, String corporation, String group, String position, String email, String phoneNumber) {
+    public StaffDto(Integer id, String name, String corporation, String group, String position, String email, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.corporation = corporation;
         this.group = group;
@@ -26,6 +28,7 @@ public class StaffDto {
 
     public Staff toEntity() {
         return Staff.builder()
+                .id(id)
                 .name(name)
                 .corporation(corporation)
                 .group(group)
