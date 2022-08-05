@@ -4,6 +4,9 @@ import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
+import com.port.accident.portaccident.enums.IncidentImpact;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -13,50 +16,48 @@ import java.util.List;
 @Getter
 @Setter
 public class ScenarioDto {
+
+    private Integer id;
     private String name;
-    private String level;
-    private String impact;
-    private String precedingType;
-    private String accidentType;
-    private String disasterType;
+    private IncidentImpact incidentImpact;
+    private IncidentType incidentType;
+    private String incidentDetailType;
     private String portArea;
     private String responseStage;
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
-    private ScenarioEvaluation scenarioEvaluation;
+    private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
 
     @Builder
-    public ScenarioDto(String name, String level, String impact, String precedingType, String accidentType,
-                       String disasterType, String portArea, String responseStage,
+    public ScenarioDto(Integer id, String name, IncidentImpact incidentImpact, IncidentType incidentType,
+                       String incidentDetailType, String portArea, String responseStage) {
 //                       List<AccidentPortFacility> accidentPortFacilityList,
 //                       List<AccidentResponseActivity> accidentResponseActivityList,
-                       ScenarioEvaluation scenarioEvaluation) {
+//                       List<ScenarioEvaluation> scenarioEvaluationList
+        this.id = id;
         this.name = name;
-        this.level = level;
-        this.impact = impact;
-        this.precedingType = precedingType;
-        this.accidentType = accidentType;
-        this.disasterType = disasterType;
+        this.incidentImpact = incidentImpact;
+        this.incidentType = incidentType;
+        this.incidentDetailType = incidentDetailType;
         this.portArea = portArea;
         this.responseStage = responseStage;
 //        this.accidentPortFacilityList = accidentPortFacilityList;
 //        this.accidentResponseActivityList = accidentResponseActivityList;
-        this.scenarioEvaluation = scenarioEvaluation;
+//        this.scenarioEvaluationList = scenarioEvaluationList;
     }
 
     public Scenario toEntity() {
         return Scenario.builder()
+                .id(id)
                 .name(name)
-                .level(level)
-                .impact(impact)
-                .precedingType(precedingType)
-                .accidentType(accidentType)
-                .disasterType(disasterType)
+                .incidentImpact(incidentImpact)
+                .incidentType(incidentType)
+                .incidentDetailType(incidentDetailType)
                 .portArea(portArea)
                 .responseStage(responseStage)
                 .accidentPortFacilityList(accidentPortFacilityList)
                 .accidentResponseActivityList(accidentResponseActivityList)
-                .scenarioEvaluation(scenarioEvaluation)
+                .scenarioEvaluationList(scenarioEvaluationList)
                 .build();
     }
 }

@@ -1,10 +1,14 @@
 package com.port.accident.portaccident.runner;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
+import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
+import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.service.ScenarioService;
 import com.port.accident.portaccident.service.TrainingResultService;
@@ -30,14 +34,16 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+        Integer trainingResultId = 0;
+
         /* create scenario */
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -51,6 +57,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                 .build();
 
         AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .incidentLevel(IncidentLevel.LEVEL_3)
                 .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
                 .manager("홍길동")
                 .completePlaningTime(LocalDateTime.now())
@@ -80,7 +87,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .trainingType(TrainingType.ACTUAL)
                         .incidentLevel(IncidentLevel.LEVEL_1)
                         .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
-                        .incidentType(IncidentType.ACCIDNET)
+                        .incidentType(IncidentType.INCIDENT)
                         .incidentDetailType("추락")
                         .department("안전관리부서A")
                         .trainingArea("훈련대상 항만구역 A")
@@ -110,7 +117,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .trainingType(TrainingType.VIRTUAL)
                         .incidentLevel(IncidentLevel.LEVEL_3)
                         .incidentImpact(IncidentImpact.INCIDENT_IMPACT_C)
-                        .incidentType(IncidentType.ACCIDNET)
+                        .incidentType(IncidentType.INCIDENT)
                         .incidentDetailType("넘어짐")
                         .department("안전관리부서C")
                         .trainingArea("훈련대상 항만구역 C")
@@ -118,8 +125,28 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .build();
             }
 
-            resultService.createTrainingResult(dto.toEntity());
-
+             trainingResultId = resultService.createTrainingResult(dto.toEntity());
         }
+        TrainingResult trainingResult = resultService.findByTrainingResultId(trainingResultId);
+
+        /* create TrainingPortFacilityRepository */
+        //given
+        TrainingPortFacilityDto facilityDto = TrainingPortFacilityDto.builder()
+                .name(PortFacility.CONTAINER)
+                .trainingResult(trainingResult)
+                .build();
+
+        //when
+        resultService.createPortFacility(facilityDto.toEntity());
+
+        /* create TrainingParticipants */
+        //given
+        TrainingParticipantsDto participantsDto = TrainingParticipantsDto.builder()
+                .participantsId(1)
+                .trainingResult(trainingResult)
+                .build();
+
+        //when
+        resultService.createTrainingParticipants(participantsDto.toEntity());
     }
 }

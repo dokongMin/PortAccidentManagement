@@ -1,22 +1,21 @@
 package com.port.accident.portaccident.service;
 
-import com.port.accident.portaccident.domain.staff.Staff;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
-import com.port.accident.portaccident.dto.SearchCondition;
-import com.port.accident.portaccident.dto.staff.StaffDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
-import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
-import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationStandardDto;
+import com.port.accident.portaccident.enums.IncidentImpact;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -58,10 +57,9 @@ public class TrainingScenarioServiceTest {
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -75,6 +73,7 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .incidentLevel(IncidentLevel.LEVEL_3)
                 .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
                 .manager("홍길동")
                 .completePlaningTime(LocalDateTime.now())
@@ -134,10 +133,9 @@ public class TrainingScenarioServiceTest {
         //given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -145,11 +143,11 @@ public class TrainingScenarioServiceTest {
         Integer scenarioId = scenarioService.saveScenario(scenarioDto);
 
         ScenarioDto updateScenarioDto = ScenarioDto.builder()
+                .id(scenarioId)
                 .name("SY2")
-                .level("1")
-                .impact("중상")
-                .precedingType("사고")
-                .accidentType("넘어짐")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -162,9 +160,8 @@ public class TrainingScenarioServiceTest {
 
         Assertions.assertEquals(scenarioId, updateScenarioId);
         Assertions.assertEquals(updateScenarioDto.getName(), updateScenario.getName());
-        Assertions.assertEquals(updateScenarioDto.getLevel(), updateScenario.getLevel());
-        Assertions.assertEquals(updateScenarioDto.getImpact(), updateScenario.getImpact());
-        Assertions.assertEquals(updateScenarioDto.getAccidentType(), updateScenario.getAccidentType());
+        Assertions.assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
+        Assertions.assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
     }
 
     @Test
@@ -358,13 +355,14 @@ public class TrainingScenarioServiceTest {
             scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
         });
 
+        ScenarioSearchCondition condition = new ScenarioSearchCondition();
         PageRequest pageRequest = PageRequest.of(0, 3); // Sort.by(Sort.Direction.DESC, "name")
 
         //when
-        Page<Scenario> scenario = scenarioService.searchPage(null, pageRequest);
+        Page<ScenarioAccidentResponseActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
 
         //then
-        List<Scenario> content = scenario.getContent();
+        List<ScenarioAccidentResponseActivityDto> content = scenario.getContent();
         assertEquals("조회된 데이터 수", 3, content.size());
         assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
         assertEquals("페이지 번호", 0, scenario.getNumber());
@@ -372,8 +370,6 @@ public class TrainingScenarioServiceTest {
         assertTrue("첫번째 항목인가?", scenario.isFirst());
         assertTrue("다음 페이지가 있는가?", scenario.hasNext());
         assertEquals("SY1", content.get(0).getName());
-        assertEquals("크레인1", content.get(0).getAccidentPortFacilityList().get(0).getName());
-        assertEquals("홍길동1", content.get(0).getAccidentResponseActivityList().get(0).getManager());
     }
 
     @Test
@@ -390,17 +386,41 @@ public class TrainingScenarioServiceTest {
                     .name("SN" + i)
                     .build();
 
-            scenarioService.saveScenario(scenarioDto2);
+            AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                    .name("크레인" + i)
+                    .build();
+
+            AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                    .name("컨테이너" + i)
+                    .build();
+
+            AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                    .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                    .manager("홍길동" + i)
+                    .completePlaningTime(LocalDateTime.now())
+                    .build();
+
+            List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+            accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+            accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+            List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
+            accidentResponseActivityDtoList.add(accidentResponseActivityDto);
+
+            scenarioService.registerScenario(scenarioDto2, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
 
         });
 
+        ScenarioSearchCondition condition = new ScenarioSearchCondition();
+        condition.setName("SN");
+        condition.setManager("홍길동");
         PageRequest pageRequest = PageRequest.of(0, 3);
 
         //when
-        Page<Scenario> scenario = scenarioService.searchPage("SN", pageRequest);
+        Page<ScenarioAccidentResponseActivityDto> scenario = scenarioService.searchPageScenario(condition, pageRequest);
 
         //then
-        List<Scenario> content = scenario.getContent();
+        List<ScenarioAccidentResponseActivityDto> content = scenario.getContent();
         assertEquals("조회된 데이터 수", 3, content.size());
         assertEquals("전체 데이터 수", 5, scenario.getTotalElements());
         assertEquals("페이지 번호", 0, scenario.getNumber());
@@ -408,5 +428,6 @@ public class TrainingScenarioServiceTest {
         assertTrue("첫번째 항목인가?", scenario.isFirst());
         assertTrue("다음 페이지가 있는가?", scenario.hasNext());
         assertEquals("SN1", content.get(0).getName());
+        assertEquals("홍길동1", content.get(0).getManager());
     }
 }

@@ -14,8 +14,6 @@ import com.port.accident.portaccident.service.accident_management_service.Accide
 import com.port.accident.portaccident.service.accident_management_service.AccidentTypeService;
 import com.port.accident.portaccident.service.accident_management_service.CausesSafetyAccidentService;
 import com.port.accident.portaccident.service.accident_management_service.DamageFacilityService;
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.vm.ci.meta.Local;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
