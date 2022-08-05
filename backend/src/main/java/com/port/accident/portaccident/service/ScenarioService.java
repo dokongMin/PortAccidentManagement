@@ -171,7 +171,7 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer updateAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+    public Integer modifyAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
         AccidentResponseActivity accidentResponseActivity = accidentResponseActivityRepository.findById(accidentResponseActivityDto.getId()).get();
         accidentResponseActivity.update(accidentResponseActivityDto);
 
@@ -179,9 +179,8 @@ public class ScenarioService {
     }
 
     @Transactional
-    public void deleteAccidentResponseActivity(Scenario scenario) {
-        List<AccidentResponseActivity> accidentResponseActivityList = accidentResponseActivityRepository.findByScenarioId(scenario.getId());
-        scenario.removeAccidentResponseActivity(accidentResponseActivityList);
+    public void deleteAccidentResponseActivity(Integer activityId) {
+        accidentResponseActivityRepository.deleteById(activityId);
     }
 
 

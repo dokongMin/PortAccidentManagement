@@ -60,7 +60,7 @@ public class Scenario {
     @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 항만 설비
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 대응 활동
+    @OneToMany(mappedBy = "scenario") // 안전 사고 대응 활동
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "scenario") // 시나리오 평가
