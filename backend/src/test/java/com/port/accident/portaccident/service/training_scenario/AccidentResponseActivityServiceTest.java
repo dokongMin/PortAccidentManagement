@@ -48,7 +48,6 @@ public class AccidentResponseActivityServiceTest {
     @Autowired
     AccidentResponseActivityRepository accidentResponseActivityRepository;
 
-
     @Before
     public void 시나리오_등록() {
         ScenarioDto scenarioDto = ScenarioDto.builder()
@@ -130,7 +129,6 @@ public class AccidentResponseActivityServiceTest {
         assertEquals(updateAccidentResponseActivityDto.getManager(), updateScenarioEvaluation.getManager());
         assertEquals(updateAccidentResponseActivityDto.getCompletePlaningTime(), updateScenarioEvaluation.getCompletePlaningTime());
         assertEquals(1, accidentResponseActivityList.size());
-
     }
 
     @Test
@@ -150,6 +148,5 @@ public class AccidentResponseActivityServiceTest {
         //then
         Optional<AccidentResponseActivity> deleteAccidentResponseActivity = accidentResponseActivityRepository.findById(activityId);
         assertFalse(deleteAccidentResponseActivity.isPresent());
-
     }
 }
