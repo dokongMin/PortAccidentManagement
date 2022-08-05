@@ -1,11 +1,13 @@
 package com.port.accident.portaccident.domain.training_scenario.elements;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,5 +43,11 @@ public class AccidentResponseActivity {
         this.manager = manager;
         this.completePlaningTime = completePlaningTime;
         this.scenario = scenario;
+    }
+    @Transactional(readOnly = true)
+    public void update(AccidentResponseActivityDto accidentResponseActivityDto) {
+        this.comment = accidentResponseActivityDto.getComment();
+        this.manager = accidentResponseActivityDto.getManager();
+        this.completePlaningTime = accidentResponseActivityDto.getCompletePlaningTime();
     }
 }

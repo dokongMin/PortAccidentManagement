@@ -64,7 +64,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
         List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
         accidentResponseActivityDtoList.add(accidentResponseActivityDto);
 
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioService.findById(scenarioId).get();
 
         /* create TrainingResult */

@@ -2,12 +2,10 @@ package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentImpact;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
@@ -25,7 +23,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -74,21 +71,11 @@ public class TrainingScenarioServiceTest {
                 .name("컨테이너")
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         //When
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
 
         //Then
         Scenario scenario = scenarioRepository.findById(scenarioId).get();
@@ -103,10 +90,9 @@ public class TrainingScenarioServiceTest {
         assertEquals(accidentPortFacilityDto.getName(), accidentPortFacilityList.get(0).getName());
         assertEquals(accidentPortFacilityDto2.getName(), accidentPortFacilityList.get(1).getName());
 
-        List<AccidentResponseActivity> accidentResponseActivityList = scenario.getAccidentResponseActivityList();
-        assertEquals(1, accidentResponseActivityList.size());
-        assertEquals(scenarioId, accidentResponseActivityList.get(0).getScenario().getId());
-        assertEquals(accidentResponseActivityDto.getManager(), accidentResponseActivityList.get(0).getManager());
+
+        assertEquals(scenarioDto.getAccidentPortFacilityList().get(0).getName(), accidentPortFacilityList.get(0).getName());
+        assertEquals(scenarioDto.getAccidentPortFacilityList().get(1).getName(), accidentPortFacilityList.get(1).getName());
     }
 
     @Test(expected = IllegalStateException.class)
@@ -142,16 +128,17 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         Integer scenarioId = scenarioService.saveScenario(scenarioDto);
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
 
         ScenarioDto updateScenarioDto = ScenarioDto.builder()
-                .id(scenarioId)
-                .name("SY2")
-                .incidentLevel(IncidentLevel.LEVEL_3)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
-                .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
-                .responseStage("2")
+                .id(scenario.getId())
+                .name(scenario.getName())
+                .incidentLevel(IncidentLevel.LEVEL_1)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentType(scenario.getIncidentType())
+                .incidentDetailType(scenario.getIncidentDetailType())
+                .portArea(scenario.getPortArea())
+                .responseStage("3")
                 .build();
 
         //when
@@ -160,10 +147,10 @@ public class TrainingScenarioServiceTest {
         //then
         Scenario updateScenario = scenarioRepository.findById(updateScenarioId).get();
 
-        Assertions.assertEquals(scenarioId, updateScenarioId);
-        Assertions.assertEquals(updateScenarioDto.getName(), updateScenario.getName());
-        Assertions.assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
-        Assertions.assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
+        assertEquals(scenarioId, updateScenarioId);
+        assertEquals(updateScenarioDto.getName(), updateScenario.getName());
+        assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
+        assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
     }
 
     @Test
@@ -181,33 +168,27 @@ public class TrainingScenarioServiceTest {
                 .name("컨테이너")
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioRepository.findById(scenarioId).get();
 
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
                 .name("지게차")
+                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
                 .name("사다리")
+                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
                 .name("컨테이너")
+                .scenario(scenario)
                 .build();
 
         List<AccidentPortFacilityDto> updateAccidentPortFacilityDtoList = new ArrayList<>();
@@ -216,20 +197,21 @@ public class TrainingScenarioServiceTest {
         updateAccidentPortFacilityDtoList.add(updateAccidentPortFacilityDto3);
 
         //when
-        Integer updateScenarioId = scenarioService.modifyAccidentPortFacility(scenario, updateAccidentPortFacilityDtoList);
+        Integer updateScenarioId = scenarioService.updateAccidentPortFacility(updateAccidentPortFacilityDtoList);
 
         //then
         List<AccidentPortFacility> updateAccidentPortFacilityList = scenario.getAccidentPortFacilityList();
 
-        Assertions.assertEquals(updateAccidentPortFacilityDto.getName(), updateAccidentPortFacilityList.get(0).getName());
-        Assertions.assertEquals(updateAccidentPortFacilityDto2.getName(), updateAccidentPortFacilityList.get(1).getName());
-        Assertions.assertEquals(updateAccidentPortFacilityDto3.getName(), updateAccidentPortFacilityList.get(2).getName());
+        assertEquals(updateAccidentPortFacilityDto.getName(), updateAccidentPortFacilityList.get(0).getName());
+        assertEquals(updateAccidentPortFacilityDto2.getName(), updateAccidentPortFacilityList.get(1).getName());
+        assertEquals(updateAccidentPortFacilityDto3.getName(), updateAccidentPortFacilityList.get(2).getName());
 
         assertEquals(3, updateAccidentPortFacilityList.size());
         assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(0).getScenario().getId());
         assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(1).getScenario().getId());
     }
 
+/*
     @Test
     public void 안전사고_대응활동_수정() {
         //given
@@ -245,20 +227,11 @@ public class TrainingScenarioServiceTest {
                 .name("컨테이너")
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioRepository.findById(scenarioId).get();
 
 
@@ -281,6 +254,93 @@ public class TrainingScenarioServiceTest {
         assertEquals(1, updateScenarioAccidentResponseActivityList.size());
         assertEquals(updateScenarioId, updateScenarioAccidentResponseActivityList.get(0).getScenario().getId());
     }
+*/
+
+    @Test
+    @Rollback(value = false)
+    public void 시나리오_안전사고_항만설비_수정() {
+        ScenarioDto scenarioDto = ScenarioDto.builder()
+                .name("SY1")
+                .incidentLevel(IncidentLevel.LEVEL_1)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
+                .portArea("무역항 수상구역")
+                .responseStage("3")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                .name("크레인")
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                .name("컨테이너")
+                .build();
+
+        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
+
+
+        ScenarioDto updateScenarioDto = ScenarioDto.builder()
+                .id(scenario.getId())
+                .name(scenario.getName())
+                .incidentLevel(IncidentLevel.LEVEL_1)
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentType(scenario.getIncidentType())
+                .incidentDetailType(scenario.getIncidentDetailType())
+                .portArea(scenario.getPortArea())
+                .responseStage("3")
+                .build();
+
+        AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                .name("지게차")
+                .scenario(scenario)
+                .build();
+
+        AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                .name("사다리")
+                .scenario(scenario)
+                .build();
+
+        AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
+                .name("컨테이너")
+                .scenario(scenario)
+                .build();
+
+        List<AccidentPortFacilityDto> updateAccidentPortFacilityDtoList = new ArrayList<>();
+        updateAccidentPortFacilityDtoList.add(updateAccidentPortFacilityDto);
+        updateAccidentPortFacilityDtoList.add(updateAccidentPortFacilityDto2);
+        updateAccidentPortFacilityDtoList.add(updateAccidentPortFacilityDto3);
+
+        //when
+        Integer updateScenarioId = scenarioService.modifyScenario(updateScenarioDto, updateAccidentPortFacilityDtoList);
+
+        //then
+        Scenario updateScenario = scenarioRepository.findById(updateScenarioId).get();
+
+        assertEquals(scenarioId, updateScenarioId);
+        assertEquals(updateScenarioDto.getName(), updateScenario.getName());
+        assertEquals(updateScenarioDto.getIncidentImpact(), updateScenario.getIncidentImpact());
+        assertEquals(updateScenarioDto.getIncidentDetailType(), updateScenario.getIncidentDetailType());
+
+        List<AccidentPortFacility> updateAccidentPortFacilityList = scenario.getAccidentPortFacilityList();
+
+        assertEquals(updateAccidentPortFacilityDto.getName(), updateAccidentPortFacilityList.get(0).getName());
+        assertEquals(updateAccidentPortFacilityDto2.getName(), updateAccidentPortFacilityList.get(1).getName());
+        assertEquals(updateAccidentPortFacilityDto3.getName(), updateAccidentPortFacilityList.get(2).getName());
+
+        assertEquals(3, updateAccidentPortFacilityList.size());
+        assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(0).getScenario().getId());
+        assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(1).getScenario().getId());
+
+        assertEquals(updateScenario.getAccidentPortFacilityList().get(0).getName(), updateAccidentPortFacilityList.get(0).getName());
+        assertEquals(updateScenario.getAccidentPortFacilityList().get(1).getName(), updateAccidentPortFacilityList.get(1).getName());
+
+    }
 
     @Test
     public void 시나리오_삭제() {
@@ -299,20 +359,11 @@ public class TrainingScenarioServiceTest {
                 .scenario(scenarioDto.toEntity())
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
 
         //when
         scenarioService.deleteScenario(scenarioId);
@@ -321,8 +372,6 @@ public class TrainingScenarioServiceTest {
         Optional<Scenario> deleteScenario = scenarioRepository.findById(scenarioId);
         assertFalse(deleteScenario.isPresent());
         assertEquals(0, accidentPortFacilityRepository.findByScenarioId(scenarioId).size());
-        assertEquals(0, accidentResponseActivityRepository.findByScenarioId(scenarioId).size());
-
     }
 
     @Test
@@ -341,20 +390,10 @@ public class TrainingScenarioServiceTest {
                     .name("컨테이너" + i)
                     .build();
 
-            AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                    .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                    .manager("홍길동" + i)
-                    .completePlaningTime(LocalDateTime.now())
-                    .build();
-
             List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
             accidentPortFacilityDtoList.add(accidentPortFacilityDto);
             accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-
-            List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-            accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-            scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+            scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         });
 
         ScenarioSearchCondition condition = new ScenarioSearchCondition();
@@ -396,27 +435,11 @@ public class TrainingScenarioServiceTest {
                     .name("컨테이너" + i)
                     .build();
 
-            AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                    .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                    .manager("홍길동" + i)
-                    .completePlaningTime(LocalDateTime.now())
-                    .build();
-
-            AccidentResponseActivityDto accidentResponseActivityDto2 = AccidentResponseActivityDto.builder()
-                    .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                    .manager("홍길동" + i)
-                    .completePlaningTime(LocalDateTime.now())
-                    .build();
-
             List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
             accidentPortFacilityDtoList.add(accidentPortFacilityDto);
             accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-            List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-            accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-            accidentResponseActivityDtoList.add(accidentResponseActivityDto2);
-
-            scenarioService.registerScenario(scenarioDto2, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+            scenarioService.registerScenario(scenarioDto2, accidentPortFacilityDtoList);
 
         });
 

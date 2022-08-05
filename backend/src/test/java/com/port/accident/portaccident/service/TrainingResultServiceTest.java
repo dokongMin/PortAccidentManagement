@@ -66,21 +66,12 @@ public class TrainingResultServiceTest {
                 .name("컨테이너")
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         //When
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioService.findById(scenarioId).get();
 
         /* create TrainingResult */

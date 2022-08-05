@@ -5,7 +5,6 @@ import com.port.accident.portaccident.domain.training_scenario.scenario_evaluati
 import com.port.accident.portaccident.enums.SuitableCheck;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
 import com.port.accident.portaccident.enums.IncidentImpact;
@@ -23,7 +22,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,19 +64,11 @@ public class TrainingScenarioEvaluationServiceTest {
                 .name("컨테이너")
                 .build();
 
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
 
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
     }
 
     @Test
@@ -154,7 +144,7 @@ public class TrainingScenarioEvaluationServiceTest {
                 .build();
 
         //when
-        Integer updateScenarioEvaluationId = scenarioService.updateScenarioEvaluation(updateScenarioEvaluationDto);
+        Integer updateScenarioEvaluationId = scenarioService.modifyScenarioEvaluation(updateScenarioEvaluationDto);
 
         //then
         ScenarioEvaluation updateScenarioEvaluation = scenarioEvaluationRepository.findById(updateScenarioEvaluationId).get();
