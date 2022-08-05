@@ -1,17 +1,20 @@
-package com.port.accident.portaccident.service;
+package com.port.accident.portaccident.service.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentImpact;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
+import com.port.accident.portaccident.service.ScenarioService;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -23,6 +26,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -210,51 +214,6 @@ public class TrainingScenarioServiceTest {
         assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(0).getScenario().getId());
         assertEquals(updateScenarioId, updateAccidentPortFacilityList.get(1).getScenario().getId());
     }
-
-/*
-    @Test
-    public void 안전사고_대응활동_수정() {
-        //given
-        ScenarioDto scenarioDto = ScenarioDto.builder()
-                .name("SY2")
-                .build();
-
-        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
-                .build();
-
-        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
-                .build();
-
-        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
-        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
-        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
-        Scenario scenario = scenarioRepository.findById(scenarioId).get();
-
-
-        AccidentResponseActivityDto updateAccidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("이혜원")
-                .completePlaningTime(LocalDateTime.now())
-                .build();
-
-        List<AccidentResponseActivityDto> updateAccidentResponseActivityDtoList = new ArrayList<>();
-        updateAccidentResponseActivityDtoList.add(updateAccidentResponseActivityDto);
-
-        //when
-        Integer updateScenarioId = scenarioService.modifyAccidentResponseActivity(scenario, updateAccidentResponseActivityDtoList);
-
-        //then
-        List<AccidentResponseActivity> updateScenarioAccidentResponseActivityList = scenario.getAccidentResponseActivityList();
-
-        assertEquals(updateAccidentResponseActivityDto.getManager(), updateAccidentResponseActivityDtoList.get(0).getManager());
-        assertEquals(1, updateScenarioAccidentResponseActivityList.size());
-        assertEquals(updateScenarioId, updateScenarioAccidentResponseActivityList.get(0).getScenario().getId());
-    }
-*/
 
     @Test
     @Rollback(value = false)
@@ -460,4 +419,5 @@ public class TrainingScenarioServiceTest {
         assertTrue("다음 페이지가 있는가?", scenario.hasNext());
         assertEquals("SN1", content.get(0).getName());
     }
+
 }

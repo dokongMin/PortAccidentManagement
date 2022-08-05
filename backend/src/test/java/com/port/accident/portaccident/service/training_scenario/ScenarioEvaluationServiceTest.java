@@ -1,4 +1,4 @@
-package com.port.accident.portaccident.service;
+package com.port.accident.portaccident.service.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
@@ -12,6 +12,7 @@ import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
+import com.port.accident.portaccident.service.ScenarioService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +33,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-public class TrainingScenarioEvaluationServiceTest {
+public class ScenarioEvaluationServiceTest {
 
     @Autowired
     ScenarioService scenarioService;
