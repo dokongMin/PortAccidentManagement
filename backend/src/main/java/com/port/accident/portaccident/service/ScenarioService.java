@@ -10,6 +10,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondit
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
+import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
@@ -35,6 +36,7 @@ public class ScenarioService {
 
     public ScenarioDto toServiceScenarioDto(ScenarioDto scenarioDto) {
         return ScenarioDto.builder()
+                .id(scenarioDto.getId())
                 .name(scenarioDto.getName())
                 .incidentLevel(scenarioDto.getIncidentLevel())
                 .incidentImpact(scenarioDto.getIncidentImpact())
@@ -50,6 +52,7 @@ public class ScenarioService {
 
         for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
+                    .id(accidentPortFacilityDto.getId())
                     .name(accidentPortFacilityDto.getName())
                     .build();
 
@@ -58,26 +61,35 @@ public class ScenarioService {
         return toServiceAccidentPortFacilityDtoList;
     }
 
-    public List<AccidentResponseActivityDto> toServiceAccidentResponseActivityList(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        List<AccidentResponseActivityDto> toServiceAccidentResponseActivityDtoList = new ArrayList<>();
-
-        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
-            AccidentResponseActivityDto activityDto = AccidentResponseActivityDto.builder()
-                    .comment(accidentResponseActivityDto.getComment())
-                    .manager(accidentResponseActivityDto.getManager())
-                    .completePlaningTime(accidentResponseActivityDto.getCompletePlaningTime())
-                    .build();
-
-            toServiceAccidentResponseActivityDtoList.add(activityDto);
-        }
-        return toServiceAccidentResponseActivityDtoList;
+    public AccidentResponseActivityDto toServiceAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        return AccidentResponseActivityDto.builder()
+                .id(accidentResponseActivityDto.getId())
+                .comment(accidentResponseActivityDto.getComment())
+                .manager(accidentResponseActivityDto.getManager())
+                .completePlaningTime(accidentResponseActivityDto.getCompletePlaningTime())
+                .scenario(accidentResponseActivityDto.getScenario())
+                .build();
     }
 
+    public ScenarioEvaluationDto toServiceScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+        return ScenarioEvaluationDto.builder()
+                .id(scenarioEvaluationDto.getId())
+                .name(scenarioEvaluationDto.getName())
+                .developmentStandard1(scenarioEvaluationDto.getDevelopmentStandard1())
+                .developmentStandard2(scenarioEvaluationDto.getDevelopmentStandard2())
+                .possibleStandard1(scenarioEvaluationDto.getPossibleStandard1())
+                .possibleStandard2(scenarioEvaluationDto.getPossibleStandard2())
+                .completeStandard1(scenarioEvaluationDto.getCompleteStandard1())
+                .completeStandard2(scenarioEvaluationDto.getCompleteStandard2())
+                .scenario(scenarioEvaluationDto.getScenario())
+                .build();
+
+    }
 
     public Optional<Scenario> findById(Integer scenarioId) {
         return scenarioRepository.findById(scenarioId);
     }
-    
+
     @Transactional
     public Integer registerScenario(ScenarioDto scenarioDto,
                                     List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
@@ -221,6 +233,11 @@ public class ScenarioService {
     @Transactional
     public void deleteScenarioEvaluation(Integer scenarioEvaluationId) {
         scenarioEvaluationRepository.deleteById(scenarioEvaluationId);
+    }
+
+    @Transactional
+    public Page<ScenarioEvaluation> searchPageScenarioEvaluation(EvaluationSearchCondition condition, Pageable pageable) {
+        return scenarioEvaluationRepository.searchPageScenarioEvaluation(condition, pageable);
     }
 
 }

@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/emergency_contact")
+@RequestMapping("/EmergencyContact")
 public class StaffController {
     private final StaffService staffService;
 
-    @RequestMapping("/staff_registration")
+    @RequestMapping("/EC_registration")
     public String registerStaff(@RequestBody StaffDto staffDto) {
         StaffDto registerStaffDto = staffService.toServiceDto(staffDto);
         staffService.registerStaff(registerStaffDto);
@@ -29,33 +29,11 @@ public class StaffController {
         return "EmergencyContact/EC_registration";
     }
 
-
-/*
-    @RequestMapping("/staff_modify")
-    public String updateStaff(@RequestBody StaffDto staffDto) {
-        StaffDto updateStaffDto = staffService.toServiceDto(staffDto);
-        staffService.updateStaff(updateStaffDto);
-
-        return "EmergencyContact/EC_modify";
-    }
-*/
-
-
-/*
-    @RequestMapping("/staff_delete")
-    public String deleteStaff(@RequestBody StaffDto staffDto) {
-        StaffDto deleteStaffDto = staffService.toServiceDto(staffDto);
-        staffService.deleteStaff(deleteStaffDto.toEntity().getId());
-
-        return "EmergencyContact/EC_delete";
-    }
-*/
-
-    @RequestMapping("/staff_list")
-    public String staffListPage(Model model,
-                                @RequestParam(required = false, defaultValue = "") String name,
-                                @RequestParam(required = false, defaultValue = "") String corporation,
-                                @PageableDefault Pageable pageable) {
+    @RequestMapping("/EC_check")
+    public String checkStaff(Model model,
+                             @RequestParam(required = false, defaultValue = "") String name,
+                             @RequestParam(required = false, defaultValue = "") String corporation,
+                             @PageableDefault Pageable pageable) {
 
         StaffSearchCondition condition = new StaffSearchCondition(name, corporation);
         Page<Staff> staff = staffService.searchPageStaff(condition, pageable);

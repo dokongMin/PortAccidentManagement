@@ -8,17 +8,20 @@ import lombok.*;
 @Getter
 @Setter
 public class AccidentPortFacilityDto {
+    private Integer id;
     private String name;
     private Scenario scenario;
 
     @Builder
-    public AccidentPortFacilityDto(String name, Scenario scenario) {
+    public AccidentPortFacilityDto(Integer id, String name, Scenario scenario) {
+        this.id = id;
         this.name = name;
         this.scenario = scenario;
     }
 
     public AccidentPortFacility toEntity() {
         return AccidentPortFacility.builder()
+                .id(id)
                 .name(name)
                 .scenario(scenario)
                 .build();
