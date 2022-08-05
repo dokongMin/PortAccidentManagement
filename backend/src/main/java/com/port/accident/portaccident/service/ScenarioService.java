@@ -4,24 +4,23 @@ import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
-import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +33,51 @@ public class ScenarioService {
     private final AccidentResponseActivityRepository accidentResponseActivityRepository;
     private final ScenarioEvaluationRepository scenarioEvaluationRepository;
 
+    public ScenarioDto toServiceScenarioDto(ScenarioDto scenarioDto) {
+        return ScenarioDto.builder()
+                .name(scenarioDto.getName())
+                .incidentLevel(scenarioDto.getIncidentLevel())
+                .incidentImpact(scenarioDto.getIncidentImpact())
+                .incidentType(scenarioDto.getIncidentType())
+                .incidentDetailType(scenarioDto.getIncidentDetailType())
+                .portArea(scenarioDto.getPortArea())
+                .responseStage(scenarioDto.getResponseStage())
+                .build();
+    }
+
+    public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
+                    .name(accidentPortFacilityDto.getName())
+                    .build();
+
+            toServiceAccidentPortFacilityDtoList.add(facilityDto);
+        }
+        return toServiceAccidentPortFacilityDtoList;
+    }
+
+    public List<AccidentResponseActivityDto> toServiceAccidentResponseActivityList(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+        List<AccidentResponseActivityDto> toServiceAccidentResponseActivityDtoList = new ArrayList<>();
+
+        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
+            AccidentResponseActivityDto activityDto = AccidentResponseActivityDto.builder()
+                    .comment(accidentResponseActivityDto.getComment())
+                    .manager(accidentResponseActivityDto.getManager())
+                    .completePlaningTime(accidentResponseActivityDto.getCompletePlaningTime())
+                    .build();
+
+            toServiceAccidentResponseActivityDtoList.add(activityDto);
+        }
+        return toServiceAccidentResponseActivityDtoList;
+    }
+
     @Transactional
     public Integer registerScenario(ScenarioDto scenarioDto,
                                     List<AccidentPortFacilityDto> accidentPortFacilityDtoList,
                                     List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
         Integer scenarioId = saveScenario(scenarioDto);
         Scenario scenario = scenarioRepository.findById(scenarioId).get();
-
 
         saveAccidentPortFacility(scenario, accidentPortFacilityDtoList);
         saveAccidentResponseActivity(scenario, accidentResponseActivityDtoList);
@@ -81,17 +118,7 @@ public class ScenarioService {
     @Transactional
     public void saveAccidentResponseActivity(Scenario scenario, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
         for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
-            validateDuplicateAccidentResponseActivity(accidentResponseActivityDto);
             scenario.addAccidentResponseActivity(accidentResponseActivityDto);
-        }
-    }
-
-    private void validateDuplicateAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
-        Optional<AccidentResponseActivity> findAccidentResponseActivity
-                = accidentResponseActivityRepository.findByIncidentLevel(accidentResponseActivityDto.getIncidentLevel());
-
-        if (findAccidentResponseActivity.isPresent()) {
-            throw new IllegalStateException("이미 존재하는 사고 수준입니다.");
         }
     }
 
@@ -136,7 +163,7 @@ public class ScenarioService {
         scenarioRepository.deleteById(scenarioId);
     }
 
-    public Page<ScenarioAccidentResponseActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+    public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
         return scenarioRepository.searchPageScenario(condition, pageable);
     }
 

@@ -34,6 +34,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
+                .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
@@ -50,7 +51,6 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                 .build();
 
         AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
                 .manager("홍길동")
                 .completePlaningTime(LocalDateTime.now())

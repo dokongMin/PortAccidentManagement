@@ -21,10 +21,6 @@ public class AccidentResponseActivity {
     @Column(name = "accident_response_activity_id") // 안전 사고 대응 활동 id
     private Integer id;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "scenario_level") // 사고 수준
-    private IncidentLevel incidentLevel;
-
     @Column(name = "accident_response_activity_comment") // 사고 대응 활동 내용
     private String comment;
 
@@ -39,9 +35,8 @@ public class AccidentResponseActivity {
     private Scenario scenario;
 
     @Builder
-    public AccidentResponseActivity(Integer id, IncidentLevel incidentLevel, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
+    public AccidentResponseActivity(Integer id, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
         this.id = id;
-        this.incidentLevel = incidentLevel;
         this.comment = comment;
         this.manager = manager;
         this.completePlaningTime = completePlaningTime;
