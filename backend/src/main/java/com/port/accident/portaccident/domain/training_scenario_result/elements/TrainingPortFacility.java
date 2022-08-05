@@ -2,7 +2,9 @@ package com.port.accident.portaccident.domain.training_scenario_result.elements;
 
 
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.enums.PortFacility;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,10 +21,18 @@ public class TrainingPortFacility {
     @Column(name = "training_port_facility_id")
     private Integer id;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "training_port_facility_name")
-    private String name;
+    private PortFacility name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;
+
+    @Builder
+    public TrainingPortFacility(Integer id, PortFacility name, TrainingResult trainingResult) {
+        this.id = id;
+        this.name = name;
+        this.trainingResult = trainingResult;
+    }
 }
