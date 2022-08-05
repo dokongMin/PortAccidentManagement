@@ -86,6 +86,20 @@ public class ScenarioService {
 
     }
 
+    public List<AccidentPortFacilityDto> StringToAccidentPortFacilityConverter(List<String> facilityList) {
+        List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
+
+        for (String facility : facilityList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
+                    .name(facility)
+                    .build();
+
+            facilityDtoList.add(facilityDto);
+        }
+
+        return facilityDtoList;
+    }
+
     public Optional<Scenario> findById(Integer scenarioId) {
         return scenarioRepository.findById(scenarioId);
     }

@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.controller;
 
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,8 +30,11 @@ public class TrainingScenarioController {
 
     @RequestMapping("/TS_Register")
     public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestBody List<AccidentPortFacilityDto> facilityDtoList) {
+                                           @RequestParam List<String> facilityList) {
+
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
+
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.StringToAccidentPortFacilityConverter(facilityList);
         List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
 
         scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
