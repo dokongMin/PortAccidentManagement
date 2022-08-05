@@ -1,8 +1,8 @@
 package com.port.accident.portaccident.service;
 
 import com.port.accident.portaccident.domain.staff.Staff;
-import com.port.accident.portaccident.dto.SearchCondition;
 import com.port.accident.portaccident.dto.staff.StaffDto;
+import com.port.accident.portaccident.dto.staff.StaffSearchCondition;
 import com.port.accident.portaccident.repository.staff.StaffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ public class StaffService {
     private final StaffRepository staffRepository;
 
     @Transactional
-    public Integer saveStaff(StaffDto staffDto) {
+    public Integer registerStaff(StaffDto staffDto) {
         validateDuplicateStaff(staffDto); // 중복 비상연락망 검증
 
         return staffRepository.save(staffDto.toEntity()).getId();
@@ -44,12 +44,12 @@ public class StaffService {
     }
 
     @Transactional
-    public void deleteScenario(Integer staffId) {
+    public void deleteStaff(Integer staffId) {
         staffRepository.deleteById(staffId);
     }
 
     @Transactional
-    public Page<Staff> searchPage(SearchCondition condition, Pageable pageable) {
-        return staffRepository.searchPage(condition, pageable);
+    public Page<Staff> searchPageStaff(StaffSearchCondition condition, Pageable pageable) {
+        return staffRepository.searchPageStaff(condition, pageable);
     }
 }

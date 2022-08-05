@@ -2,8 +2,6 @@ package com.port.accident.portaccident.repository.training_scenario_result;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
@@ -19,8 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,10 +35,9 @@ public class TrainingResultRepositoryTest {
         /* create scenario */
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .level("3")
-                .impact("경상")
-                .precedingType("사고")
-                .accidentType("추락")
+                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
                 .responseStage("2")
                 .build();
@@ -58,7 +53,7 @@ public class TrainingResultRepositoryTest {
                 .trainingType(TrainingType.VIRTUAL)
                 .incidentLevel(IncidentLevel.LEVEL_1)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
-                .incidentType(IncidentType.ACCIDNET)
+                .incidentType(IncidentType.INCIDENT)
                 .department("안전관리부서")
                 .trainingArea("훈련대상 항만구역")
                 .scenario(scenario)
@@ -72,7 +67,7 @@ public class TrainingResultRepositoryTest {
                 .trainingType(TrainingType.ACTUAL)
                 .incidentLevel(IncidentLevel.LEVEL_2)
                 .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
-                .incidentType(IncidentType.ACCIDNET)
+                .incidentType(IncidentType.INCIDENT)
                 .department("안전관리부서2")
                 .trainingArea("훈련대상 항만구역")
                 .scenario(scenario)

@@ -5,8 +5,6 @@ import com.port.accident.portaccident.domain.training_scenario_result.elements.T
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
-import com.port.accident.portaccident.dto.code.CodeSearchCondition;
-import com.port.accident.portaccident.dto.code.DetRepJoinDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
@@ -15,7 +13,6 @@ import com.port.accident.portaccident.dto.training_scenario_result.elements.Trai
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.TrainingByDateDto;
 import com.port.accident.portaccident.enums.*;
-import com.port.accident.portaccident.exception.CanNotCreateEntityException;
 import com.port.accident.portaccident.exception.DoesNotExistException;
 import com.port.accident.portaccident.exception.DuplicateTrainingResultNameException;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
@@ -52,7 +49,7 @@ public class TrainingResultService {
         if (trainingResultRepository.findByName(trainingResult.getName()).isPresent()) {
             throw new DuplicateTrainingResultNameException();
         }
-        TrainingResult savedResult = trainingResultRepository.save(trainingResult);
+        TrainingResult savedResult = trainingResultRepository.saveAndFlush(trainingResult);
         return savedResult.getId();
     }
 
@@ -62,7 +59,7 @@ public class TrainingResultService {
     }
 
     public Integer createPortFacility(TrainingPortFacility facility) {
-        TrainingPortFacility savedFacility = facilityRepository.save(facility);
+        TrainingPortFacility savedFacility = facilityRepository.saveAndFlush(facility);
         return savedFacility.getId();
     }
 
@@ -82,8 +79,8 @@ public class TrainingResultService {
     }
 
     public Integer createTrainingParticipants(TrainingParticipants participants) {
-        TrainingParticipants savedParticipants = participantsRepository.save(participants);
-        return savedParticipants.getParticipantsId();
+        TrainingParticipants savedParticipants = participantsRepository.saveAndFlush(participants);
+        return savedParticipants.getId();
     }
 
     public TrainingParticipants findByParticipantId(Integer id) {
@@ -102,17 +99,21 @@ public class TrainingResultService {
         return byId.orElseThrow(() -> new DoesNotExistException());
     }
 
+    @Transactional
     public void createTrainingResultUsingJsonString(Map<String, Object> param) {
         TrainingResultDto trainingResultDto = settingTrainingResultDtoUsingSplit(param);
         Integer result = createTrainingResult(trainingResultDto.toEntity());
         TrainingResult trainingResult = findByTrainingResultId(result);
 
-        createTrainingPortFacilityList(param, trainingResult);
-        createTrainingParticipantsList(param, trainingResult);
+        createTrainingPortFacilityList(param, trainingResult, false);
+        createTrainingParticipantsList(param, trainingResult, false);
     }
 
-    private void createTrainingParticipantsList(Map<String, Object> param, TrainingResult trainingResult) {
+    private void createTrainingParticipantsList(Map<String, Object> param, TrainingResult trainingResult, Boolean isUpdating) {
         String[] split = parsingJsonString(param, "TrainingParticipants", "[", "]");
+        if (isUpdating) {
+            participantsRepository.deleteParticipantsByTrainingResultId(trainingResult.getId());
+        }
         for (String participantsId : split) {
             TrainingParticipantsDto dto = TrainingParticipantsDto.builder()
                     .participantsId(Integer.parseInt(participantsId))
@@ -123,8 +124,11 @@ public class TrainingResultService {
         }
     }
 
-    private void createTrainingPortFacilityList(Map<String, Object> param, TrainingResult trainingResult) {
+    private void createTrainingPortFacilityList(Map<String, Object> param, TrainingResult trainingResult, Boolean isUpdating) {
         String[] split = parsingJsonString(param, "TrainingPortFacilitys", "[", "]");
+        if (isUpdating) {
+            facilityRepository.deleteFacilityByTrainingResultId(trainingResult.getId());
+        }
         for (String facility : split) {
             TrainingPortFacilityDto dto = matchingStringToEnumPortFacility(trainingResult, facility);
             Integer savedFacilityId = createPortFacility(dto.toEntity());
@@ -162,7 +166,10 @@ public class TrainingResultService {
         String[] trainingResultsElements = parsingTrainingResultsJsonString(param);
         for (String trainingResultsElement : trainingResultsElements) {
             String[] split = trainingResultsElement.split("=");
-            if (split[0].equals("name")) {
+            if (split[0].equals("id")) {
+                trainingResultDto.setId(Integer.parseInt(split[1]));
+
+            } else if (split[0].equals("name")) {
                 trainingResultDto.setName(split[1]);
             } else if (split[0].equals("startDate")) {
                 LocalDateTime date = stringToLocalDateTime(split[1]);
@@ -196,7 +203,7 @@ public class TrainingResultService {
 
     private void matchingStringToEnumIncidentType(TrainingResultDto trainingResultDto, String[] split) {
         if (split[1].equals("ACCIDNET"))
-            trainingResultDto.setIncidentType(IncidentType.ACCIDNET);
+            trainingResultDto.setIncidentType(IncidentType.INCIDENT);
         else if (split[1].equals("DISASTER"))
             trainingResultDto.setIncidentType(IncidentType.DISASTER);
     }
@@ -311,9 +318,17 @@ public class TrainingResultService {
         } else if (key.toString().equals("trainingResultId")) {
             TrainingResult trainingResult = findByTrainingResultId((Integer) stringObjectMap.get(key));
             count++;
-            System.out.println("trainingResult : " + trainingResult.getId());
             byDateDto.setTrainingResult(trainingResult);
         }
         return count;
+    }
+
+    public void updateTrainingResultUsingJsonString(Map<String, Object> param) {
+        TrainingResultDto trainingResultDto = settingTrainingResultDtoUsingSplit(param);
+        Integer resultId = createTrainingResult(trainingResultDto.toEntity());
+        TrainingResult trainingResult = findByTrainingResultId(resultId);
+        createTrainingPortFacilityList(param, trainingResult, true);
+        createTrainingParticipantsList(param, trainingResult, true);
+
     }
 }
