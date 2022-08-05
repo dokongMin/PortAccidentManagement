@@ -16,6 +16,4 @@ public interface AccidentResponseActivityRepository extends JpaRepository<Accide
     @Query("select a from AccidentResponseActivity a where a.scenario.id = :scenarioId")
     List<AccidentResponseActivity> findByScenarioId(@Param("scenarioId") Integer scenarioId);
 
-    @Query("select a from AccidentResponseActivity a where a.incidentLevel = :incidentLevel")
-    Optional<AccidentResponseActivity> findByIncidentLevel(@Param("incidentLevel") IncidentLevel incidentLevel);
 }

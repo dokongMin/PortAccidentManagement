@@ -12,15 +12,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class AccidentResponseActivityDto {
-    private IncidentLevel incidentLevel;
     private String comment;
     private String manager;
     private LocalDateTime completePlaningTime;
     private Scenario scenario;
 
     @Builder
-    public AccidentResponseActivityDto(IncidentLevel incidentLevel, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
-        this.incidentLevel = incidentLevel;
+    public AccidentResponseActivityDto(String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
         this.comment = comment;
         this.manager = manager;
         this.completePlaningTime = completePlaningTime;
@@ -29,7 +27,6 @@ public class AccidentResponseActivityDto {
 
     public AccidentResponseActivity toEntity() {
         return AccidentResponseActivity.builder()
-                .incidentLevel(incidentLevel)
                 .comment(comment)
                 .manager(manager)
                 .completePlaningTime(completePlaningTime)
