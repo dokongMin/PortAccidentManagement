@@ -11,6 +11,7 @@ import com.port.accident.portaccident.dto.training_scenario.elements.AccidentRes
 import com.port.accident.portaccident.enums.IncidentImpact;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
+import com.port.accident.portaccident.enums.PortFacility;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
@@ -68,11 +69,11 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .build();
 
         //When
@@ -165,11 +166,11 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .build();
 
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
@@ -181,17 +182,17 @@ public class TrainingScenarioServiceTest {
 
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("지게차")
+                .name(PortFacility.FORKLIFT)
                 .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("사다리")
+                .name(PortFacility.LADDER)
                 .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .scenario(scenario)
                 .build();
 
@@ -229,11 +230,11 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .build();
 
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
@@ -256,17 +257,17 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("지게차")
+                .name(PortFacility.FORKLIFT)
                 .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("사다리")
+                .name(PortFacility.LADDER)
                 .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .scenario(scenario)
                 .build();
 
@@ -309,13 +310,11 @@ public class TrainingScenarioServiceTest {
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
-                .scenario(scenarioDto.toEntity())
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
-                .scenario(scenarioDto.toEntity())
+                .name(PortFacility.CONTAINER)
                 .build();
 
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
@@ -342,11 +341,11 @@ public class TrainingScenarioServiceTest {
                     .build();
 
             AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                    .name("크레인" + i)
+                    .name(PortFacility.CRANE)
                     .build();
 
             AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                    .name("컨테이너" + i)
+                    .name(PortFacility.CONTAINER)
                     .build();
 
             List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
@@ -387,11 +386,11 @@ public class TrainingScenarioServiceTest {
                     .build();
 
             AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                    .name("크레인" + i)
+                    .name(PortFacility.CRANE)
                     .build();
 
             AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                    .name("컨테이너" + i)
+                    .name(PortFacility.CONTAINER)
                     .build();
 
             List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();

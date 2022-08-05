@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.domain.training_scenario.elements;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.enums.PortFacility;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,14 +21,14 @@ public class AccidentPortFacility {
     private Integer id;
 
     @Column(name = "accident_port_facility_name") // 안전 사고 항만 설비명
-    private String name;
+    private PortFacility name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scenario_id") // 훈련 시나리오 id
     private Scenario scenario;
 
     @Builder
-    public AccidentPortFacility(Integer id, String name, Scenario scenario) {
+    public AccidentPortFacility(Integer id, PortFacility name, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.scenario = scenario;

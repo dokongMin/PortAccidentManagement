@@ -2,6 +2,7 @@ package com.port.accident.portaccident.dto.training_scenario.elements;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
+import com.port.accident.portaccident.enums.PortFacility;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -9,11 +10,11 @@ import lombok.*;
 @Setter
 public class AccidentPortFacilityDto {
     private Integer id;
-    private String name;
+    private PortFacility name;
     private Scenario scenario;
 
     @Builder
-    public AccidentPortFacilityDto(Integer id, String name, Scenario scenario) {
+    public AccidentPortFacilityDto(Integer id, PortFacility name, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.scenario = scenario;

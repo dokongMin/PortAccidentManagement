@@ -59,11 +59,11 @@ public class TrainingResultServiceTest {
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .build();
 
         //When
