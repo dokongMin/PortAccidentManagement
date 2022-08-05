@@ -11,6 +11,7 @@ import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPor
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
+import com.port.accident.portaccident.enums.PortFacility;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
@@ -91,7 +92,7 @@ public class ScenarioService {
 
         for (String facility : facilityList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
-                    .name(facility)
+                    .name(PortFacility.valueOf(facility))
                     .build();
 
             facilityDtoList.add(facilityDto);
