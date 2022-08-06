@@ -176,17 +176,14 @@ public class TrainingScenarioServiceTest {
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
                 .name(PortFacility.FORKLIFT)
-                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
                 .name(PortFacility.LADDER)
-                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
                 .name(PortFacility.CONTAINER)
-                .scenario(scenario)
                 .build();
 
         List<AccidentPortFacilityDto> updateAccidentPortFacilityDtoList = new ArrayList<>();
@@ -195,7 +192,7 @@ public class TrainingScenarioServiceTest {
         updateAccidentPortFacilityDtoList.add(updateAccidentPortFacilityDto3);
 
         //when
-        Integer updateScenarioId = scenarioService.updateAccidentPortFacility(updateAccidentPortFacilityDtoList);
+        Integer updateScenarioId = scenarioService.updateAccidentPortFacility(scenarioId, updateAccidentPortFacilityDtoList);
 
         //then
         List<AccidentPortFacility> updateAccidentPortFacilityList = scenario.getAccidentPortFacilityList();
@@ -251,17 +248,14 @@ public class TrainingScenarioServiceTest {
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
                 .name(PortFacility.FORKLIFT)
-                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
                 .name(PortFacility.LADDER)
-                .scenario(scenario)
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto3 = AccidentPortFacilityDto.builder()
                 .name(PortFacility.CONTAINER)
-                .scenario(scenario)
                 .build();
 
         List<AccidentPortFacilityDto> updateAccidentPortFacilityDtoList = new ArrayList<>();
@@ -410,6 +404,10 @@ public class TrainingScenarioServiceTest {
         assertTrue("첫번째 항목인가?", scenario.isFirst());
         assertTrue("다음 페이지가 있는가?", scenario.hasNext());
         assertEquals("SN1", content.get(0).getName());
+    }
+
+    public void 시나리오_상세_조회() {
+
     }
 
 }
