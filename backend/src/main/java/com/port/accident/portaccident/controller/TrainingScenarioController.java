@@ -1,11 +1,10 @@
 package com.port.accident.portaccident.controller;
 
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
+import com.port.accident.portaccident.enums.PortFacility;
 import com.port.accident.portaccident.service.ScenarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,11 +27,11 @@ public class TrainingScenarioController {
 
     @RequestMapping("/TS_Register")
     public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestParam List<String> facilityList) {
+                                           @RequestParam List<PortFacility> facilityList) {
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.StringToAccidentPortFacilityConverter(facilityList);
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(facilityList);
         List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
 
         scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
