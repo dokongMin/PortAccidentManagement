@@ -4,9 +4,7 @@ import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
+import com.port.accident.portaccident.enums.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -22,8 +20,8 @@ public class ScenarioDto {
     private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
     private IncidentType incidentType;
-    private String incidentDetailType;
-    private String portArea;
+    private IncidentDetailType incidentDetailType;
+    private TrainingPlace portArea;
     private String responseStage;
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
@@ -31,7 +29,7 @@ public class ScenarioDto {
 
     @Builder
     public ScenarioDto(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType,
-                       String incidentDetailType, String portArea, String responseStage) {
+                       IncidentDetailType incidentDetailType, TrainingPlace portArea, String responseStage) {
 //                       List<AccidentPortFacility> accidentPortFacilityList,
 //                       List<AccidentResponseActivity> accidentResponseActivityList,
 //                       List<ScenarioEvaluation> scenarioEvaluationList

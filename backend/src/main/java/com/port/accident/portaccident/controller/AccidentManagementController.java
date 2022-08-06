@@ -51,14 +51,15 @@ public class AccidentManagementController {
      */
 
     @GetMapping("/SA_registration")
-    public void registerAccident(){}
+    public void registerAccident() {
+    }
+
     @PostMapping("/SA_registration")
     public void registerAccident(Model model, @RequestParam("accidentType") String accidentType, @RequestParam("damageFacilityInfoList") List<String> damageFacilityInfoList,
-                                @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
-                             @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
+                                 @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
+                                 @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
                                  @RequestParam("accidentManager") String accidentManager, @RequestParam("accidentInspect") String accidentInspect,
-                                 @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate) throws Exception
-    {
+                                 @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate) throws Exception {
         AccidentTypeDto accidentTypeBuild = AccidentTypeDto.builder()
                 .name(accidentType)
                 .build();

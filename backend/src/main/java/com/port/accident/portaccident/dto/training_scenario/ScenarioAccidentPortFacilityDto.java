@@ -2,9 +2,7 @@ package com.port.accident.portaccident.dto.training_scenario;
 
 
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
+import com.port.accident.portaccident.enums.*;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
@@ -17,13 +15,13 @@ public class ScenarioAccidentPortFacilityDto {
     private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
     private IncidentType incidentType;
-    private String incidentDetailType;
-    private String portArea;
+    private IncidentDetailType incidentDetailType;
+    private TrainingPlace portArea;
     private List<AccidentPortFacility> accidentPortFacilityList;
 
     @QueryProjection
     public ScenarioAccidentPortFacilityDto(String name, IncidentLevel incidentLevel, IncidentImpact impact,
-                                           IncidentType incidentType, String incidentDetailType, String portArea) {
+                                           IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea) {
 
         this.name = name;
         this.incidentLevel = incidentLevel;
@@ -31,6 +29,5 @@ public class ScenarioAccidentPortFacilityDto {
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
         this.portArea = portArea;
-
     }
 }
