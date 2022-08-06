@@ -4,6 +4,7 @@ import com.port.accident.portaccident.dto.training_scenario.QScenarioAccidentPor
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.port.accident.portaccident.domain.training_scenario.QScenario.scenario;
+import static com.port.accident.portaccident.domain.training_scenario.elements.QAccidentPortFacility.accidentPortFacility;
 import static com.port.accident.portaccident.domain.training_scenario.elements.QAccidentResponseActivity.accidentResponseActivity;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -28,8 +30,10 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     @Override
     public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+
         List<ScenarioAccidentPortFacilityDto> content = queryFactory
                 .select(new QScenarioAccidentPortFacilityDto(
+                        scenario.id,
                         scenario.name,
                         scenario.incidentLevel,
                         scenario.incidentImpact,

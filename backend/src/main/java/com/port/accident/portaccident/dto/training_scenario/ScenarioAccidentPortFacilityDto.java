@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class ScenarioAccidentPortFacilityDto {
 
+    private Integer id;
     private String name;
     private IncidentLevel incidentLevel;
     private IncidentImpact incidentImpact;
@@ -20,9 +21,9 @@ public class ScenarioAccidentPortFacilityDto {
     private List<AccidentPortFacility> accidentPortFacilityList;
 
     @QueryProjection
-    public ScenarioAccidentPortFacilityDto(String name, IncidentLevel incidentLevel, IncidentImpact impact,
+    public ScenarioAccidentPortFacilityDto(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact impact,
                                            IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea) {
-
+        this.id = id;
         this.name = name;
         this.incidentLevel = incidentLevel;
         this.incidentImpact = impact;

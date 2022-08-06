@@ -142,7 +142,7 @@ public class ScenarioService {
     @Transactional
     public Integer modifyScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
         Integer scenarioId = updateScenario(scenarioDto);
-        updateAccidentPortFacility(accidentPortFacilityDtoList);
+        updateAccidentPortFacility(scenarioId, accidentPortFacilityDtoList);
 
         return scenarioId;
     }
@@ -156,8 +156,8 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer updateAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        Scenario scenario = accidentPortFacilityDtoList.get(0).getScenario();
+    public Integer updateAccidentPortFacility(Integer scenarioId, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
         deleteAccidentPortFacility(scenario);
         saveAccidentPortFacility(scenario, accidentPortFacilityDtoList);
 

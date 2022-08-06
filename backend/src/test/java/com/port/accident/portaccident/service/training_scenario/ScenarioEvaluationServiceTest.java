@@ -132,7 +132,7 @@ public class ScenarioEvaluationServiceTest {
 
         ScenarioEvaluationDto updateScenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .id(scenarioEvaluationId)
-                .name("SY2v1")
+                .name("SY2v2")
                 .developmentStandard1(SuitableCheck.Y)
                 .developmentStandard2(SuitableCheck.Y)
                 .possibleStandard1(SuitableCheck.Y)
