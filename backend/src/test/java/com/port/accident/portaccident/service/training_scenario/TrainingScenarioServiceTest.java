@@ -6,10 +6,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPort
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
-import com.port.accident.portaccident.enums.PortFacility;
+import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
@@ -59,8 +56,8 @@ public class TrainingScenarioServiceTest {
                 .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("2")
                 .build();
 
@@ -123,8 +120,8 @@ public class TrainingScenarioServiceTest {
                 .incidentLevel(IncidentLevel.LEVEL_3)
                 .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("2")
                 .build();
 
@@ -220,8 +217,8 @@ public class TrainingScenarioServiceTest {
                 .incidentLevel(IncidentLevel.LEVEL_1)
                 .incidentImpact(IncidentImpact.SLIGHT)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("3")
                 .build();
 

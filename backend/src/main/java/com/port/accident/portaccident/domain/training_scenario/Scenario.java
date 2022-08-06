@@ -9,9 +9,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
+import com.port.accident.portaccident.enums.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,10 +47,10 @@ public class Scenario {
     private IncidentType incidentType;
 
     @Column(name = "scenario_incident_detail_type") // 사고 유형
-    private String incidentDetailType;
+    private IncidentDetailType incidentDetailType;
 
     @Column(name = "scenario_port_area") // 사고 항만 구역
-    private String portArea;
+    private TrainingPlace portArea;
 
     @Column(name = "scenario_response_stage") // 사고 대응 단계
     private String responseStage;
@@ -71,7 +69,7 @@ public class Scenario {
 
     @Builder
     public Scenario(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
-                    IncidentType incidentType, String incidentDetailType, String portArea, String responseStage,
+                    IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
                     List<ScenarioEvaluation> scenarioEvaluationList) {
