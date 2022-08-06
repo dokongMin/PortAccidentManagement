@@ -2,12 +2,10 @@ package com.port.accident.portaccident.service.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentImpact;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
@@ -17,7 +15,6 @@ import com.port.accident.portaccident.repository.training_scenario.AccidentRespo
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.service.ScenarioService;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +24,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +57,7 @@ public class TrainingScenarioServiceTest {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
                 .incidentLevel(IncidentLevel.LEVEL_3)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
@@ -125,7 +121,7 @@ public class TrainingScenarioServiceTest {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
                 .incidentLevel(IncidentLevel.LEVEL_3)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
@@ -139,7 +135,7 @@ public class TrainingScenarioServiceTest {
                 .id(scenario.getId())
                 .name(scenario.getName())
                 .incidentLevel(IncidentLevel.LEVEL_1)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentImpact(IncidentImpact.SLIGHT)
                 .incidentType(scenario.getIncidentType())
                 .incidentDetailType(scenario.getIncidentDetailType())
                 .portArea(scenario.getPortArea())
@@ -222,7 +218,7 @@ public class TrainingScenarioServiceTest {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY1")
                 .incidentLevel(IncidentLevel.LEVEL_1)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentImpact(IncidentImpact.SLIGHT)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
@@ -249,7 +245,7 @@ public class TrainingScenarioServiceTest {
                 .id(scenario.getId())
                 .name(scenario.getName())
                 .incidentLevel(IncidentLevel.LEVEL_1)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                .incidentImpact(IncidentImpact.SLIGHT)
                 .incidentType(scenario.getIncidentType())
                 .incidentDetailType(scenario.getIncidentDetailType())
                 .portArea(scenario.getPortArea())

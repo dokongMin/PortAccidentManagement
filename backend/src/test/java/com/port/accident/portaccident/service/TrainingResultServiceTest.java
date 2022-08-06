@@ -8,7 +8,6 @@ import com.port.accident.portaccident.domain.training_scenario_result.evaluation
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
@@ -51,7 +50,7 @@ public class TrainingResultServiceTest {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
                 .incidentLevel(IncidentLevel.LEVEL_3)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType("추락")
                 .portArea("무역항 수상구역")
@@ -83,7 +82,7 @@ public class TrainingResultServiceTest {
                 .place(TrainingPlace.PLACE1)
                 .trainingType(TrainingType.ACTUAL)
                 .incidentLevel(IncidentLevel.LEVEL_1)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
                 .department("안전관리부서")
                 .trainingArea("훈련대상 항만구역")
