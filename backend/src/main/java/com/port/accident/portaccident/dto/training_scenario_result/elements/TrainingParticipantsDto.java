@@ -9,17 +9,20 @@ import lombok.*;
 @Getter
 @Setter
 public class TrainingParticipantsDto {
+    private Integer id;
     private Integer participantsId;
     private TrainingResult trainingResult;
 
     @Builder
-    public TrainingParticipantsDto(Integer participantsId, TrainingResult trainingResult) {
+    public TrainingParticipantsDto(Integer id, Integer participantsId, TrainingResult trainingResult) {
+        this.id = id;
         this.participantsId = participantsId;
         this.trainingResult = trainingResult;
     }
 
     public TrainingParticipants toEntity() {
         return TrainingParticipants.builder()
+                .id(id)
                 .participantsId(participantsId)
                 .trainingResult(trainingResult)
                 .build();

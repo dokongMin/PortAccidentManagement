@@ -203,6 +203,10 @@ public class TrainingResultServiceTest {
         assertEquals(java.util.OptionalInt.of(details.getScore()), OptionalInt.of(5));
         assertEquals(details.getTrainingByDate().getId(), resultByDateId);
 
+    }
+
+    @Test
+    public void updateTrainingResultServiceTest() {
 
     }
 
