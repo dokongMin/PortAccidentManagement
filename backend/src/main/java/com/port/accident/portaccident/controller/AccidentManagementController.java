@@ -15,6 +15,10 @@ import com.port.accident.portaccident.service.accident_management_service.Accide
 import com.port.accident.portaccident.service.accident_management_service.CausesSafetyAccidentService;
 import com.port.accident.portaccident.service.accident_management_service.DamageFacilityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +42,6 @@ public class AccidentManagementController {
     private final CausesSafetyAccidentService causesSafetyAccidentService;
 
     private final DamageFacilityService damageFacilityService;
-    /**
-     * 안전사고 정보 리스트 조회
-     */
-//    @GetMapping
-//    public void getAccidentInfoList(){
-//
-//    }
 
     /**
      * 안전사고 등록
@@ -96,6 +93,21 @@ public class AccidentManagementController {
             causesSafetyAccidentService.saveCausesSafetyAccidentInfo(causesBuild);
         }
 //        return "redirect:";
+    }
+
+    /**
+     * 안전사고 정보 리스트 조회 페이징 & 검색
+     */
+    @GetMapping("/SA_check")
+    public String getAccidentInfoList(Model model, @PageableDefault(size = 2) Pageable pageable,
+                                      @RequestParam(required = false, defaultValue = "") String searchText){
+        Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
+        int startPage = Math.max(1, accidents.getPageable().getPageNumber() - 1);
+        int endPage = Math.min(accidents.getTotalPages(), accidents.getPageable().getPageNumber() + 3);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("accidents", accidents);
+        return "SafetyAccident/SA_check";
     }
 
     /**
