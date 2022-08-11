@@ -2,7 +2,7 @@ class PortHeader extends HTMLElement{
     connectedCallback(){
         this.innerHTML ='<header>\n' +
             '    <div class="inner">\n' +
-            '      <a href="MainPage.html" class="logo">\n' +
+            '      <a href="/" class="logo">\n' +
             '        <img src="/img/favicon.png" alt="PSA">\n' +
             '      </a>\n' +
             '      <div class="sub-menu1">\n' +
