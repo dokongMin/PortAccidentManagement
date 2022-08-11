@@ -8,7 +8,6 @@ import com.port.accident.portaccident.domain.training_scenario_result.evaluation
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
@@ -50,26 +49,20 @@ public class TrainingResultServiceTest {
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
-                .build();
-
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .incidentLevel(IncidentLevel.LEVEL_3)
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
+                .name(PortFacility.CONTAINER)
                 .build();
 
         //When
@@ -77,10 +70,7 @@ public class TrainingResultServiceTest {
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioService.findById(scenarioId).get();
 
         /* create TrainingResult */
@@ -92,7 +82,7 @@ public class TrainingResultServiceTest {
                 .place(TrainingPlace.PLACE1)
                 .trainingType(TrainingType.ACTUAL)
                 .incidentLevel(IncidentLevel.LEVEL_1)
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
                 .department("안전관리부서")
                 .trainingArea("훈련대상 항만구역")

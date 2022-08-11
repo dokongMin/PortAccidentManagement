@@ -19,6 +19,17 @@ public class StaffService {
 
     private final StaffRepository staffRepository;
 
+    public StaffDto toServiceDto(StaffDto staffDto) {
+        return StaffDto.builder()
+                .name(staffDto.getName())
+                .corporation(staffDto.getCorporation())
+                .group(staffDto.getGroup())
+                .position(staffDto.getPosition())
+                .email(staffDto.getEmail())
+                .phoneNumber(staffDto.getPhoneNumber())
+                .build();
+    }
+
     @Transactional
     public Integer registerStaff(StaffDto staffDto) {
         validateDuplicateStaff(staffDto); // 중복 비상연락망 검증

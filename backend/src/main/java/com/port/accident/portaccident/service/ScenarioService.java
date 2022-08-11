@@ -4,24 +4,25 @@ import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentResponseActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
+import com.port.accident.portaccident.enums.PortFacility;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,16 +35,83 @@ public class ScenarioService {
     private final AccidentResponseActivityRepository accidentResponseActivityRepository;
     private final ScenarioEvaluationRepository scenarioEvaluationRepository;
 
+    public ScenarioDto toServiceScenarioDto(ScenarioDto scenarioDto) {
+        return ScenarioDto.builder()
+                .id(scenarioDto.getId())
+                .name(scenarioDto.getName())
+                .incidentLevel(scenarioDto.getIncidentLevel())
+                .incidentImpact(scenarioDto.getIncidentImpact())
+                .incidentType(scenarioDto.getIncidentType())
+                .incidentDetailType(scenarioDto.getIncidentDetailType())
+                .portArea(scenarioDto.getPortArea())
+                .responseStage(scenarioDto.getResponseStage())
+                .build();
+    }
+
+    public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
+
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
+                    .id(accidentPortFacilityDto.getId())
+                    .name(accidentPortFacilityDto.getName())
+                    .build();
+
+            toServiceAccidentPortFacilityDtoList.add(facilityDto);
+        }
+        return toServiceAccidentPortFacilityDtoList;
+    }
+
+    public AccidentResponseActivityDto toServiceAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        return AccidentResponseActivityDto.builder()
+                .id(accidentResponseActivityDto.getId())
+                .comment(accidentResponseActivityDto.getComment())
+                .manager(accidentResponseActivityDto.getManager())
+                .completePlaningTime(accidentResponseActivityDto.getCompletePlaningTime())
+                .scenario(accidentResponseActivityDto.getScenario())
+                .build();
+    }
+
+    public ScenarioEvaluationDto toServiceScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+        return ScenarioEvaluationDto.builder()
+                .id(scenarioEvaluationDto.getId())
+                .name(scenarioEvaluationDto.getName())
+                .developmentStandard1(scenarioEvaluationDto.getDevelopmentStandard1())
+                .developmentStandard2(scenarioEvaluationDto.getDevelopmentStandard2())
+                .possibleStandard1(scenarioEvaluationDto.getPossibleStandard1())
+                .possibleStandard2(scenarioEvaluationDto.getPossibleStandard2())
+                .completeStandard1(scenarioEvaluationDto.getCompleteStandard1())
+                .completeStandard2(scenarioEvaluationDto.getCompleteStandard2())
+                .scenario(scenarioEvaluationDto.getScenario())
+                .build();
+
+    }
+
+    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<PortFacility> facilityList) {
+        List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
+
+        for (PortFacility facility : facilityList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
+                    .name(facility)
+                    .build();
+
+            facilityDtoList.add(facilityDto);
+        }
+
+        return facilityDtoList;
+    }
+
+    public Optional<Scenario> findById(Integer scenarioId) {
+        return scenarioRepository.findById(scenarioId);
+    }
+
     @Transactional
     public Integer registerScenario(ScenarioDto scenarioDto,
-                                    List<AccidentPortFacilityDto> accidentPortFacilityDtoList,
-                                    List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+                                    List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
         Integer scenarioId = saveScenario(scenarioDto);
         Scenario scenario = scenarioRepository.findById(scenarioId).get();
 
-
         saveAccidentPortFacility(scenario, accidentPortFacilityDtoList);
-        saveAccidentResponseActivity(scenario, accidentResponseActivityDtoList);
 
         return scenarioId;
     }
@@ -63,22 +131,20 @@ public class ScenarioService {
         }
     }
 
-    public List<Scenario> findScenarios() {
-        return scenarioRepository.findAll();
-    }
-
-    public Optional<Scenario> findById(Integer scenarioId) {
-        return scenarioRepository.findById(scenarioId);
-    }
-
     @Transactional
     public void saveAccidentPortFacility(Scenario scenario, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        scenario.addAccidentPortFacility(accidentPortFacilityDtoList);
+        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
+            scenario.addAccidentPortFacility(accidentPortFacilityDto);
+        }
     }
 
+
     @Transactional
-    public void saveAccidentResponseActivity(Scenario scenario, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        scenario.addAccidentResponseActivity(accidentResponseActivityDtoList);
+    public Integer modifyScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        Integer scenarioId = updateScenario(scenarioDto);
+        updateAccidentPortFacility(scenarioId, accidentPortFacilityDtoList);
+
+        return scenarioId;
     }
 
     @Transactional
@@ -90,7 +156,8 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer modifyAccidentPortFacility(Scenario scenario, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+    public Integer updateAccidentPortFacility(Integer scenarioId, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
         deleteAccidentPortFacility(scenario);
         saveAccidentPortFacility(scenario, accidentPortFacilityDtoList);
 
@@ -104,31 +171,49 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer modifyAccidentResponseActivity(Scenario scenario, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        deleteAccidentResponseActivity(scenario);
-        saveAccidentResponseActivity(scenario, accidentResponseActivityDtoList);
-
-        return scenario.getId();
-    }
-
-    @Transactional
-    public void deleteAccidentResponseActivity(Scenario scenario) {
-        List<AccidentResponseActivity> accidentResponseActivityList = accidentResponseActivityRepository.findByScenarioId(scenario.getId());
-        scenario.removeAccidentResponseActivity(accidentResponseActivityList);
-    }
-
-    @Transactional
     public void deleteScenario(Integer scenarioId) {
         scenarioRepository.deleteById(scenarioId);
     }
 
-    public Page<ScenarioAccidentResponseActivityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+    public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
         return scenarioRepository.searchPageScenario(condition, pageable);
     }
 
+
     /*
-    * 시나리오 평가
-    * */
+     * 사고 대응 활동
+     * */
+
+    @Transactional
+    public Integer registerAccidentResponseActivity(String scenarioName, AccidentResponseActivityDto accidentResponseActivityDto) {
+        Scenario scenario = scenarioRepository.findByName(scenarioName).get();
+        scenario.addAccidentResponseActivity(accidentResponseActivityDto);
+
+        return saveAccidentResponseActivity(accidentResponseActivityDto);
+    }
+
+    @Transactional
+    public Integer saveAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        return accidentResponseActivityRepository.save(accidentResponseActivityDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public Integer modifyAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        AccidentResponseActivity accidentResponseActivity = accidentResponseActivityRepository.findById(accidentResponseActivityDto.getId()).get();
+        accidentResponseActivity.update(accidentResponseActivityDto);
+
+        return saveAccidentResponseActivity(accidentResponseActivityDto);
+    }
+
+    @Transactional
+    public void deleteAccidentResponseActivity(Integer activityId) {
+        accidentResponseActivityRepository.deleteById(activityId);
+    }
+
+
+    /*
+     * 시나리오 평가
+     * */
 
     public Integer registerScenarioEvaluation(String scenarioName, ScenarioEvaluationDto scenarioEvaluationDto) {
         Scenario scenario = scenarioRepository.findByName(scenarioName).get();
@@ -153,7 +238,7 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer updateScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+    public Integer modifyScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
         ScenarioEvaluation scenarioEvaluation = scenarioEvaluationRepository.findById(scenarioEvaluationDto.getId()).get();
         scenarioEvaluation.update(scenarioEvaluationDto);
 
@@ -163,6 +248,11 @@ public class ScenarioService {
     @Transactional
     public void deleteScenarioEvaluation(Integer scenarioEvaluationId) {
         scenarioEvaluationRepository.deleteById(scenarioEvaluationId);
+    }
+
+    @Transactional
+    public Page<ScenarioEvaluation> searchPageScenarioEvaluation(EvaluationSearchCondition condition, Pageable pageable) {
+        return scenarioEvaluationRepository.searchPageScenarioEvaluation(condition, pageable);
     }
 
 }

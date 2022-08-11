@@ -1,11 +1,13 @@
 package com.port.accident.portaccident.domain.training_scenario.elements;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,10 +23,6 @@ public class AccidentResponseActivity {
     @Column(name = "accident_response_activity_id") // 안전 사고 대응 활동 id
     private Integer id;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "scenario_level") // 사고 수준
-    private IncidentLevel incidentLevel;
-
     @Column(name = "accident_response_activity_comment") // 사고 대응 활동 내용
     private String comment;
 
@@ -39,12 +37,17 @@ public class AccidentResponseActivity {
     private Scenario scenario;
 
     @Builder
-    public AccidentResponseActivity(Integer id, IncidentLevel incidentLevel, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
+    public AccidentResponseActivity(Integer id, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
         this.id = id;
-        this.incidentLevel = incidentLevel;
         this.comment = comment;
         this.manager = manager;
         this.completePlaningTime = completePlaningTime;
         this.scenario = scenario;
+    }
+    @Transactional(readOnly = true)
+    public void update(AccidentResponseActivityDto accidentResponseActivityDto) {
+        this.comment = accidentResponseActivityDto.getComment();
+        this.manager = accidentResponseActivityDto.getManager();
+        this.completePlaningTime = accidentResponseActivityDto.getCompletePlaningTime();
     }
 }
