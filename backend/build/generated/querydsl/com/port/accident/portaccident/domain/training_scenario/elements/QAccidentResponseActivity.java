@@ -28,8 +28,6 @@ public class QAccidentResponseActivity extends EntityPathBase<AccidentResponseAc
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final EnumPath<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel = createEnum("incidentLevel", com.port.accident.portaccident.enums.IncidentLevel.class);
-
     public final StringPath manager = createString("manager");
 
     public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;

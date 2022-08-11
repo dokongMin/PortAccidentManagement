@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poor+Story&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poor+Story&display=swap");
 
 /*COMMON*/
-body{
-  color:#333;
+body {
+  color: #333;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
 a {
@@ -14,48 +14,50 @@ a {
 }
 
 .inner {
-  width: 1100px; 
-  margin:  0 auto; 
+  width: 1100px;
+  margin: 0 auto;
   position: relative;
 }
 
 /*HEADER*/
 header {
-width:100%;
-background-color: #2264bb;
-border-bottom: 1px solid #c8c8c8;
-position: relative; top:0;
-z-index: 9;
+  width: 100%;
+  background-color: #2264bb;
+  border-bottom: 1px solid #c8c8c8;
+  position: relative;
+  top: 0;
+  z-index: 9;
 }
 
-header >.inner {
-height: 120px;
+header > .inner {
+  height: 120px;
 }
 
 header .logo {
-position: relative; 
-top:-5px; 
-bottom: 0; 
-left:-40px;
-max-height: 100px;
+  position: relative;
+  top: -5px;
+  bottom: 0;
+  left: -40px;
+  max-height: 100px;
 }
 
 .logo img {
-  display: block; 
-  max-height: 100px; 
-  position: absolute; 
-  top:20px;
+  display: block;
+  max-height: 100px;
+  position: absolute;
+  top: 20px;
 }
 
 header .sub-menu1 {
-  position: absolute; 
-  top:10px; 
+  position: absolute;
+  top: 10px;
   right: 0;
-  display: flex;}
+  display: flex;
+}
 
 header .sub-menu1 ul.menu {
-  font-family:Arial, sans-serif;
-  display: flex; 
+  font-family: Arial, sans-serif;
+  display: flex;
 }
 
 header .sub-menu1 ul.menu li {
@@ -63,30 +65,30 @@ header .sub-menu1 ul.menu li {
 }
 
 header .sub-menu1 ul.menu li::before {
-  content: ""; 
+  content: "";
   display: block;
-  width:1px; 
-  height: 12px; 
+  width: 1px;
+  height: 12px;
   background-color: #e5e5e5;
   position: absolute;
-  top:0; 
-  bottom: 0; 
+  top: 0;
+  bottom: 0;
   margin: auto 0;
 }
 
-header .sub-menu1 ul.menu li:first-child::before{
-display: none;
+header .sub-menu1 ul.menu li:first-child::before {
+  display: none;
 }
 
-header .sub-menu1 ul.menu li a{
+header .sub-menu1 ul.menu li a {
   font-size: 12px;
-  padding: 11px 16px; 
+  padding: 11px 16px;
   display: block;
   color: white;
 }
 
-header .sub-menu1 ul.menu li a:hover{
-  color: #d3d3d3; 
+header .sub-menu1 ul.menu li a:hover {
+  color: #d3d3d3;
   font-weight: 700;
 }
 
@@ -97,11 +99,12 @@ nav {
   position: relative;
 }
 .main {
-  position: absolute; 
-  left: 150px; 
-  top:61px;
+  position: absolute;
+  left: 150px;
+  top: 61px;
 }
-#main-menu ul, li {
+#main-menu ul,
+li {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -114,41 +117,58 @@ nav {
 
 #main-menu > li > a {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.85);
+  color: rgba(255, 255, 255, 0.85);
   text-align: center;
   text-decoration: none;
   letter-spacing: 0.05em;
   display: block;
   font-weight: 700;
   padding: 10px 25px;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 #main-menu > li > a:hover {
   color: #d3d3d3;
 }
 .line {
-  height: 2px; background-color: gray; opacity: 0.7; width: 105.87px;
+  height: 2px;
+  background-color: gray;
+  opacity: 0.7;
+  width: 105.87px;
 }
 .line2 {
-  height: 2px; background-color: gray; width: 110.35px; opacity: 0.7;
+  height: 2px;
+  background-color: gray;
+  width: 110.35px;
+  opacity: 0.7;
 }
 .line35 {
-  height: 2px; background-color: gray; width: 164.21px; opacity: 0.7;
+  height: 2px;
+  background-color: gray;
+  width: 164.21px;
+  opacity: 0.7;
 }
 .line4 {
-  height: 2px; background-color: gray; width: 168.7px; opacity: 0.7;
+  height: 2px;
+  background-color: gray;
+  width: 168.7px;
+  opacity: 0.7;
 }
 .line6 {
-  height: 2px; background-color: gray; width: 119.32px; opacity: 0.7;
+  height: 2px;
+  background-color: gray;
+  width: 119.32px;
+  opacity: 0.7;
 }
 .line7 {
-  height: 2px; background-color: gray; width: 81.92px; opacity: 0.7;
+  height: 2px;
+  background-color: gray;
+  width: 81.92px;
+  opacity: 0.7;
 }
 
 #sub-menu {
   position: absolute;
-  top:60.08px;
+  top: 60.08px;
   background: white;
   opacity: 0;
   visibility: hidden;
@@ -158,14 +178,14 @@ nav {
 #sub-menu > li {
   padding: 7px 0px 7px 0px;
   width: 100%;
-  margin: 0 auto; text-align: center;
+  margin: 0 auto;
+  text-align: center;
 }
 
-#sub-menu > li >  a {
+#sub-menu > li > a {
   color: #2264bb;
   text-decoration: none;
   font-size: 12px;
-  
 }
 
 #main-menu > li:hover #sub-menu {
@@ -173,65 +193,79 @@ nav {
   visibility: visible;
 }
 
-#sub-menu > li >  a:hover {
- font-weight: 700;
+#sub-menu > li > a:hover {
+  font-weight: 700;
 }
 
 /*training-scenarios-inquiry*/
-.training-scenarios-inquiry{
+.training-scenarios-inquiry {
   position: relative;
   width: 1000px;
   height: auto;
   margin: 0 auto;
-  text-align:center;
-  font-family: 'Gowun Dodum', sans-serif;
+  text-align: center;
+  font-family: "Gowun Dodum", sans-serif;
   border: 1px solid #f2eeee;
 }
-.fonts,option, select, input{
+.fonts,
+option,
+select,
+input {
   font-weight: 600;
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: "Gowun Dodum", sans-serif;
 }
 
-
-.inquiry-title{
+.inquiry-title {
   margin: 50px auto;
   font-size: large;
   font-weight: bold;
   font-weight: 600;
   border: 0.5px solid #f2eeee;
-  background-color: #f2eeee
+  background-color: #f2eeee;
 }
 
-.inquiry-line-1{
+.inquiry-line-1 {
   margin-bottom: 10px;
 }
 
-table,thead,tbody,tfoot,th,td{
+table,
+thead,
+tbody,
+tfoot,
+th,
+td {
   border: 0.5px solid rgb(100, 96, 96);
 }
 
-thead{
-  background-color: rgb(226,226,226);
+thead {
+  background-color: rgb(226, 226, 226);
 }
 
-table{
+table {
   width: 95%;
   margin-left: 2.5%;
   margin-right: 2.5%;
 }
+tbody tr {
+  transition: 0.2s;
+}
+tbody tr:hover {
+  cursor: pointer;
+  background-color: skyblue;
+  color: white;
+}
 
-
-.inquiry-button{
+.inquiry-button {
   text-align: right;
   padding: 10px 25px;
 }
 
-.regist-button{
+.regist-button {
   text-align: right;
   padding: 30px;
 }
 
-.imsi-button{
+.imsi-button {
   color: #fff;
   border: 1px solid #157bb1;
   background-color: #157bb1;
@@ -242,69 +276,66 @@ table{
   padding: 3px;
 }
 
-.imsi-button:hover{
+.imsi-button:hover {
   border: 1px solid #093db6;
   background-color: #093db6;
 }
 
-
 /*footer*/
-footer{
-background-color: #272727; 
-border-top: 1px solid #333;
+footer {
+  background-color: #272727;
+  border-top: 1px solid #333;
 }
-footer .inner{
-padding: 40px 0 40px 0;
+footer .inner {
+  padding: 40px 0 40px 0;
 }
-footer .inner p.title{
+footer .inner p.title {
   color: #d3d3d3;
-  text-align: center; 
+  text-align: center;
 }
-footer .menu{
-display: flex; 
-justify-content: center;
+footer .menu {
+  display: flex;
+  justify-content: center;
 }
-footer .menu li{
+footer .menu li {
   position: relative;
 }
-footer .menu li::before{
+footer .menu li::before {
   content: "";
-  width: 3px; 
-  height: 3px; 
+  width: 3px;
+  height: 3px;
   background-color: #555;
   position: absolute;
   top: 0;
   bottom: 0;
-  margin: auto; 
+  margin: auto;
   right: -1px;
 }
-footer .menu li:last-child::before{
-display: none;
+footer .menu li:last-child::before {
+  display: none;
 }
-footer .menu li p{
-  color: #d3d3d3; 
-  font-size: 12px; 
-  font-weight: 700; 
+footer .menu li p {
+  color: #d3d3d3;
+  font-size: 12px;
+  font-weight: 700;
   padding: 15px;
   display: block;
 }
-footer .info{
-  margin-top: 0px; 
+footer .info {
+  margin-top: 0px;
   text-align: center;
 }
-footer .info span{
-margin-right: 20px; 
-color: #d3d3d3;
-font-size: 12px;
+footer .info span {
+  margin-right: 20px;
+  color: #d3d3d3;
+  font-size: 12px;
 }
-footer .info span:last-child{
+footer .info span:last-child {
   margin-right: 0;
-  }
-footer .copyright{
-  color: #d3d3d3; 
-  font-size: 12px; 
-  text-align: center; 
+}
+footer .copyright {
+  color: #d3d3d3;
+  font-size: 12px;
+  text-align: center;
   margin-top: 15px;
 }
-
-

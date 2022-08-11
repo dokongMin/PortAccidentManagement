@@ -26,15 +26,17 @@ public class QScenario extends EntityPathBase<Scenario> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final StringPath incidentDetailType = createString("incidentDetailType");
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentDetailType> incidentDetailType = createEnum("incidentDetailType", com.port.accident.portaccident.enums.IncidentDetailType.class);
 
     public final EnumPath<com.port.accident.portaccident.enums.IncidentImpact> incidentImpact = createEnum("incidentImpact", com.port.accident.portaccident.enums.IncidentImpact.class);
+
+    public final EnumPath<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel = createEnum("incidentLevel", com.port.accident.portaccident.enums.IncidentLevel.class);
 
     public final EnumPath<com.port.accident.portaccident.enums.IncidentType> incidentType = createEnum("incidentType", com.port.accident.portaccident.enums.IncidentType.class);
 
     public final StringPath name = createString("name");
 
-    public final StringPath portArea = createString("portArea");
+    public final EnumPath<com.port.accident.portaccident.enums.TrainingPlace> portArea = createEnum("portArea", com.port.accident.portaccident.enums.TrainingPlace.class);
 
     public final StringPath responseStage = createString("responseStage");
 

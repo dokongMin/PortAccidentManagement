@@ -247,6 +247,24 @@ table {
   margin-right: 2.5%;
 }
 
+tbody tr {
+  transition: 0.2s;
+}
+tbody tr:hover {
+  cursor: pointer;
+  background-color: skyblue;
+  color: white;
+}
+
+tfoot tr {
+  transition: 0.2s;
+}
+tfoot tr:hover {
+  cursor: pointer;
+  background-color: skyblue;
+  color: white;
+}
+
 .inquiry-button {
   text-align: right;
   padding: 10px 25px;
