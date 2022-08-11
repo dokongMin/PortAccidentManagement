@@ -95,7 +95,7 @@ public class AccidentManagementController {
                     .build();
             causesSafetyAccidentService.saveCausesSafetyAccidentInfo(causesBuild);
         }
-        return "/SafetyAccident/SA_check";
+        return "redirect:/SafetyAccident/SA_check";
     }
 
     /**
