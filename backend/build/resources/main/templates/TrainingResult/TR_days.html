@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSA관리시스템</title>
 
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/static/css/TrainingResult/TR_days.css">
+  <link rel="stylesheet" href="/css/TrainingResult/TR_days.css">
  
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
@@ -22,99 +22,15 @@
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <!-- JQuery Number Plugin -->
-<script src="/static/js/jquery.number.min.js"></script>
+<script src="/js/jquery.number.min.js"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
   <!-- HEADER -->
-  <header>
-    <div class="inner">
-      <a href="javascript:void(0)" class="logo">
-        <img src="/static/img/favicon.png" alt="PSA">
-      </a>
-      <div class="sub-menu1">
-        <ul class="menu">
-          <li>
-            <a href="javascript:void(0)">로그인</a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">회원가입</a>
-          </li>
-        </ul>
-      </div>
-      <nav role="navigation">
-        <div class="main">
-        <ul id="main-menu">
-          <li><a href="#">공통코드<br>관리</a>           
-            <ul id="sub-menu">
-              <div class="line"></div>
-              <li><a href="#" aria-label="submenu">대표코드 조회</a></li>
-              <li><a href="#" aria-label="submenu">상세코드 조회</a></li>
-              <li><a href="#" aria-label="submenu">공통코드 등록</a></li>
-              <li><a href="#" aria-label="submenu">공통코드 수정</a></li>
-              <li><a href="#" aria-label="submenu">공통코드 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고<br>정보 관리</a>
-            <ul id="sub-menu">
-              <div class="line2"></div>
-              <li><a href="#" aria-label="submenu">안전사고 정보 조회</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보 등록</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보 수정</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보<br>사용 중지</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>시나리오 관리</a>
-            <ul id="sub-menu">
-              <div class="line35"></div>
-              <li><a href="/TrainingScenarios/TS_check/index.html" aria-label="submenu">대응훈련 시나리오 조회</a></li>
-              <li><a href="/TrainingScenarios/TS_registration/index.html" aria-label="submenu">대응훈련 시나리오 등록</a></li>
-              <li><a href="/TrainingScenarios/TS_modify/index.html" aria-label="submenu">대응훈련 시나리오 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 <br>사용 중지</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>시나리오 평가 관리</a>
-            <ul id="sub-menu">
-              <div class="line4"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>결과 관리</a>
-            <ul id="sub-menu">
-              <div class="line35"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 일자별<br>수행 결과 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">비상연락망<br>관리</a>
-            <ul id="sub-menu">
-              <div class="line6"></div>
-              <li><a href="#" aria-label="submenu">비상연락망 조회</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 등록</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 수정</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">help<br>&nbsp;</a>
-            <ul id="sub-menu">
-              <div class="line7"></div>
-              <li><a href="#" aria-label="submenu">항만 안전사고 현황</a></li>
-              <li><a href="#" aria-label="submenu">FAQ</a></li>
-              <li><a href="#" aria-label="submenu">자료실</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      </nav>
-  </header>
-
+  <script type="module" src="/js/header.js"></script>
+  <port-header></port-header>
 <!--training-results-date-->
 
 <div class="training-results-date">
@@ -125,14 +41,8 @@
 
   <div class="inquiry-line-1">
     <p> 
-      <span class="fonts">시나리오명</span>&nbsp; <select>
-        <option>SY2</option>
-        <option>SV1</option>
-        <option>SR3</option>
-        <option>SR1</option>
-        <option>SV2</option>
-      </select>
-      &nbsp;  &nbsp;  &nbsp;
+      <span class="fonts"> 시나리오명&nbsp; </span><input type="text" placeholder="SY2">
+        &nbsp;  &nbsp;  &nbsp;
 
       <span class="fonts">훈련명</span>&nbsp; <select>
         <option>추락예방훈련</option>
@@ -151,6 +61,36 @@
     </p>
   </div>
 
+  <!--
+  <div class="inquiry-line-2">
+    <p> 
+      <span class="fonts">유형</span>&nbsp; 
+      <select onChange="change(this.options[this.selectedIndex].value)">
+        <option value="type1">사고</option>
+        <option value="type2">재난</option>
+      </select>
+      &nbsp;  &nbsp;  &nbsp;
+
+      <span class="fonts">레벨</span>&nbsp; 
+      <select onChange="change1(this.options[this.selectedIndex].value)">
+        <option value="level1">Level 1</option>
+        <option value="level2">Level 2</option>
+        <option value="level3">Level 3</option>
+      </select>
+      &nbsp;  &nbsp;  &nbsp;
+
+      <span class="fonts">수행 일자</span>&nbsp; 
+      <select onChange="change2(this.options[this.selectedIndex].value)">
+        <option value="day1">1일차</option>
+        <option value="day2">2일차</option>
+        <option value="day3">3일차</option>
+      </select>
+      &nbsp;  &nbsp;  &nbsp;
+    </p>
+  </div>
+-->
+
+  
   <div class="inquiry-line-3">
     <div class="inquiry-line-3.a">
 <label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)" />사고 - 레벨1 - 1일차</label>
@@ -185,7 +125,7 @@
   </div>
 
 
-  <div class="inquiry-line-2">
+  <div class="inquiry-line-3">
     <p class="fonts">평가 상세 항목</p>
   </div><br>
 
@@ -381,7 +321,7 @@
     </table>
   </div>
 
-  <div id="form_4" style="display: none;">
+  <div id="view4" style="display: none;">
     <table>
       <thead>
         <tr>
@@ -445,7 +385,7 @@
     </table>
   </div>
 
-  <div id="form_5" style="display: none;">
+  <div id="view5" style="display: none;">
     <table>
       <thead>
         <tr>
@@ -509,7 +449,7 @@
     </table>
   </div>
 
-  <div id="form_6" style="display: none;">
+  <div id="view6" style="display: none;">
     <table>
       <thead>
         <tr>
@@ -573,7 +513,7 @@
     </table>
   </div>
 
-  <div id="form_7" style="display: none;">
+  <div id="view7" style="display: none;">
     <table>
       <thead>
         <tr>
@@ -1153,9 +1093,25 @@
   </div>
 
 
+<!--modal-->
+
+<div id="modal" class="modal-overlay">
+  <div class="modal-window">
+      <div class="title">
+          <i class="fa-solid fa-triangle-exclamation fa-2xl"></i>
+      </div>
+      <div class="close-area">X</div>
+      <div class="content">
+          <p>점수가 20점 이하이므로 불합격입니다.</p>
+          <p>해당 훈련을 다시 시행해주세요.</p>
+          
+      </div>
+  </div>
+</div>
+
   <div class="regist-button">
-    <a href="/SafetyAccident/SA_registration/SA_registration.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-    <a href="/SafetyAccident/SA_modify/SA_modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+    <a href="#"><span class="imsi-button" id="btn-modal">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+    <a href="/TrainingResult/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
   </div>
 </div>
 
@@ -1178,5 +1134,5 @@
     </div>
   </footer>
 </body>
-<script src="/static/js/TrainingResult/TR_days.js"> </script>
+<script src="/js/TrainingResult/TR_days.js"> </script>
 </html>

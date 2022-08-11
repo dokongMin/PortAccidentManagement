@@ -13,6 +13,134 @@ function ChangeValue() {
   }
 }
 
+// function change(style) {
+//   if (style == "type1") {
+//     view1.style.display = "inline";
+//     view2.style.display = "inline";
+//     view3.style.display = "inline";
+//     view4.style.display = "inline";
+//     view5.style.display = "inline";
+//     view6.style.display = "inline";
+//     view7.style.display = "inline";
+//     view8.style.display = "none";
+//     view10.style.display = "none";
+//     view11.style.display = "none";
+//     view12.style.display = "none";
+//     view13.style.display = "none";
+//     view14.style.display = "none";
+//   } else if (style == "type2") {
+//     view1.style.display = "none";
+//     view2.style.display = "none";
+//     view3.style.display = "none";
+//     view4.style.display = "none";
+//     view5.style.display = "none";
+//     view6.style.display = "none";
+//     view7.style.display = "none";
+//     view8.style.display = "inline";
+//     view10.style.display = "inline";
+//     view11.style.display = "inline";
+//     view12.style.display = "inline";
+//     view13.style.display = "inline";
+//     view14.style.display = "inline";
+//   }
+// }
+
+// function change1(style1) {
+//   if (style1 == "level1") {
+//     view1.style.display = "inline";
+//     view2.style.display = "inline";
+//     view3.style.display = "none";
+//     view4.style.display = "none";
+//     view5.style.display = "none";
+//     view6.style.display = "none";
+//     view7.style.display = "none";
+//     view8.style.display = "inline";
+//     view10.style.display = "none";
+//     view11.style.display = "none";
+//     view12.style.display = "none";
+//     view13.style.display = "none";
+//     view14.style.display = "none";
+//   }
+//   if (style1 == "level2") {
+//     view1.style.display = "none";
+//     view2.style.display = "none";
+//     view3.style.display = "inline";
+//     view4.style.display = "inline";
+//     view5.style.display = "none";
+//     view6.style.display = "none";
+//     view7.style.display = "none";
+//     view8.style.display = "none";
+//     view10.style.display = "inline";
+//     view11.style.display = "inline";
+//     view12.style.display = "none";
+//     view13.style.display = "none";
+//     view14.style.display = "none";
+//   }
+//   if (style1 == "level3") {
+//     view1.style.display = "none";
+//     view2.style.display = "none";
+//     view3.style.display = "none";
+//     view4.style.display = "none";
+//     view5.style.display = "inline";
+//     view6.style.display = "inline";
+//     view7.style.display = "inline";
+//     view8.style.display = "none";
+//     view10.style.display = "none";
+//     view11.style.display = "none";
+//     view12.style.display = "inline";
+//     view13.style.display = "inline";
+//     view14.style.display = "inline";
+//   }
+// }
+
+// function change2(style2) {
+//   if (style2 == "day1") {
+//     view1.style.display = "inline";
+//     view2.style.display = "none";
+//     view3.style.display = "inline";
+//     view4.style.display = "none";
+//     view5.style.display = "inline";
+//     view6.style.display = "none";
+//     view7.style.display = "none";
+//     view8.style.display = "inline";
+//     view10.style.display = "inline";
+//     view11.style.display = "none";
+//     view12.style.display = "inline";
+//     view13.style.display = "none";
+//     view14.style.display = "none";
+//   }
+//   if (style2 == "day2") {
+//     view1.style.display = "none";
+//     view2.style.display = "inline";
+//     view3.style.display = "none";
+//     view4.style.display = "inline";
+//     view5.style.display = "none";
+//     view6.style.display = "inline";
+//     view7.style.display = "none";
+//     view8.style.display = "none";
+//     view10.style.display = "none";
+//     view11.style.display = "inline";
+//     view12.style.display = "none";
+//     view13.style.display = "inline";
+//     view14.style.display = "none";
+//   }
+//   if (style2 == "day3") {
+//     view1.style.display = "none";
+//     view2.style.display = "none";
+//     view3.style.display = "none";
+//     view4.style.display = "none";
+//     view5.style.display = "none";
+//     view6.style.display = "none";
+//     view7.style.display = "inline";
+//     view8.style.display = "none";
+//     view10.style.display = "none";
+//     view11.style.display = "none";
+//     view12.style.display = "none";
+//     view13.style.display = "none";
+//     view14.style.display = "inline";
+//   }
+// }
+
 function chooseForm(radioName) {
   var radios = document.getElementsByName(radioName);
   for (var i = 0, length = radios.length; i < length; i++) {
@@ -138,3 +266,38 @@ function autoCal14() {
   });
   $('input[name="totalScore"]').val(total);
 }
+
+//modal
+
+const modal = document.getElementById("modal");
+
+function modalOn() {
+  modal.style.display = "flex";
+}
+function isModalOn() {
+  return modal.style.display === "flex";
+}
+function modalOff() {
+  modal.style.display = "none";
+}
+const btnModal = document.getElementById("btn-modal");
+
+btnModal.addEventListener("click", (e) => {
+  modalOn();
+});
+const closeBtn = modal.querySelector(".close-area");
+
+closeBtn.addEventListener("click", (e) => {
+  modalOff();
+});
+modal.addEventListener("click", (e) => {
+  const evTarget = e.target;
+  if (evTarget.classList.contains("modal-overlay")) {
+    modalOff();
+  }
+});
+window.addEventListener("keyup", (e) => {
+  if (isModalOn() && e.key === "Escape") {
+    modalOff();
+  }
+});

@@ -24,7 +24,7 @@ public class QAccidentPortFacility extends EntityPathBase<AccidentPortFacility> 
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final StringPath name = createString("name");
+    public final EnumPath<com.port.accident.portaccident.enums.PortFacility> name = createEnum("name", com.port.accident.portaccident.enums.PortFacility.class);
 
     public final com.port.accident.portaccident.domain.training_scenario.QScenario scenario;
 

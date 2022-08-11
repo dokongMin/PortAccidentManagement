@@ -52,7 +52,7 @@ public class AccidentManagementController {
     }
 
     @PostMapping("/SA_registration")
-    public void registerAccident(Model model, @RequestParam("accidentType") String accidentType, @RequestParam("damageFacilityInfoList") List<String> damageFacilityInfoList,
+    public String registerAccident(Model model, @RequestParam("accidentType") String accidentType, @RequestParam("damageFacilityInfoList") List<String> damageFacilityInfoList,
                                  @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
                                  @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
                                  @RequestParam("accidentManager") String accidentManager, @RequestParam("accidentInspect") String accidentInspect,
@@ -95,7 +95,7 @@ public class AccidentManagementController {
                     .build();
             causesSafetyAccidentService.saveCausesSafetyAccidentInfo(causesBuild);
         }
-//        return "redirect:";
+        return "/SafetyAccident/SA_check";
     }
 
     /**
@@ -110,7 +110,7 @@ public class AccidentManagementController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("accidents", accidents);
-        return "SafetyAccident/SA_check";
+        return "/SafetyAccident/SA_check";
     }
 
     /**
