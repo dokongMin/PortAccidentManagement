@@ -2,10 +2,13 @@ package com.port.accident.portaccident.domain.accident_management.type;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "accident_type")
 @Entity
@@ -21,7 +24,15 @@ public class AccidentType {
     @Column(name = "accident_type_name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accident_info_id")
-    private AccidentInfo accidentInfo;
+    @Enumerated(EnumType.STRING)
+    private AccidentTypeEnum accidentTypeEnum;
+    @OneToMany(mappedBy = "accidentType")
+    private List<AccidentInfo> accidentInfoList = new ArrayList<>();
+
+    @Builder
+    public AccidentType(Integer id, String name, List<AccidentInfo> accidentInfoList) {
+        this.id = id;
+        this.name = name;
+        this.accidentInfoList = accidentInfoList;
+    }
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSA관리시스템</title>
+
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/css/commoncode/dcregister.css">
+
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+
+
+</head>
+<body>
+  <!-- HEADER -->
+  <script type="module" src="/js/header.js"></script>
+  <port-header></port-header>
+  <!-- Detailed code management -->
+  <div class="Detailed-code-management">
+
+    <div class="Detailed-code-title">
+      <p>상세코드 등록</p>
+    </div>
+    <div class="Detailed-code-line">
+      <p> 
+        <span class="fonts">
+          대표코드
+          <select>
+            <option>AT01</option>
+            <option>BT01</option>
+            <option>CT01</option>
+            <option>DT01</option>
+            <option>ET01</option>
+            <option>FT01</option>
+            <option>GT01</option>
+            <option>HT01</option>
+          </select>
+        </span>
+        <span style="width: 100px; display: inline-block;"></span>      
+        <span class="fonts">
+          대표코드명
+          <input type="text" placeholder="" style="width: 150px;" disabled>
+          <br><br><br>
+          <p class="Alignment">상세코드번호</p>
+          <br><br>
+          <input type="text" placeholder="등록할 상세코드번호 입력" style="width: 250px;">
+          <br><br><br>
+          <p class="Alignment">상세코드명</p>
+          <br><br>
+          <input type="text" placeholder="등록할 상세코드명 입력" style="width: 250px;">
+          <br><br><br>
+          <p class="Alignment">상세설명</p>
+          <br><br>
+          <textarea cols="40" rows="5" name="info" placeholder="상세코드에 대한 설명 입력"></textarea>
+        </span>
+        <br>  
+      </p>
+    </div>
+    <br>
+  <div class="regist-button">
+    <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+    <a href="/CommonCode/DC_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+  </div>
+</div>
+  <!-- footer -->
+  <footer>
+    <div class="inner">
+      <p class="title">DEVELOPED BY TEAM</p>
+      <ul class="menu">
+        <li><p>스마트 해상물류 프로젝트</p></li>
+        <li><p>항만 안전사고 대응 관리 시스템</p></li>
+      </ul>
+      <div class="info">
+        <span>MENTOR: 김인수</span>
+        <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+        <span>FRONTEND TEAM: 송영주 주현정</span>
+      </div>
+      <p class="copyright">
+        <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

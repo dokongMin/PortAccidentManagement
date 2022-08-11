@@ -1,7 +1,10 @@
+/*
 package com.port.accident.portaccident.domain.training_scenario.scenario_evaluation;
 
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,16 +20,33 @@ public class ScenarioEvaluationStandard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "scenario_evaluation_standard_id")
+    @Column(name = "scenario_evaluation_standard_id") // 시나리오 평가 기준 id
     private Integer id;
 
-    @Column(name = "scenario_evaluation_standard_name")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "scenario_evaluation_standard_name")// 시나리오 평가 기준
+    private EvaluationStandard evaluationStandard;
 
-    @OneToMany(mappedBy = "scenario_evaluation_standard")
-    private List<ScenarioEvaluationDetailsStandard> scenarioEvaluationDetailsStandardList = new ArrayList<>();
+    @Column(name = "scenario_evaluation_details_standard_name") // 시나리오 평가 상세기준
+    private String evaluationDetailsStandard;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "suitable_check") // 상세기준별 적합 여부
+    private SuitableCheck suitableCheck;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "scenario_evaluation_id")
+    @JoinColumn(name = "scenario_evaluation_id") // 시나리오 평가 id
     private ScenarioEvaluation scenarioEvaluation;
+
+
+    @Builder
+    public ScenarioEvaluationStandard(Integer id, EvaluationStandard evaluationStandard, String evaluationDetailsStandard,
+                                      SuitableCheck suitableCheck, ScenarioEvaluation scenarioEvaluation) {
+        this.id = id;
+        this.evaluationStandard = evaluationStandard;
+        this.evaluationDetailsStandard = evaluationDetailsStandard;
+        this.suitableCheck = suitableCheck;
+        this.scenarioEvaluation = scenarioEvaluation;
+    }
 }
+*/
