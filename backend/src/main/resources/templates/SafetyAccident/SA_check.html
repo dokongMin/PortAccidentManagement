@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,17 +26,30 @@
 <!-- HEADER -->
 <header>
     <div class="inner">
-        <a href="javascript:void(0)" class="logo">
-            <img src="/static/img/favicon.png" alt="PSA">
-        </a>
-        <div class="sub-menu1">
-            <ul class="menu">
-                <li>
-                    <a href="javascript:void(0)">로그인</a>
-                </li>
-                <li>
-                    <a href="javascript:void(0)">회원가입</a>
-                </li>
+      <a href="/backend/src/main/resources/templates/MainPage.html" class="logo">
+        <img src="/backend/src/main/resources/static/img/favicon.png" alt="PSA">
+      </a>
+      <div class="sub-menu1">
+        <ul class="menu">
+          <li>
+            <a href="javascript:void(0)">로그인</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">회원가입</a>
+          </li>
+        </ul>
+      </div>
+      <nav role="navigation">
+        <div class="main">
+        <ul id="main-menu">
+          <li><a href="#">공통코드<br>관리</a>           
+            <ul id="sub-menu">
+              <div class="line"></div>
+              <li><a href="#" aria-label="submenu">대표코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">상세코드 조회</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 등록</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 수정</a></li>
+              <li><a href="#" aria-label="submenu">공통코드 삭제</a></li>
             </ul>
         </div>
         <nav role="navigation">
