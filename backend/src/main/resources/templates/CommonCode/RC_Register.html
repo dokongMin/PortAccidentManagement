@@ -111,22 +111,26 @@
     <div class="Representative-code-title">
       <p>대표코드 등록</p>
     </div>
-
+    <form action="/Code/representativeCode_register" method="get">
     <div class="Representative-code-line">
       <p>        
         <span class="fonts">
           <p class="pstyle">대표코드번호</p><br><br>
-          <input type="text" placeholder="등록할 대표코드번호 입력" style="width: 250px; height: 25px;" required><br><br><br>
+          <input type="text" placeholder="등록할 대표코드번호 입력" style="width: 250px; height: 25px;" required name="code"><br><br><br>
           <p class="pstyle">대표코드명</p><br><br>
-          <input type="text" placeholder="등록할 대표코드명 입력" style="width: 250px; height: 25px;" required><br><br><br>
+          <input type="text" placeholder="등록할 대표코드명 입력" style="width: 250px; height: 25px;" required name="name"><br><br><br>
         </span>  
       </p>
-    </div>
+    </div> 
 
-    <div class="regist-button">
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-      <a href="/backend/src/main/resources/templates/CommonCode/RC_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+    <div class="regist-button" style="display: flex; justify-content: end;">
+      <input type="submit" class="imsi-button" style="font-weight: 400;" value="&nbsp;&nbsp;등록&nbsp;&nbsp;">
+    </form>&nbsp;&nbsp;
+    <form action="/backend/src/main/resources/templates/CommonCode/RC_Check.html">
+      <input type="submit" class="imsi-button" style="font-weight: 400;" value="&nbsp;&nbsp;취소&nbsp;&nbsp;">
     </div>
+    </form>
+  
   </div>
 
   <!-- footer -->
@@ -148,4 +152,5 @@
     </div>
   </footer>
 </body>
+<script src="/backend/src/main/resources/static/js/CommonCode/rcregister.js"> </script>
 </html>
