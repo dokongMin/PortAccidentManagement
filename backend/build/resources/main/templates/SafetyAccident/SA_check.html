@@ -164,7 +164,7 @@
     </div>
     <form method="GET" th:action="@{SA_check}">
     <div class="inquiry-button">
-        <input type="text" id="searchText" name="searchText">
+        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">
         <a href="#"><button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button></a>
     </div>
     </form>

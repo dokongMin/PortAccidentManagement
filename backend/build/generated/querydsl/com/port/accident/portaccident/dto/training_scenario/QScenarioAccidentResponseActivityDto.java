@@ -13,8 +13,8 @@ public class QScenarioAccidentResponseActivityDto extends ConstructorExpression<
 
     private static final long serialVersionUID = -1122042167L;
 
-    public QScenarioAccidentResponseActivityDto(com.querydsl.core.types.Expression<String> name, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentImpact> impact, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentType> incidentType, com.querydsl.core.types.Expression<String> incidentDetailType, com.querydsl.core.types.Expression<String> comment, com.querydsl.core.types.Expression<String> manager) {
-        super(ScenarioAccidentResponseActivityDto.class, new Class<?>[]{String.class, com.port.accident.portaccident.enums.IncidentLevel.class, com.port.accident.portaccident.enums.IncidentImpact.class, com.port.accident.portaccident.enums.IncidentType.class, String.class, String.class, String.class}, name, incidentLevel, impact, incidentType, incidentDetailType, comment, manager);
+    public QScenarioAccidentResponseActivityDto(com.querydsl.core.types.Expression<String> name, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentImpact> impact, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentType> incidentType, com.querydsl.core.types.Expression<String> incidentDetailType, com.querydsl.core.types.Expression<com.port.accident.portaccident.enums.IncidentLevel> incidentLevel, com.querydsl.core.types.Expression<String> comment, com.querydsl.core.types.Expression<String> manager) {
+        super(ScenarioAccidentResponseActivityDto.class, new Class<?>[]{String.class, com.port.accident.portaccident.enums.IncidentImpact.class, com.port.accident.portaccident.enums.IncidentType.class, String.class, com.port.accident.portaccident.enums.IncidentLevel.class, String.class, String.class}, name, impact, incidentType, incidentDetailType, incidentLevel, comment, manager);
     }
 
 }

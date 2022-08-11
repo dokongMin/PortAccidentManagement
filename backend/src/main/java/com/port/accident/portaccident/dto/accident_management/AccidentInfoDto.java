@@ -29,6 +29,7 @@ public class AccidentInfoDto {
     private String accidentManager;
     private String victim;
 
+    private String incidentType;
     private AccidentType accidentType;
 
     private DisasterType disasterType;
@@ -39,7 +40,7 @@ public class AccidentInfoDto {
 
     @Builder
     public AccidentInfoDto(LocalDate accidentDate, String accidentArea, String accidentLevel, String accidentImpact, String accidentInspect,
-                           String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
+                           String accidentManager, String victim,String incidentType, AccidentType accidentType, DisasterType disasterType,
                            List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.accidentDate = accidentDate;
         this.accidentArea = accidentArea;
@@ -48,6 +49,7 @@ public class AccidentInfoDto {
         this.accidentInspect = accidentInspect;
         this.accidentManager = accidentManager;
         this.victim = victim;
+        this.incidentType = incidentType;
         this.accidentType = accidentType;
         this.disasterType = disasterType;
         this.causesSafetyAccidentInfoList = causesSafetyAccidentInfoList;
@@ -64,6 +66,7 @@ public class AccidentInfoDto {
                 .accidentInspect(accidentInspect)
                 .accidentManager(accidentManager)
                 .victim(victim)
+                .incidentType(incidentType)
                 .accidentType(accidentType)
                 .disasterType(disasterType)
                 .causesSafetyAccidentInfoList(causesSafetyAccidentInfoList)
