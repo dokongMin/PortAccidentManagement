@@ -48,6 +48,9 @@ public class AccidentInfo {
     @Column(name = "victim")
     private String victim;
 
+    @Column(name = "accident_incident_type")
+    private String incidentType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accident_type_id")
     private AccidentType accidentType;
@@ -64,7 +67,7 @@ public class AccidentInfo {
 
     @Builder
     public AccidentInfo(Integer id, LocalDate accidentDate, String accidentArea, String accidentLevel, String accidentImpact,
-                        String accidentInspect, String accidentManager, String victim, AccidentType accidentType, DisasterType disasterType,
+                        String accidentInspect, String accidentManager, String victim, String incidentType, AccidentType accidentType, DisasterType disasterType,
                         List<CausesSafetyAccidentInfo> causesSafetyAccidentInfoList, List<DamageFacilityInfo> damageFacilityInfoList) {
         this.id = id;
         this.accidentDate = accidentDate;
@@ -74,6 +77,7 @@ public class AccidentInfo {
         this.accidentInspect = accidentInspect;
         this.accidentManager = accidentManager;
         this.victim = victim;
+        this.incidentType = incidentType;
         this.accidentType = accidentType;
         this.disasterType = disasterType;
         this.causesSafetyAccidentInfoList = causesSafetyAccidentInfoList;
@@ -98,6 +102,7 @@ public class AccidentInfo {
         this.accidentInspect = dto.getAccidentInspect();
         this.accidentManager = dto.getAccidentManager();
         this.victim = dto.getVictim();
+        this.incidentType = dto.getIncidentType();
         this.accidentType = dto.getAccidentType();
         this.disasterType = dto.getDisasterType();
         this.causesSafetyAccidentInfoList = dto.getCausesSafetyAccidentInfoList();

@@ -54,7 +54,8 @@ public class AccidentManagementController {
                                 @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
                              @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
                                  @RequestParam("accidentManager") String accidentManager, @RequestParam("accidentInspect") String accidentInspect,
-                                 @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate) throws Exception
+                                 @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate,
+                                 @RequestParam("incidentType") String incidentType) throws Exception
     {
         AccidentTypeDto accidentTypeBuild = AccidentTypeDto.builder()
                 .name(accidentType)
@@ -71,6 +72,7 @@ public class AccidentManagementController {
                 .accidentInspect(accidentInspect)
                 .accidentManager(accidentManager)
                 .victim(victim)
+                .incidentType(incidentType)
                 .accidentType(accidentTypeDto)
                 .build();
         Integer accidentInfoId = accidentManagementService.saveAccidentInfo(dto);
