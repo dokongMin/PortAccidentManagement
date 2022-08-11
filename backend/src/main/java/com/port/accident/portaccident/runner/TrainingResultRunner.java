@@ -41,23 +41,23 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
         //Given
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
+                .name(PortFacility.CONTAINER)
                 .build();
 
         AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .incidentLevel(IncidentLevel.LEVEL_3)
                 .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
                 .manager("홍길동")
                 .completePlaningTime(LocalDateTime.now())
@@ -71,7 +71,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
         List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
         accidentResponseActivityDtoList.add(accidentResponseActivityDto);
 
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
         Scenario scenario = scenarioService.findById(scenarioId).get();
 
         /* create TrainingResult */
@@ -86,7 +86,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .place(TrainingPlace.PLACE1)
                         .trainingType(TrainingType.ACTUAL)
                         .incidentLevel(IncidentLevel.LEVEL_1)
-                        .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                        .incidentImpact(IncidentImpact.DAMAGE)
                         .incidentType(IncidentType.INCIDENT)
                         .incidentDetailType("추락")
                         .department("안전관리부서A")
@@ -101,7 +101,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .place(TrainingPlace.PLACE2)
                         .trainingType(TrainingType.ACTUAL)
                         .incidentLevel(IncidentLevel.LEVEL_2)
-                        .incidentImpact(IncidentImpact.INCIDENT_IMPACT_B)
+                        .incidentImpact(IncidentImpact.SLIGHT)
                         .incidentType(IncidentType.DISASTER)
                         .incidentDetailType("끼임")
                         .department("안전관리부서B")
@@ -116,7 +116,7 @@ public class TrainingResultRunner implements org.springframework.boot.Applicatio
                         .place(TrainingPlace.PLACE3)
                         .trainingType(TrainingType.VIRTUAL)
                         .incidentLevel(IncidentLevel.LEVEL_3)
-                        .incidentImpact(IncidentImpact.INCIDENT_IMPACT_C)
+                        .incidentImpact(IncidentImpact.SERIOUS)
                         .incidentType(IncidentType.INCIDENT)
                         .incidentDetailType("넘어짐")
                         .department("안전관리부서C")

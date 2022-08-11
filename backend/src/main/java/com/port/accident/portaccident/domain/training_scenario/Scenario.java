@@ -9,9 +9,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
+import com.port.accident.portaccident.enums.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,6 +35,10 @@ public class Scenario {
     private String name;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "scenario_level") // 사고 수준
+    private IncidentLevel incidentLevel;
+
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_impact") // 사고 영향
     private IncidentImpact incidentImpact;
 
@@ -45,10 +47,10 @@ public class Scenario {
     private IncidentType incidentType;
 
     @Column(name = "scenario_incident_detail_type") // 사고 유형
-    private String incidentDetailType;
+    private IncidentDetailType incidentDetailType;
 
     @Column(name = "scenario_port_area") // 사고 항만 구역
-    private String portArea;
+    private TrainingPlace portArea;
 
     @Column(name = "scenario_response_stage") // 사고 대응 단계
     private String responseStage;
@@ -56,7 +58,7 @@ public class Scenario {
     @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 항만 설비
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 대응 활동
+    @OneToMany(mappedBy = "scenario") // 안전 사고 대응 활동
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
 
     @OneToMany(mappedBy = "scenario") // 시나리오 평가
@@ -66,13 +68,14 @@ public class Scenario {
     private List<TrainingResult> trainingResultArrayList = new ArrayList<>();
 
     @Builder
-    public Scenario(Integer id, String name, IncidentImpact incidentImpact,
-                    IncidentType incidentType, String incidentDetailType, String portArea, String responseStage,
+    public Scenario(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
+                    IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea, String responseStage,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
                     List<ScenarioEvaluation> scenarioEvaluationList) {
         this.id = id;
         this.name = name;
+        this.incidentLevel = incidentLevel;
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
@@ -84,19 +87,15 @@ public class Scenario {
     }
 
     @Transactional(readOnly = true)
-    public void addAccidentPortFacility(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
-        for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
-            accidentPortFacilityDto.setScenario(this);
-            this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
-        }
+    public void addAccidentPortFacility(AccidentPortFacilityDto accidentPortFacilityDto) {
+        accidentPortFacilityDto.setScenario(this);
+        this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
     }
 
     @Transactional(readOnly = true)
-    public void addAccidentResponseActivity(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
-            accidentResponseActivityDto.setScenario(this);
-            this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
-        }
+    public void addAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+        accidentResponseActivityDto.setScenario(this);
+        this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
     }
 
     @Transactional(readOnly = true)
@@ -126,6 +125,7 @@ public class Scenario {
 
     @Transactional(readOnly = true)
     public void update(ScenarioDto scenarioDto) {
+        this.incidentLevel = scenarioDto.getIncidentLevel();
         this.incidentImpact = scenarioDto.getIncidentImpact();
         this.incidentType = scenarioDto.getIncidentType();
         this.incidentDetailType = scenarioDto.getIncidentDetailType();

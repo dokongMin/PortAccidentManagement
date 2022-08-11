@@ -1,18 +1,15 @@
-package com.port.accident.portaccident.service;
+package com.port.accident.portaccident.service.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.enums.SuitableCheck;
+import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
-import com.port.accident.portaccident.enums.IncidentImpact;
-import com.port.accident.portaccident.enums.IncidentLevel;
-import com.port.accident.portaccident.enums.IncidentType;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioEvaluationRepository;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
+import com.port.accident.portaccident.service.ScenarioService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +20,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +30,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-public class TrainingScenarioEvaluationServiceTest {
+public class ScenarioEvaluationServiceTest {
 
     @Autowired
     ScenarioService scenarioService;
@@ -50,35 +46,27 @@ public class TrainingScenarioEvaluationServiceTest {
     public void 시나리오_등록() {
         ScenarioDto scenarioDto = ScenarioDto.builder()
                 .name("SY2")
-                .incidentImpact(IncidentImpact.INCIDENT_IMPACT_A)
+                .incidentLevel(IncidentLevel.LEVEL_3)
+                .incidentImpact(IncidentImpact.DAMAGE)
                 .incidentType(IncidentType.INCIDENT)
-                .incidentDetailType("추락")
-                .portArea("무역항 수상구역")
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
                 .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-                .name("크레인")
+                .name(PortFacility.CRANE)
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-                .name("컨테이너")
-                .build();
-
-        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-                .incidentLevel(IncidentLevel.LEVEL_3)
-                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-                .manager("홍길동")
-                .completePlaningTime(LocalDateTime.now())
+                .name(PortFacility.CONTAINER)
                 .build();
 
         List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
 
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList, accidentResponseActivityDtoList);
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
     }
 
     @Test
@@ -144,7 +132,7 @@ public class TrainingScenarioEvaluationServiceTest {
 
         ScenarioEvaluationDto updateScenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .id(scenarioEvaluationId)
-                .name("SY2v1")
+                .name("SY2v2")
                 .developmentStandard1(SuitableCheck.Y)
                 .developmentStandard2(SuitableCheck.Y)
                 .possibleStandard1(SuitableCheck.Y)
@@ -154,7 +142,7 @@ public class TrainingScenarioEvaluationServiceTest {
                 .build();
 
         //when
-        Integer updateScenarioEvaluationId = scenarioService.updateScenarioEvaluation(updateScenarioEvaluationDto);
+        Integer updateScenarioEvaluationId = scenarioService.modifyScenarioEvaluation(updateScenarioEvaluationDto);
 
         //then
         ScenarioEvaluation updateScenarioEvaluation = scenarioEvaluationRepository.findById(updateScenarioEvaluationId).get();

@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TrainingType {
-    VIRTUAL("도상 훈련"),
-    ACTUAL("실전 훈련");
+public enum IncidentDetailType {
+    DROP("추락"),
+    FALL("넘어짐"),
+    BUMP("부딪힘"),
+    TRAP("끼임"),
+    HIT("맞음");
 
     private final String typeValue;
 }

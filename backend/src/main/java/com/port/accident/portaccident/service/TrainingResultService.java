@@ -202,21 +202,21 @@ public class TrainingResultService {
     }
 
     private void matchingStringToEnumIncidentType(TrainingResultDto trainingResultDto, String[] split) {
-        if (split[1].equals("ACCIDNET"))
+        if (split[1].equals("ACCIDENT"))
             trainingResultDto.setIncidentType(IncidentType.INCIDENT);
         else if (split[1].equals("DISASTER"))
             trainingResultDto.setIncidentType(IncidentType.DISASTER);
     }
 
     private void matchingStringToEnumIncidentImpact(TrainingResultDto trainingResultDto, String[] split) {
-        if (split[1].equals("INCIDENT_IMPACT_A"))
-            trainingResultDto.setIncidentImpact(IncidentImpact.INCIDENT_IMPACT_A);
-        else if (split[1].equals("INCIDENT_IMPACT_B"))
-            trainingResultDto.setIncidentImpact(IncidentImpact.INCIDENT_IMPACT_B);
-        else if (split[1].equals("INCIDENT_IMPACT_C"))
-            trainingResultDto.setIncidentImpact(IncidentImpact.INCIDENT_IMPACT_C);
-        else if (split[1].equals("INCIDENT_IMPACT_D"))
-            trainingResultDto.setIncidentImpact(IncidentImpact.INCIDENT_IMPACT_D);
+        if (split[1].equals("DAMAGE"))
+            trainingResultDto.setIncidentImpact(IncidentImpact.DAMAGE);
+        else if (split[1].equals("SLIGHT"))
+            trainingResultDto.setIncidentImpact(IncidentImpact.SLIGHT);
+        else if (split[1].equals("SERIOUS"))
+            trainingResultDto.setIncidentImpact(IncidentImpact.SERIOUS);
+        else if (split[1].equals("DEATH"))
+            trainingResultDto.setIncidentImpact(IncidentImpact.DEATH);
     }
 
     private void matchingStringToEnumIncidentLevel(TrainingResultDto trainingResultDto, String[] split) {
