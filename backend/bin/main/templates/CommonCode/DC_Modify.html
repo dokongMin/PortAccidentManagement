@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/backend/src/main/resources/static/css/commoncode/dcmodify.css">
+  <link rel="stylesheet" href="/css/commoncode/dcmodify.css">
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
@@ -22,89 +22,8 @@
 </head>
 <body>
   <!-- HEADER -->
-  <header>
-    <div class="inner">
-      <a href="/backend/src/main/resources/templates/MainPage.html" class="logo">
-        <img src="/backend/src/main/resources/static/img/favicon.png" alt="PSA">
-      </a>
-      <div class="sub-menu1">
-        <ul class="menu">
-          <li>
-            <a href="javascript:void(0)">로그인</a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">회원가입</a>
-          </li>
-        </ul>
-      </div>
-      <nav role="navigation">
-        <div class="main">
-        <ul id="main-menu">
-          <li><a href="#">공통코드<br>관리</a>           
-            <ul id="sub-menu">
-              <div class="line"></div>
-              <li><a href="/CommonCode/RepresentativeCode/RC_check/index.html" aria-label="submenu">대표코드 관리</a></li>
-              <li><a href="/CommonCode/DetailedCode/DC_check/index.html" aria-label="submenu">상세코드 관리</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고<br>정보 관리</a>
-            <ul id="sub-menu">
-              <div class="line2"></div>
-              <li><a href="#" aria-label="submenu">안전사고 정보 조회</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보 등록</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보 수정</a></li>
-              <li><a href="#" aria-label="submenu">안전사고 정보<br>사용 중지</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>시나리오 관리</a>
-            <ul id="sub-menu">
-              <div class="line35"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 <br>사용 중지</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>시나리오 평가 관리</a>
-            <ul id="sub-menu">
-              <div class="line4"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">안전사고 대응훈련<br>결과 관리</a>
-            <ul id="sub-menu">
-              <div class="line35"></div>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 조회</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 일자별<br>수행 결과 등록</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 수정</a></li>
-              <li><a href="#" aria-label="submenu">대응훈련 결과 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">비상연락망<br>관리</a>
-            <ul id="sub-menu">
-              <div class="line6"></div>
-              <li><a href="#" aria-label="submenu">비상연락망 조회</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 등록</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 수정</a></li>
-              <li><a href="#" aria-label="submenu">비상연락망 삭제</a></li>
-            </ul>
-          </li>
-          <li><a href="#">help<br>&nbsp;</a>
-            <ul id="sub-menu">
-              <div class="line7"></div>
-              <li><a href="#" aria-label="submenu">항만 안전사고 현황</a></li>
-              <li><a href="#" aria-label="submenu">FAQ</a></li>
-              <li><a href="#" aria-label="submenu">자료실</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      </nav>
-  </header>
+  <script type="module" src="/js/header.js"></script>
+  <port-header></port-header>
   <!-- Detailed code management -->
   <div class="Detailed-code-management">
 
@@ -179,7 +98,7 @@
     </center>
   <div class="regist-button">
     <a href="#"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
-    <a href="/backend/src/main/resources/templates/CommonCode/DC_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+    <a href="/CommonCode/DC_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
   </div>
 </div>
   <!-- footer -->
