@@ -4,16 +4,14 @@ import com.port.accident.portaccident.domain.staff.Staff;
 import com.port.accident.portaccident.dto.staff.StaffDto;
 import com.port.accident.portaccident.dto.staff.StaffSearchCondition;
 import com.port.accident.portaccident.service.StaffService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,20 +24,21 @@ public class StaffController {
         return "EmergencyContact/EC_registration";
     }
 
-    @RequestMapping("/EC_registration")
+    @PostMapping("/EC_registration")
     public String registerStaff(@RequestBody StaffDto staffDto) {
         /*TODO::혜원 영주님 - 비상연락망 등록
-         *DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
+         *DTO의 필드명과 동일하
+         * 게 form의 name 설정 시 DTO에 연결됩니다.
          *(name, corporation, group, position, email, phoneNumber)
          * */
-
+        System.out.println("staffDto = " + staffDto.getName());
         StaffDto registerStaffDto = staffService.toServiceDto(staffDto);
         staffService.registerStaff(registerStaffDto);
 
         return "redirect:/EmergencyContact/EC_check";
     }
 
-    @RequestMapping("/EC_check")
+    @GetMapping("/EC_check")
     public String checkStaff(Model model,
                              @RequestParam(required = false, defaultValue = "") String name,
                              @RequestParam(required = false, defaultValue = "") String corporation,
