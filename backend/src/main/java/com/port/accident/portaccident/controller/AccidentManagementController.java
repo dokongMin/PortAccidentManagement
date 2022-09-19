@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.controller;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
+import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccidentInfo;
 import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
 import com.port.accident.portaccident.dto.accident_management.AccidentInfoDto;
@@ -53,12 +54,11 @@ public class AccidentManagementController {
 
     @PostMapping("/SA_registration")
     public String registerAccident(Model model, @RequestParam("accidentType") String accidentType, @RequestParam("damageFacilityInfoList") List<String> damageFacilityInfoList,
-                                 @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
-                                 @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
-                                 @RequestParam("accidentManager") String accidentManager, @RequestParam("accidentInspect") String accidentInspect,
-                                 @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate,
-                                 @RequestParam("incidentType") String incidentType) throws Exception
-    {
+                                   @RequestParam("causesSafetyAccidentInfoList") List<String> causesSafetyAccidentInfoList, @RequestParam("accidentLevel") String accidentLevel,
+                                   @RequestParam("accidentImpact") String accidentImpact, @RequestParam("accidentArea") String accidentArea,
+                                   @RequestParam("accidentManager") String accidentManager, @RequestParam("accidentInspect") String accidentInspect,
+                                   @RequestParam("victim") String victim, @RequestParam("accidentDate") String accidentDate,
+                                   @RequestParam("incidentType") String incidentType) throws Exception {
         AccidentTypeDto accidentTypeBuild = AccidentTypeDto.builder()
                 .name(accidentType)
                 .build();
@@ -103,7 +103,7 @@ public class AccidentManagementController {
      */
     @GetMapping("/SA_check")
     public String getAccidentInfoList(Model model, @PageableDefault(size = 2) Pageable pageable,
-                                      @RequestParam(required = false, defaultValue = "") String searchText){
+                                      @RequestParam(required = false, defaultValue = "") String searchText) {
         Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
         int startPage = Math.max(1, accidents.getPageable().getPageNumber() - 1);
         int endPage = Math.min(accidents.getTotalPages(), accidents.getPageable().getPageNumber() + 3);
