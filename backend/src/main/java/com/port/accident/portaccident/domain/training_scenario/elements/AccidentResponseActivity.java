@@ -44,6 +44,7 @@ public class AccidentResponseActivity {
         this.completePlaningTime = completePlaningTime;
         this.scenario = scenario;
     }
+
     @Transactional(readOnly = true)
     public void update(AccidentResponseActivityDto accidentResponseActivityDto) {
         this.comment = accidentResponseActivityDto.getComment();

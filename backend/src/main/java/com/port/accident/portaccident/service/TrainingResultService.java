@@ -15,6 +15,7 @@ import com.port.accident.portaccident.dto.training_scenario_result.evaluation.Tr
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.exception.DoesNotExistException;
 import com.port.accident.portaccident.exception.DuplicateTrainingResultNameException;
+import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.element.TrainingParticipantsRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.element.TrainingPortFacilityRepository;
@@ -39,6 +40,7 @@ public class TrainingResultService {
     private final TrainingPortFacilityRepository facilityRepository;
     private final TrainingByDateRepository byDateRepository;
     private final EvaluationDetailsRepository evaluationRepository;
+
 
     @Transactional(readOnly = true)
     public Page<TrainingResultJoinScenarioDto> searchTrainingResultListWithPaging(TrainingResultCondition condition, Pageable pageable) {

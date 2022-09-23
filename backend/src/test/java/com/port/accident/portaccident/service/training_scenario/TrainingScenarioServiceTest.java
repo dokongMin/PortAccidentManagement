@@ -2,10 +2,13 @@ package com.port.accident.portaccident.service.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDetailDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
 import com.port.accident.portaccident.repository.training_scenario.AccidentResponseActivityRepository;
@@ -21,6 +24,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -406,8 +410,59 @@ public class TrainingScenarioServiceTest {
         assertEquals("SN1", content.get(0).getName());
     }
 
+    @Test
     public void 시나리오_상세_조회() {
+        //given
+        ScenarioDto scenarioDto = ScenarioDto.builder()
+                .name("SY1")
+                .incidentLevel(IncidentLevel.LEVEL_1)
+                .incidentImpact(IncidentImpact.SLIGHT)
+                .incidentType(IncidentType.INCIDENT)
+                .incidentDetailType(IncidentDetailType.DROP)
+                .portArea(TrainingPlace.PLACE1)
+                .responseStage("3")
+                .build();
 
+        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
+                .name(PortFacility.CRANE)
+                .build();
+
+        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
+                .name(PortFacility.CONTAINER)
+                .build();
+
+        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
+        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
+
+        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
+
+        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
+                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                .manager("이혜원")
+                .completePlaningTime(LocalDateTime.now())
+                .build();
+
+        AccidentResponseActivityDto accidentResponseActivityDto2 = AccidentResponseActivityDto.builder()
+                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
+                .manager("박태영")
+                .completePlaningTime(LocalDateTime.now())
+                .build();
+
+        scenarioService.registerAccidentResponseActivity("SY1", accidentResponseActivityDto);
+        scenarioService.registerAccidentResponseActivity("SY1", accidentResponseActivityDto2);
+
+        //when
+        List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
+        List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
+
+        //then
+        assertEquals(2, portFacilityNameList.size());
+        assertEquals(2, accidentResponseActivityList.size());
+        assertEquals(accidentPortFacilityDto.getName().getFacilityValue(), portFacilityNameList.get(0).getFacilityValue());
+        assertEquals(accidentPortFacilityDto2.getName().getFacilityValue(), portFacilityNameList.get(1).getFacilityValue());
+        assertEquals(accidentResponseActivityDto.getManager(), accidentResponseActivityList.get(0).getManager());
+        assertEquals(accidentResponseActivityDto2.getManager(), accidentResponseActivityList.get(1).getManager());
     }
 
 }

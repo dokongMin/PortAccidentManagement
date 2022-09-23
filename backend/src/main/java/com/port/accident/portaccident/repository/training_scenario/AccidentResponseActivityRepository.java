@@ -1,6 +1,8 @@
 package com.port.accident.portaccident.repository.training_scenario;
 
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDetailDto;
+import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
