@@ -46,9 +46,11 @@ public class Scenario {
     @Column(name = "scenario_incident_type") // 사고/재난
     private IncidentType incidentType;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_incident_detail_type") // 사고 유형
     private IncidentDetailType incidentDetailType;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_port_area") // 사고 항만 구역
     private TrainingPlace portArea;
 
