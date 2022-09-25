@@ -8,6 +8,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondit
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDetailDto;
 import com.port.accident.portaccident.enums.PortFacility;
+import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.service.ScenarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ import java.util.Optional;
 public class TrainingScenarioController {
 
     private final ScenarioService scenarioService;
+    private final ScenarioRepository scenarioRepository;
 
 
 
@@ -35,14 +37,17 @@ public class TrainingScenarioController {
      *
      * 시나리오 목록 조회 페이지 또한 대응 활동과 매니저명이 제외되어야 합니다.*/
 
+    @GetMapping("/TS_Check")
+    public String checkTrainingScenario(){
+        return "TrainingScenarios/TS_Check";
+    }
     @GetMapping("/TS_Register_Page")
     public String registerTrainingScenarioPage() {
         return "TrainingScenarios/TS_Register";
     }
 
-    @RequestMapping("/TS_Register")
-    public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestParam List<PortFacility> facilityList) {
+    @PostMapping("/TS_Register")
+    public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto) {
         /*TODO::혜원 현정님 - 시나리오 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
@@ -54,11 +59,11 @@ public class TrainingScenarioController {
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(facilityList);
-        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
-
-        scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
-
+//        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(facilityList);
+//        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
+//
+//        scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
+        scenarioService.saveScenario(registerScenarioDto);
         return "redirect:/TrainingScenarios/TS_Check";
     }
 
