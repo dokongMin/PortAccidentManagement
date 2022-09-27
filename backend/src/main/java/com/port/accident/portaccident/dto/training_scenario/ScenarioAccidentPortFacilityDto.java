@@ -18,7 +18,7 @@ public class ScenarioAccidentPortFacilityDto {
     private IncidentType incidentType;
     private IncidentDetailType incidentDetailType;
     private TrainingPlace portArea;
-    private List<AccidentPortFacility> accidentPortFacilityList;
+//    private List<AccidentPortFacility> accidentPortFacilityList;
 
     @QueryProjection
     public ScenarioAccidentPortFacilityDto(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact impact,

@@ -102,3 +102,31 @@ public class TrainingScenarioController {
     }
 
 }
+
+
+    @RequestMapping("/TS_Detail/{scenarioId}")
+    public String detailTrainingScenario(Model model, @PathVariable(value = "scenarioId") Integer scenarioId) {
+
+        /*TODO::혜원 현정님 - 시나리오 상세 조회
+         * 시나리오 아이디로 시나리오 사고 항만 설비와 사고 대응활동을 조회하였습니다.
+         * 사고 항만설비와 사고 대응활동은 여러 개 존재 가능합니다
+         * (디테일 페이지에서 등록된 모든 사고 대응활동 조회 가능)
+         *
+         * scenario에는 id, name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea 값이 있습니다.
+         * accidentResponseActivity에는 id, comment, manager, completePlaningTime가 있습니다.
+         * portFacilityNameList에는 PortFacility값이 있습니다.
+         **/
+        Optional<Scenario> scenario = scenarioService.findById(scenarioId);
+
+        if(scenario.isPresent()) {
+            List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
+
+            List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
+            model.addAttribute("scenario", scenario.get());
+            model.addAttribute("portFacility", portFacilityNameList);
+            model.addAttribute("accidentResponseActivity", accidentResponseActivityList);
+        }
+
+        return "TrainingScenarios/TS_Detail";
+    }
+}
