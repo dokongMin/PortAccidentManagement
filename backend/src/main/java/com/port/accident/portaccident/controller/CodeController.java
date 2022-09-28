@@ -3,10 +3,8 @@ package com.port.accident.portaccident.controller;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.port.accident.portaccident.domain.code.DetailedCode;
 import com.port.accident.portaccident.domain.code.RepresentativeCode;
-import com.port.accident.portaccident.dto.code.CodeSearchCondition;
-import com.port.accident.portaccident.dto.code.DetRepJoinDto;
-import com.port.accident.portaccident.dto.code.DetailedCodeDto;
-import com.port.accident.portaccident.dto.code.RepresentativeCodeDto;
+import com.port.accident.portaccident.dto.code.*;
+import com.port.accident.portaccident.repository.code.RepresentativeCodeRepository;
 import com.port.accident.portaccident.service.CodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.CoderResult;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ import static org.springframework.util.StringUtils.hasText;
 public class CodeController {
 
     private final CodeService codeService;
-
+    private final RepresentativeCodeRepository representativeCodeRepository;
     @GetMapping("/representativeCode_registerPage")
     public String repCodeRegiterPage() {
         return "CommonCode/RC_Register";
@@ -47,13 +46,14 @@ public class CodeController {
     }
 
     @GetMapping("/detailedCode_registerPage")
-    public String detCodeRegiterPage() {
+    public String detCodeRegiterPage(Model model) {
+        List<RepresentativeCode> allReCodes = representativeCodeRepository.findAll();
+        model.addAttribute("allReCodes", allReCodes);
         return "CommonCode/DC_Register";
     }
 
     @RequestMapping("/detailedCode_register")
-    public String registerDetCode(@RequestBody DetailedCodeDto dto,
-                                  @RequestParam(value = "repCodeId") Integer repCodeId) {
+    public String registerDetCode(@RequestBody DetailedCodeRegisterDto dto) {
         //TODO::태영 현정님
         /* 1.   form형식으로 동작한다고 가정하고 작성한 코드이므로
          *      화면상에서 js를 이용해 null값 제한을 걸어줘야 함
@@ -61,8 +61,9 @@ public class CodeController {
         String code = dto.getCode();
         String name = dto.getName();
         String comment = dto.getComment();
-
-        ;
+        String representativeCodeName = dto.getRepCodeId();
+        RepresentativeCode repCode = codeService.findByRepCode(representativeCodeName);
+        Integer repCodeId = repCode.getId();
         codeService.createDetailedCode(new DetailedCode(code, name, comment), repCodeId);
 
         return "redirect:/Code/detailedCode_list";   //저장이 완료되면 상세코드 조회 페이지로 이동
@@ -138,6 +139,16 @@ public class CodeController {
         return "CommonCode/RC_Modify";
     }
 
+//    @PostMapping("/representativeCode_modify_setting")
+//    public String modifyRepCodeSetting(@RequestParam(value = "reqName") String reqName, Model model){
+//        System.out.println("reqName = " + reqName);
+//        String name = codeService.findByRepCode(reqName).getName();
+//        RepresentativeCode repCode = codeService.findByRepCode(reqName);
+//        System.out.println("name = " + name);
+//        model.addAttribute("repCode",repCode);
+////        return "redirect:/Code/representativeCode_modifyPage";
+//        return "CommonCode/RC_Modify";
+//    }
     @RequestMapping("/representativeCode_modify")
     public String modifyRepCode(@RequestBody RepresentativeCodeDto dto) {
         //TODO::태영 현정님

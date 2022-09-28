@@ -16,7 +16,8 @@
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
 </head>
@@ -32,6 +33,7 @@
     </div>
   <center>
     <table style="text-align: left; width: 850px;" cellpadding="2" cellspacing="2">
+      <form th:id="RcModify" name="RcModify">
       <tbody>
         <tr>
           <td style="width: 400px;">
@@ -44,11 +46,12 @@
                 </select> 
                 입력</p>
                 <br><br>
-              <input type="text" required><br>
+              <input type="text" required th:name="id" th:id="id"><br>
             </span>
             <div class="regist-button">
-              <a href="#"><span class="imsi-button" style="position: absolute; left: 75px;">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>
+<!--              <a href="#"><span class="imsi-button" style="position: absolute; left: 75px;" onclick="javascript:document.RCModify.submit();">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>-->
             </div>
+
           </td>
           <td style="width: 50px;"></td>
           <td style="width: 400px;">
@@ -57,22 +60,22 @@
               <span class="fonts">
                 <p class="pstyle">id</p><br><br>
                 <input type="text" disabled><br><br><br>
-                <p class="pstyle">변경 후의 대표코드번호 입력</p><br><br>
-                <input  type="text" required><br><br><br>
+<!--                <p class="pstyle">변경 후의 대표코드번호 입력</p><br><br>-->
+<!--                <input  type="text" required><br><br><br>-->
                 <p class="pstyle">변경 후의 대표코드명 입력</p><br><br>
-                <input type="text" required><br><br><br>
+                <input type="text" required th:id="name" th:name="name"><br><br><br>
               </span>  
             </p>
             </div>
           </td>
         </tr>
       </tbody>
+      </form>
     </table>
   </center>
-    
 
     <div class="regist-button">
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+      <a href="#" th:id="RC_modify_button" onclick="javascript:document.RcModify.submit();"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
       <a href="/CommonCode/RC_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
   </div>
@@ -95,5 +98,6 @@
       </p>
     </div>
   </footer>
+  <script src="/js/RC_modify.js"></script>
 </body>
 </html>

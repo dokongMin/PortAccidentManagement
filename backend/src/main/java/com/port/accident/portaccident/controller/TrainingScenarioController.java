@@ -1,5 +1,7 @@
 package com.port.accident.portaccident.controller;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -101,7 +104,6 @@ public class TrainingScenarioController {
         return "TrainingScenarios/TS_Check";
     }
 
-}
 
 
     @RequestMapping("/TS_Detail/{scenarioId}")

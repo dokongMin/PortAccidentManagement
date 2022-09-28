@@ -35,7 +35,7 @@ public class CodeRunner implements org.springframework.boot.ApplicationRunner {
     }
 
     private void createRepCodes(Queue<RepresentativeCodeDto> repDtoQueue) {
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 50; i++) {
             repDtoQueue.add(RepresentativeCodeDto.builder()
                     .code("AT" + i)
                     .name("대표코드" + i)
