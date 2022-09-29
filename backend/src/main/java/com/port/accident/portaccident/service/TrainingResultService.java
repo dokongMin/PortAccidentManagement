@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
 public class TrainingResultService {
     private final TrainingResultRepository trainingResultRepository;
