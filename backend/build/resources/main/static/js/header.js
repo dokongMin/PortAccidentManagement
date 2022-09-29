@@ -65,8 +65,8 @@ class PortHeader extends HTMLElement{
             '            <li><a href="#">비상연락망<br>관리</a>\n' +
             '              <ul id="sub-menu">\n' +
             '                <div class="line6"></div>\n' +
-            '                <li><a href="#" aria-label="submenu">비상연락망 조회</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">비상연락망 등록</a></li>\n' +
+            '                <li><a href="/EmergencyContact/EC_check" aria-label="submenu">비상연락망 조회</a></li>\n' +
+            '                <li><a href="/EmergencyContact/EC_registration_Page" aria-label="submenu">비상연락망 등록</a></li>\n' +
             '                <li><a href="#" aria-label="submenu">비상연락망 수정</a></li>\n' +
             '                <li><a href="#" aria-label="submenu">비상연락망 삭제</a></li>\n' +
             '              </ul>\n' +

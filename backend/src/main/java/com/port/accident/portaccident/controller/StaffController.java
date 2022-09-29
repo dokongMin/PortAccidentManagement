@@ -31,7 +31,6 @@ public class StaffController {
          * 게 form의 name 설정 시 DTO에 연결됩니다.
          *(name, corporation, group, position, email, phoneNumber)
          * */
-        System.out.println("staffDto = " + staffDto.getName());
         StaffDto registerStaffDto = staffService.toServiceDto(staffDto);
         staffService.registerStaff(registerStaffDto);
 

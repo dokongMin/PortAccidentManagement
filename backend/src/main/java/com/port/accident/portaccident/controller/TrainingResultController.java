@@ -1,9 +1,12 @@
 package com.port.accident.portaccident.controller;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
 import com.port.accident.portaccident.enums.*;
+import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
+import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
 import com.port.accident.portaccident.service.TrainingResultService;
 import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RequestMapping("/TrainingResult")
 public class TrainingResultController {
     private final TrainingResultService resultService;
+    private final ScenarioRepository scenarioRepository;
 
     @GetMapping("/trainingResult_registerPage")
     public String trainingResultRegisterPage() {
@@ -65,7 +69,11 @@ public class TrainingResultController {
     }
 
     @GetMapping("/trainingResult_daysPage")
-    public String trainingResultDetailByDays() {
+    public String trainingResultDetailByDays(Model model)
+    {
+
+        List<Scenario> resultLists = scenarioRepository.findAll();
+        model.addAttribute("resultLists", resultLists);
         return "TrainingResult/TR_days";
     }
 
@@ -98,7 +106,6 @@ public class TrainingResultController {
         ]
         */
         resultService.createEvaluationDetailsByDays(param);
-
 
         return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
