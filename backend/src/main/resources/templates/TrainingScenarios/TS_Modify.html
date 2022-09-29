@@ -22,7 +22,7 @@
 <script type="module" src="/js/header.js"></script>
 <port-header></port-header>
   <!--training-scenarios-->
-  
+
   <div class="training-scenarios">
   
     <div class="regist-title">
@@ -34,18 +34,21 @@
         <option value="재난">재난</option>
       </select></span>
     <br><br>
+    <form method="post" action="/TrainingScenarios/TS_Modify_Check" name="checkScenario">
     <span class="fonts">
-      <p class="pstyle">수정할 대응훈련 시나리오의 시나리오명 입력 &nbsp;&nbsp;<input type="text" required><br></p>
+      <p class="pstyle">수정할 대응훈련 시나리오의 시나리오명 입력 &nbsp;&nbsp;<input type="text" required name="nameCheck" th:id="nameCheck"><br></p>
     </span>
     <div class="regist-button" style="position: absolute; right: 60px; top: 145px;">
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>
+      <button type="button" onclick="javascript:document.checkScenario.submit();">조회</button>
+<!--      <a href="#" onclick="javascript:document.checkScenario.submit();"><span class="imsi-button">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>-->
     </div>
+    </form>
     <br><br>
     <div class="regist-line-1">
       <p> <span class="fonts"> 시나리오명 &nbsp;&nbsp;<input type="text" placeholder="" style="width: 250px;"> </span>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;<select>
-            <option>추락</option>
+            <option value="">추락</option>
             <option>넘어짐</option>
             <option>부딪힘</option>
             <option>끼임</option>

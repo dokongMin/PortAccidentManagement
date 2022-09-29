@@ -84,6 +84,12 @@ public class TrainingScenarioController {
 
         return "redirect:/TrainingScenarios/TS_Check";
     }
+    @PostMapping("/TS_Modify_Check")
+    public String modifyCheck(@RequestParam(value = "nameCheck") String nameCheck)throws Exception{
+        Scenario scenario = scenarioRepository.findByName(nameCheck).orElseThrow(() -> new Exception("해당 시나리오명은 없습니다."));
+        return "TrainingScenarios/TS_Modify";
+    }
+
 
     @RequestMapping("/staff_list")
     public String checkTrainingScenario(Model model,
