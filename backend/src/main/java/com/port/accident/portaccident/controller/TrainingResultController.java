@@ -3,23 +3,20 @@ package com.port.accident.portaccident.controller;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
 import com.port.accident.portaccident.service.TrainingResultService;
-import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +30,9 @@ public class TrainingResultController {
     private final ScenarioRepository scenarioRepository;
 
     @GetMapping("/trainingResult_registerPage")
-    public String trainingResultRegisterPage() {
+    public String trainingResultRegisterPage(Model model) {
+        List<Scenario> allScenarios = scenarioRepository.findAll();
+        model.addAttribute("allScenarios", allScenarios);
         return "TrainingResult/TR_registration";
     }
 
@@ -62,9 +61,7 @@ public class TrainingResultController {
             ]
         }
         */
-
         resultService.createTrainingResultUsingJsonString(param);
-
         return "redirect:/TrainingResult/trainingResult_list";      //데이터 저장하면 바로 조회페이지로 이동
     }
 
