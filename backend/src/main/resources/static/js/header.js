@@ -74,7 +74,7 @@ class PortHeader extends HTMLElement{
             '            <li><a href="#">help<br>&nbsp;</a>\n' +
             '              <ul id="sub-menu">\n' +
             '                <div class="line7"></div>\n' +
-            '                <li><a href="/help/stateaccident.html" aria-label="submenu">항만 안전사고 현황</a></li>\n' +
+            '                <li><a href="/help/stateaccident" aria-label="submenu">항만 안전사고 현황</a></li>\n' +
             '                <li><a href="#" aria-label="submenu">FAQ</a></li>\n' +
             '                <li><a href="#" aria-label="submenu">자료실</a></li>\n' +
             '              </ul>\n' +

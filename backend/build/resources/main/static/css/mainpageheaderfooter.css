@@ -1,4 +1,4 @@
-
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 /*COMMON*/
 body{
   color:#333;
@@ -198,11 +198,11 @@ nav {
   object-fit: cover;
 }
 .slide-box:nth-of-type(1) {
-  background: center/cover no-repeat url("/img/main.jpg");
+  background: center/cover no-repeat url("../img/main.jpg");
 
 }
 .slide-box:nth-of-type(2) {
-  background: center/cover no-repeat url("/img/collage.jpg");
+  background: center/cover no-repeat url("../img/collage.jpg");
 }
 .slide-next {
   position: absolute;
@@ -219,6 +219,106 @@ nav {
   cursor: pointer;
   color: white;
   font-size: 48px;
+}
+
+/*add*/
+.add {
+  display: inline-block;
+  background-color: white;
+  width: 500px;
+  height: 250px;
+  margin: 50px 25px; 
+  position: relative;
+
+}
+.add:hover {
+  box-shadow: 1px 1px 1px 1px #0055ff;
+}
+.newstitle{
+  display: inline-flex; 
+  text-align: left; 
+  font-size: 23.5px;
+  font-weight: 700;
+  font-family: 'Jeju Gothic', sans-serif;
+  text-decoration:underline;
+  text-underline-position:under;
+}
+.newscontent{
+  position: absolute;
+  width: 500px;
+  height: 200px;
+  top:50px;
+  font-size: 16px;
+  font-weight: 400;
+}
+.jump{
+  display: inline-block;
+  background-color: #0055ff;
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  right: 10px;
+  top:10px;
+  color: white;
+  border-radius: 90%;
+  box-sizing: border-box;
+}
+.jump:hover{
+  box-shadow: 1px 1px 1px 1px black;
+  cursor: pointer;
+
+}
+.news{
+  color:white;
+  background: center/cover no-repeat url('../img/ipa.jpg');
+}
+.plus{
+position: absolute;
+left: -10px;
+top: -10px;
+}
+.addfont{
+  display: inline-block;
+  color: black;
+  width: 300px;
+  font-weight: 700;
+  position: relative;
+  top:25px;
+  left: -20px;
+}
+.background{
+  background: center/cover no-repeat url("../img/background.png");
+}
+table,
+thead,
+tbody,
+tfoot,
+th,
+td {
+  border: 1px solid black;
+}
+
+thead {
+  background-color: #0055ff;
+  color: white;
+}
+
+table {
+  position: absolute;
+  width: 475px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  left: -75px;
+  top: 100px;
+}
+
+tbody tr {
+  transition: 0.2s;
+  background-color: white;
+  color: black;
+}
+td{
+  text-align: center;
 }
 /*footer*/
 footer{
