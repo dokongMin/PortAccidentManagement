@@ -27,6 +27,8 @@ public class StaffRepositoryCustomImpl implements StaffRepositoryCustom {
 
     @Override
     public Page<Staff> searchPageStaff(StaffSearchCondition condition, Pageable pageable) {
+        pageable = pageableSetting(pageable);
+
         List<Staff> content = queryFactory
                 .selectFrom(staff)
                 .where(
@@ -57,7 +59,7 @@ public class StaffRepositoryCustomImpl implements StaffRepositoryCustom {
     }
 
     private Pageable pageableSetting(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작 -> 페이지에서 -1 처리
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 
         return PageRequest.of(page, 10);
     }
