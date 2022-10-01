@@ -1,7 +1,7 @@
 function ChangeValue(){
-  const value_str = document.getElementById('choose');
+  const value_str = document.getElementById('incidentType');
   const chose = value_str.options[value_str.selectedIndex].value;
-  if (chose == "사고") {
+  if (chose == "INCIDENT" || chose == "사고") {
     const el1 = document.getElementById('ch1');
     el1.innerHTML = '사고 수준';
     const el2 = document.getElementById('ch2');
@@ -15,7 +15,7 @@ function ChangeValue(){
     const el6 = document.getElementById('ch6');
     el6.innerHTML = '사고대응활동 내용';
   } 
-  if (chose == "재난"){
+  if (chose == "DISASTER" || chose == "재난"){
     const el1 = document.getElementById('ch1');
     el1.innerHTML = '재난 수준';
     const el2 = document.getElementById('ch2');

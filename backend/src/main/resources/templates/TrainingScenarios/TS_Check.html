@@ -32,7 +32,7 @@
         <p>대응훈련 시나리오 조회</p>
     </div>
     <span class="fonts">시나리오 유형&nbsp;
-    <select id="incidentTypeSelect" onchange="ChangeValue(); incidentType(this);">
+    <select id="incidentType" onchange="ChangeValue(); incidentType(this);">
       <option value="none" selected="selected">&nbsp;--&nbsp;</option>
       <option value="INCIDENT">사고</option>
       <option value="DISASTER">재난</option>
@@ -134,8 +134,8 @@
     </div>
 
     <div class="regist-button">
-        <a href="/TrainingScenarios/TS_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-        <a href="/TrainingScenarios/TS_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+        <a href="/TrainingScenarios/TS_Register_Page"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/TrainingScenarios/TS_Modify_Page"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
     </div>
 </div>
 
@@ -182,7 +182,7 @@
         }
         if (urlParams.get('incidentType')) {
             incidentTypeVal = urlParams.get('incidentType');
-            selectedControl('incidentTypeSelect', urlParams.get('incidentType'));
+            selectedControl('incidentType', urlParams.get('incidentType'));
         }
         if (urlParams.get('incidentDetailType')) {
             incidentDetailTypeVal = urlParams.get('incidentDetailType');
