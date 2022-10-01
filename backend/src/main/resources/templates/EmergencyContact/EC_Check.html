@@ -44,11 +44,11 @@
       </p>
     </div> -->
     <div class="inquiry-button">
-        <span class="fonts">이름</span>&nbsp; <input type="text" placeholder=&nbsp;홍길동 style="width: 80px;">
+        <span class="fonts">이름</span>&nbsp; <input id="staffName" type="text" placeholder="이름 입력" style="width: 80px;">
         &nbsp;
-        <span class="fonts">소속 회사</span>&nbsp; <input type="text" placeholder="&nbsp;OO회사" style="width: 80px;">
+        <span class="fonts">소속 회사</span>&nbsp; <input id="corporationName" type="text" placeholder="회사명 입력" style="width: 80px;">
         &nbsp;
-        <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+        <span class="imsi-button" onclick="search()">&nbsp;&nbsp;검색&nbsp;&nbsp;</span>
     </div>
     <br>
 
@@ -65,8 +65,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${allStaff.getTotalPages() != 0}" th:each="staff : ${allStaff}">
-            <td th:text="${staffStat.count} + ${allStaff.number} * 10"></td>
+        <tr th:if="${staffList.getTotalPages() != 0}" th:each="staff : ${staffList}">
+            <td th:text="${staffStat.count} + ${staffList.number} * 10"></td>
             <td th:text="${staff.name}"></td>
             <td th:text="${staff.corporation}"></td>
             <td th:text="${staff.group}"></td>
@@ -74,7 +74,7 @@
             <td th:text="${staff.email}"></td>
             <td th:text="${staff.phoneNumber}"></td>
         </tr>
-        <tr th:if="${allStaff.getTotalPages() == 0}">
+        <tr th:if="${staffList.getTotalPages() == 0}">
             <td colspan="7">조회된 결과가 없습니다.</td>
         </tr>
         </tbody>
@@ -93,8 +93,8 @@
     <div class="page_wrap">
         <div class="page_nation">
             <ul class="page_ul"
-                th:if="${allStaff.getTotalPages() != 0}"
-                th:with="start=${T(java.lang.Math).floor(allStaff.number/10)*10 + 1}, last=(${start + 9 < allStaff.totalPages ? start + 9 : allStaff.totalPages})">
+                th:if="${staffList.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(staffList.number/10)*10 + 1}, last=(${start + 9 < staffList.totalPages ? start + 9 : staffList.totalPages})">
                 <!--with: 변수 설정-->
                 <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
                 <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
@@ -104,19 +104,19 @@
                 </li>
                 <li class="page_li">
                     <a class="arrow prev"
-                       th:href="${allStaff.first} ? '#' : @{/EmergencyContact/EC_Check(page=${allStaff.number},name=${condition.name},corporation=${condition.corporation})}"></a>
+                       th:href="${staffList.first} ? '#' : @{/EmergencyContact/EC_Check(page=${staffList.number},name=${condition.name},corporation=${condition.corporation})}"></a>
                 </li>
                 <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
-                    <a th:text="${page}" th:class="${page == allStaff.number + 1} ? 'active'"
+                    <a th:text="${page}" th:class="${page == staffList.number + 1} ? 'active'"
                        th:href="@{/EmergencyContact/EC_Check(page=${page},name=${condition.name},corporation=${condition.corporation})}"></a>
                 </li>
                 <li class="page_li">
                     <a class="arrow next"
-                       th:href="${allStaff.last} ? '#' : @{/EmergencyContact/EC_Check(page=${allStaff.number + 2},name=${condition.name},corporation=${condition.corporation})}"></a>
+                       th:href="${staffList.last} ? '#' : @{/EmergencyContact/EC_Check(page=${staffList.number + 2},name=${condition.name},corporation=${condition.corporation})}"></a>
                 </li>
                 <li class="page_li">
                     <a class="arrow nnext"
-                       th:href="@{/EmergencyContact/EC_Check(page=${allStaff.totalPages},name=${condition.name},corporation=${condition.corporation})}"></a>
+                       th:href="@{/EmergencyContact/EC_Check(page=${staffList.totalPages},name=${condition.name},corporation=${condition.corporation})}"></a>
                 </li>
             </ul>
         </div>
@@ -147,5 +147,48 @@
     </div>
 </footer>
 </body>
+<script>
+    let staffNameVal;
+    let corporationNameVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('name')) {
+            document.getElementById("staffName").value = urlParams.get('name');
+        }
+        if (urlParams.get('corporation')) {
+            document.getElementById("corporationName").value = urlParams.get('corporation');
+        }
+    }
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        staffNameVal = document.getElementById("staffName").value;
+        corporationNameVal = document.getElementById("corporationName").value;
+
+        let conditionStr = "";
+
+        if (staffNameVal) {
+            conditionStr += "name=" + staffNameVal + "&";
+        }
+        if (corporationNameVal) {
+            conditionStr += "corporation=" + corporationNameVal;
+        }
+
+        // if (conditionStr == "") {
+        //     alert("검색 조건을 설정해주세요.");
+        //     return false;
+        // }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 <script src="/backend/src/main/resources/static/js/EC_check.js"></script>
 </html>

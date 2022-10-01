@@ -49,10 +49,10 @@ public class StaffController {
 
 
         StaffSearchCondition condition = new StaffSearchCondition(name, corporation);
-        Page<Staff> allStaff = staffService.searchPageStaff(condition, pageable);
+        Page<Staff> staffList = staffService.searchPageStaff(condition, pageable);
 
         model.addAttribute("condition", condition);
-        model.addAttribute("allStaff", allStaff);
+        model.addAttribute("staffList", staffList);
         return "EmergencyContact/EC_Check";
     }
 
