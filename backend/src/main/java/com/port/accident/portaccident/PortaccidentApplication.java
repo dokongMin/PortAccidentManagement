@@ -4,6 +4,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 
 import javax.persistence.EntityManager;
 
@@ -14,8 +15,13 @@ public class PortaccidentApplication {
 		SpringApplication.run(PortaccidentApplication.class, args);
 	}
 
-//	@Bean
-//	JPAQueryFactory jpaQueryFactory(EntityManager em){
-//		return new JPAQueryFactory(em);
-//	}
+	@Bean
+	public PageableHandlerMethodArgumentResolverCustomizer customize() {
+		/* pagination 1부터 시작하도록 설정 */
+		return p -> {
+			p.setOneIndexedParameters(true);	// 1부터 시작
+			p.setMaxPageSize(10);				// size=10
+		};
+	}
+
 }

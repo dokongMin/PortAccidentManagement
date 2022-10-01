@@ -91,6 +91,7 @@ public class CodeController {
                                   @PageableDefault Pageable pageable) {
         CodeSearchCondition condition = new CodeSearchCondition(code, name);
         Page<DetRepJoinDto> result = codeService.searchDetCodeListWithPaging(condition, pageable);
+
         model.addAttribute("condition", condition);
         model.addAttribute("detList", result);
         return "CommonCode/DC_Check";
