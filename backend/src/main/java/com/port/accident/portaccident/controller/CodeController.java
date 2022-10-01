@@ -37,9 +37,6 @@ public class CodeController {
     @RequestMapping("/representativeCode_register")
     public String registerRepCode(@RequestParam("code") String code,
                                   @RequestParam("name") String name) {
-        //TODO::태영 현정님
-        /* form형식으로 동작한다고 가정하고 작성한 코드이므로
-         * 화면상에서 js를 이용해 null값 제한을 걸어줘야 함 */
         codeService.createRepresentativeCode(new RepresentativeCode(code, name));
 
         return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
@@ -54,10 +51,6 @@ public class CodeController {
 
     @RequestMapping("/detailedCode_register")
     public String registerDetCode(@RequestBody DetailedCodeRegisterDto dto) {
-        //TODO::태영 현정님
-        /* 1.   form형식으로 동작한다고 가정하고 작성한 코드이므로
-         *      화면상에서 js를 이용해 null값 제한을 걸어줘야 함
-         * 2.   repCodeId는 get방식으로(파라미터로), dto는 post방식으로 데이터를 넘겨줌 */
         String code = dto.getCode();
         String name = dto.getName();
         String comment = dto.getComment();
@@ -100,8 +93,6 @@ public class CodeController {
     @RequestMapping(value = "/find_repCode", method = RequestMethod.POST)
     @ResponseBody
     public Object findRepCode(@RequestBody RepresentativeCodeDto dto) {
-        //TODO::태영 현정님
-        /* 단일 값을 가져와야 하므로 유니크 제약조건이 없는 name조건은 제거 */
         RepresentativeCode result = null;
 
         Integer id = dto.getId();
@@ -119,8 +110,6 @@ public class CodeController {
     @RequestMapping(value = "/find_detCode", method = RequestMethod.POST)
     @ResponseBody
     public Object findDetCode(@RequestBody DetailedCodeDto dto) {
-        //TODO::태영 현정님
-        /* 단일 값을 가져와야 하므로 유니크 제약조건이 없는 name조건은 제거 */
         DetailedCode result = null;
 
         Integer id = dto.getId();
@@ -152,8 +141,6 @@ public class CodeController {
 //    }
     @RequestMapping("/representativeCode_modify")
     public String modifyRepCode(@RequestBody RepresentativeCodeDto dto) {
-        //TODO::태영 현정님
-        /* 데이터 무결성을 위해 대표코드명만 변경 가능하도록 작성 */
         codeService.updateRepresentativeCode(dto.getId(), dto.getName());
         return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동
     }
@@ -165,8 +152,6 @@ public class CodeController {
 
     @RequestMapping("/detailedCode_modify")
     public String modifyDetCode(@RequestBody DetailedCodeDto dto) {
-        //TODO::태영 현정님
-        /* 데이터 무결성을 위해 상세코드명, 상세설명만 변경 가능하도록 작성 */
         codeService.updateDetailedCode(dto);
 
         return "redirect:/Code/representativeCode_list";   //저장이 완료되면 공통코드 조회 페이지로 이동

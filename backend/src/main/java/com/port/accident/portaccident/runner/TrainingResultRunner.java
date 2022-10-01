@@ -20,6 +20,7 @@
 //import java.time.LocalDateTime;
 //import java.util.ArrayList;
 //import java.util.List;
+//import java.util.Optional;
 //
 //@Profile("local")
 //@Component
@@ -34,46 +35,10 @@
 //
 //    @Override
 //    public void run(ApplicationArguments args) throws Exception {
-//
+//        Optional<Scenario> scenario1 = scenarioService.findById(1);
+//        Optional<Scenario> scenario2 = scenarioService.findById(2);
+//        Optional<Scenario> scenario3 = scenarioService.findById(3);
 //        Integer trainingResultId = 0;
-//
-//        /* create scenario */
-//        //Given
-//        ScenarioDto scenarioDto = ScenarioDto.builder()
-//                .name("SY2")
-//                .incidentLevel(IncidentLevel.LEVEL_3)
-//                .incidentImpact(IncidentImpact.DAMAGE)
-//                .incidentType(IncidentType.INCIDENT)
-//                .incidentDetailType(IncidentDetailType.DROP)
-//                .portArea(TrainingPlace.PLACE1)
-//                .responseStage("2")
-//                .build();
-//
-//        AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
-//                .name(PortFacility.CRANE)
-//                .build();
-//
-//        AccidentPortFacilityDto accidentPortFacilityDto2 = AccidentPortFacilityDto.builder()
-//                .name(PortFacility.CONTAINER)
-//                .build();
-//
-//        AccidentResponseActivityDto accidentResponseActivityDto = AccidentResponseActivityDto.builder()
-//                .comment("사고가 발생한 상황을 가정하여 상세하게 작성.")
-//                .manager("홍길동")
-//                .completePlaningTime(LocalDateTime.now())
-//                .build();
-//
-//        //When
-//        List<AccidentPortFacilityDto> accidentPortFacilityDtoList = new ArrayList<>();
-//        accidentPortFacilityDtoList.add(accidentPortFacilityDto);
-//        accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
-//
-//        List<AccidentResponseActivityDto> accidentResponseActivityDtoList = new ArrayList<>();
-//        accidentResponseActivityDtoList.add(accidentResponseActivityDto);
-//
-//        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
-//        Scenario scenario = scenarioService.findById(scenarioId).get();
-//
 //        /* create TrainingResult */
 //        //given
 //        for (int i = 1; i <= 30; i++) {
@@ -91,7 +56,7 @@
 //                        .incidentDetailType("추락")
 //                        .department("안전관리부서A")
 //                        .trainingArea("훈련대상 항만구역 A")
-//                        .scenario(scenario)
+//                        .scenario(scenario1.get())
 //                        .build();
 //            } else if (i <= 20) {
 //                dto = TrainingResultDto.builder()
@@ -106,7 +71,7 @@
 //                        .incidentDetailType("끼임")
 //                        .department("안전관리부서B")
 //                        .trainingArea("훈련대상 항만구역 B")
-//                        .scenario(scenario)
+//                        .scenario(scenario2.get())
 //                        .build();
 //            } else if (i <= 30) {
 //                dto = TrainingResultDto.builder()
@@ -121,7 +86,7 @@
 //                        .incidentDetailType("넘어짐")
 //                        .department("안전관리부서C")
 //                        .trainingArea("훈련대상 항만구역 C")
-//                        .scenario(scenario)
+//                        .scenario(scenario3.get())
 //                        .build();
 //            }
 //

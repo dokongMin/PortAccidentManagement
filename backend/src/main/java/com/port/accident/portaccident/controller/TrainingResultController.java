@@ -36,6 +36,11 @@ public class TrainingResultController {
         return "TrainingResult/TR_registration";
     }
 
+    @GetMapping("/trainingResult_detail")
+    public String trainingResultDetail(Model model) {
+        return "TrainingResult/TR_detail/TR_1st";
+    }
+
     @RequestMapping(value = "/trainingResult_register", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
     public String registerTrainingResult(@RequestBody Map<String, Object> param) {
         //TODO::태영 영주님
@@ -123,11 +128,8 @@ public class TrainingResultController {
             condition.setIncidentLevel(IncidentLevel.valueOf(incidentLevel));
         Page<TrainingResultJoinScenarioDto> result = resultService.searchTrainingResultListWithPaging(condition, pageable);
         model.addAttribute("condition", condition);
-        model.addAttribute("detList", result);
+        model.addAttribute("trList", result);
 
-        for (TrainingResultJoinScenarioDto trainingResultJoinScenarioDto : result) {
-            System.out.println(trainingResultJoinScenarioDto.toString());
-        }
         return "TrainingResult/TR_check";
     }
 
