@@ -1,14 +1,15 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 /*COMMON*/
+
 body{
   max-width: 1267.5px;
+  max-height: 150px;
   color:#333;
   overflow-x:hidden;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.4;
   font-family: 'Nanum Gothic', sans-serif;
-  background-image: url(../../img/chart.png);
 }
 
 a {
@@ -684,13 +685,65 @@ body:hover .fullbarchart .barlong4{width:350px;}
   background-color: blue;
   display: inline-block;
 }
+/*extra chart*/
+.extra{
+  position: absolute;
+  width: 1000px;
+  height: 300px;
+  left: 133.75px;
+  top: 1234px;
+}
+.extrabar{
+  position: relative;
+  color: black;
+  font-weight: 700;
+  padding: 8.75px 30px;
+  font-size: 12px;
+  bottom: 20px;
+  left: 300px;
+}
+.exbarname1, .exbarname2, .exbarname3, .exbarname4, .exbarname5
+, .exbarname6, .exbarname7, .exbarname8, .exbarname9, .exbarname10
+{background-color: #2264bb;
+  position: absolute;
+  left: 440px;
+  height: 12px;
+  transition: width 1.5s;
+  }
 
+.exbarname1{top:59px;width:236px;}
+.exbarname2{top:93px;width:191px;}
+.exbarname3{top:127px;width:171px;}
+.exbarname4{top:161px;width:120px;}
+.exbarname5{top:195px;width:118px;}
+.exbarname6{top:229px;width:70px;}
+.exbarname7{top:263px;width:48px;}
+.exbarname8{top:297px;width:16px;}
+.exbarname9{top:331px;width:15px;}
+.exbarname10{top:365px;width:59px;}
 
-
+.total{
+  width: 125px;
+  height: 100px;
+  position: relative;
+  left: 550px;
+  bottom: 150px;
+  border: 2px solid black;
+  border-radius: 50px;
+}
+.totalsum{
+  font-weight: 700; 
+  position: absolute; 
+  width: 125px; 
+  text-align: center;
+  height: 100px;
+  top:30px;
+}
 /*footer*/
 footer{
 background-color: #272727; 
 border-top: 1px solid #333;
+
 }
 footer .inner{
 padding: 40px 0 40px 0;
