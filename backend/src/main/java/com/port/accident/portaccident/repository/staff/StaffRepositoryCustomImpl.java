@@ -27,8 +27,6 @@ public class StaffRepositoryCustomImpl implements StaffRepositoryCustom {
 
     @Override
     public Page<Staff> searchPageStaff(StaffSearchCondition condition, Pageable pageable) {
-        pageable = pageableSetting(pageable);
-
         List<Staff> content = queryFactory
                 .selectFrom(staff)
                 .where(
@@ -56,11 +54,5 @@ public class StaffRepositoryCustomImpl implements StaffRepositoryCustom {
 
     private BooleanExpression corporationContains(String corporationCond) {
         return isEmpty(corporationCond) ? null : staff.corporation.contains(corporationCond);
-    }
-
-    private Pageable pageableSetting(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-
-        return PageRequest.of(page, 10);
     }
 }

@@ -34,8 +34,6 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     @Override
     public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
-        pageable = pageableSetting(pageable);
-
         List<ScenarioAccidentPortFacilityDto> content = queryFactory
                 .select(new QScenarioAccidentPortFacilityDto(
                         scenario.id,
@@ -52,6 +50,7 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
                         incidentTypeEq(condition.getIncidentType()),
                         incidentDetailTypeEq(condition.getIncidentDetailType())
                 )
+                .orderBy(scenario.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -83,11 +82,5 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     private BooleanExpression incidentDetailTypeEq(IncidentDetailType incidentDetailTypeCondition) {
         return isEmpty(incidentDetailTypeCondition) ? null : scenario.incidentDetailType.eq(incidentDetailTypeCondition);
-    }
-
-    private Pageable pageableSetting(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-
-        return PageRequest.of(page, 10);
     }
 }
