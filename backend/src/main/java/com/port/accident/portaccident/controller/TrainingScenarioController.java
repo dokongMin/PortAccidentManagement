@@ -6,7 +6,7 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPort
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.enums.PortFacility;
+import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.service.ScenarioService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.util.StringUtils.hasText;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/TrainingScenarios")
@@ -29,12 +31,12 @@ public class TrainingScenarioController {
     private final ScenarioRepository scenarioRepository;
 
     /*TODO::혜원 현정님 - 시나리오
-    * 1개의 시나리오에 여러 대응 활동이 작성되야하므로 화면 수정이 필요합니다.
-    * (시나리오 등록 페이지와 대응 활동 등록 페이지 분리)
-    *
-    * 시나리오 목록 조회 페이지 또한 대응 활동과 매니저명이 제외되어야 합니다.*/
+     * 1개의 시나리오에 여러 대응 활동이 작성되야하므로 화면 수정이 필요합니다.
+     * (시나리오 등록 페이지와 대응 활동 등록 페이지 분리)
+     *
+     * 시나리오 목록 조회 페이지 또한 대응 활동과 매니저명이 제외되어야 합니다.*/
 
-//    @GetMapping("/TS_Check_Page")
+    //    @GetMapping("/TS_Check_Page")
 //    public String checkTrainingScenario(){
 //        return "TrainingScenarios/TS_Check";
 //    }
@@ -46,13 +48,13 @@ public class TrainingScenarioController {
     @PostMapping("/TS_Register")
     public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto) {
         /*TODO::혜원 현정님 - 시나리오 등록
-        * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
-        * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
-        *
-        * 항만설비의 경우 체크 박스의 모든 name을 facilityList로 설정 시 List에 연결됩니다.
-        *
-        * name을 제외한 필드는 모두 enum으로 처리해주세요!
-        * */
+         * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
+         * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
+         *
+         * 항만설비의 경우 체크 박스의 모든 name을 facilityList로 설정 시 List에 연결됩니다.
+         *
+         * name을 제외한 필드는 모두 enum으로 처리해주세요!
+         * */
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
@@ -74,7 +76,7 @@ public class TrainingScenarioController {
                                          @RequestParam List<PortFacility> facilityList) {
 
         /*TODO:: 혜원 현정님 - 시나리오 수정
-        * 수정 시에는 시나리오의 id도 함께 넘겨주세요 (필드명: id)*/
+         * 수정 시에는 시나리오의 id도 함께 넘겨주세요 (필드명: id)*/
 
         ScenarioDto modifyScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
@@ -86,7 +88,7 @@ public class TrainingScenarioController {
     }
 
     @PostMapping("/TS_Modify_Check")
-    public String modifyCheck(@RequestParam(value = "nameCheck") String nameCheck)throws Exception{
+    public String modifyCheck(@RequestParam(value = "nameCheck") String nameCheck) throws Exception {
         Scenario scenario = scenarioRepository.findByName(nameCheck).orElseThrow(() -> new Exception("해당 시나리오명은 없습니다."));
         return "TrainingScenarios/TS_Modify";
     }
@@ -95,22 +97,33 @@ public class TrainingScenarioController {
     @RequestMapping("/TS_Check")
     public String checkTrainingScenario(Model model,
                                         @RequestParam(required = false, defaultValue = "") String name,
+                                        @RequestParam(required = false, defaultValue = "") String incidentLevel,
+                                        @RequestParam(required = false, defaultValue = "") String incidentType,
+                                        @RequestParam(required = false, defaultValue = "") String incidentDetailType,
                                         @PageableDefault Pageable pageable) {
 
         /*TODO::혜원 현정님 - 시나리오 조회
-        * 대응 활동이 분리되었기 때문에 매니저명으로 검색이 제외되어야 할 것 같아
-        * 시나리오 명으로만 검색 가능하도록 변경하였습니다.
-        *
-        * scenario에는 id, name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea 값이 있습니다.*/
+         * 대응 활동이 분리되었기 때문에 매니저명으로 검색이 제외되어야 할 것 같아
+         * 시나리오 명으로만 검색 가능하도록 변경하였습니다.
+         *
+         * scenario에는 id, name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea 값이 있습니다.*/
 
-        ScenarioSearchCondition condition = new ScenarioSearchCondition(name);
+        ScenarioSearchCondition condition = new ScenarioSearchCondition();
+        if(hasText(name))
+            condition.setName(name);
+        if(hasText(incidentLevel))
+            condition.setIncidentLevel(IncidentLevel.valueOf(incidentLevel));
+        if(hasText(incidentType))
+            condition.setIncidentType(IncidentType.valueOf(incidentType));
+        if(hasText(incidentDetailType))
+            condition.setIncidentDetailType(IncidentDetailType.valueOf(incidentDetailType));
+
         Page<ScenarioAccidentPortFacilityDto> scenarios = scenarioService.searchPageScenario(condition, pageable);
 
         model.addAttribute("condition", condition);
         model.addAttribute("scenarios", scenarios);
         return "TrainingScenarios/TS_Check";
     }
-
 
 
     @RequestMapping("/TS_Detail/{scenarioId}")
@@ -127,7 +140,7 @@ public class TrainingScenarioController {
          **/
         Optional<Scenario> scenario = scenarioService.findById(scenarioId);
 
-        if(scenario.isPresent()) {
+        if (scenario.isPresent()) {
             List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
 
             List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);

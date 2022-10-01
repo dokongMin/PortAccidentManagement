@@ -19,8 +19,6 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-
 </head>
 <body>
 <!-- HEADER -->
@@ -35,7 +33,7 @@
         <p>대응훈련 결과 조회</p>
     </div>
     <span class="fonts">안전사고 유형&nbsp;
-    <select id="incidentTypeSelect" onchange="incidentType(this)">
+    <select id="incidentTypeSelect" onchange="ChangeValue(); incidentType(this);">
       <option value="none" selected="selected">&nbsp;--&nbsp;</option>
       <option value="INCIDENT">사고</option>
       <option value="DISASTER">재난</option>
@@ -65,7 +63,6 @@
         <span class="fonts">훈련수행부서</span>&nbsp; <input id="department" type="text" placeholder="부서명 입력"
                                                        style="width: 100px;">
         <div class="inquiry-button" onclick="search()" style="padding: 10px 10px;"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span>
-
         </div>
     </div>
     <br>

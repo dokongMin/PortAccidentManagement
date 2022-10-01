@@ -32,37 +32,42 @@
         <p>대응훈련 시나리오 조회</p>
     </div>
     <span class="fonts">시나리오 유형&nbsp;
-    <select id="choose" onchange="ChangeValue()">
-      <option value="사고">사고</option>
-      <option value="재난">재난</option>
+    <select id="incidentTypeSelect" onchange="ChangeValue(); incidentType(this);">
+      <option value="none" selected="selected">&nbsp;--&nbsp;</option>
+      <option value="INCIDENT">사고</option>
+      <option value="DISASTER">재난</option>
     </select></span>
     <br><br>
     <div class="inquiry-line-1">
-        <p><span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder=" SY2" th:value="${condition.name}" style="width: 90px;"> </span>
+        <p><span class="fonts"> 시나리오명&nbsp; <input id="scenarioName" type="text" placeholder="시나리오명 입력"
+                                                   style="width: 100px;"> </span>
             &nbsp; &nbsp; &nbsp;
             <span><span class="fonts" id="ch1">사고 수준</span>
-        <input type="radio" name="l1" checked> Level1
-        <input type="radio" name="l1"> Level2
-        <input type="radio" name="l1"> Level3 </span>
+        <input type="radio" name="incidentLevel" value="LEVEL_1"> Level1
+        <input type="radio" name="incidentLevel" value="LEVEL_2"> Level2
+        <input type="radio" name="incidentLevel" value="LEVEL_3"> Level3 </span>
 
             &nbsp; &nbsp;
 
-            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select>
-                <option>추락</option>
-                <option>넘어짐</option>
-                <option>부딪힘</option>
-                <option>끼임</option>
-                <option>맞음</option>
+            <span class="fonts" id="ch2">사고 유형</span>&nbsp;<select id="incidentDetailTypeSelect"
+                                                                   onchange="incidentDetailType(this)">
+
+                <option value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option value="DROP">추락</option>
+                <option value="FALL">넘어짐</option>
+                <option value="BUMP">부딪힘</option>
+                <option value="TRAP">끼임</option>
+                <option value="HIT">맞음</option>
             </select>
 
             &nbsp; &nbsp; &nbsp; &nbsp;
 
-<!--            <span class="fonts" id="ch3">사고대응활동 담당자</span>&nbsp; <input type="text" style="width: 100px;">-->
+            <!--            <span class="fonts" id="ch3">사고대응활동 담당자</span>&nbsp; <input type="text" style="width: 100px;">-->
 
         </p>
     </div>
     <div class="inquiry-button">
-        <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+        <span class="imsi-button" onclick="search()">&nbsp;&nbsp;검색&nbsp;&nbsp;</span>
     </div>
     <br>
 
@@ -104,24 +109,25 @@
                 <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
                 <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
                 <li class="page_li">
-                    <a class="arrow pprev" th:href="@{/TrainingScenarios/TS_Check(page=1,name=${condition.name})}"></a>
+                    <a class="arrow pprev"
+                       th:href="@{/TrainingScenarios/TS_Check(page=1,name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
                     <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
                 </li>
                 <li class="page_li">
                     <a class="arrow prev"
-                       th:href="${scenarios.first} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number},name=${condition.name})}"></a>
+                       th:href="${scenarios.first} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
                 </li>
                 <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
                     <a th:text="${page}" th:class="${page == scenarios.number + 1} ? 'active'"
-                       th:href="@{/TrainingScenarios/TS_Check(page=${page},name=${condition.name})}"></a>
+                       th:href="@{/TrainingScenarios/TS_Check(page=${page},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
                 </li>
                 <li class="page_li">
                     <a class="arrow next"
-                       th:href="${scenarios.last} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number + 2},name=${condition.name})}"></a>
+                       th:href="${scenarios.last} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number + 2},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
                 </li>
                 <li class="page_li">
                     <a class="arrow nnext"
-                       th:href="@{/TrainingScenarios/TS_Check(page=${scenarios.totalPages},name=${condition.name})}"></a>
+                       th:href="@{/TrainingScenarios/TS_Check(page=${scenarios.totalPages},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
                 </li>
             </ul>
         </div>
@@ -152,5 +158,102 @@
     </div>
 </footer>
 </body>
+<script>
+    let scenarioNameVal;
+    let incidentLevelVal;
+    let incidentTypeVal;
+    let incidentDetailTypeVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('name')) {
+            document.getElementById("scenarioName").value = urlParams.get('name');
+        }
+        if (urlParams.get('incidentLevel')) {
+            const incidentLevelList = document.getElementsByName('incidentLevel');
+
+            incidentLevelList.forEach((node) => {
+                if (node.value == urlParams.get('incidentLevel')) {
+                    node.checked = true;
+                }
+            })
+        }
+        if (urlParams.get('incidentType')) {
+            incidentTypeVal = urlParams.get('incidentType');
+            selectedControl('incidentTypeSelect', urlParams.get('incidentType'));
+        }
+        if (urlParams.get('incidentDetailType')) {
+            incidentDetailTypeVal = urlParams.get('incidentDetailType');
+            selectedControl('incidentDetailTypeSelect', urlParams.get('incidentDetailType'));
+        }
+    }
+
+    function selectedControl(elementId, urlParamVal) {
+        const el = document.getElementById(elementId);  //select box
+        const len = el.options.length; //select box의 option 갯수
+        //select box의 option 갯수만큼 for문 돌림
+        for (let i = 0; i < len; i++) {
+            //select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+            if (el.options[i].value == urlParamVal) {
+                el.options[i].selected = true;
+            }
+        }
+    }
+
+
+    /* select box 옵션 값 선택 */
+    const incidentType = (target) => {
+        // 선택한 option의 value 값
+        incidentTypeVal = target.value;
+    }
+    const incidentDetailType = (target) => {
+        // 선택한 option의 value 값
+        incidentDetailTypeVal = target.value;
+    }
+
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        scenarioNameVal = document.getElementById("scenarioName").value;
+
+        /* 라디오버튼 값 가져오기 */
+        const incidentLevelList = document.getElementsByName('incidentLevel');
+
+        incidentLevelList.forEach((node) => {
+            if (node.checked) {
+                incidentLevelVal = node.value;
+            }
+        })
+
+        let conditionStr = "";
+
+        if (scenarioNameVal) {
+            conditionStr += "name=" + scenarioNameVal + "&";
+        }
+        if (incidentLevelVal != 'none' && incidentLevelVal != undefined) {
+            conditionStr += "incidentLevel=" + incidentLevelVal + "&";
+        }
+        if (incidentTypeVal != 'none' && incidentTypeVal != undefined) {
+            conditionStr += "incidentType=" + incidentTypeVal + "&";
+        }
+        if (incidentDetailTypeVal != 'none' && incidentDetailTypeVal != undefined) {
+            conditionStr += "incidentDetailType=" + incidentDetailTypeVal;
+        }
+
+        if (conditionStr == "") {
+            alert("검색 조건을 설정해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 <script src="/js/traningscenarios/tscheck.js"></script>
 </html>
