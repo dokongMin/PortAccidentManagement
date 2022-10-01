@@ -74,7 +74,7 @@
     <table>
         <thead>
         <tr>
-            <th class="fonts">id</th>
+            <th class="fonts">Index</th>
             <th class="fonts">시나리오명</th>
             <th class="fonts">훈련명</th>
             <th class="fonts">사고수준</th>
@@ -89,9 +89,9 @@
             <td th:text="${trStat.count} + ${trList.number} * 10"></td>
             <td th:text="${tr.scenarioName}"></td>
             <td th:text="${tr.trainingName}"></td>
-            <td th:text="${tr.incidentLevel}"></td>
+            <td th:text="${tr.incidentLevel.getLevelValue()}"></td>
             <td th:text="${tr.incidentDetailType}"></td>
-            <td th:text="${tr.place}"></td>
+            <td th:text="${tr.place.getPlaceValue()}"></td>
             <td th:text="${tr.department}"></td>
             <td th:text="${tr.trainingArea}"></td>
         </tr>
