@@ -9,6 +9,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,7 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     @Override
     public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+        pageable = pageableSetting(pageable);
 
         List<ScenarioAccidentPortFacilityDto> content = queryFactory
                 .select(new QScenarioAccidentPortFacilityDto(
@@ -60,5 +62,11 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     private BooleanExpression managerContains(String managerCondition) {
         return isEmpty(managerCondition) ? null : accidentResponseActivity.manager.contains(managerCondition);
+    }
+
+    private Pageable pageableSetting(Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+
+        return PageRequest.of(page, 10);
     }
 }

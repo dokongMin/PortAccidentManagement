@@ -34,10 +34,10 @@ public class TrainingScenarioController {
     *
     * 시나리오 목록 조회 페이지 또한 대응 활동과 매니저명이 제외되어야 합니다.*/
 
-    @GetMapping("/TS_Check")
-    public String checkTrainingScenario(){
-        return "TrainingScenarios/TS_Check";
-    }
+//    @GetMapping("/TS_Check_Page")
+//    public String checkTrainingScenario(){
+//        return "TrainingScenarios/TS_Check";
+//    }
     @GetMapping("/TS_Register_Page")
     public String registerTrainingScenarioPage() {
         return "TrainingScenarios/TS_Register";
@@ -84,6 +84,7 @@ public class TrainingScenarioController {
 
         return "redirect:/TrainingScenarios/TS_Check";
     }
+
     @PostMapping("/TS_Modify_Check")
     public String modifyCheck(@RequestParam(value = "nameCheck") String nameCheck)throws Exception{
         Scenario scenario = scenarioRepository.findByName(nameCheck).orElseThrow(() -> new Exception("해당 시나리오명은 없습니다."));
@@ -91,7 +92,7 @@ public class TrainingScenarioController {
     }
 
 
-    @RequestMapping("/staff_list")
+    @RequestMapping("/TS_Check")
     public String checkTrainingScenario(Model model,
                                         @RequestParam(required = false, defaultValue = "") String name,
                                         @PageableDefault Pageable pageable) {
@@ -103,10 +104,10 @@ public class TrainingScenarioController {
         * scenario에는 id, name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea 값이 있습니다.*/
 
         ScenarioSearchCondition condition = new ScenarioSearchCondition(name);
-        Page<ScenarioAccidentPortFacilityDto> scenario = scenarioService.searchPageScenario(condition, pageable);
+        Page<ScenarioAccidentPortFacilityDto> scenarios = scenarioService.searchPageScenario(condition, pageable);
 
         model.addAttribute("condition", condition);
-        model.addAttribute("scenario", scenario);
+        model.addAttribute("scenarios", scenarios);
         return "TrainingScenarios/TS_Check";
     }
 
