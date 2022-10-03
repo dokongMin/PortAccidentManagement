@@ -63,4 +63,9 @@ configurations {
     }
     querydsl.extendsFrom compileClasspath
 }
+
+compileQuerydsl.doFirst {
+    if(file(querydslDir).exists() )
+        delete(file(querydslDir))
+}
 targetCompatibility = JavaVersion.VERSION_1_9
