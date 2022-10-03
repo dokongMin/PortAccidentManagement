@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSA관리시스템</title>
+
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/traningscenarios/tscheck.css">
+    <link rel="stylesheet" href="/css/paging.css">
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<script type="module" src="/js/header.js"></script>
+<port-header></port-header>
+
+<!--training-scenarios-inquiry-->
+
+<div class="training-scenarios-inquiry">
+
+    <div class="inquiry-title">
+        <p>대응훈련 시나리오 조회</p>
+    </div>
+    <span class="fonts">시나리오 유형&nbsp;
+    <select id="incidentType" onchange="ChangeValue(); incidentType(this);">
+      <option value="none" selected="selected">&nbsp;--&nbsp;</option>
+      <option value="INCIDENT">사고</option>
+      <option value="DISASTER">재난</option>
+    </select></span>
+    <br><br>
+    <div class="inquiry-line-1">
+        <p><span class="fonts"> 시나리오명&nbsp; <input id="scenarioName" type="text" placeholder="시나리오명 입력"
+                                                   style="width: 100px;"> </span>
+            &nbsp; &nbsp; &nbsp;
+            <span><span class="fonts" id="ch1">사고 수준</span>
+        <input type="radio" name="incidentLevel" value="LEVEL_1"> Level1
+        <input type="radio" name="incidentLevel" value="LEVEL_2"> Level2
+        <input type="radio" name="incidentLevel" value="LEVEL_3"> Level3 </span>
+
+            &nbsp; &nbsp;
+
+            <span class="fonts" id="ch2">사고 유형</span>&nbsp;<select id="incidentDetailTypeSelect"
+                                                                   onchange="incidentDetailType(this)">
+
+                <option value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option value="DROP">추락</option>
+                <option value="FALL">넘어짐</option>
+                <option value="BUMP">부딪힘</option>
+                <option value="TRAP">끼임</option>
+                <option value="HIT">맞음</option>
+            </select>
+
+            &nbsp; &nbsp; &nbsp; &nbsp;
+
+            <!--            <span class="fonts" id="ch3">사고대응활동 담당자</span>&nbsp; <input type="text" style="width: 100px;">-->
+
+        </p>
+    </div>
+    <div class="inquiry-button">
+        <span class="imsi-button" onclick="search()">&nbsp;&nbsp;검색&nbsp;&nbsp;</span>
+    </div>
+    <br>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th class="fonts">Index</th>
+            <th class="fonts">시나리오명</th>
+            <th class="fonts">시나리오 유형</th>
+            <th class="fonts">수준</th>
+            <th class="fonts">유형</th>
+            <th class="fonts">영향</th>
+            <th class="fonts">사고항만구역</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${scenarios.getTotalPages() != 0}" th:each="scenario : ${scenarios}"
+            th:onclick="|location.href='@{/TS_Detail/{scenarioId}(scenarioId=${scenario.id})}'|">
+            <td th:text="${scenarioStat.count} + ${scenarios.number} * 10"></td>
+            <td th:text="${scenario.name}"></td>
+            <td th:text="${scenario.incidentType.getTypeValue()}"></td>
+            <td th:text="${scenario.incidentLevel.getLevelValue()}"></td>
+            <td th:text="${scenario.incidentDetailType.getTypeValue()}"></td>
+            <td th:text="${scenario.incidentImpact.getImpactValue()}"></td>
+            <td th:text="${scenario.portArea.getPlaceValue()}"></td>
+        </tr>
+        <tr th:if="${scenarios.getTotalPages() == 0}">
+            <td colspan="7">조회된 결과가 없습니다.</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="page_wrap">
+        <div class="page_nation">
+            <ul class="page_ul"
+                th:if="${scenarios.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(scenarios.number/10)*10 + 1}, last=(${start + 9 < scenarios.totalPages ? start + 9 : scenarios.totalPages})">
+                <!--with: 변수 설정-->
+                <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
+                <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
+                <li class="page_li">
+                    <a class="arrow pprev"
+                       th:href="@{/TrainingScenarios/TS_Check(page=1,name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
+                    <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
+                </li>
+                <li class="page_li">
+                    <a class="arrow prev"
+                       th:href="${scenarios.first} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
+                </li>
+                <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
+                    <a th:text="${page}" th:class="${page == scenarios.number + 1} ? 'active'"
+                       th:href="@{/TrainingScenarios/TS_Check(page=${page},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow next"
+                       th:href="${scenarios.last} ? '#' : @{/TrainingScenarios/TS_Check(page=${scenarios.number + 2},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow nnext"
+                       th:href="@{/TrainingScenarios/TS_Check(page=${scenarios.totalPages},name=${condition.name},incidentLevel=${condition.incidentLevel},incidentType=${condition.incidentType},incidentDetailType=${condition.incidentDetailType})}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="regist-button">
+        <a href="/TrainingScenarios/TS_Register_Page"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/TrainingScenarios/TS_Modify_Page"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+    </div>
+</div>
+
+<!-- footer -->
+<footer>
+    <div class="inner">
+        <p class="title">DEVELOPED BY TEAM</p>
+        <ul class="menu">
+            <li><p>스마트 해상물류 프로젝트</p></li>
+            <li><p>항만 안전사고 대응 관리 시스템</p></li>
+        </ul>
+        <div class="info">
+            <span>MENTOR: 김인수</span>
+            <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+            <span>FRONTEND TEAM: 송영주 주현정</span>
+        </div>
+        <p class="copyright">
+            <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+        </p>
+    </div>
+</footer>
+</body>
+<script>
+    let scenarioNameVal;
+    let incidentLevelVal;
+    let incidentTypeVal;
+    let incidentDetailTypeVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('name')) {
+            document.getElementById("scenarioName").value = urlParams.get('name');
+        }
+        if (urlParams.get('incidentLevel')) {
+            const incidentLevelList = document.getElementsByName('incidentLevel');
+
+            incidentLevelList.forEach((node) => {
+                if (node.value == urlParams.get('incidentLevel')) {
+                    node.checked = true;
+                }
+            })
+        }
+        if (urlParams.get('incidentType')) {
+            incidentTypeVal = urlParams.get('incidentType');
+            selectedControl('incidentType', urlParams.get('incidentType'));
+        }
+        if (urlParams.get('incidentDetailType')) {
+            incidentDetailTypeVal = urlParams.get('incidentDetailType');
+            selectedControl('incidentDetailTypeSelect', urlParams.get('incidentDetailType'));
+        }
+    }
+
+    function selectedControl(elementId, urlParamVal) {
+        const el = document.getElementById(elementId);  //select box
+        const len = el.options.length; //select box의 option 갯수
+        //select box의 option 갯수만큼 for문 돌림
+        for (let i = 0; i < len; i++) {
+            //select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+            if (el.options[i].value == urlParamVal) {
+                el.options[i].selected = true;
+            }
+        }
+    }
+
+
+    /* select box 옵션 값 선택 */
+    const incidentType = (target) => {
+        // 선택한 option의 value 값
+        incidentTypeVal = target.value;
+    }
+    const incidentDetailType = (target) => {
+        // 선택한 option의 value 값
+        incidentDetailTypeVal = target.value;
+    }
+
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        scenarioNameVal = document.getElementById("scenarioName").value;
+
+        /* 라디오버튼 값 가져오기 */
+        const incidentLevelList = document.getElementsByName('incidentLevel');
+
+        incidentLevelList.forEach((node) => {
+            if (node.checked) {
+                incidentLevelVal = node.value;
+            }
+        })
+
+        let conditionStr = "";
+
+        if (scenarioNameVal) {
+            conditionStr += "name=" + scenarioNameVal + "&";
+        }
+        if (incidentLevelVal != 'none' && incidentLevelVal != undefined) {
+            conditionStr += "incidentLevel=" + incidentLevelVal + "&";
+        }
+        if (incidentTypeVal != 'none' && incidentTypeVal != undefined) {
+            conditionStr += "incidentType=" + incidentTypeVal + "&";
+        }
+        if (incidentDetailTypeVal != 'none' && incidentDetailTypeVal != undefined) {
+            conditionStr += "incidentDetailType=" + incidentDetailTypeVal;
+        }
+
+        if (conditionStr == "") {
+            alert("검색 조건을 설정해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
+<script src="/js/traningscenarios/tscheck.js"></script>
+</html>
