@@ -211,6 +211,8 @@ nav {
 
 table,thead,tbody,tfoot,th,td{
   border: 0.5px solid rgb(100, 96, 96);
+  font-weight: 700;
+  vertical-align: middle;
 }
 
 thead{

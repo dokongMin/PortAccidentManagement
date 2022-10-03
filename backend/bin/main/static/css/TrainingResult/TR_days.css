@@ -285,16 +285,35 @@ table {
 }
 
 /*modal*/
-.modal1,.modal2, .modal3, .modal4,.modal5,.modal6, 
-.modal7, .modal8,.modal10,.modal1, .modal2, .modal3, .modal14 {
+.modal1,.modal2, .modal3, .modal4,.modal5,.modal6, .modal7, .modal8,.modal10,
+.modal11, .modal12, .modal13, .modal14, .modal1-1, .modal2-1, .modal3-1, .modal4-1, .modal5-1
+, .modal6-1, .modal7-1, .modal8-1, .modal9-1, .modal10-1, .modal11-1, .modal12-1, .modal13-1, .modal14-1 {
   position: absolute;
   z-index: 1;
   top:0px;
   left: 0px;
   width: 100vw;
-  height: 130vh;
   display: none;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal2, .modal2-1{
+  height: 105vh;
+}
+
+.modal1, .modal1-1,.modal4, .modal4-1,.modal5, .modal5-1,.modal6, .modal6-1,.modal12, .modal12-1,.modal13, .modal13-1{
+  height: 108.5vh;
+}
+
+.modal3, .modal3-1,.modal7, .modal7-1,.modal11, .modal11-1{
+  height: 112.5vh;
+}
+
+.modal10, .modal10-1,.modal14, .modal14-1{
+  height: 116vh;
+}
+.modal8, .modal8-1{
+  height: 120vh;
 }
 .modal.show {
   display: block;

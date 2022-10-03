@@ -6,20 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSA관리시스템</title>
 
-  <link rel="icon" href="/img/favicon.png">
+  <link rel="icon" href="../../static/img/favicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/tsassessment/tsaregister.css">
+  <link rel="stylesheet" href="../../static/css/tsassessment/tsaregister.css">
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
 </head>
 <body>
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 <!--training-scenarios-assessment-inquiry-->
 
@@ -30,7 +30,13 @@
   </div>
 
   <div class="inquiry-line-1">
-    <p> <span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder="" style="width: 130px;" required> </span>
+    <p> <span class="fonts"> 시나리오명&nbsp; 
+      <select style="width: 130px; height: 25px;" class="fonts">
+        <option class="fonts">SY2</option>
+        <option class="fonts">SV1</option>
+        <option class="fonts">SY5</option>
+        <option class="fonts">SW1</option>
+      </select> </span>
       &nbsp; &nbsp; &nbsp;
     </p>
   </div>
