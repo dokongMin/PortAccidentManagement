@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
 public class CodeService {
 

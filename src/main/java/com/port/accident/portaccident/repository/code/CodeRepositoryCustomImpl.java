@@ -58,7 +58,7 @@ public class CodeRepositoryCustomImpl implements CodeRepositoryCustom {
                         detailedCode.name.as("detName"),
                         detailedCode.code.as("detCode"),
                         detailedCode.comment,
-                        representativeCode.name.as("repName")
+                        representativeCode.code.as("repCode")
 
                 ))
                 .from(detailedCode)

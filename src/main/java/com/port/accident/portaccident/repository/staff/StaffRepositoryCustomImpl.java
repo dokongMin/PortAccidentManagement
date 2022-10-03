@@ -55,10 +55,4 @@ public class StaffRepositoryCustomImpl implements StaffRepositoryCustom {
     private BooleanExpression corporationContains(String corporationCond) {
         return isEmpty(corporationCond) ? null : staff.corporation.contains(corporationCond);
     }
-
-    private Pageable pageableSetting(Pageable pageable) {
-        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1); // page는 index 처럼 0부터 시작 -> 페이지에서 -1 처리
-
-        return PageRequest.of(page, 10);
-    }
 }

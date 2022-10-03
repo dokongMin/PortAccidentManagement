@@ -10,14 +10,14 @@ public class DetRepJoinDto {
     private String detName;
     private String detCode;
     private String comment;
-    private String repName;
+    private String repCode;
 
     @QueryProjection
-    public DetRepJoinDto(Integer detId, String detName, String detCode, String comment, String repName) {
+    public DetRepJoinDto(Integer detId, String detName, String detCode, String comment, String repCode) {
         this.detId = detId;
         this.detName = detName;
         this.detCode = detCode;
         this.comment = comment;
-        this.repName = repName;
+        this.repCode = repCode;
     }
 }

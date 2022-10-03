@@ -3,12 +3,16 @@ package com.port.accident.portaccident.repository.training_scenario;
 import com.port.accident.portaccident.dto.training_scenario.QScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
+import com.port.accident.portaccident.enums.IncidentDetailType;
+import com.port.accident.portaccident.enums.IncidentLevel;
+import com.port.accident.portaccident.enums.IncidentType;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
@@ -30,7 +34,6 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
 
     @Override
     public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
-
         List<ScenarioAccidentPortFacilityDto> content = queryFactory
                 .select(new QScenarioAccidentPortFacilityDto(
                         scenario.id,
@@ -41,7 +44,13 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
                         scenario.incidentDetailType,
                         scenario.portArea))
                 .from(scenario)
-                .where(nameContains(condition.getName()))
+                .where(
+                        nameContains(condition.getName()),
+                        incidentLevelEq(condition.getIncidentLevel()),
+                        incidentTypeEq(condition.getIncidentType()),
+                        incidentDetailTypeEq(condition.getIncidentDetailType())
+                )
+                .orderBy(scenario.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -49,7 +58,12 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
         JPAQuery<Long> countQuery = queryFactory
                 .select(scenario.count())
                 .from(scenario)
-                .where(nameContains(condition.getName()));
+                .where(
+                        nameContains(condition.getName()),
+                        incidentLevelEq(condition.getIncidentLevel()),
+                        incidentTypeEq(condition.getIncidentType()),
+                        incidentDetailTypeEq(condition.getIncidentDetailType())
+                );
 
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchOne);
     }
@@ -58,7 +72,15 @@ public class ScenarioRepositoryCustomImpl implements ScenarioRepositoryCustom {
         return isEmpty(nameCondition) ? null : scenario.name.contains(nameCondition);
     }
 
-    private BooleanExpression managerContains(String managerCondition) {
-        return isEmpty(managerCondition) ? null : accidentResponseActivity.manager.contains(managerCondition);
+    private BooleanExpression incidentLevelEq(IncidentLevel incidentLevelCondition) {
+        return isEmpty(incidentLevelCondition) ? null : scenario.incidentLevel.eq(incidentLevelCondition);
+    }
+
+    private BooleanExpression incidentTypeEq(IncidentType incidentTypeCondition) {
+        return isEmpty(incidentTypeCondition) ? null : scenario.incidentType.eq(incidentTypeCondition);
+    }
+
+    private BooleanExpression incidentDetailTypeEq(IncidentDetailType incidentDetailTypeCondition) {
+        return isEmpty(incidentDetailTypeCondition) ? null : scenario.incidentDetailType.eq(incidentDetailTypeCondition);
     }
 }

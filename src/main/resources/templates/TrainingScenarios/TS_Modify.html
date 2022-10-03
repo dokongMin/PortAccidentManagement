@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PSA관리시스템</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSA관리시스템</title>
 
-  <link rel="icon" href="/img/favicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/traningscenarios/tsmodify.css">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/traningscenarios/tsmodify.css">
 
-<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
 <script type="module" src="/js/header.js"></script>
 <port-header></port-header>
-  <!--training-scenarios-->
-  
-  <div class="training-scenarios">
-  
+<!--training-scenarios-->
+
+<div class="training-scenarios">
+
     <div class="regist-title">
-      <p>대응훈련 시나리오 수정</p>
+        <p>대응훈련 시나리오 수정</p>
     </div>
     <span class="fonts">시나리오 유형&nbsp; 
       <select id="choose" onchange="ChangeValue()">
@@ -34,84 +35,88 @@
         <option value="재난">재난</option>
       </select></span>
     <br><br>
+    <form method="post" action="/TrainingScenarios/TS_Modify_Check" name="checkScenario">
     <span class="fonts">
-      <p class="pstyle">수정할 대응훈련 시나리오의 시나리오명 입력 &nbsp;&nbsp;<input type="text" required><br></p>
+      <p class="pstyle">수정할 대응훈련 시나리오의 시나리오명 입력 &nbsp;&nbsp;<input type="text" required name="nameCheck"
+                                                                   th:id="nameCheck"><br></p>
     </span>
-    <div class="regist-button" style="position: absolute; right: 60px; top: 145px;">
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>
-    </div>
+        <div class="regist-button" style="position: absolute; right: 60px; top: 145px;">
+            <button type="button" onclick="javascript:document.checkScenario.submit();">조회</button>
+            <!--      <a href="#" onclick="javascript:document.checkScenario.submit();"><span class="imsi-button">&nbsp;&nbsp;확인&nbsp;&nbsp;</span></a>-->
+        </div>
+    </form>
     <br><br>
     <div class="regist-line-1">
-      <p> <span class="fonts"> 시나리오명 &nbsp;&nbsp;<input type="text" placeholder="" style="width: 250px;"> </span>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;<select>
-            <option>추락</option>
-            <option>넘어짐</option>
-            <option>부딪힘</option>
-            <option>끼임</option>
-            <option>맞음</option>
-          </select>
-      </p>
+        <p><span class="fonts"> 시나리오명 &nbsp;&nbsp;<input type="text" placeholder="" style="width: 250px;"> </span>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;<select>
+                <option value="">추락</option>
+                <option>넘어짐</option>
+                <option>부딪힘</option>
+                <option>끼임</option>
+                <option>맞음</option>
+            </select>
+        </p>
     </div>
-  
+
     <div class="regist-line-2">
-      <p><span class="fonts" id="ch1">사고 수준</span> &nbsp;&nbsp; 
-        <input type="radio" name="l1" checked> Level1
-        <input type="radio" name="l1"> Level2
-        <input type="radio" name="l1"> Level3 
-      </p> 
+        <p><span class="fonts" id="ch1">사고 수준</span> &nbsp;&nbsp;
+            <input type="radio" name="l1" checked> Level1
+            <input type="radio" name="l1"> Level2
+            <input type="radio" name="l1"> Level3
+        </p>
     </div>
-  
+
     <div class="regist-line-3">
-      <p> <span class="fonts" id="ch3">사고 영향</span> &nbsp;&nbsp;<select>
+        <p><span class="fonts" id="ch3">사고 영향</span> &nbsp;&nbsp;<select>
             <option>경상</option>
             <option>중상</option>
-          </select>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="fonts" id="ch4">사고항만구역</span> &nbsp;&nbsp;<select>
-            <option>무역항 수상구역</option>
-            <option>무역항 육상구역</option>
-            <option>연안항 수상구역</option>
-            <option>연안항 육상구역</option>
-            <option>하역</option>
-          </select>
-      </p>
+        </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="fonts" id="ch4">사고항만구역</span> &nbsp;&nbsp;<select>
+                <option>무역항 수상구역</option>
+                <option>무역항 육상구역</option>
+                <option>연안항 수상구역</option>
+                <option>연안항 육상구역</option>
+                <option>하역</option>
+            </select>
+        </p>
     </div>
-  
+
     <div class="regist-line-4">
-      <p><span class="fonts" id="ch5">사고항만설비</span> &nbsp; &nbsp;
-        <input type="checkbox" name="machine1">크레인
-        &nbsp;<input type="checkbox" name="machine2">컨테이너
-        &nbsp;<input type="checkbox" name="machine3">지게차
-        &nbsp;<input type="checkbox" name="machine4">사다리
-      </p>
+        <p><span class="fonts" id="ch5">사고항만설비</span> &nbsp; &nbsp;
+            <input type="checkbox" name="machine1">크레인
+            &nbsp;<input type="checkbox" name="machine2">컨테이너
+            &nbsp;<input type="checkbox" name="machine3">지게차
+            &nbsp;<input type="checkbox" name="machine4">사다리
+        </p>
     </div>
-  
+
     <div class="regist-button">
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
-      <a href="/TrainingScenarios/TS_Check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+        <a href="/TrainingScenarios/TS_Modify"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+        <a href="/TrainingScenarios/TS_Check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
-  </div>
+</div>
 
 
-  <!-- footer -->
-  <footer>
+<!-- footer -->
+<footer>
     <div class="inner">
-      <p class="title">DEVELOPED BY TEAM</p>
-      <ul class="menu">
-        <li><p>스마트 해상물류 프로젝트</p></li>
-        <li><p>항만 안전사고 대응 관리 시스템</p></li>
-      </ul>
-      <div class="info">
-        <span>MENTOR: 김인수</span>
-        <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
-        <span>FRONTEND TEAM: 송영주 주현정</span>
-      </div>
-      <p class="copyright">
-        <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
-      </p>
+        <p class="title">DEVELOPED BY TEAM</p>
+        <ul class="menu">
+            <li><p>스마트 해상물류 프로젝트</p></li>
+            <li><p>항만 안전사고 대응 관리 시스템</p></li>
+        </ul>
+        <div class="info">
+            <span>MENTOR: 김인수</span>
+            <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+            <span>FRONTEND TEAM: 송영주 주현정</span>
+        </div>
+        <p class="copyright">
+            <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+        </p>
     </div>
-  </footer>
+</footer>
 </body>
-<script src="/js/traningscenarios/tsmodify.js"> </script>
+<script src="/js/traningscenarios/tsmodify.js"></script>
 </html>

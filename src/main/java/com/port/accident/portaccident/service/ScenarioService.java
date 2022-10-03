@@ -179,6 +179,11 @@ public class ScenarioService {
         return scenarioRepository.searchPageScenario(condition, pageable);
     }
 
+    @Transactional
+    public List<PortFacility> findAccidentPortFacilityNameByScenarioId(Integer scenarioId) {
+        return accidentPortFacilityRepository.findNameByScenarioId(scenarioId);
+    }
+
 
     /*
      * 사고 대응 활동
@@ -210,6 +215,10 @@ public class ScenarioService {
         accidentResponseActivityRepository.deleteById(activityId);
     }
 
+    @Transactional
+    public List<AccidentResponseActivity> findAccidentResponseActivityByScenarioId(Integer scenarioId) {
+        return accidentResponseActivityRepository.findByScenarioId(scenarioId);
+    }
 
     /*
      * 시나리오 평가
