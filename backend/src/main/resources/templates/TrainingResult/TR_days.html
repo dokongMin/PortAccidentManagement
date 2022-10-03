@@ -66,7 +66,7 @@ JQuery Number Plugin
   <div class="inquiry-line-2">
     <p> 
       <span class="fonts">유형</span>&nbsp; 
-      <select id="typeC" onchange="Evaluation()">
+      <select id="typeC" onchange="Evaluation();">
         <option>--선택--</option>
         <option value="사고">사고</option>
         <option value="재난">재난</option>
@@ -74,7 +74,7 @@ JQuery Number Plugin
       &nbsp;  &nbsp;  &nbsp;
 
       <span class="fonts" >레벨</span>&nbsp; 
-      <select id="levelC" onchange="Evaluation()">
+      <select id="levelC" onchange="Evaluation();">
         <option>--선택--</option>
         <option value="level1">Level1</option>
         <option value="level2">Level2</option>
@@ -83,7 +83,7 @@ JQuery Number Plugin
       &nbsp;  &nbsp;  &nbsp;
 
       <span class="fonts">수행 일자</span>&nbsp; 
-      <select id="dayC" onchange="Evaluation()">
+      <select id="dayC" onchange="Evaluation();">
         <option>--선택--</option>
         <option value="1일차">1일차</option>
         <option value="2일차">2일차</option>
@@ -93,12 +93,15 @@ JQuery Number Plugin
     </p>
   </div>
 </div>
+<br><br>
 
-<div  id="daytable2">
+
+<div id="daytable1">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
   <table>
     <tbody>
       <tr>
-        <td>사고 - Level1 - 2일차</td>
+        <td>사고 - Level1 - 1일차 (사고 대응 방법)</td>
         <td>1</td>
         <td>2</td>
         <td>3</td>
@@ -106,46 +109,1014 @@ JQuery Number Plugin
         <td>5</td>
       </tr>
       <tr>
-        <td>sfd</td>
-        <td><input name="score1" value="1" type="radio" onclick="Radio()"></td>
-        <td><input name="score1" value="2" type="radio" onclick="Radio()"></td>
-        <td><input name="score1" value="3" type="radio" onclick="Radio()"></td>
-        <td><input name="score1" value="4" type="radio" onclick="Radio()"></td>
-        <td><input name="score1" value="5" type="radio" onclick="Radio()"></td>
+        <td>항만 안전사고 초기 상황 확인</td>
+        <td><input name="score1-1" value="1" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-1" value="2" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-1" value="3" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-1" value="4" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-1" value="5" type="radio" onclick="Radio1()"></td>
       </tr>
       <tr>
-        <td>sdf</td>
-        <td><input name="score2" value="1" type="radio" onclick="Radio()"></td>
-        <td><input name="score2" value="2" type="radio" onclick="Radio()"></td>
-        <td><input name="score2" value="3" type="radio" onclick="Radio()"></td>
-        <td><input name="score2" value="4" type="radio" onclick="Radio()"></td>
-        <td><input name="score2" value="5" type="radio" onclick="Radio()"></td>
+        <td>조치사항 지시(하역작업 중단 등)</td>
+        <td><input name="score1-2" value="1" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-2" value="2" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-2" value="3" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-2" value="4" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-2" value="5" type="radio" onclick="Radio1()"></td>
       </tr>
       <tr>
-        <td>dh</td>
-        <td><input name="score3" value="1" type="radio" onclick="Radio()"></td>
-        <td><input name="score3" value="2" type="radio" onclick="Radio()"></td>
-        <td><input name="score3" value="3" type="radio" onclick="Radio()"></td>
-        <td><input name="score3" value="4" type="radio" onclick="Radio()"></td>
-        <td><input name="score3" value="5" type="radio" onclick="Radio()"></td>
+        <td>사고현장 방문 및 대응상황 점검</td>
+        <td><input name="score1-3" value="1" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-3" value="2" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-3" value="3" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-3" value="4" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-3" value="5" type="radio" onclick="Radio1()"></td>
+      </tr>
+      <tr>
+        <td>시설물 점검 및 복구 계획 수립</td>
+        <td><input name="score1-4" value="1" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-4" value="2" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-4" value="3" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-4" value="4" type="radio" onclick="Radio1()"></td>
+        <td><input name="score1-4" value="5" type="radio" onclick="Radio1()"></td>
       </tr>
     </tbody>
   </table>
   <br>
-  <span>합계 : &nbsp;
-    <div id="totalsum" style="display:inline;"></div>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum1" style="display:inline;"></div>
   </span> 
-  <div class="modal">
-    <div class="modal_body">ㄴㅇㄹㄴㅇ론롱홀ㅇ
-      <a href="../TrainingResult/TR_days.html"><span class="imsi-button">&nbsp;&nbsp;다시 하기&nbsp;&nbsp;</span></a>
+  <div class="modal1">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
     </div>  
   </div>
-  <button class="btn-open-popup">평가하기</button>
-  <div id="success"></div>
+  <div class="modal1-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup1 imsi-button">평가하기</button>
+</div>
+
+
+<div  id="daytable2">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level1 - 2일차 (사고 복구 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>시설피해현황 파악</td>
+        <td><input name="score2-1" value="1" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-1" value="2" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-1" value="3" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-1" value="4" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-1" value="5" type="radio" onclick="Radio2()"></td>
+      </tr>
+      <tr>
+        <td>피해 시설물 자체 점검</td>
+        <td><input name="score2-2" value="1" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-2" value="2" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-2" value="3" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-2" value="4" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-2" value="5" type="radio" onclick="Radio2()"></td>
+      </tr>
+      <tr>
+        <td>피해 복구 작업 진행</td>
+        <td><input name="score2-3" value="1" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-3" value="2" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-3" value="3" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-3" value="4" type="radio" onclick="Radio2()"></td>
+        <td><input name="score2-3" value="5" type="radio" onclick="Radio2()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum2" style="display:inline;"></div>
+  </span> 
+  <div class="modal2">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal2-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup2 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable3">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level2 - 1일차 (사고 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>항만 안전사고 초기 상황 확인</td>
+        <td><input name="score3-1" value="1" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-1" value="2" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-1" value="3" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-1" value="4" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-1" value="5" type="radio" onclick="Radio3()"></td>
+      </tr>
+      <tr>
+        <td>긴급 대응조직 편성</td>
+        <td><input name="score3-2" value="1" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-2" value="2" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-2" value="3" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-2" value="4" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-2" value="5" type="radio" onclick="Radio3()"></td>
+      </tr>
+      <tr>
+        <td>조치사항 지시</td>
+        <td><input name="score3-3" value="1" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-3" value="2" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-3" value="3" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-3" value="4" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-3" value="5" type="radio" onclick="Radio3()"></td>
+      </tr>
+      <tr>
+        <td>사고현장 방문 및 대응상황 점검</td>
+        <td><input name="score3-4" value="1" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-4" value="2" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-4" value="3" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-4" value="4" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-4" value="5" type="radio" onclick="Radio3()"></td>
+      </tr>
+      <tr>
+        <td>시설물 점검 및 복구 계획 수립</td>
+        <td><input name="score3-5" value="1" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-5" value="2" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-5" value="3" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-5" value="4" type="radio" onclick="Radio3()"></td>
+        <td><input name="score3-5" value="5" type="radio" onclick="Radio3()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum3" style="display:inline;"></div>
+  </span> 
+  <div class="modal3">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal3-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup3 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable4">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level2 - 2일차 (사고 복구 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>시설피해현황 파악</td>
+        <td><input name="score4-1" value="1" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-1" value="2" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-1" value="3" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-1" value="4" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-1" value="5" type="radio" onclick="Radio4()"></td>
+      </tr>
+      <tr>
+        <td>2차 피해 우려지역 점검 강화 및 피해 조사</td>
+        <td><input name="score4-2" value="1" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-2" value="2" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-2" value="3" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-2" value="4" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-2" value="5" type="radio" onclick="Radio4()"></td>
+      </tr>
+      <tr>
+        <td>피해 시설물 자체 점검</td>
+        <td><input name="score4-3" value="1" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-3" value="2" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-3" value="3" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-3" value="4" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-3" value="5" type="radio" onclick="Radio4()"></td>
+      </tr>
+      <tr>
+        <td>피해 복구 작업 진행</td>
+        <td><input name="score4-4" value="1" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-4" value="2" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-4" value="3" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-4" value="4" type="radio" onclick="Radio4()"></td>
+        <td><input name="score4-4" value="5" type="radio" onclick="Radio4()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum4" style="display:inline;"></div>
+  </span> 
+  <div class="modal4">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal4-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup4 imsi-button">평가하기</button>
+</div>
+
+
+<div id="daytable5">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level3 - 1일차 (사고 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>항만 안전사고 초기 상황 확인</td>
+        <td><input name="score5-1" value="1" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-1" value="2" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-1" value="3" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-1" value="4" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-1" value="5" type="radio" onclick="Radio5()"></td>
+      </tr>
+      <tr>
+        <td>긴급 대응조직 편성 &  대응 지휘 체제 구축</td>
+        <td><input name="score5-2" value="1" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-2" value="2" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-2" value="3" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-2" value="4" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-2" value="5" type="radio" onclick="Radio5()"></td>
+      </tr>
+      <tr>
+        <td>비상근무 발령 & 24시간 대응체계 가동</td>
+        <td><input name="score5-3" value="1" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-3" value="2" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-3" value="3" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-3" value="4" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-3" value="5" type="radio" onclick="Radio5()"></td>
+      </tr>
+      <tr>
+        <td>조치사항 지시</td>
+        <td><input name="score5-4" value="1" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-4" value="2" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-4" value="3" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-4" value="4" type="radio" onclick="Radio5()"></td>
+        <td><input name="score5-4" value="5" type="radio" onclick="Radio5()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum5" style="display:inline;"></div>
+  </span> 
+  <div class="modal5">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal5-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup5 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable6">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level3 - 2일차 (사고 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>유관기관 상황 전파</td>
+        <td><input name="score6-1" value="1" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-1" value="2" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-1" value="3" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-1" value="4" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-1" value="5" type="radio" onclick="Radio6()"></td>
+      </tr>
+      <tr>
+        <td>사고현장 방문 및 대응상황 점검</td>
+        <td><input name="score6-2" value="1" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-2" value="2" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-2" value="3" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-2" value="4" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-2" value="5" type="radio" onclick="Radio6()"></td>
+      </tr>
+      <tr>
+        <td>시설물 점검 및 복구 게획 수립</td>
+        <td><input name="score6-3" value="1" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-3" value="2" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-3" value="3" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-3" value="4" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-3" value="5" type="radio" onclick="Radio6()"></td>
+      </tr>
+      <tr>
+        <td>방송사 - 언론 기관에 보도 지원</td>
+        <td><input name="score6-4" value="1" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-4" value="2" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-4" value="3" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-4" value="4" type="radio" onclick="Radio6()"></td>
+        <td><input name="score6-4" value="5" type="radio" onclick="Radio6()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum6" style="display:inline;"></div>
+  </span> 
+  <div class="modal6">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal6-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup6 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable7">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>사고 - Level3 - 3일차 (사고 복구 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>시설피해현황 파악</td>
+        <td><input name="score7-1" value="1" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-1" value="2" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-1" value="3" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-1" value="4" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-1" value="5" type="radio" onclick="Radio7()"></td>
+      </tr>
+      <tr>
+        <td>2차 피해 우려지역 점검 강화 및 피해 조사</td>
+        <td><input name="score7-2" value="1" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-2" value="2" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-2" value="3" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-2" value="4" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-2" value="5" type="radio" onclick="Radio7()"></td>
+      </tr>
+      <tr>
+        <td>전체 시설물 점검</td>
+        <td><input name="score7-3" value="1" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-3" value="2" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-3" value="3" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-3" value="4" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-3" value="5" type="radio" onclick="Radio7()"></td>
+      </tr>
+      <tr>
+        <td>피해 복구 작업 진행</td>
+        <td><input name="score7-4" value="1" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-4" value="2" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-4" value="3" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-4" value="4" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-4" value="5" type="radio" onclick="Radio7()"></td>
+      </tr>
+      <tr>
+        <td>수습상황 점검</td>
+        <td><input name="score7-5" value="1" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-5" value="2" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-5" value="3" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-5" value="4" type="radio" onclick="Radio7()"></td>
+        <td><input name="score7-5" value="5" type="radio" onclick="Radio7()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum7" style="display:inline;"></div>
+  </span> 
+  <div class="modal7">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal7-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup7 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable8">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level1 - 1일차 (재난 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>재난 위기 징후 감시활동 강화</td>
+        <td><input name="score8-1" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-1" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-1" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-1" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-1" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>위기 경보 발령(관심)</td>
+        <td><input name="score8-2" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-2" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-2" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-2" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-2" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>비상연락망 및 협조체제 점검</td>
+        <td><input name="score8-3" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-3" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-3" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-3" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-3" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>피해 규모 예측 및 대응 계획 사전 검토</td>
+        <td><input name="score8-4" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-4" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-4" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-4" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-4" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>항만 내 사고 취약 시설 등 장비 점검</td>
+        <td><input name="score8-5" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-5" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-5" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-5" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-5" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>안전관리 메뉴얼 점검 및 검토</td>
+        <td><input name="score8-6" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-6" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-6" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-6" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-6" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+      <tr>
+        <td>수습-복구 인력-장비-물자 점검 및 출동태세 확인</td>
+        <td><input name="score8-7" value="1" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-7" value="2" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-7" value="3" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-7" value="4" type="radio" onclick="Radio8()"></td>
+        <td><input name="score8-7" value="5" type="radio" onclick="Radio8()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum8" style="display:inline;"></div>
+  </span> 
+  <div class="modal8">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal8-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup8 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable9" style="text-align: center;">
+  <div style='color:red; font-weight:700; display: inline-block;'>
+    레벨 1은 아직 재난이 일어나지 않았다고 가정하였으므로 재난 복구 방법에 해당하는 2일차 평가 항목이 마련되어있지 않습니다.</div>
+</div>
+
+<div id="daytable10">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level2 - 1일차 (재난 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>재난 주의보 발령(위기)</td>
+        <td><input name="score10-1" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-1" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-1" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-1" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-1" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+      <tr>
+        <td>비상연락망 및 협조체제 가동</td>
+        <td><input name="score10-2" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-2" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-2" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-2" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-2" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+      <tr>
+        <td>긴급 대응조직 편성 & 사고대응 지휘 체제 구축</td>
+        <td><input name="score10-3" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-3" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-3" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-3" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-3" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+      <tr>
+        <td>유출에 따른 해양환경오염 여부 및 2차 피해 가능성 조사</td>
+        <td><input name="score10-4" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-4" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-4" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-4" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-4" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+      <tr>
+        <td>시설물 점검 및 복구 계획 수립</td>
+        <td><input name="score10-5" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-5" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-5" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-5" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-5" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+      <tr>
+        <td>항만업무연속성 필요 여부 확인 후 진행</td>
+        <td><input name="score10-6" value="1" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-6" value="2" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-6" value="3" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-6" value="4" type="radio" onclick="Radio10()"></td>
+        <td><input name="score10-6" value="5" type="radio" onclick="Radio10()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum10" style="display:inline;"></div>
+  </span> 
+  <div class="modal10">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal10-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup10 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable11">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level2 - 2일차 (재난 복구 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>시설피해현황 파악</td>
+        <td><input name="score11-1" value="1" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-1" value="2" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-1" value="3" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-1" value="4" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-1" value="5" type="radio" onclick="Radio11()"></td>
+      </tr>
+      <tr>
+        <td>2차 피해 우려지역 점검 강화 및 피해 조사</td>
+        <td><input name="score11-2" value="1" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-2" value="2" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-2" value="3" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-2" value="4" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-2" value="5" type="radio" onclick="Radio11()"></td>
+      </tr>
+      <tr>
+        <td>피해 시설물 자체 점검</td>
+        <td><input name="score11-3" value="1" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-3" value="2" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-3" value="3" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-3" value="4" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-3" value="5" type="radio" onclick="Radio11()"></td>
+      </tr>
+      <tr>
+        <td>피해 복구 작업 진행</td>
+        <td><input name="score11-4" value="1" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-4" value="2" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-4" value="3" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-4" value="4" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-4" value="5" type="radio" onclick="Radio11()"></td>
+      </tr>
+      <tr>
+        <td>수습상황 점검</td>
+        <td><input name="score11-5" value="1" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-5" value="2" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-5" value="3" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-5" value="4" type="radio" onclick="Radio11()"></td>
+        <td><input name="score11-5" value="5" type="radio" onclick="Radio11()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum11" style="display:inline;"></div>
+  </span> 
+  <div class="modal11">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal11-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup11 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable12">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level3 - 1일차 (재난 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>재난 위기 경보 발령(심각)</td>
+        <td><input name="score12-1" value="1" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-1" value="2" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-1" value="3" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-1" value="4" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-1" value="5" type="radio" onclick="Radio12()"></td>
+      </tr>
+      <tr>
+        <td>비상연락망 및 협조체제 가동</td>
+        <td><input name="score12-2" value="1" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-2" value="2" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-2" value="3" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-2" value="4" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-2" value="5" type="radio" onclick="Radio12()"></td>
+      </tr>
+      <tr>
+        <td>긴급 대응조직 편성 & 사고대응 지휘 체제 구축</td>
+        <td><input name="score12-3" value="1" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-3" value="2" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-3" value="3" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-3" value="4" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-3" value="5" type="radio" onclick="Radio12()"></td>
+      </tr>
+      <tr>
+        <td>유관기관 상황 전파</td>
+        <td><input name="score12-4" value="1" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-4" value="2" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-4" value="3" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-4" value="4" type="radio" onclick="Radio12()"></td>
+        <td><input name="score12-4" value="5" type="radio" onclick="Radio12()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum12" style="display:inline;"></div>
+  </span> 
+  <div class="modal12">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal12-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup12 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable13">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level3 - 2일차 (재난 대응 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>유출에 따른 해양환경오엠 여부 및 2차 피해 가능성 조사</td>
+        <td><input name="score13-1" value="1" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-1" value="2" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-1" value="3" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-1" value="4" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-1" value="5" type="radio" onclick="Radio13()"></td>
+      </tr>
+      <tr>
+        <td>항만업무연속성 필요 여부 확인 후 진행</td>
+        <td><input name="score13-2" value="1" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-2" value="2" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-2" value="3" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-2" value="4" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-2" value="5" type="radio" onclick="Radio13()"></td>
+      </tr>
+      <tr>
+        <td>시설물 점검 및 복구 계획 수립</td>
+        <td><input name="score13-3" value="1" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-3" value="2" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-3" value="3" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-3" value="4" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-3" value="5" type="radio" onclick="Radio13()"></td>
+      </tr>
+      <tr>
+        <td>방송사 - 언론 기관에 보도 지원</td>
+        <td><input name="score13-4" value="1" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-4" value="2" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-4" value="3" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-4" value="4" type="radio" onclick="Radio13()"></td>
+        <td><input name="score13-4" value="5" type="radio" onclick="Radio13()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum13" style="display:inline;"></div>
+  </span> 
+  <div class="modal13">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal13-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup13 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable14">
+  <span style="margin-left: 25%; font-weight: 700;">평가 상세 항목</span>
+  <table>
+    <tbody>
+      <tr>
+        <td>재난 - Level3 - 3일차 (재난 복구 방법)</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>시설피해현황 파악</td>
+        <td><input name="score14-1" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-1" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-1" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-1" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-1" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+      <tr>
+        <td>2차피해 우려지역 점검 강화 및 피해 조사</td>
+        <td><input name="score14-2" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-2" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-2" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-2" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-2" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+      <tr>
+        <td>피해 시설물 자체 점검</td>
+        <td><input name="score14-3" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-3" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-3" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-3" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-3" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+      <tr>
+        <td>피해 복구 작업 진행</td>
+        <td><input name="score14-4" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-4" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-4" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-4" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-4" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+      <tr>
+        <td>수습 상황 점검</td>
+        <td><input name="score14-5" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-5" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-5" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-5" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-5" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+      <tr>
+        <td>단계별 수습상황 브리핑 및 보도자료 배포</td>
+        <td><input name="score14-6" value="1" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-6" value="2" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-6" value="3" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-6" value="4" type="radio" onclick="Radio14()"></td>
+        <td><input name="score14-6" value="5" type="radio" onclick="Radio14()"></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <span style="margin-left: 25%; font-weight: 700;">합계 : &nbsp;
+    <div id="totalsum14" style="display:inline;"></div>
+  </span> 
+  <div class="modal14">
+    <div class="modal_body">
+      <img src="../../static/img/warn.png" alt="warning" style="width: 50px; height:50px; margin-top: -150px;">
+      <p style="font-weight: 700;">점수가 15점 이하이므로 불합격입니다.<br>해당 훈련을 다시 시행해주세요.</p><br>      
+      <a href="../TrainingResult/TR_days.html">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  <div class="modal14-1">
+    <div class="modal_body">
+      <p style="font-weight: 700;">점수가 15점 이상이므로 합격입니다.<br>등록을 계속 시행해주세요.</p><br>      
+      <a href="javascript:void(0)">
+        <span class="imsi-button modal-button">
+          &nbsp;&nbsp;OK&nbsp;&nbsp;</span>
+      </a>
+    </div>  
+  </div>
+  &nbsp;&nbsp;<button class="btn-open-popup14 imsi-button">평가하기</button>
+</div>
+
+<div id="daytable15" style="text-align: center;">
+  <div style='color:red; font-weight:700; display: inline-block;'>
+    사고 유형과 재난 유형 모두 레벨 1, 레벨 2의 3일차 평가 항목은 존재하지 않습니다.</div>
 </div>
 
   <div class="regist-button">
-    <a href="#"><span class="imsi-button" id="btn-modal">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
     <a href="../TrainingResult/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
   </div>
 
