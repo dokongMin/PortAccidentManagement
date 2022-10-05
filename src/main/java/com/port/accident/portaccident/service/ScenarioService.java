@@ -87,12 +87,13 @@ public class ScenarioService {
 
     }
 
-    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<PortFacility> facilityList) {
+    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<String> facilityList) {
         List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
 
-        for (PortFacility facility : facilityList) {
+
+        for (String facility : facilityList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
-                    .name(facility)
+                    .name(PortFacility.valueOf(facility))
                     .build();
 
             facilityDtoList.add(facilityDto);

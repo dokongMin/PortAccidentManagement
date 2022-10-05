@@ -36,17 +36,14 @@ public class TrainingScenarioController {
      *
      * 시나리오 목록 조회 페이지 또한 대응 활동과 매니저명이 제외되어야 합니다.*/
 
-    //    @GetMapping("/TS_Check_Page")
-//    public String checkTrainingScenario(){
-//        return "TrainingScenarios/TS_Check";
-//    }
     @GetMapping("/TS_Register_Page")
     public String registerTrainingScenarioPage() {
         return "TrainingScenarios/TS_Register";
     }
 
     @PostMapping("/TS_Register")
-    public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto) {
+    public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
+                                           @RequestParam List<String> accidentPortFacilityList) {
         /*TODO::혜원 현정님 - 시나리오 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
@@ -58,10 +55,10 @@ public class TrainingScenarioController {
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-//        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(facilityList);
-//        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
+        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
 //
-//        scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
+        scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
         scenarioService.saveScenario(registerScenarioDto);
         return "redirect:/TrainingScenarios/TS_Check";
     }
@@ -73,14 +70,14 @@ public class TrainingScenarioController {
 
     @RequestMapping("/TS_Modify")
     public String modifyTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                         @RequestParam List<PortFacility> facilityList) {
+                                         @RequestParam List<String> accidentPortFacilityList) {
 
         /*TODO:: 혜원 현정님 - 시나리오 수정
          * 수정 시에는 시나리오의 id도 함께 넘겨주세요 (필드명: id)*/
 
         ScenarioDto modifyScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(facilityList);
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
         List<AccidentPortFacilityDto> modifyFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
         scenarioService.modifyScenario(modifyScenarioDto, modifyFacilityDtoList);
 
@@ -93,6 +90,11 @@ public class TrainingScenarioController {
         return "TrainingScenarios/TS_Modify";
     }
 
+
+//    @GetMapping("/TS_Check_Page")
+//    public String checkTrainingScenario(){
+//        return "TrainingScenarios/TS_Check";
+//    }
 
     @RequestMapping("/TS_Check")
     public String checkTrainingScenario(Model model,
@@ -109,13 +111,13 @@ public class TrainingScenarioController {
          * scenario에는 id, name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea 값이 있습니다.*/
 
         ScenarioSearchCondition condition = new ScenarioSearchCondition();
-        if(hasText(name))
+        if (hasText(name))
             condition.setName(name);
-        if(hasText(incidentLevel))
+        if (hasText(incidentLevel))
             condition.setIncidentLevel(IncidentLevel.valueOf(incidentLevel));
-        if(hasText(incidentType))
+        if (hasText(incidentType))
             condition.setIncidentType(IncidentType.valueOf(incidentType));
-        if(hasText(incidentDetailType))
+        if (hasText(incidentDetailType))
             condition.setIncidentDetailType(IncidentDetailType.valueOf(incidentDetailType));
 
         Page<ScenarioAccidentPortFacilityDto> scenarios = scenarioService.searchPageScenario(condition, pageable);
@@ -142,11 +144,11 @@ public class TrainingScenarioController {
 
         if (scenario.isPresent()) {
             List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
-
             List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
+
             model.addAttribute("scenario", scenario.get());
-            model.addAttribute("portFacility", portFacilityNameList);
-            model.addAttribute("accidentResponseActivity", accidentResponseActivityList);
+            model.addAttribute("portFacilityList", portFacilityNameList);
+            model.addAttribute("accidentResponseActivityList", accidentResponseActivityList);
         }
 
         return "TrainingScenarios/TS_Detail";

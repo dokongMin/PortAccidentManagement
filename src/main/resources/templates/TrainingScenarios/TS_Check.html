@@ -52,12 +52,12 @@
             <span class="fonts" id="ch2">사고 유형</span>&nbsp;<select id="incidentDetailTypeSelect"
                                                                    onchange="incidentDetailType(this)">
 
-                <option value="none" selected="selected">&nbsp;--&nbsp;</option>
-                <option value="DROP">추락</option>
-                <option value="FALL">넘어짐</option>
-                <option value="BUMP">부딪힘</option>
-                <option value="TRAP">끼임</option>
-                <option value="HIT">맞음</option>
+                <option name="incidentDetailType" value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP">추락</option>
+                <option name="incidentDetailType" value="FALL">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP">끼임</option>
+                <option name="incidentDetailType" value="HIT">맞음</option>
             </select>
 
             &nbsp; &nbsp; &nbsp; &nbsp;
@@ -86,7 +86,7 @@
         </thead>
         <tbody>
         <tr th:if="${scenarios.getTotalPages() != 0}" th:each="scenario : ${scenarios}"
-            th:onclick="|location.href='@{/TS_Detail/{scenarioId}(scenarioId=${scenario.id})}'|">
+            th:onclick="|location.href='@{/TrainingScenarios/TS_Detail/{scenarioId}(scenarioId=${scenario.id})}'|">
             <td th:text="${scenarioStat.count} + ${scenarios.number} * 10"></td>
             <td th:text="${scenario.name}"></td>
             <td th:text="${scenario.incidentType.getTypeValue()}"></td>
