@@ -36,9 +36,9 @@ public class TrainingResultController {
         return "TrainingResult/TR_registration";
     }
 
-    @GetMapping("/trainingResult_detail")
-    public String trainingResultDetail(Model model) {
-        return "TrainingResult/TR_detail/TR_1st";
+    @GetMapping("/trainingResult_detail/{resultId}")
+    public String trainingResultDetail(Model model, @PathVariable(value = "resultId") Integer resultId) {
+        return "TrainingResult/TR_detail";
     }
 
     @RequestMapping(value = "/trainingResult_register", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
