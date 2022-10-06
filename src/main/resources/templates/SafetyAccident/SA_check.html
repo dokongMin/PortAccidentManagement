@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/SafetyAccident/SA_check.css">
     <link rel="stylesheet" href="/css/SafetyAccident/SA_Pagination.css">
+    <link rel="stylesheet" href="/css/paging.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -85,7 +86,7 @@
     <table>
         <thead>
         <tr>
-            <th class="fonts">id</th>
+            <th class="fonts">Index</th>
             <th class="fonts">사고/재난 일시</th>
             <th class="fonts">수준</th>
             <th class="fonts">구역</th>
@@ -96,66 +97,50 @@
         </thead>
         <tbody>
         <tr th:each="accident : ${accidents}">
-            <td th:text="${accident.id}">1</td>
-            <td th:text="${accident.accidentDate}">2022.01.03</td>
-            <td th:text="${accident.accidentLevel}">3</td>
-            <td th:text="${accident.accidentArea}">무역항 수상</td>
-            <td th:text="${accident.accidentType.getName()}">추락</td>
-            <td th:text="${accident.victim}">정민환</td>
-            <td th:text="${accident.accidentInspect}">사다리에서 추락</td>
+            <td th:text="${accidentStat.count} + ${accidents.number} * 10"></td>
+            <td th:text="${accident.accidentDate}"></td>
+            <td th:text="${accident.accidentLevel}"></td>
+            <td th:text="${accident.accidentArea}"></td>
+            <td th:text="${accident.accidentType.getName()}"></td>
+            <td th:text="${accident.victim}"></td>
+            <td th:text="${accident.accidentInspect}"></td>
         </tr>
-        <!--      <tr>-->
-        <!--        <td>3</td>-->
-        <!--        <td>2022.01.15</td>-->
-        <!--        <td>1</td>-->
-        <!--        <td>무역항 육상</td>-->
-        <!--        <td>넘어짐</td>-->
-        <!--        <td>이혜원</td>-->
-        <!--        <td>넘어짐</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>3</td>-->
-        <!--        <td>2022.01.24</td>-->
-        <!--        <td>1</td>-->
-        <!--        <td>연안항 수상</td>-->
-        <!--        <td>부딪힘</td>-->
-        <!--        <td>박태영</td>-->
-        <!--        <td>지게차와 부딪힘</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>4</td>-->
-        <!--        <td>2022.02.07</td>-->
-        <!--        <td>3</td>-->
-        <!--        <td>연안항 육상</td>-->
-        <!--        <td>끼임</td>-->
-        <!--        <td>송영주</td>-->
-        <!--        <td>컨테이너에 끼임</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>5</td>-->
-        <!--        <td>2022.02.19</td>-->
-        <!--        <td>2</td>-->
-        <!--        <td>하역</td>-->
-        <!--        <td>맞음</td>-->
-        <!--        <td>주현정</td>-->
-        <!--        <td>사다리에 맞음</td>-->
-        <!--      </tr>-->
-        <!--    </tbody>-->
-        <!--    <tfoot>-->
-        <!--      <tr>-->
-        <!--        <td>6</td>-->
-        <!--        <td>2022.03.04</td>-->
-        <!--        <td>3</td>-->
-        <!--        <td>무역항 수상</td>-->
-        <!--        <td>추락</td>-->
-        <!--        <td>홍길동</td>-->
-        <!--        <td>사다리에서 추락</td>-->
-        <!--      </tr>-->
-        <!--    </tfoot>-->
     </table>
     <div class="page_wrap">
         <div class="page_nation">
-            <!--      <a class="arrow pprev" href="#"></a>-->
+            <ul class="page_ul"
+                th:if="${accidents.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(accidents.number/10)*10 + 1}, last=(${start + 9 < accidents.totalPages ? start + 9 : accidents.totalPages})">
+                <!--with: 변수 설정-->
+                <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
+                <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
+                <li class="page_li">
+                    <a class="arrow pprev"
+                       th:href="@{/SafetyAccident/SA_check(page=1,searchText=${param.searchText})}"></a>
+                    <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
+                </li>
+                <li class="page_li">
+                    <a class="arrow prev"
+                       th:href="${accidents.first} ? '#' : @{/SafetyAccident/SA_check(page=${accidents.number},searchText=${param.searchText})}"></a>
+                </li>
+                <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
+                    <a th:text="${page}" th:class="${page == accidents.number + 1} ? 'active'"
+                       th:href="@{/SafetyAccident/SA_check(page=${page},searchText=${param.searchText})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow next"
+                       th:href="${accidents.last} ? '#' : @{/SafetyAccident/SA_check(page=${accidents.number + 2},searchText=${param.searchText})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow nnext"
+                       th:href="@{/SafetyAccident/SA_check(page=${accidents.totalPages},searchText=${param.searchText})}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="page_wrap">
+        <div class="page_nation">
+            &lt;!&ndash;      <a class="arrow pprev" href="#"></a>&ndash;&gt;
             <ul class="pagination" style="padding: 0">
                 <li class="page-item" th:classappend="${1 == accidents.pageable.pageNumber + 1} ?'disabled'">
                     <a class="arrow-prev" href="#" th:href="@{SA_check(page=${accidents.pageable.pageNumber - 1})}"></a>
@@ -169,9 +154,9 @@
                     <a class="arrow-next" href="#" th:href="@{SA_check(page=${accidents.pageable.pageNumber + 1})}"></a>
                 </li>
             </ul>
-            <!--      <a class="arrow nnext" href="#"></a>-->
+            &lt;!&ndash;      <a class="arrow nnext" href="#"></a>&ndash;&gt;
         </div>
-    </div>
+    </div>-->
     <div class="regist-button">
         <a href="/SafetyAccident/SA_registration/SA_registration.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/SafetyAccident/SA_modify/SA_modify.html"><span
