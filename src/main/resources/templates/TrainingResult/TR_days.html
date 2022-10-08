@@ -45,24 +45,24 @@
     <div class="inquiry-line-1">
         <p>
             <span class="fonts"> 시나리오명&nbsp; </span>
-        <div></div>
-<!--        <input type="text" placeholder="SY2">-->
-        <input type="text" >
-
-        <span class="fonts">훈련명</span>&nbsp; <select>
-        <option>추락예방훈련</option>
-        <option></option>
-        <option></option>
-        <option></option>
-        <option></option>
-    </select>
-        &nbsp; &nbsp; &nbsp;
-
-        <span class="fonts">완료 유무</span>&nbsp; <select>
-        <option>완료</option>
-        <option>진행중</option>
-    </select>
-        &nbsp; &nbsp; &nbsp;
+            <!--        <div></div>-->
+            <!--        <input type="text" placeholder="SY2">-->
+            <select>
+                <option th:each="scenario : ${scenarioList}" th:text="${scenario.name}" th:value="${scenario.id}"
+                        th:id="scenarioSelect" name="scenario"></option>
+            </select>
+            &nbsp; &nbsp; &nbsp;
+            <span class="fonts">훈련명</span>&nbsp;
+            <select>
+                <option th:each="result : ${resultList}" th:text="${result.name}" th:value="${result.id}" th:id="result"
+                        name="result"></option>
+            </select>
+            &nbsp; &nbsp; &nbsp;
+            <span class="fonts">완료 유무</span>&nbsp; <select>
+            <option>완료</option>
+            <option>진행중</option>
+        </select>
+            &nbsp; &nbsp; &nbsp;
         </p>
     </div>
 
@@ -98,9 +98,9 @@
 
     <div class="inquiry-line-3">
         <div class="inquiry-line-3.a">
-            <label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
-            <br>
-            <label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
+            <!--<label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
+            <br>-->
+            <label><input type="radio" name="formType" value="1" onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
             <br>
             <label><input type="radio" name="formType" value="2" onclick="chooseForm(this.name)"/>사고 - 레벨1 - 2일차</label>
             <br>
@@ -116,7 +116,7 @@
             <br>
         </div>
         <div class="inquiry-line-3.a">
-            <label><input type="radio" name="formType" value="8" checked onclick="chooseForm(this.name)"/>재난 - 레벨1 - 1일차</label>
+            <label><input type="radio" name="formType" value="8" onclick="chooseForm(this.name)"/>재난 - 레벨1 - 1일차</label>
             <br>
             <label><input type="radio" name="formType" value="10" onclick="chooseForm(this.name)"/>재난 - 레벨2 -
                 1일차</label>
@@ -334,7 +334,7 @@
         </table>
     </div>
 
-    <div id="view4" style="display: none;">
+    <div id="form_4" style="display: none;">
         <table>
             <thead>
             <tr>
@@ -398,7 +398,7 @@
         </table>
     </div>
 
-    <div id="view5" style="display: none;">
+    <div id="form_5" style="display: none;">
         <table>
             <thead>
             <tr>
@@ -462,7 +462,7 @@
         </table>
     </div>
 
-    <div id="view6" style="display: none;">
+    <div id="form_6" style="display: none;">
         <table>
             <thead>
             <tr>
@@ -526,7 +526,7 @@
         </table>
     </div>
 
-    <div id="view7" style="display: none;">
+    <div id="form_7" style="display: none;">
         <table>
             <thead>
             <tr>

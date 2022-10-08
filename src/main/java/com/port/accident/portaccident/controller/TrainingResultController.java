@@ -27,6 +27,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RequestMapping("/TrainingResult")
 public class TrainingResultController {
     private final TrainingResultService resultService;
+    private final TrainingResultRepository resultRepository;
     private final ScenarioRepository scenarioRepository;
 
     @GetMapping("/trainingResult_registerPage")
@@ -73,9 +74,11 @@ public class TrainingResultController {
     @GetMapping("/trainingResult_daysPage")
     public String trainingResultDetailByDays(Model model)
     {
+        List<Scenario> scenarioList = scenarioRepository.findAll();
+        List<TrainingResult> resultList = resultRepository.findAll();
 
-        List<Scenario> resultLists = scenarioRepository.findAll();
-        model.addAttribute("resultLists", resultLists);
+        model.addAttribute("scenarioList", scenarioList);
+        model.addAttribute("resultList", resultList);
         return "TrainingResult/TR_days";
     }
 

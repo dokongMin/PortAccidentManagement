@@ -38,7 +38,7 @@
     </div>
     <form name="trainingResultForm">
     <span class="fonts">안전사고 유형&nbsp;
-      <select id="choose" onchange="ChangeValue()" th:name="incidentType" th:id="incidentType">
+      <select id="incidentType" th:name="incidentType" onchange="ChangeValue()">
         <option value="INCIDENT">사고</option>
         <option value="DISASTER">재난</option>
       </select></span>
@@ -91,13 +91,31 @@
     <div class="regist-line-2">
       <p>
         <span class="fonts" id="ch1">사고 수준</span> &nbsp;
-        <input type="text" placeholder="Level1" value="LEVEL_1" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;
+        <select id="incidentLevelSelect"> <!--onchange="incidentLevelType(this)"-->
+          <option value="LEVEL_1" selected>Level1</option>
+          <option value="LEVEL_2">Level2</option>
+          <option value="LEVEL_3">Level3</option>
+        </select> &nbsp;&nbsp;
+<!--        <input type="text" placeholder="Level1" value="LEVEL_1" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
         
         <span class="fonts" id="ch2">사고 유형</span> &nbsp;
-        <input type="text" placeholder="추락" value="LEVEL_2" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;
+        <select id="incidentDetailTypeSelect" onchange="incidentDetailType(this)">
+          <option value="추락" selected>추락</option>
+          <option value="넘어짐">넘어짐</option>
+          <option value="부딪힘">부딪힘</option>
+          <option value="끼임">끼임</option>
+          <option value="맞음">맞음</option>
+        </select> &nbsp;&nbsp;
+<!--        <input type="text" placeholder="추락" value="LEVEL_2" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
   
         <span class="fonts" id="ch3">사고 영향</span> &nbsp;
-        <input type="text" placeholder="경상" value="LEVEL_3" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;
+          <select id="incidentImpactSelect"> <!--onchange="incidentImpactType(this)">-->
+            <option value="단순" selected>단순</option>
+            <option value="경상">경상</option>
+            <option value="중상">중상</option>
+            <option value="사망">사망</option>
+          </select> &nbsp;&nbsp;
+<!--        <input type="text" placeholder="경상" value="LEVEL_3" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
       </p> 
     </div>
   
@@ -116,7 +134,7 @@
 
     <div class="regist-line-6">
       <p><span class="fonts">훈련 대상 항만 설비</span> &nbsp; &nbsp;
-        <input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="CRANE" checked>크레인
+        <input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="CRANE">크레인
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="CONTAINER">컨테이너
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="FORKLIFT">지게차
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="LADDER">사다리
