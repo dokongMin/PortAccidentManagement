@@ -102,7 +102,7 @@ public class AccidentManagementController {
      * 안전사고 정보 리스트 조회 페이징 & 검색
      */
     @GetMapping("/SA_check")
-    public String getAccidentInfoList(Model model, @PageableDefault(size = 2) Pageable pageable,
+    public String getAccidentInfoList(Model model, @PageableDefault(size = 10) Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "") String searchText) {
         Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
         int startPage = Math.max(1, accidents.getPageable().getPageNumber() - 1);

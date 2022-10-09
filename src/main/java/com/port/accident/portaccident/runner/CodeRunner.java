@@ -34,38 +34,49 @@
 //        createDetCodes(detDtoQueue);
 //    }
 //
-//    private void createRepCodes(Queue<RepresentativeCodeDto> repDtoQueue) {
-//        for (int i = 1; i <= 50; i++) {
-//            repDtoQueue.add(RepresentativeCodeDto.builder()
-//                    .code("AT" + i)
-//                    .name("대표코드" + i)
-//                    .build());
-//            RepresentativeCodeDto poll = repDtoQueue.poll();
-//            codeService.createRepresentativeCode(poll.toEntity());
-//        }
-//    }
-//
-//    private void createDetCodes(Queue<DetailedCodeDto> detDtoQueue) {
-//        for (int i = 1; i <= 100; i++) {
-//            RepresentativeCode repCode = null;
-//            if (i < 50) {
-//                repCode = codeService.findByRepCode("AT10");
-//            } else {
-//                repCode = codeService.findByRepCode("AT20");
-//            }
-//            detDtoQueue.add(DetailedCodeDto.builder()
-//                    .code("AD" + i)
-//                    .name("상세코드" + i)
-//                    .comment("설명" + i)
-//                    .representativeCode(repCode)
-//                    .build());
-//            DetailedCodeDto poll = detDtoQueue.poll();
-//
-//            detailedCodeRepository.save(poll.toEntity());
-//
-//        }
-//
-//    }
+////    private void createRepCodes(Queue<RepresentativeCodeDto> repDtoQueue) {
+////            repDtoQueue.add(RepresentativeCodeDto.builder()
+////                    .code("AT1")
+////                    .name("크레인")
+////                    .build());
+////        RepresentativeCodeDto poll = repDtoQueue.poll();
+////        codeService.createRepresentativeCode(poll.toEntity());
+////    }
+////    private void createDetCodes(Queue<DetailedCodeDto> detDtoQueue) {
+////
+////    }
+////    private void createRepCodes(Queue<RepresentativeCodeDto> repDtoQueue) {
+////        for (int i = 1; i <= 50; i++) {
+////            repDtoQueue.add(RepresentativeCodeDto.builder()
+////                    .code("AT" + i)
+////                    .name("대표코드" + i)
+////                    .build());
+////            RepresentativeCodeDto poll = repDtoQueue.poll();
+////            codeService.createRepresentativeCode(poll.toEntity());
+////        }
+////    }
+////
+////    private void createDetCodes(Queue<DetailedCodeDto> detDtoQueue) {
+////        for (int i = 1; i <= 100; i++) {
+////            RepresentativeCode repCode = null;
+////            if (i < 50) {
+////                repCode = codeService.findByRepCode("AT10");
+////            } else {
+////                repCode = codeService.findByRepCode("AT20");
+////            }
+////            detDtoQueue.add(DetailedCodeDto.builder()
+////                    .code("AD" + i)
+////                    .name("상세코드" + i)
+////                    .comment("설명" + i)
+////                    .representativeCode(repCode)
+////                    .build());
+////            DetailedCodeDto poll = detDtoQueue.poll();
+////
+////            detailedCodeRepository.save(poll.toEntity());
+////
+////        }
+////
+////    }
 //
 //
 //}
