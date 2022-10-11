@@ -66,17 +66,16 @@ public class TrainingScenarioController {
     }
 
     @GetMapping("/TS_Modify_Page")
-    public String modifyTrainingScenarioPage(Model model, Integer scenarioId) {
-        Optional<Scenario> scenario = scenarioService.findById(scenarioId);
+    public String modifyTrainingScenarioPage(Model model, @RequestParam("scenarioId") Integer scenarioId) {
+        Scenario scenario = scenarioService.findById(scenarioId);
 
-        if (scenario.isPresent()) {
-            List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
-            List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
+        List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
+        List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
 
-            model.addAttribute("scenario", scenario.get());
-            model.addAttribute("portFacilityList", portFacilityNameList);
-            model.addAttribute("accidentResponseActivityList", accidentResponseActivityList);
-        }
+        model.addAttribute("scenario", scenario);
+        model.addAttribute("portFacilityList", portFacilityNameList);
+        model.addAttribute("accidentResponseActivityList", accidentResponseActivityList);
+
         return "TrainingScenarios/TS_Modify";
     }
 
@@ -152,16 +151,14 @@ public class TrainingScenarioController {
          * accidentResponseActivity에는 id, comment, manager, completePlaningTime가 있습니다.
          * portFacilityNameList에는 PortFacility값이 있습니다.
          **/
-        Optional<Scenario> scenario = scenarioService.findById(scenarioId);
+        Scenario scenario = scenarioService.findById(scenarioId);
 
-        if (scenario.isPresent()) {
-            List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
-            List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
+        List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
+        List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
 
-            model.addAttribute("scenario", scenario.get());
-            model.addAttribute("portFacilityList", portFacilityNameList);
-            model.addAttribute("accidentResponseActivityList", accidentResponseActivityList);
-        }
+        model.addAttribute("scenario", scenario);
+        model.addAttribute("portFacilityList", portFacilityNameList);
+        model.addAttribute("accidentResponseActivityList", accidentResponseActivityList);
 
         return "TrainingScenarios/TS_Detail";
     }
@@ -191,7 +188,8 @@ public class TrainingScenarioController {
     }
 
     @GetMapping("/ARA_Modify_Page")
-    public String modifyAccidentResponseActivityPage(Model model, Integer accidentResponseActivityId) {
+    public String modifyAccidentResponseActivityPage(Model model,
+                                                     @RequestParam("accidentResponseActivityId") Integer accidentResponseActivityId) {
         AccidentResponseActivity accidentResponseActivity = scenarioService.findByAccidentResponseActivityId(accidentResponseActivityId);
 
         model.addAttribute("accidentResponseActivity", accidentResponseActivity);
