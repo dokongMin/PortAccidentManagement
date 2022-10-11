@@ -142,7 +142,7 @@ public class TrainingScenarioController {
     @RequestMapping("/TS_Detail/{scenarioId}")
     public String detailTrainingScenario(Model model, @PathVariable(value = "scenarioId") Integer scenarioId) {
 
-        /*TODO::혜원 현정님 - 시나리오 상세 조회
+        /* TODO::혜원 현정님 - 시나리오 상세 조회
          * 시나리오 아이디로 시나리오 사고 항만 설비와 사고 대응활동을 조회하였습니다.
          * 사고 항만설비와 사고 대응활동은 여러 개 존재 가능합니다
          * (디테일 페이지에서 등록된 모든 사고 대응활동 조회 가능)
