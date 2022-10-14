@@ -23,6 +23,7 @@ let saveScenario = {
             contentType: "application/json"
         }).done(function (resp){
             // alert("회원가입이 완료됐습니다.");
+            alert('시나리오가 저장되었습니다.');
             location.href="/"
             console.log(data);
         }).fail(function (error){
