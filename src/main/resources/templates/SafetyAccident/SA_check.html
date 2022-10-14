@@ -60,7 +60,7 @@
             </select>
 
             &nbsp;
-
+            <br>
             <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select>
                 <option>무역항 수상구역</option>
                 <option>무역항 육상구역</option>
@@ -76,10 +76,10 @@
         </p>
     </div>
     <form method="GET" th:action="@{SA_check}">
-    <div class="inquiry-button">
-        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">
-        <a href="#"><button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button></a>
-    </div>
+        <div class="inquiry-button">
+            <!--        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">-->
+            <a href="#"><button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button></a>
+        </div>
     </form>
     <br>
 
@@ -101,7 +101,7 @@
             <td th:text="${accident.accidentDate}"></td>
             <td th:text="${accident.accidentLevel}"></td>
             <td th:text="${accident.accidentArea}"></td>
-            <td th:text="${accident.accidentType.getName()}"></td>
+            <td th:text="${accident.incidentType}"></td>
             <td th:text="${accident.victim}"></td>
             <td th:text="${accident.accidentInspect}"></td>
         </tr>
@@ -147,7 +147,7 @@
                 </li>
                 <li class="page-item"  th:classappend="${i == accidents.pageable.pageNumber + 1} ? 'disabled'"
                     th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                    <a href="#" class="active"  th:text="${i}"></a>
+                    <a href="#" class="active"  th:text="${i}">1</a>
                 </li>
                 <li class="page-item"
                     th:classappend="${accidents.totalPages == accidents.pageable.pageNumber + 1} ? 'disabled'">

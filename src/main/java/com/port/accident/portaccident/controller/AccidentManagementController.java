@@ -106,10 +106,6 @@ public class AccidentManagementController {
                                       @PageableDefault(size = 10) Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "") String searchText) {
         Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
-        int startPage = Math.max(1, accidents.getPageable().getPageNumber() - 1);
-        int endPage = Math.min(accidents.getTotalPages(), accidents.getPageable().getPageNumber() + 3);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
         model.addAttribute("accidents", accidents);
         return "/SafetyAccident/SA_check";
     }
