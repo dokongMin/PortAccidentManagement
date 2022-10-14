@@ -27,6 +27,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RequestMapping("/TrainingResult")
 public class TrainingResultController {
     private final TrainingResultService resultService;
+    private final TrainingResultRepository resultRepository;
     private final ScenarioRepository scenarioRepository;
 
     @GetMapping("/trainingResult_registerPage")
@@ -36,9 +37,9 @@ public class TrainingResultController {
         return "TrainingResult/TR_registration";
     }
 
-    @GetMapping("/trainingResult_detail")
-    public String trainingResultDetail(Model model) {
-        return "TrainingResult/TR_detail/TR_1st";
+    @GetMapping("/trainingResult_detail/{resultId}")
+    public String trainingResultDetail(Model model, @PathVariable(value = "resultId") Integer resultId) {
+        return "TrainingResult/TR_detail";
     }
 
     @RequestMapping(value = "/trainingResult_register", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
@@ -73,9 +74,11 @@ public class TrainingResultController {
     @GetMapping("/trainingResult_daysPage")
     public String trainingResultDetailByDays(Model model)
     {
+        List<Scenario> scenarioList = scenarioRepository.findAll();
+        List<TrainingResult> resultList = resultRepository.findAll();
 
-        List<Scenario> resultLists = scenarioRepository.findAll();
-        model.addAttribute("resultLists", resultLists);
+        model.addAttribute("scenarioList", scenarioList);
+        model.addAttribute("resultList", resultList);
         return "TrainingResult/TR_days";
     }
 

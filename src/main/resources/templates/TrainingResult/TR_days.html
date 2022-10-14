@@ -39,6 +39,7 @@
     <p>대응훈련 일자별 수행 결과 등록</p>
   </div>
 
+<<<<<<< HEAD
   <div class="inquiry-line-1">
     <p>
       <span class="fonts"> 시나리오명&nbsp; </span><input type="text" placeholder="SY2">
@@ -60,6 +61,31 @@
       &nbsp;  &nbsp;  &nbsp;
     </p>
   </div>
+=======
+    <div class="inquiry-line-1">
+        <p>
+            <span class="fonts"> 시나리오명&nbsp; </span>
+            <!--        <div></div>-->
+            <!--        <input type="text" placeholder="SY2">-->
+            <select>
+                <option th:each="scenario : ${scenarioList}" th:text="${scenario.name}" th:value="${scenario.id}"
+                        th:id="scenarioSelect" name="scenario"></option>
+            </select>
+            &nbsp; &nbsp; &nbsp;
+            <span class="fonts">훈련명</span>&nbsp;
+            <select>
+                <option th:each="result : ${resultList}" th:text="${result.name}" th:value="${result.id}" th:id="result"
+                        name="result"></option>
+            </select>
+            &nbsp; &nbsp; &nbsp;
+            <span class="fonts">완료 유무</span>&nbsp; <select>
+            <option>완료</option>
+            <option>진행중</option>
+        </select>
+            &nbsp; &nbsp; &nbsp;
+        </p>
+    </div>
+>>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
 
   <!--
   <div class="inquiry-line-2">
@@ -91,6 +117,7 @@
 -->
 
 
+<<<<<<< HEAD
   <div class="inquiry-line-3">
     <div class="inquiry-line-3.a">
       <label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)" />사고 - 레벨1 - 1일차</label>
@@ -107,6 +134,46 @@
       <br>
       <label><input type="radio" name="formType" value="7" onclick="chooseForm(this.name)" />사고 - 레벨3 - 3일차</label>
       <br>
+=======
+    <div class="inquiry-line-3">
+        <div class="inquiry-line-3.a">
+            <!--<label><input type="radio" name="formType" value="1" checked onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
+            <br>-->
+            <label><input type="radio" name="formType" value="1" onclick="chooseForm(this.name)"/>사고 - 레벨1 - 1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="2" onclick="chooseForm(this.name)"/>사고 - 레벨1 - 2일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="3" onclick="chooseForm(this.name)"/>사고 - 레벨2 - 1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="4" onclick="chooseForm(this.name)"/>사고 - 레벨2 - 2일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="5" onclick="chooseForm(this.name)"/>사고 - 레벨3 - 1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="6" onclick="chooseForm(this.name)"/>사고 - 레벨3 - 2일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="7" onclick="chooseForm(this.name)"/>사고 - 레벨3 - 3일차</label>
+            <br>
+        </div>
+        <div class="inquiry-line-3.a">
+            <label><input type="radio" name="formType" value="8" onclick="chooseForm(this.name)"/>재난 - 레벨1 - 1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="10" onclick="chooseForm(this.name)"/>재난 - 레벨2 -
+                1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="11" onclick="chooseForm(this.name)"/>재난 - 레벨2 -
+                2일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="12" onclick="chooseForm(this.name)"/>재난 - 레벨3 -
+                1일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="13" onclick="chooseForm(this.name)"/>재난 - 레벨3 -
+                2일차</label>
+            <br>
+            <label><input type="radio" name="formType" value="14" onclick="chooseForm(this.name)"/>재난 - 레벨3 -
+                3일차</label>
+            <br>
+        </div>
+>>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
     </div>
     <div class="inquiry-line-3.a">
       <label><input type="radio" name="formType" value="8" checked onclick="chooseForm(this.name)" />재난 - 레벨1 - 1일차</label>
@@ -321,6 +388,7 @@
     </table>
   </div>
 
+<<<<<<< HEAD
   <div id="view4" style="display: none;">
     <table>
       <thead>
@@ -587,6 +655,274 @@
       </tfoot>
     </table>
   </div>
+=======
+    <div id="form_4" style="display: none;">
+        <table>
+            <thead>
+            <tr>
+                <th class="fonts">사고 복구</th>
+                <th class="fonts">점수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>시설피해현황 파악</td>
+                <td><input
+                        type="text"
+                        class="score4"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal4();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>2차 피해 우려지역 점검 강화 및 피해 조사</td>
+                <td><input
+                        type="text"
+                        class="score4"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal4();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>피해 시설물 자체 점검</td>
+                <td><input
+                        type="text"
+                        class="score4"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal4();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>피해 복구 작업 진행</td>
+                <td><input
+                        type="text"
+                        class="score4"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal4();"
+                /><span> / 10</span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>총 점</td>
+                <td><input type="text" name="totalScore" value="0" readonly/>
+                    <span> / 40</span></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div id="form_5" style="display: none;">
+        <table>
+            <thead>
+            <tr>
+                <th class="fonts">사고 대응</th>
+                <th class="fonts">점수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>항만 안전사고 초기 상황 확인</td>
+                <td><input
+                        type="text"
+                        class="score5"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal5();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>긴급 대응조직 편성 & 사고 대응 지휘 체계 구축</td>
+                <td><input
+                        type="text"
+                        class="score5"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal5();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>비상근무 발령 & 24시간 대응체계 가동</td>
+                <td><input
+                        type="text"
+                        class="score5"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal5();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>조치사항 지시</td>
+                <td><input
+                        type="text"
+                        class="score5"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal5();"
+                /><span> / 10</span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>총 점</td>
+                <td><input type="text" name="totalScore" value="0" readonly/>
+                    <span> / 40</span></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div id="form_6" style="display: none;">
+        <table>
+            <thead>
+            <tr>
+                <th class="fonts">사고 대응</th>
+                <th class="fonts">점수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>유관기관 상황 전파</td>
+                <td><input
+                        type="text"
+                        class="score6"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal6();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>사고현장 방문 및 대응상황 점검</td>
+                <td><input
+                        type="text"
+                        class="score6"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal6();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>시설물 점검 및 복구 계획 수립</td>
+                <td><input
+                        type="text"
+                        class="score6"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal6();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>방송사 - 언론 기관에 보도 지원</td>
+                <td><input
+                        type="text"
+                        class="score6"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal6();"
+                /><span> / 10</span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>총 점</td>
+                <td><input type="text" name="totalScore" value="0" readonly/>
+                    <span> / 40</span></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div id="form_7" style="display: none;">
+        <table>
+            <thead>
+            <tr>
+                <th class="fonts">사고 복구</th>
+                <th class="fonts">점수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>시설피해현황 파악</td>
+                <td><input
+                        type="text"
+                        class="score7"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal7();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>2차 피해 우려지역 점검 강화 및 피해 조사</td>
+                <td><input
+                        type="text"
+                        class="score7"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal7();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>전체 시설물 점검</td>
+                <td><input
+                        type="text"
+                        class="score7"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal7();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>피해 복구 작업 진행</td>
+                <td><input
+                        type="text"
+                        class="score7"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal7();"
+                /><span> / 10</span></td>
+            </tr>
+            <tr>
+                <td>수습상황 점검</td>
+                <td><input
+                        type="text"
+                        class="score7"
+                        value="0"
+                        maxLength="2"
+                        data-limit="10"
+                        onkeyup="setNumeric(this);autoCal7();"
+                /><span> / 10</span></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>총 점</td>
+                <td><input type="text" name="totalScore" value="0" readonly/>
+                    <span> / 50</span></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+>>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
 
   <div id="form_8" style="display: none;">
     <table>
@@ -1109,10 +1445,17 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <div class="regist-button">
     <a href="#"><span class="imsi-button" id="btn-modal">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
     <a href="/TrainingResult/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
   </div>
+=======
+    <div class="regist-button">
+        <a href="#"><span class="imsi-button" id="btn-modal">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/TrainingResult/trainingResult_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+    </div>
+>>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
 </div>
 
 <!-- footer -->
