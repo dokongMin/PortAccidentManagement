@@ -37,7 +37,7 @@
     <p>안전사고 정보 등록</p>
   </div>
 
-  <form action="/SafetyAccident/SA_registration" th:action method="post" >
+  <form action="/SafetyAccident/SA_registration" th:action method="post" th:id="accidentForm" >
     <span class="fonts">안전사고 유형&nbsp;
       <select id="incidentType" name="incidentType" onchange="ChangeValue()">
         <option value="사고">사고</option>
@@ -124,9 +124,9 @@
 
 
     <div class="regist-button">
-      <button onclick="location.href='/SafetyAccident/SA_check' ">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-      <a href="/SafetyAccident/SA_check/SA_check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+<!--      <button onclick="location.href='/SafetyAccident/SA_check' ">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>-->
+      <a href="/SafetyAccident/SA_registration" onclick="document.getElementById('accidentForm').submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+      <a href="/SafetyAccident/SA_check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
   </form>
 </div>
