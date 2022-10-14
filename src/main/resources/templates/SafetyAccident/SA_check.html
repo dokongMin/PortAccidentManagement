@@ -20,8 +20,6 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-
 </head>
 <body>
 <!-- HEADER -->
@@ -36,49 +34,56 @@
         <p>안전사고 정보 조회</p>
     </div>
     <span class="fonts">안전사고 유형&nbsp;
-    <select id="choose" onchange="ChangeValue()">
-      <option value="사고">사고</option>
-      <option value="재난">재난</option>
+    <select id="incidentType" onchange="ChangeValue(); incidentType(this);">
+      <option name="incidentType" value="none" selected="selected">&nbsp;--&nbsp;</option>
+      <option name="incidentType" value="INCIDENT">사고</option>
+      <option name="incidentType" value="DISASTER">재난</option>
     </select></span>
     <br><br>
     <div class="inquiry-line-1">
         <p><span class="fonts"> 사고일시&nbsp; <input type="date"> </span>
             &nbsp;
             <span><span class="fonts" id="ch1">사고 수준</span>
-        <input type="radio" name="l1" checked> Level1
-        <input type="radio" name="l1"> Level2
-        <input type="radio" name="l1"> Level3 </span>
+        <input type="radio" name="incidentLevel" value="LEVEL_1"> Level1
+        <input type="radio" name="incidentLevel" value="LEVEL_2"> Level2
+        <input type="radio" name="incidentLevel" value="LEVEL_3"> Level3 </span>
 
             &nbsp;
 
-            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select>
-                <option>추락</option>
-                <option>넘어짐</option>
-                <option>부딪힘</option>
-                <option>끼임</option>
-                <option>맞음</option>
+            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select id="incidentDetailTypeSelect"
+                                                                    onchange="incidentDetailType(this)">
+                <option name="incidentDetailType" value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP">추락</option>
+                <option name="incidentDetailType" value="FALL">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP">끼임</option>
+                <option name="incidentDetailType" value="HIT">맞음</option>
             </select>
 
             &nbsp;
             <br>
-            <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select>
-                <option>무역항 수상구역</option>
-                <option>무역항 육상구역</option>
-                <option>연안항 수상구역</option>
-                <option>연안항 육상구역</option>
-                <option>하역</option>
+            <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select id="trainingPlaceSelect"
+                                                                    onchange="trainingPlace(this)">
+                <option name="TrainingPlace" value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option name="TrainingPlace" value="PLACE1">무역항 수상구역</option>
+                <option name="TrainingPlace" value="PLACE2">무역항 육상구역</option>
+                <option name="TrainingPlace" value="PLACE3">연안항 수상구역</option>
+                <option name="TrainingPlace" value="PLACE4">연안항 육상구역</option>
+                <option name="TrainingPlace" value="PLACE5">하역</option>
             </select>
 
             &nbsp;
 
-            <span class="fonts" id="ch3">사고자</span>&nbsp; <input type="text" style="width: 80px;">
+            <span class="fonts" id="ch3">사고자</span>&nbsp; <input id="accidentManager" type="text" style="width: 80px;">
 
         </p>
     </div>
     <form method="GET" th:action="@{SA_check}">
         <div class="inquiry-button">
             <!--        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">-->
-            <a href="#"><button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button></a>
+            <a href="#">
+                <button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button>
+            </a>
         </div>
     </form>
     <br>
@@ -183,5 +188,111 @@
     </div>
 </footer>
 </body>
+<script>
+    let incidentTypeVal;
+    let incidentLevelVal;
+    let incidentDetailTypeVal;
+    let trainingPlaceVal;
+    let accidentManagerVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('accidentManager')) {
+            document.getElementById("accidentManager").value = urlParams.get('accidentManager');
+        }
+        if (urlParams.get('incidentLevel')) {
+            const incidentLevelList = document.getElementsByName('incidentLevel');
+
+            incidentLevelList.forEach((node) => {
+                if (node.value == urlParams.get('incidentLevel')) {
+                    node.checked = true;
+                }
+            })
+        }
+        if (urlParams.get('incidentType')) {
+            incidentTypeVal = urlParams.get('incidentType');
+            selectedControl('incidentType', urlParams.get('incidentType'));
+        }
+        if (urlParams.get('incidentDetailType')) {
+            incidentDetailTypeVal = urlParams.get('incidentDetailType');
+            selectedControl('incidentDetailTypeSelect', urlParams.get('incidentDetailType'));
+        }
+        if (urlParams.get('TrainingPlace')) {
+            incidentDetailTypeVal = urlParams.get('TrainingPlace');
+            selectedControl('trainingPlaceSelect', urlParams.get('TrainingPlace'));
+        }
+    }
+
+    function selectedControl(elementId, urlParamVal) {
+        const el = document.getElementById(elementId);  //select box
+        const len = el.options.length; //select box의 option 갯수
+        //select box의 option 갯수만큼 for문 돌림
+        for (let i = 0; i < len; i++) {
+            //select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+            if (el.options[i].value == urlParamVal) {
+                el.options[i].selected = true;
+            }
+        }
+    }
+
+
+    /* select box 옵션 값 선택 */
+    const incidentType = (target) => {
+        incidentTypeVal = target.value;
+    }
+    const incidentDetailType = (target) => {
+        incidentDetailTypeVal = target.value;
+    }
+    const trainingPlace = (target) => {
+        trainingPlaceVal = target.value;
+    }
+
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        accidentManagerVal = document.getElementById("accidentManager").value;
+
+        /* 라디오버튼 값 가져오기 */
+        const incidentLevelList = document.getElementsByName('incidentLevel');
+
+        incidentLevelList.forEach((node) => {
+            if (node.checked) {
+                incidentLevelVal = node.value;
+            }
+        })
+
+        let conditionStr = "";
+
+        if (accidentManagerVal) {
+            conditionStr += "accidentManager=" + accidentManagerVal + "&";
+        }
+        if (incidentLevelVal != 'none' && incidentLevelVal != undefined) {
+            conditionStr += "incidentLevel=" + incidentLevelVal + "&";
+        }
+        if (incidentTypeVal != 'none' && incidentTypeVal != undefined) {
+            conditionStr += "incidentType=" + incidentTypeVal + "&";
+        }
+        if (incidentDetailTypeVal != 'none' && incidentDetailTypeVal != undefined) {
+            conditionStr += "incidentDetailType=" + incidentDetailTypeVal;
+        }
+        if (trainingPlaceVal != 'none' && trainingPlaceVal != undefined) {
+            conditionStr += "TrainingPlace=" + trainingPlaceVal;
+        }
+
+        if (conditionStr == "") {
+            alert("검색 조건을 설정해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 <script src="/js/SafetyAccident/SA_check.js"></script>
 </html>
