@@ -29,7 +29,7 @@ class PortHeader extends HTMLElement {
             '              <ul id="sub-menu">\n' +
             '                <div class="line2"></div>\n' +
             '                <li><a href="/SafetyAccident/SA_check" aria-label="submenu">안전사고 정보 조회</a></li>\n' +
-            '                <li><a href="/SafetyAccident/SA_registration" aria-label="submenu">안전사고 정보 등록</a></li>\n' +
+            '                <li><a href="/SafetyAccident/SA_registration_Page" aria-label="submenu">안전사고 정보 등록</a></li>\n' +
             '                <li><a href="/SafetyAccident/SA_modify" aria-label="submenu">안전사고 정보 수정</a></li>\n' +
             '                <li><a href="#" aria-label="submenu">안전사고 정보<br>사용 중지</a></li>\n' +
             '              </ul>\n' +

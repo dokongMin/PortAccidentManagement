@@ -37,15 +37,10 @@
     </div>
 
     <span class="fonts">안전사고 유형&nbsp;
-<<<<<<< HEAD
-      <select id="choose" onchange="ChangeValue()">
-        <option value="사고">사고</option>
-        <option value="재난">재난</option>
-=======
+
       <select id="incidentType" th:name="incidentType" onchange="ChangeValue()">
         <option value="INCIDENT">사고</option>
         <option value="DISASTER">재난</option>
->>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
       </select></span>
     <br><br>
 
@@ -96,18 +91,7 @@
     <br>
 
     <div class="regist-line-2">
-<<<<<<< HEAD
-        <p>
-            <span class="fonts" id="ch1">사고 수준</span> &nbsp;
-            <input type="text" placeholder="Level1"> &nbsp;&nbsp;
 
-            <span class="fonts" id="ch2">사고 유형</span> &nbsp;
-            <input type="text" placeholder="추락"> &nbsp;&nbsp;
-
-            <span class="fonts" id="ch3">사고 영향</span> &nbsp;
-            <input type="text" placeholder="경상"> &nbsp;&nbsp;
-        </p>
-=======
       <p>
         <span class="fonts" id="ch1">사고 수준</span> &nbsp;
         <select id="incidentLevelSelect"> <!--onchange="incidentLevelType(this)"-->
@@ -136,7 +120,6 @@
           </select> &nbsp;&nbsp;
 <!--        <input type="text" placeholder="경상" value="LEVEL_3" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
       </p> 
->>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
     </div>
 
     <div class="regist-line-3">
@@ -154,21 +137,13 @@
     </div>
 
     <div class="regist-line-6">
-<<<<<<< HEAD
-        <p><span class="fonts">훈련 대상 항만 설비</span> &nbsp; &nbsp;
-            <input type="checkbox" name="machine1" checked>크레인
-            &nbsp;<input type="checkbox" name="machine2">컨테이너
-            &nbsp;<input type="checkbox" name="machine3">지게차
-            &nbsp;<input type="checkbox" name="machine4">사다리
-        </p>
-=======
+
       <p><span class="fonts">훈련 대상 항만 설비</span> &nbsp; &nbsp;
         <input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="CRANE">크레인
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="CONTAINER">컨테이너
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="FORKLIFT">지게차
         &nbsp;<input type="checkbox" th:id="trainingPortFacilityList" name="trainingPortFacilityList" value="LADDER">사다리
       </p>
->>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
     </div>
 
 
@@ -180,13 +155,12 @@
     </div>
 
     <div class="regist-button">
-<<<<<<< HEAD
+
         <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/TrainingResult/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
-=======
-      <a href="#" th:id="TR_Registration_button" onclick="javascript:document.trainingResultForm.submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+
+      <a href="#" th:id="TR_Registration_button" onclick="javascript:document.trainingResultForm.submit(); btn();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
       <a href="/TrainingResult/trainingResult_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
->>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
     </div>
 </div>
 
@@ -210,5 +184,13 @@
     </div>
 </footer>
 </body>
-<script src="/js/TrainingResult/TR_registration.js"></script>
+
+<script src="/js/TrainingResult/TR_registration.js"> </script>
+<script src="/js/TR_registration_button.js"></script>
+<script>
+  function btn() {
+    alert('시나리오 결과가 저장되었습니다.');
+    location.href="/TrainingResult/trainingResult_list"
+  }
+</script>
 </html>

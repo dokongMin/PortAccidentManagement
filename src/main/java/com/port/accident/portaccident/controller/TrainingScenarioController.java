@@ -162,8 +162,7 @@ public class TrainingScenarioController {
 
         return "TrainingScenarios/TS_Detail";
     }
-<<<<<<< HEAD
-=======
+
 
     @GetMapping("/ARA_Register_Page")
     public String registerAccidentResponseActivityPage() {
@@ -212,5 +211,4 @@ public class TrainingScenarioController {
 
         return "redirect:/TS_Detail/{scenarioId}";
     }
->>>>>>> 79d1f32d9fe2658c26d76bc0ce4ac689a19d9512
 }
