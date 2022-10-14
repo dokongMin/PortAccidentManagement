@@ -158,7 +158,7 @@ public class TrainingResultServiceTest {
 
         TrainingByDateDto dto = TrainingByDateDto.builder()
                 .details("1일차 대응훈련 수행 내용")
-                .completionCheck(CompletionStatus.COMPLETE)
+                .completionCheck(CompletionStatus.A)
                 .evaluationName("대응훈련 평가항목명")
                 .trainingResult(trainingResult)
                 .build();
@@ -168,7 +168,7 @@ public class TrainingResultServiceTest {
         TrainingByDate resultByDate = resultService.findTrainingByDateById(resultByDateId);
 
         //then
-        assertEquals(resultByDate.getCompletionCheck(), CompletionStatus.COMPLETE);
+        assertEquals(resultByDate.getCompletionCheck(), CompletionStatus.A);
         assertEquals(resultByDate.getTrainingResult().getId(), trainingResultId);
     }
 
@@ -180,7 +180,7 @@ public class TrainingResultServiceTest {
 
         TrainingByDateDto byDateDto = TrainingByDateDto.builder()
                 .details("1일차 대응훈련 수행 내용")
-                .completionCheck(CompletionStatus.COMPLETE)
+                .completionCheck(CompletionStatus.A)
                 .evaluationName("대응훈련 평가항목명")
                 .trainingResult(trainingResult)
                 .build();

@@ -17,7 +17,3 @@ function ChangeValue() {
         el3.innerHTML = '재난대응활동 담당자';
     }
 }
-
-
-
-

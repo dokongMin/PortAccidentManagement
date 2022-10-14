@@ -14,26 +14,32 @@ public class ScenarioEvaluationDto {
     //    private List<ScenarioEvaluationStandard> scenarioEvaluationStandardList = new ArrayList<>();
     private SuitableCheck developmentStandard1;
     private SuitableCheck developmentStandard2;
+    private SuitableCheck developmentStandard3;
     private SuitableCheck possibleStandard1;
     private SuitableCheck possibleStandard2;
+    private SuitableCheck possibleStandard3;
     private SuitableCheck completeStandard1;
     private SuitableCheck completeStandard2;
+    private SuitableCheck completeStandard3;
     private Scenario scenario;
 
     @Builder
     public ScenarioEvaluationDto(Integer id, String name,
-                                 SuitableCheck developmentStandard1, SuitableCheck developmentStandard2,
-                                 SuitableCheck possibleStandard1, SuitableCheck possibleStandard2,
-                                 SuitableCheck completeStandard1, SuitableCheck completeStandard2,
+                                 SuitableCheck developmentStandard1, SuitableCheck developmentStandard2, SuitableCheck developmentStandard3,
+                                 SuitableCheck possibleStandard1, SuitableCheck possibleStandard2, SuitableCheck possibleStandard3,
+                                 SuitableCheck completeStandard1, SuitableCheck completeStandard2, SuitableCheck completeStandard3,
                                  Scenario scenario) {
         this.id = id;
         this.name = name;
         this.developmentStandard1 = developmentStandard1;
         this.developmentStandard2 = developmentStandard2;
+        this.developmentStandard3 = developmentStandard3;
         this.possibleStandard1 = possibleStandard1;
         this.possibleStandard2 = possibleStandard2;
+        this.possibleStandard3 = possibleStandard3;
         this.completeStandard1 = completeStandard1;
         this.completeStandard2 = completeStandard2;
+        this.completeStandard3 = completeStandard3;
         this.scenario = scenario;
     }
 
@@ -43,10 +49,13 @@ public class ScenarioEvaluationDto {
                 .name(name)
                 .developmentStandard1(developmentStandard1)
                 .developmentStandard2(developmentStandard2)
+                .developmentStandard3(developmentStandard3)
                 .possibleStandard1(possibleStandard1)
                 .possibleStandard2(possibleStandard2)
+                .possibleStandard3(possibleStandard3)
                 .completeStandard1(completeStandard1)
                 .completeStandard2(completeStandard2)
+                .completeStandard3(completeStandard3)
                 .scenario(scenario)
                 .build();
     }

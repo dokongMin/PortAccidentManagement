@@ -42,10 +42,10 @@
                 </option>
             </select>
                         </span>
-        <span style="width: 100px; display: inline-block;"></span>
-        <span class="fonts">
+            <span style="width: 100px; display: inline-block;"></span>
+            <span class="fonts">
 <!--          대표코드명-->
-<!--          <input type="text" placeholder="" style="width: 150px;" disabled>-->
+                <!--          <input type="text" placeholder="" style="width: 150px;" disabled>-->
           <br><br><br>
           <p class="Alignment">상세코드번호</p>
           <br><br>
@@ -57,15 +57,18 @@
           <br><br><br>
           <p class="Alignment">상세설명</p>
           <br><br>
-          <textarea cols="40" rows="5" name="info" placeholder="상세코드에 대한 설명 입력" th:name="comment" th:id="comment"></textarea>
+          <textarea cols="40" rows="5" name="info" placeholder="상세코드에 대한 설명 입력" th:name="comment"
+                    th:id="comment"></textarea>
         </span>
-        <br>
-        </p>
+            <br>
+            </p>
         </form>
     </div>
     <br>
     <div class="regist-button">
-        <a href="/Code/detailedCode_list" th:id="DC_Register_Button" onclick="javascript:document.DCForm.submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/Code/detailedCode_list" th:id="DC_Register_Button"
+           onclick="javascript:document.DCForm.submit();"><span
+                class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/Code/detailedCode_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
 </div>
