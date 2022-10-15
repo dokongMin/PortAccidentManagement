@@ -45,7 +45,7 @@ public class TrainingScenarioController {
 
     @PostMapping("/TS_Register")
     public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestParam List<String> accidentPortFacilityList) {
+                                           @RequestParam(value= "accidentPortFacilityListStr",required=false) List<String> accidentPortFacilityListStr) {
         /*TODO::혜원 현정님 - 시나리오 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
@@ -57,7 +57,7 @@ public class TrainingScenarioController {
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityListStr);
         List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
 
         scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);

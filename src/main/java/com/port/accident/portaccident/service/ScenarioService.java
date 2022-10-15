@@ -45,7 +45,6 @@ public class ScenarioService {
                 .incidentType(scenarioDto.getIncidentType())
                 .incidentDetailType(scenarioDto.getIncidentDetailType())
                 .portArea(scenarioDto.getPortArea())
-                .responseStage(scenarioDto.getResponseStage())
                 .build();
     }
 

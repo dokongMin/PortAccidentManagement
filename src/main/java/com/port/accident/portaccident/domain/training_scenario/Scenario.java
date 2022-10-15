@@ -54,8 +54,7 @@ public class Scenario {
     @Column(name = "scenario_port_area") // 사고 항만 구역
     private TrainingPlace portArea;
 
-    @Column(name = "scenario_response_stage") // 사고 대응 단계
-    private String responseStage;
+
 
     @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true) // 안전 사고 항만 설비
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
@@ -71,7 +70,7 @@ public class Scenario {
 
     @Builder
     public Scenario(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
-                    IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea, String responseStage,
+                    IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea,
                     List<AccidentPortFacility> accidentPortFacilityList,
                     List<AccidentResponseActivity> accidentResponseActivityList,
                     List<ScenarioEvaluation> scenarioEvaluationList) {
@@ -82,7 +81,6 @@ public class Scenario {
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
         this.portArea = portArea;
-        this.responseStage = responseStage;
         this.accidentPortFacilityList = accidentPortFacilityList;
         this.accidentResponseActivityList = accidentResponseActivityList;
         this.scenarioEvaluationList = scenarioEvaluationList;
@@ -132,6 +130,5 @@ public class Scenario {
         this.incidentType = scenarioDto.getIncidentType();
         this.incidentDetailType = scenarioDto.getIncidentDetailType();
         this.portArea = scenarioDto.getPortArea();
-        this.responseStage = scenarioDto.getResponseStage();
     }
 }

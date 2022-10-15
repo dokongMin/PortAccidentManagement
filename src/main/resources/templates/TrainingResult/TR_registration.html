@@ -155,10 +155,6 @@
     </div>
 
     <div class="regist-button">
-
-        <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-        <a href="/TrainingResult/TR_check.html"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
-
       <a href="#" th:id="TR_Registration_button" onclick="javascript:document.trainingResultForm.submit(); btn();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
       <a href="/TrainingResult/trainingResult_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
@@ -189,7 +185,7 @@
 <script src="/js/TR_registration_button.js"></script>
 <script>
   function btn() {
-    alert('시나리오 결과가 저장되었습니다.');
+
     location.href="/TrainingResult/trainingResult_list"
   }
 </script>

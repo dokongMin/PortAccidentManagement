@@ -22,14 +22,13 @@ public class ScenarioDto {
     private IncidentType incidentType;
     private IncidentDetailType incidentDetailType;
     private TrainingPlace portArea;
-    private String responseStage;
     private List<AccidentPortFacility> accidentPortFacilityList = new ArrayList<>();
     private List<AccidentResponseActivity> accidentResponseActivityList = new ArrayList<>();
     private List<ScenarioEvaluation> scenarioEvaluationList = new ArrayList<>();
 
     @Builder
     public ScenarioDto(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType,
-                       IncidentDetailType incidentDetailType, TrainingPlace portArea, String responseStage) {
+                       IncidentDetailType incidentDetailType, TrainingPlace portArea) {
 //                       List<AccidentPortFacility> accidentPortFacilityList,
 //                       List<AccidentResponseActivity> accidentResponseActivityList,
 //                       List<ScenarioEvaluation> scenarioEvaluationList
@@ -40,7 +39,6 @@ public class ScenarioDto {
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
         this.portArea = portArea;
-        this.responseStage = responseStage;
 //        this.accidentPortFacilityList = accidentPortFacilityList;
 //        this.accidentResponseActivityList = accidentResponseActivityList;
 //        this.scenarioEvaluationList = scenarioEvaluationList;
@@ -55,7 +53,6 @@ public class ScenarioDto {
                 .incidentType(incidentType)
                 .incidentDetailType(incidentDetailType)
                 .portArea(portArea)
-                .responseStage(responseStage)
                 .accidentPortFacilityList(accidentPortFacilityList)
                 .accidentResponseActivityList(accidentResponseActivityList)
                 .scenarioEvaluationList(scenarioEvaluationList)

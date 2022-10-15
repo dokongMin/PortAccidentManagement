@@ -12,8 +12,7 @@ function ChangeValue() {
         el4.innerHTML = '사고항만구역';
         const el5 = document.getElementById('ch5');
         el5.innerHTML = '사고항만설비';
-        const el6 = document.getElementById('ch6');
-        el6.innerHTML = '사고대응활동 내용';
+
     }
     if (chose == "DISASTER" || chose == "재난") {
         const el1 = document.getElementById('ch1');
@@ -26,7 +25,6 @@ function ChangeValue() {
         el4.innerHTML = '재난항만구역';
         const el5 = document.getElementById('ch5');
         el5.innerHTML = '재난항만설비';
-        const el6 = document.getElementById('ch6');
-        el6.innerHTML = '재난대응활동 내용';
+
     }
 }
