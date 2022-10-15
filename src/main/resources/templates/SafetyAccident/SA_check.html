@@ -102,7 +102,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="accident : ${accidents}">
+        <tr th:each="accident : ${accidents}"
+            th:onclick="|location.href='@{/SafetyAccident/SA_detail/{accident_info_id}(accident_info_id=${accident.id})}'|">
             <td th:text="${accidentStat.count} + ${accidents.number} * 10"></td>
             <td th:text="${accident.accidentDate}"></td>
             <td th:text="${accident.accidentLevel}"></td>

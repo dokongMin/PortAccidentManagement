@@ -2,10 +2,13 @@ package com.port.accident.portaccident.controller;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.dto.accident_management.AccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.CausesSafetyAccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.DamageFacilityInfoDto;
 import com.port.accident.portaccident.dto.accident_management.type.AccidentTypeDto;
+import com.port.accident.portaccident.enums.PortFacility;
 import com.port.accident.portaccident.repository.accident_management.AccidentManagementRepository;
 import com.port.accident.portaccident.repository.accident_management.AccidentTypeRepository;
 import com.port.accident.portaccident.service.accident_management_service.AccidentManagementService;
@@ -110,9 +113,13 @@ public class AccidentManagementController {
     /**
      * 안전사고 정보 개별 조회
      */
-//    @GetMapping
-//    public void getAccidentInfo(){
-//
-//    }
+    @RequestMapping("/SA_detail/{accident_info_id}")
+    public String detailTrainingScenario(Model model, @PathVariable(value = "accident_info_id") Integer accident_info_id) {
 
+
+        AccidentInfo accidentInfo = accidentManagementRepository.findById(accident_info_id).get();
+        model.addAttribute("accidentInfo", accidentInfo);
+        
+        return "/SafetyAccident/SA_detail";
+    }
 }

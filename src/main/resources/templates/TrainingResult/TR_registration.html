@@ -36,37 +36,36 @@
     <div class="regist-title">
         <p>대응훈련 결과 등록</p>
     </div>
-    <form name="trainingResultForm">
     <span class="fonts">안전사고 유형&nbsp;
 
       <select id="incidentType" th:name="incidentType" onchange="ChangeValue()">
-        <option value="INCIDENT">사고</option>
+        <option value="INCIDENT" selected>사고</option>
         <option value="DISASTER">재난</option>
       </select></span>
         <br><br>
 
         <div class="regist-line-1">
       <span class="fonts">시나리오명&nbsp;&nbsp;
-        <select>
-        <option th:each="allScenario : ${allScenarios}" th:text="${allScenario.name}" th:value="${allScenario}" th:id="scenario" name="scenario"></option>
+        <select name="scenarioSelect">
+        <option th:each="allScenario : ${allScenarios}" th:text="${allScenario.name}" th:value="${allScenario.id}" th:id="scenario" name="scenario"></option>
       </select>
       </span>
 
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <span class="fonts"> 훈련명&nbsp;&nbsp; </span><input type="text" placeholder="추락 예방 훈련" name="name" th:id="name">
+            <span class="fonts"> 훈련명&nbsp;&nbsp; </span><input type="text" placeholder="훈련명 입력" name="name" th:id="name">
         </div>
 
         <div class="regist-line-1-0">
             <p>
         <span class="fonts">훈련 종류&nbsp;&nbsp; <select>
-          <option name="trainingType" th:id="trainingType" value="VIRTUAL">도상 훈련</option>
+          <option name="trainingType" th:id="trainingType" value="VIRTUAL" selected>도상 훈련</option>
           <option value="ACTUAL" name="trainingType" th:id="trainingType">실전 훈련</option>
         </select>
         </span>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 <span class="fonts">훈련 장소&nbsp;&nbsp;
             <select th:id="place">
-                <option th:name="place" th:id="place" value="PLACE1">무역항 수상구역</option>
+                <option th:name="place" th:id="place" value="PLACE1" selected>무역항 수상구역</option>
                 <option th:name="place" th:id="place" value="PLACE2">무역항 육상구역</option>
                 <option th:name="place" th:id="place" value="PLACE3">연안항 수상구역</option>
                 <option th:name="place" th:id="place" value="PLACE4">연안항 육상구역</option>
@@ -93,7 +92,7 @@
         <div class="regist-line-2">
             <p>
                 <span class="fonts" id="ch1">사고 수준</span> &nbsp;
-                <select id="incidentLevelSelect"> <!--onchange="incidentLevelType(this)"-->
+                <select name="incidentLevelSelect"> <!--onchange="incidentLevelType(this)"-->
                     <option value="LEVEL_1" selected>Level1</option>
                     <option value="LEVEL_2">Level2</option>
                     <option value="LEVEL_3">Level3</option>
@@ -101,7 +100,7 @@
                 <!--        <input type="text" placeholder="Level1" value="LEVEL_1" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
 
                 <span class="fonts" id="ch2">사고 유형</span> &nbsp;
-                <select id="incidentDetailTypeSelect" onchange="incidentDetailType(this)">
+                <select name="incidentDetailTypeSelect" onchange="incidentDetailType(this)">
                     <option value="추락" selected>추락</option>
                     <option value="넘어짐">넘어짐</option>
                     <option value="부딪힘">부딪힘</option>
@@ -111,11 +110,11 @@
                 <!--        <input type="text" placeholder="추락" value="LEVEL_2" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
 
                 <span class="fonts" id="ch3">사고 영향</span> &nbsp;
-                <select id="incidentImpactSelect"> <!--onchange="incidentImpactType(this)">-->
-                    <option value="단순" selected>단순</option>
-                    <option value="경상">경상</option>
-                    <option value="중상">중상</option>
-                    <option value="사망">사망</option>
+                <select name="incidentImpactSelect"> <!--onchange="incidentImpactType(this)">-->
+                    <option value="DAMAGE" selected>단순</option>
+                    <option value="SLIGHT">경상</option>
+                    <option value="SERIOUS">중상</option>
+                    <option value="DEATH">사망</option>
                 </select> &nbsp;&nbsp;
                 <!--        <input type="text" placeholder="경상" value="LEVEL_3" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
             </p>
@@ -131,7 +130,7 @@
 
 
         <div class="regist-line-5">
-            <p><textarea placeholder="text" name="trainingArea" th:id="trainingArea"></textarea></p>
+            <p><textarea placeholder="훈련 대상 항만 구역 입력" name="trainingArea" th:id="trainingArea"></textarea></p>
         </div>
 
         <div class="regist-line-6">
@@ -145,16 +144,16 @@
 
 
         <div class="regist-line-7">
-            <p> <span class="fonts"> 훈련 수행 부서 &nbsp;&nbsp;<input type="text" placeholder="안전관리" name="department" th:id="department"></span>
+            <p> <span class="fonts"> 훈련 수행 부서 &nbsp;&nbsp;<input type="text" placeholder="훈련 수행 부서 입력" name="department" th:id="department"></span>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="fonts"> 훈련 참여 인원 &nbsp;&nbsp;<input type="text" placeholder="정민환,박태영,이혜원,송영주,주현정" name="trainingParticipantsList" th:id="trainingParticipantsList"> </span>
+                <span class="fonts"> 훈련 참여 인원 &nbsp;&nbsp;<input type="text" placeholder="콤마(',') 사용 금지" name="trainingParticipantsList" th:id="trainingParticipants"> </span>
             </p>
         </div>
 
     </form>
     <div class="regist-button">
 
-        <a href="#" th:id="TR_Registration_button" onclick="javascript:document.trainingResultForm.submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="#" th:id="TR_Registration_button"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/TrainingResult/trainingResult_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
 </div>
@@ -182,4 +181,5 @@
 
 <script src="/js/TrainingResult/TR_registration.js"> </script>
 <script src="/js/TR_registration_button.js"></script>
+
 </html>
