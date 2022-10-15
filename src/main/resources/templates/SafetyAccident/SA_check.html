@@ -15,12 +15,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/SafetyAccident/SA_check.css">
     <link rel="stylesheet" href="/css/SafetyAccident/SA_Pagination.css">
+    <link rel="stylesheet" href="/css/paging.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-
 </head>
 <body>
 <!-- HEADER -->
@@ -35,57 +34,65 @@
         <p>안전사고 정보 조회</p>
     </div>
     <span class="fonts">안전사고 유형&nbsp;
-    <select id="choose" onchange="ChangeValue()">
-      <option value="사고">사고</option>
-      <option value="재난">재난</option>
+    <select id="incidentType" onchange="ChangeValue(); incidentType(this);">
+      <option name="incidentType" value="none" selected="selected">&nbsp;--&nbsp;</option>
+      <option name="incidentType" value="INCIDENT">사고</option>
+      <option name="incidentType" value="DISASTER">재난</option>
     </select></span>
     <br><br>
     <div class="inquiry-line-1">
         <p><span class="fonts"> 사고일시&nbsp; <input type="date"> </span>
             &nbsp;
             <span><span class="fonts" id="ch1">사고 수준</span>
-        <input type="radio" name="l1" checked> Level1
-        <input type="radio" name="l1"> Level2
-        <input type="radio" name="l1"> Level3 </span>
+        <input type="radio" name="incidentLevel" value="LEVEL_1"> Level1
+        <input type="radio" name="incidentLevel" value="LEVEL_2"> Level2
+        <input type="radio" name="incidentLevel" value="LEVEL_3"> Level3 </span>
 
             &nbsp;
 
-            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select>
-                <option>추락</option>
-                <option>넘어짐</option>
-                <option>부딪힘</option>
-                <option>끼임</option>
-                <option>맞음</option>
+            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select id="incidentDetailTypeSelect"
+                                                                    onchange="incidentDetailType(this)">
+                <option name="incidentDetailType" value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP">추락</option>
+                <option name="incidentDetailType" value="FALL">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP">끼임</option>
+                <option name="incidentDetailType" value="HIT">맞음</option>
+            </select>
+
+            &nbsp;
+            <br>
+            <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select id="trainingPlaceSelect"
+                                                                    onchange="trainingPlace(this)">
+                <option name="TrainingPlace" value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option name="TrainingPlace" value="PLACE1">무역항 수상구역</option>
+                <option name="TrainingPlace" value="PLACE2">무역항 육상구역</option>
+                <option name="TrainingPlace" value="PLACE3">연안항 수상구역</option>
+                <option name="TrainingPlace" value="PLACE4">연안항 육상구역</option>
+                <option name="TrainingPlace" value="PLACE5">하역</option>
             </select>
 
             &nbsp;
 
-            <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select>
-                <option>무역항 수상구역</option>
-                <option>무역항 육상구역</option>
-                <option>연안항 수상구역</option>
-                <option>연안항 육상구역</option>
-                <option>하역</option>
-            </select>
-
-            &nbsp;
-
-            <span class="fonts" id="ch3">사고자</span>&nbsp; <input type="text" style="width: 80px;">
+            <span class="fonts" id="ch3">사고자</span>&nbsp; <input id="accidentManager" type="text" style="width: 80px;">
 
         </p>
     </div>
     <form method="GET" th:action="@{SA_check}">
-    <div class="inquiry-button">
-        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">
-        <a href="#"><button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button></a>
-    </div>
+
+        <div class="inquiry-button">
+            <!--        <input type="text" id="searchText" name="searchText"  th:value="${param.searchText}">-->
+            <a href="#">
+                <button type="submit" class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</button>
+            </a>
+        </div>
     </form>
     <br>
 
     <table>
         <thead>
         <tr>
-            <th class="fonts">id</th>
+            <th class="fonts">Index</th>
             <th class="fonts">사고/재난 일시</th>
             <th class="fonts">수준</th>
             <th class="fonts">구역</th>
@@ -96,85 +103,50 @@
         </thead>
         <tbody>
         <tr th:each="accident : ${accidents}">
-            <td th:text="${accident.id}">1</td>
-            <td th:text="${accident.accidentDate}">2022.01.03</td>
-            <td th:text="${accident.accidentLevel}">3</td>
-            <td th:text="${accident.accidentArea}">무역항 수상</td>
-            <td th:text="${accident.accidentType.getName()}">추락</td>
-            <td th:text="${accident.victim}">정민환</td>
-            <td th:text="${accident.accidentInspect}">사다리에서 추락</td>
+            <td th:text="${accidentStat.count} + ${accidents.number} * 10"></td>
+            <td th:text="${accident.accidentDate}"></td>
+            <td th:text="${accident.accidentLevel}"></td>
+            <td th:text="${accident.accidentArea}"></td>
+            <td th:text="${accident.incidentType}"></td>
+            <td th:text="${accident.victim}"></td>
+            <td th:text="${accident.accidentInspect}"></td>
         </tr>
-        <!--      <tr>-->
-        <!--        <td>3</td>-->
-        <!--        <td>2022.01.15</td>-->
-        <!--        <td>1</td>-->
-        <!--        <td>무역항 육상</td>-->
-        <!--        <td>넘어짐</td>-->
-        <!--        <td>이혜원</td>-->
-        <!--        <td>넘어짐</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>3</td>-->
-        <!--        <td>2022.01.24</td>-->
-        <!--        <td>1</td>-->
-        <!--        <td>연안항 수상</td>-->
-        <!--        <td>부딪힘</td>-->
-        <!--        <td>박태영</td>-->
-        <!--        <td>지게차와 부딪힘</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>4</td>-->
-        <!--        <td>2022.02.07</td>-->
-        <!--        <td>3</td>-->
-        <!--        <td>연안항 육상</td>-->
-        <!--        <td>끼임</td>-->
-        <!--        <td>송영주</td>-->
-        <!--        <td>컨테이너에 끼임</td>-->
-        <!--      </tr>-->
-        <!--      <tr>-->
-        <!--        <td>5</td>-->
-        <!--        <td>2022.02.19</td>-->
-        <!--        <td>2</td>-->
-        <!--        <td>하역</td>-->
-        <!--        <td>맞음</td>-->
-        <!--        <td>주현정</td>-->
-        <!--        <td>사다리에 맞음</td>-->
-        <!--      </tr>-->
-        <!--    </tbody>-->
-        <!--    <tfoot>-->
-        <!--      <tr>-->
-        <!--        <td>6</td>-->
-        <!--        <td>2022.03.04</td>-->
-        <!--        <td>3</td>-->
-        <!--        <td>무역항 수상</td>-->
-        <!--        <td>추락</td>-->
-        <!--        <td>홍길동</td>-->
-        <!--        <td>사다리에서 추락</td>-->
-        <!--      </tr>-->
-        <!--    </tfoot>-->
     </table>
     <div class="page_wrap">
         <div class="page_nation">
-            <!--      <a class="arrow pprev" href="#"></a>-->
-            <ul class="pagination" style="padding: 0">
-                <li class="page-item" th:classappend="${1 == accidents.pageable.pageNumber + 1} ?'disabled'">
-                    <a class="arrow-prev" href="#" th:href="@{SA_check(page=${accidents.pageable.pageNumber - 1})}"></a>
+            <ul class="page_ul"
+                th:if="${accidents.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(accidents.number/10)*10 + 1}, last=(${start + 9 < accidents.totalPages ? start + 9 : accidents.totalPages})">
+                <!--with: 변수 설정-->
+                <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
+                <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
+                <li class="page_li">
+                    <a class="arrow pprev"
+                       th:href="@{/SafetyAccident/SA_check(page=1,searchText=${param.searchText})}"></a>
+                    <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
                 </li>
-                <li class="page-item"  th:classappend="${i == accidents.pageable.pageNumber + 1} ? 'disabled'"
-                    th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                    <a href="#" class="active"  th:text="${i}">1</a>
+                <li class="page_li">
+                    <a class="arrow prev"
+                       th:href="${accidents.first} ? '#' : @{/SafetyAccident/SA_check(page=${accidents.number},searchText=${param.searchText})}"></a>
                 </li>
-                <li class="page-item"
-                    th:classappend="${accidents.totalPages == accidents.pageable.pageNumber + 1} ? 'disabled'">
-                    <a class="arrow-next" href="#" th:href="@{SA_check(page=${accidents.pageable.pageNumber + 1})}"></a>
+                <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
+                    <a th:text="${page}" th:class="${page == accidents.number + 1} ? 'active'"
+                       th:href="@{/SafetyAccident/SA_check(page=${page},searchText=${param.searchText})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow next"
+                       th:href="${accidents.last} ? '#' : @{/SafetyAccident/SA_check(page=${accidents.number + 2},searchText=${param.searchText})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow nnext"
+                       th:href="@{/SafetyAccident/SA_check(page=${accidents.totalPages},searchText=${param.searchText})}"></a>
                 </li>
             </ul>
-            <!--      <a class="arrow nnext" href="#"></a>-->
         </div>
     </div>
     <div class="regist-button">
-        <a href="/SafetyAccident/SA_registration/SA_registration.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-        <a href="/SafetyAccident/SA_modify/SA_modify.html"><span
+        <a href="/SafetyAccident/SA_registration"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/SafetyAccident/SA_modify"><span
                 class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
     </div>
 </div>
@@ -198,5 +170,111 @@
     </div>
 </footer>
 </body>
+<script>
+    let incidentTypeVal;
+    let incidentLevelVal;
+    let incidentDetailTypeVal;
+    let trainingPlaceVal;
+    let accidentManagerVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('accidentManager')) {
+            document.getElementById("accidentManager").value = urlParams.get('accidentManager');
+        }
+        if (urlParams.get('incidentLevel')) {
+            const incidentLevelList = document.getElementsByName('incidentLevel');
+
+            incidentLevelList.forEach((node) => {
+                if (node.value == urlParams.get('incidentLevel')) {
+                    node.checked = true;
+                }
+            })
+        }
+        if (urlParams.get('incidentType')) {
+            incidentTypeVal = urlParams.get('incidentType');
+            selectedControl('incidentType', urlParams.get('incidentType'));
+        }
+        if (urlParams.get('incidentDetailType')) {
+            incidentDetailTypeVal = urlParams.get('incidentDetailType');
+            selectedControl('incidentDetailTypeSelect', urlParams.get('incidentDetailType'));
+        }
+        if (urlParams.get('TrainingPlace')) {
+            incidentDetailTypeVal = urlParams.get('TrainingPlace');
+            selectedControl('trainingPlaceSelect', urlParams.get('TrainingPlace'));
+        }
+    }
+
+    function selectedControl(elementId, urlParamVal) {
+        const el = document.getElementById(elementId);  //select box
+        const len = el.options.length; //select box의 option 갯수
+        //select box의 option 갯수만큼 for문 돌림
+        for (let i = 0; i < len; i++) {
+            //select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+            if (el.options[i].value == urlParamVal) {
+                el.options[i].selected = true;
+            }
+        }
+    }
+
+
+    /* select box 옵션 값 선택 */
+    const incidentType = (target) => {
+        incidentTypeVal = target.value;
+    }
+    const incidentDetailType = (target) => {
+        incidentDetailTypeVal = target.value;
+    }
+    const trainingPlace = (target) => {
+        trainingPlaceVal = target.value;
+    }
+
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        accidentManagerVal = document.getElementById("accidentManager").value;
+
+        /* 라디오버튼 값 가져오기 */
+        const incidentLevelList = document.getElementsByName('incidentLevel');
+
+        incidentLevelList.forEach((node) => {
+            if (node.checked) {
+                incidentLevelVal = node.value;
+            }
+        })
+
+        let conditionStr = "";
+
+        if (accidentManagerVal) {
+            conditionStr += "accidentManager=" + accidentManagerVal + "&";
+        }
+        if (incidentLevelVal != 'none' && incidentLevelVal != undefined) {
+            conditionStr += "incidentLevel=" + incidentLevelVal + "&";
+        }
+        if (incidentTypeVal != 'none' && incidentTypeVal != undefined) {
+            conditionStr += "incidentType=" + incidentTypeVal + "&";
+        }
+        if (incidentDetailTypeVal != 'none' && incidentDetailTypeVal != undefined) {
+            conditionStr += "incidentDetailType=" + incidentDetailTypeVal;
+        }
+        if (trainingPlaceVal != 'none' && trainingPlaceVal != undefined) {
+            conditionStr += "TrainingPlace=" + trainingPlaceVal;
+        }
+
+        if (conditionStr == "") {
+            alert("검색 조건을 설정해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 <script src="/js/SafetyAccident/SA_check.js"></script>
 </html>
