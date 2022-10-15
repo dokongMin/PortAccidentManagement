@@ -36,7 +36,6 @@
     <div class="regist-title">
         <p>대응훈련 결과 등록</p>
     </div>
-    <form name="trainingResultForm">
     <span class="fonts">안전사고 유형&nbsp;
 
       <select id="incidentType" th:name="incidentType" onchange="ChangeValue()">
@@ -47,8 +46,8 @@
 
         <div class="regist-line-1">
       <span class="fonts">시나리오명&nbsp;&nbsp;
-        <select>
-        <option th:each="allScenario : ${allScenarios}" th:text="${allScenario.name}" th:value="${allScenario}" th:id="scenario" name="scenario"></option>
+        <select name="scenarioSelect">
+        <option th:each="allScenario : ${allScenarios}" th:text="${allScenario.name}" th:value="${allScenario.id}" th:id="scenario" name="scenario"></option>
       </select>
       </span>
 
@@ -112,10 +111,10 @@
 
                 <span class="fonts" id="ch3">사고 영향</span> &nbsp;
                 <select id="incidentImpactSelect"> <!--onchange="incidentImpactType(this)">-->
-                    <option value="단순" selected>단순</option>
-                    <option value="경상">경상</option>
-                    <option value="중상">중상</option>
-                    <option value="사망">사망</option>
+                    <option value="DAMAGE" selected>단순</option>
+                    <option value="SLIGHT">경상</option>
+                    <option value="SERIOUS">중상</option>
+                    <option value="DEATH">사망</option>
                 </select> &nbsp;&nbsp;
                 <!--        <input type="text" placeholder="경상" value="LEVEL_3" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
             </p>
@@ -147,14 +146,14 @@
         <div class="regist-line-7">
             <p> <span class="fonts"> 훈련 수행 부서 &nbsp;&nbsp;<input type="text" placeholder="안전관리" name="department" th:id="department"></span>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="fonts"> 훈련 참여 인원 &nbsp;&nbsp;<input type="text" placeholder="정민환,박태영,이혜원,송영주,주현정" name="trainingParticipantsList" th:id="trainingParticipantsList"> </span>
+                <span class="fonts"> 훈련 참여 인원 &nbsp;&nbsp;<input type="text" placeholder="정민환,박태영,이혜원,송영주,주현정" name="trainingParticipantsList" th:id="trainingParticipants"> </span>
             </p>
         </div>
 
     </form>
     <div class="regist-button">
 
-        <a href="#" th:id="TR_Registration_button" onclick="javascript:document.trainingResultForm.submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="#" th:id="TR_Registration_button"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/TrainingResult/trainingResult_list"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
 </div>
@@ -182,4 +181,5 @@
 
 <script src="/js/TrainingResult/TR_registration.js"> </script>
 <script src="/js/TR_registration_button.js"></script>
+
 </html>

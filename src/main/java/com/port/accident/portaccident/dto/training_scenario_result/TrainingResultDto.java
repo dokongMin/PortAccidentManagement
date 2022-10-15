@@ -29,18 +29,18 @@ public class TrainingResultDto {
     private IncidentType incidentType;
     private String incidentDetailType;
     private String department;
+    private String trainingParticipants;
     private String trainingArea;
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
     private List<TrainingByDate> trainingByDateList = new ArrayList<>();
-    private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
+//    private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
     private Scenario scenario;
 
     @Builder
     public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
                              TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
-                             IncidentType incidentType, String incidentDetailType, String department, String trainingArea,
-                             List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList,
-                             List<TrainingParticipants> trainingParticipantsList, Scenario scenario) {
+                             IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea,
+                             List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -52,10 +52,11 @@ public class TrainingResultDto {
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
         this.department = department;
+        this.trainingParticipants = trainingParticipants;
         this.trainingArea = trainingArea;
         this.trainingPortFacilityList = trainingPortFacilityList;
         this.trainingByDateList = trainingByDateList;
-        this.trainingParticipantsList = trainingParticipantsList;
+//        this.trainingParticipantsList = trainingParticipantsList;
         this.scenario = scenario;
     }
 
@@ -75,6 +76,7 @@ public class TrainingResultDto {
                 .incidentType(incidentType)
                 .incidentDetailType(incidentDetailType)
                 .department(department)
+                .trainingParticipants(trainingParticipants)
                 .trainingArea(trainingArea)
                 .scenario(scenario)
                 .build();

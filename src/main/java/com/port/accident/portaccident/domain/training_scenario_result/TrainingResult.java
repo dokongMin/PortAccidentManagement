@@ -60,6 +60,9 @@ public class TrainingResult {
     @Column(name = "training_department")
     private String department;
 
+    @Column(name = "training_participants")
+    private String trainingParticipants;
+
     @Column(name = "training_port_area")
     private String trainingArea;    //훈련대상 항만구역
 
@@ -69,17 +72,15 @@ public class TrainingResult {
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingByDate> trainingByDateList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "trainingResult")
-    private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
+//    @OneToMany(mappedBy = "trainingResult")
+//    private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scenario_id")
     private Scenario scenario;
 
     @Builder
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
-                          TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
-                          IncidentType incidentType, String incidentDetailType, String department, String trainingArea, Scenario scenario) {
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -91,9 +92,11 @@ public class TrainingResult {
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
         this.department = department;
+        this.trainingParticipants = trainingParticipants;
         this.trainingArea = trainingArea;
         this.scenario = scenario;
     }
+
 
     public void updateTrainingPortFacilityList(TrainingPortFacility facility) {
         trainingPortFacilityList.add(facility);
@@ -102,9 +105,9 @@ public class TrainingResult {
     public void updateTrainingByDateList(TrainingByDate byDate) {
         trainingByDateList.add(byDate);
     }
-
-    public void updateTrainingParticipantsList(TrainingParticipants participants) {
-        trainingParticipantsList.add(participants);
-    }
+//
+//    public void updateTrainingParticipantsList(TrainingParticipants participants) {
+//        trainingParticipantsList.add(participants);
+//    }
 
 }
