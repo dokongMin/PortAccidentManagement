@@ -83,10 +83,10 @@ public class ScenarioEvaluationController {
          * completeStandard1, completeStandard2 값이 있습니다.*/
 
         EvaluationSearchCondition condition = new EvaluationSearchCondition(name);
-        Page<ScenarioEvaluation> evaluation = scenarioService.searchPageScenarioEvaluation(condition, pageable);
+        Page<ScenarioEvaluation> evaluationList = scenarioService.searchPageScenarioEvaluation(condition, pageable);
 
         model.addAttribute("condition", condition);
-        model.addAttribute("evaluation", evaluation);
+        model.addAttribute("evaluationList", evaluationList);
         return "TS_Assessment/TSA_Check";
     }
 

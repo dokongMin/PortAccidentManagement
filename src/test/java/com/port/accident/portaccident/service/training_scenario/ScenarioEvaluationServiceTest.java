@@ -51,7 +51,6 @@ public class ScenarioEvaluationServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -74,12 +73,15 @@ public class ScenarioEvaluationServiceTest {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         //when
@@ -120,12 +122,15 @@ public class ScenarioEvaluationServiceTest {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
@@ -133,12 +138,15 @@ public class ScenarioEvaluationServiceTest {
         ScenarioEvaluationDto updateScenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .id(scenarioEvaluationId)
                 .name("SY2v2")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.Y)
-                .completeStandard1(SuitableCheck.Y)
-                .completeStandard2(SuitableCheck.Y)
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         //when
@@ -158,12 +166,15 @@ public class ScenarioEvaluationServiceTest {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);

@@ -44,7 +44,7 @@
     <table>
         <thead>
         <tr>
-            <td colspan="1" rowspan="2" class="fonts">id</td>
+            <td colspan="1" rowspan="2" class="fonts">Index</td>
             <td colspan="1" rowspan="2" class="fonts">시나리오</td>
             <td colspan="3" rowspan="1" class="fonts">발전가능성</td>
             <td colspan="3" rowspan="1" class="fonts">적절성</td>
@@ -63,87 +63,23 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>SY2</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>미흡</td>
+        <tr th:if="${evaluationList.getTotalPages() != 0}" th:each="evaluation : ${evaluationList}">
+            <td th:text="${evaluationStat.count} + ${evaluationList.number} * 10"></td>
+            <td th:text="${evaluation.name}"></td>
+            <td th:text="${evaluation.developmentStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.developmentStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.developmentStandard3.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard3.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard3.getCheckValue()}"></td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td>SR1</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>미흡</td>
-            <td>부적합</td>
-            <td>적합</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>SV1</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>미흡</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>SR3</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>미흡</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>ST1</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>부적합</td>
+        <tr th:if="${evaluationList.getTotalPages() == 0}">
+            <td colspan="11">조회된 결과가 없습니다.</td>
         </tr>
         </tbody>
-        <tfoot>
-        <tr>
-            <td>6</td>
-            <td>SV2</td>
-            <td>적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>부적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-            <td>적합</td>
-        </tr>
-        </tfoot>
     </table>
     <div class="regist-button">
         <a href="/TS_Assessment/TSA_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
@@ -156,11 +92,11 @@
         &nbsp;&nbsp;&nbsp;적절성①: 배치된 시간과 부서의 적절성 여부<br>
         &nbsp;&nbsp;&nbsp;적절성②: 재난 및 사고 유형별 특성 고려 여부<br>
         &nbsp;&nbsp;&nbsp;적절성③: 훈련을 위한 적절한 장소 선택 여부<br>
-        &nbsp;&nbsp;&nbsp;적절성④: 발생일자 및 날씨 반영 여부 <span style="color: red">(재난)</span><br>
+<!--        &nbsp;&nbsp;&nbsp;적절성④: 발생일자 및 날씨 반영 여부 <span style="color: red">(재난)</span><br>-->
         &nbsp;&nbsp;&nbsp;완전성①: 물리적 피해 및 경제적 피해 명시 여부<br>
         &nbsp;&nbsp;&nbsp;완전성②: 상황대응에 대한 내용 기술 여부<br>
         &nbsp;&nbsp;&nbsp;완전성③: 복구 및 회복 내용 명시 여부<br>
-        &nbsp;&nbsp;&nbsp;완전성④: 관련 사고 설비 포함 여부 <span style="color: red">(사고)</span><br>
+<!--        &nbsp;&nbsp;&nbsp;완전성④: 관련 사고 설비 포함 여부 <span style="color: red">(사고)</span><br>-->
     </p>
     <br>
 </div>
