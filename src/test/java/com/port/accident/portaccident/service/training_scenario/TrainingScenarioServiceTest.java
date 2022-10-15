@@ -7,7 +7,6 @@ import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPort
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
-import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDetailDto;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.AccidentPortFacilityRepository;
@@ -62,7 +61,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -126,7 +124,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         Integer scenarioId = scenarioService.saveScenario(scenarioDto);
@@ -140,7 +137,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(scenario.getIncidentType())
                 .incidentDetailType(scenario.getIncidentDetailType())
                 .portArea(scenario.getPortArea())
-                .responseStage("3")
                 .build();
 
         //when
@@ -220,7 +216,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("3")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -247,7 +242,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(scenario.getIncidentType())
                 .incidentDetailType(scenario.getIncidentDetailType())
                 .portArea(scenario.getPortArea())
-                .responseStage("3")
                 .build();
 
         AccidentPortFacilityDto updateAccidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -420,7 +414,6 @@ public class TrainingScenarioServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("3")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()

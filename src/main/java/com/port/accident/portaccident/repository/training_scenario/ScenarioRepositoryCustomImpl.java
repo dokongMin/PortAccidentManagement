@@ -7,12 +7,10 @@ import com.port.accident.portaccident.enums.IncidentDetailType;
 import com.port.accident.portaccident.enums.IncidentLevel;
 import com.port.accident.portaccident.enums.IncidentType;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
@@ -21,8 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.port.accident.portaccident.domain.training_scenario.QScenario.scenario;
-import static com.port.accident.portaccident.domain.training_scenario.elements.QAccidentPortFacility.accidentPortFacility;
-import static com.port.accident.portaccident.domain.training_scenario.elements.QAccidentResponseActivity.accidentResponseActivity;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Repository

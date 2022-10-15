@@ -43,8 +43,7 @@ public class TrainingScenarioController {
     }
 
     @PostMapping("/TS_Register")
-    public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestParam(value = "accidentPortFacilityList", required = false) List<String> accidentPortFacilityList) {
+    public String registerTrainingScenario(@RequestBody ScenarioAccidentPortFacilityDto scenarioAccidentPortFacilityDto) {
         /*TODO::혜원 현정님 - 시나리오 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
@@ -54,13 +53,11 @@ public class TrainingScenarioController {
          * name을 제외한 필드는 모두 enum으로 처리해주세요!
          * */
 
-        ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
-
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
-        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
+        ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioAccidentPortFacilityDto);
+        List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(scenarioAccidentPortFacilityDto.getAccidentPortFacilityList());
 
         scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
-        scenarioService.saveScenario(registerScenarioDto);
+//        scenarioService.saveScenario(registerScenarioDto);
         return "redirect:/TrainingScenarios/TS_Check";
     }
 
@@ -78,20 +75,17 @@ public class TrainingScenarioController {
     }
 
     @RequestMapping("/TS_Modify")
-    public String modifyTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                         @RequestParam List<String> accidentPortFacilityList,
-                                         @RequestBody AccidentResponseActivityDto accidentResponseActivityDto) {
+    public String modifyTrainingScenario(@RequestBody ScenarioAccidentPortFacilityDto scenarioAccidentPortFacilityDto) {
 
         /*TODO:: 혜원 현정님 - 시나리오 수정
          * 수정 시에는 시나리오의 id도 함께 넘겨주세요 (필드명: id)*/
 
-        ScenarioDto modifyScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
+        ScenarioDto modifyScenarioDto = scenarioService.toServiceScenarioDto(scenarioAccidentPortFacilityDto);
+        List<AccidentPortFacilityDto> modifyFacilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(scenarioAccidentPortFacilityDto.getAccidentPortFacilityList());
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
-        List<AccidentPortFacilityDto> modifyFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
-        AccidentResponseActivityDto modifyAccidentResponseActivityDto = scenarioService.toServiceAccidentResponseActivity(accidentResponseActivityDto);
+//        AccidentResponseActivityDto modifyAccidentResponseActivityDto = scenarioService.toServiceAccidentResponseActivity(accidentResponseActivityDto);
+//        scenarioService.updateAccidentResponseActivity(modifyAccidentResponseActivityDto);
 
-        scenarioService.updateAccidentResponseActivity(modifyAccidentResponseActivityDto);
         scenarioService.modifyScenario(modifyScenarioDto, modifyFacilityDtoList);
 
         return "redirect:/TrainingScenarios/TS_Check";

@@ -48,12 +48,39 @@ public class ScenarioService {
                 .build();
     }
 
+    public ScenarioDto toServiceScenarioDto(ScenarioAccidentPortFacilityDto scenarioAccidentPortFacilityDto) {
+        return ScenarioDto.builder()
+                .id(scenarioAccidentPortFacilityDto.getId())
+                .name(scenarioAccidentPortFacilityDto.getName())
+                .incidentLevel(scenarioAccidentPortFacilityDto.getIncidentLevel())
+                .incidentImpact(scenarioAccidentPortFacilityDto.getIncidentImpact())
+                .incidentType(scenarioAccidentPortFacilityDto.getIncidentType())
+                .incidentDetailType(scenarioAccidentPortFacilityDto.getIncidentDetailType())
+                .portArea(scenarioAccidentPortFacilityDto.getPortArea())
+                .build();
+    }
+
+/*
     public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
         List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
 
         for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
                     .id(accidentPortFacilityDto.getId())
+                    .name(accidentPortFacilityDto.getName())
+                    .build();
+
+            toServiceAccidentPortFacilityDtoList.add(facilityDto);
+        }
+        return toServiceAccidentPortFacilityDtoList;
+    }
+*/
+
+    public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> facilityDtoList) {
+        List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
+
+        for (AccidentPortFacilityDto accidentPortFacilityDto : facilityDtoList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
                     .name(accidentPortFacilityDto.getName())
                     .build();
 
@@ -87,13 +114,12 @@ public class ScenarioService {
 
     }
 
-    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<String> facilityList) {
+    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<PortFacility> facilityList) {
         List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
 
-
-        for (String facility : facilityList) {
+        for (PortFacility facility : facilityList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
-                    .name(PortFacility.valueOf(facility))
+                    .name(facility)
                     .build();
 
             facilityDtoList.add(facilityDto);
