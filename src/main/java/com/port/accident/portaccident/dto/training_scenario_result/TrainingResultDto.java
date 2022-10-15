@@ -1,0 +1,77 @@
+package com.port.accident.portaccident.dto.training_scenario_result;
+
+
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
+import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
+import com.port.accident.portaccident.domain.training_scenario_result.evaluation.EvaluationDetails;
+import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
+import com.port.accident.portaccident.enums.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@NoArgsConstructor
+@Getter
+@Setter
+public class TrainingResultDto {
+    private Integer id;
+    private String name;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private TrainingPlace place;
+    private TrainingType trainingType;
+    private IncidentLevel incidentLevel;
+    private IncidentImpact incidentImpact;
+    private IncidentType incidentType;
+    private String incidentDetailType;
+    private String department;
+    private String trainingParticipants;
+    private String trainingArea;
+    private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
+    private List<TrainingByDate> trainingByDateList = new ArrayList<>();
+//    private List<TrainingParticipants> trainingParticipantsList = new ArrayList<>();
+    private Scenario scenario;
+
+    @Builder
+    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String incidentDetailType1, String department, String trainingParticipants, String trainingArea, Scenario scenario) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.place = place;
+        this.trainingType = trainingType;
+        this.incidentLevel = incidentLevel;
+        this.incidentImpact = incidentImpact;
+        this.incidentType = incidentType;
+        this.incidentDetailType = incidentDetailType;
+        this.incidentDetailType = incidentDetailType1;
+        this.department = department;
+        this.trainingParticipants = trainingParticipants;
+        this.trainingArea = trainingArea;
+        this.scenario = scenario;
+    }
+
+
+    public TrainingResult toEntity() {
+        return TrainingResult.builder()
+                .id(id)
+                .name(name)
+                .startDate(startDate)
+                .endDate(endDate)
+                .place(place)
+                .trainingType(trainingType)
+                .incidentLevel(incidentLevel)
+                .incidentImpact(incidentImpact)
+                .incidentType(incidentType)
+                .incidentDetailType(incidentDetailType)
+                .department(department)
+                .trainingParticipants(trainingParticipants)
+                .trainingArea(trainingArea)
+                .scenario(scenario)
+                .build();
+    }
+}

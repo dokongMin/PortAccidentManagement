@@ -1,34 +1,42 @@
-stages:
-  - build
-  - test
-
-image: alpine:latest
+image: gradle:alpine
 
 variables:
-  GREETING_MESSAGE: Hello
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
-build_a:
+before_script:
+   - chmod +x gradlew
+   - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+ paths:
+   - .gradle/wrapper
+   - .gradle/caches
+   - build/
+
+stages:
+  - build
+  - package
+
+build:
   stage: build
+  only:
+  - master
   script:
-    - echo "$GREETING_MESSAGE, GitLab CI!"
-    - echo "이 Job은 무언가를 빌드합니다."
+  - ./gradlew clean
+  - ./gradlew build -x test
+  - echo "build"
+  artifacts:
+    paths:
+    - build/libs/*.jar
 
-build_b:
-  stage: build
-  script:
-    - echo "이 Job은 다른 무언가를 빌드합니다."
-    - sleep 5
-
-test_a:
-  stage: test
-  script:
-    - echo "이 Job은 무언가를 테스트합니다."
-    - echo "빌드 단계의 모든 Job이 완료된 경우에만 실행됩니다."
-
-test_b:
-  stage: test
-  script:
-    - echo "이 Job은 다른 무언가를 테스트합니다."
-    - echo "이 Job도 빌드 단계의 모든 Job이 완료된 경우에만 실행됩니다."
-    - echo "test_a와 거의 동시에 시작됩니다."
-    - sleep 5
+# docker-build:
+#   image: docker:latest
+#   stage: package
+#   services:
+#     - docker:dind
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker pull $CI_REGISTRY_IMAGE:latest || true
+#     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
+#     - docker push $CI_REGISTRY_IMAGE:latest
