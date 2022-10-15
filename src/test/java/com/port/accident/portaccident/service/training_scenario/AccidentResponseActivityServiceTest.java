@@ -110,7 +110,7 @@ public class AccidentResponseActivityServiceTest {
                 .build();
 
         //when
-        Integer updateActivityId = scenarioService.modifyAccidentResponseActivity(updateAccidentResponseActivityDto);
+        Integer updateActivityId = scenarioService.updateAccidentResponseActivity(updateAccidentResponseActivityDto);
 
         //then
         AccidentResponseActivity updateScenarioEvaluation = accidentResponseActivityRepository.findById(updateActivityId).get();

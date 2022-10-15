@@ -106,6 +106,10 @@ public class ScenarioService {
         return scenarioRepository.findById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
+    public String findNameById(Integer scenarioId) {
+        return scenarioRepository.findNameById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
+    }
+
     @Transactional
     public Integer registerScenario(ScenarioDto scenarioDto,
                                     List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
@@ -205,7 +209,7 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer modifyAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+    public Integer updateAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
         AccidentResponseActivity accidentResponseActivity = accidentResponseActivityRepository.findById(accidentResponseActivityDto.getId()).get();
         accidentResponseActivity.update(accidentResponseActivityDto);
 

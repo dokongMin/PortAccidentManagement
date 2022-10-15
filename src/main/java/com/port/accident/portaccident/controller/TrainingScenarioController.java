@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.util.StringUtils.hasText;
 
@@ -45,7 +44,7 @@ public class TrainingScenarioController {
 
     @PostMapping("/TS_Register")
     public String registerTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                           @RequestParam(value= "accidentPortFacilityListStr",required=false) List<String> accidentPortFacilityListStr) {
+                                           @RequestParam(value = "accidentPortFacilityList", required = false) List<String> accidentPortFacilityList) {
         /*TODO::혜원 현정님 - 시나리오 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (name, incidentLevel, incidentImpact, incidentType, incidentDetailType, portArea)
@@ -57,7 +56,7 @@ public class TrainingScenarioController {
 
         ScenarioDto registerScenarioDto = scenarioService.toServiceScenarioDto(scenarioDto);
 
-        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityListStr);
+        List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
         List<AccidentPortFacilityDto> registerFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
 
         scenarioService.registerScenario(registerScenarioDto, registerFacilityDtoList);
@@ -68,7 +67,6 @@ public class TrainingScenarioController {
     @GetMapping("/TS_Modify_Page")
     public String modifyTrainingScenarioPage(Model model, @RequestParam("scenarioId") Integer scenarioId) {
         Scenario scenario = scenarioService.findById(scenarioId);
-
         List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);
         List<AccidentResponseActivity> accidentResponseActivityList = scenarioService.findAccidentResponseActivityByScenarioId(scenarioId);
 
@@ -81,7 +79,8 @@ public class TrainingScenarioController {
 
     @RequestMapping("/TS_Modify")
     public String modifyTrainingScenario(@RequestBody ScenarioDto scenarioDto,
-                                         @RequestParam List<String> accidentPortFacilityList) {
+                                         @RequestParam List<String> accidentPortFacilityList,
+                                         @RequestBody AccidentResponseActivityDto accidentResponseActivityDto) {
 
         /*TODO:: 혜원 현정님 - 시나리오 수정
          * 수정 시에는 시나리오의 id도 함께 넘겨주세요 (필드명: id)*/
@@ -90,6 +89,9 @@ public class TrainingScenarioController {
 
         List<AccidentPortFacilityDto> facilityDtoList = scenarioService.makeAccidentPortFacilityDtoBuilder(accidentPortFacilityList);
         List<AccidentPortFacilityDto> modifyFacilityDtoList = scenarioService.toServiceAccidentPortFacilityDtoList(facilityDtoList);
+        AccidentResponseActivityDto modifyAccidentResponseActivityDto = scenarioService.toServiceAccidentResponseActivity(accidentResponseActivityDto);
+
+        scenarioService.updateAccidentResponseActivity(modifyAccidentResponseActivityDto);
         scenarioService.modifyScenario(modifyScenarioDto, modifyFacilityDtoList);
 
         return "redirect:/TrainingScenarios/TS_Check";
@@ -164,9 +166,14 @@ public class TrainingScenarioController {
     }
 
 
-    @GetMapping("/ARA_Register_Page")
-    public String registerAccidentResponseActivityPage() {
-        return "TrainingScenarios/ARA_Register";
+    @GetMapping("/ARA_Register_Page/{scenarioId}")
+    public String registerAccidentResponseActivityPage(Model model, @PathVariable(value = "scenarioId") Integer scenarioId) {
+
+        String scenarioName = scenarioService.findNameById(scenarioId);
+        model.addAttribute("scenarioId", scenarioId);
+        model.addAttribute("scenarioName", scenarioName);
+
+        return "TrainingScenarios/AccidentResponseActivity/ARA_Register";
     }
 
     @PostMapping("/ARA_Register")
@@ -205,7 +212,7 @@ public class TrainingScenarioController {
         /*TODO:: 혜원 현정님 - 안전사고대응활동 수정*/
 
         AccidentResponseActivityDto modifyAccidentResponseActivityDto = scenarioService.toServiceAccidentResponseActivity(accidentResponseActivityDto);
-        scenarioService.modifyAccidentResponseActivity(modifyAccidentResponseActivityDto);
+        scenarioService.updateAccidentResponseActivity(modifyAccidentResponseActivityDto);
 
         redirectAttributes.addAttribute("scenarioId", modifyAccidentResponseActivityDto.getScenario().getId());
 
