@@ -595,8 +595,7 @@ svg{
   width: 600px;
   height: 400px;
   position: absolute;
-  top:750px;
-  right: 100px;
+  top:650px;
 }
 
 
@@ -691,8 +690,8 @@ body:hover .fullbarchart .barlong4{width:350px;}
   position: absolute;
   width: 1000px;
   height: 300px;
-  left: -230px;
-  top: 1234px;
+  left: 400px;
+  top: 634px;
 }
 .extrabar{
   position: relative;
