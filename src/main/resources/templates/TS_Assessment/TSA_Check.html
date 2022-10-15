@@ -14,6 +14,7 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/tsassessment/tsacheck.css">
+    <link rel="stylesheet" href="/css/paging.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -32,13 +33,13 @@
     </div>
 
     <div class="inquiry-line-1">
-        <p><span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder="   SY2" style="width: 130px;"> </span>
+        <p><span class="fonts"> 시나리오명&nbsp; <input id="evaluationName" type="text" placeholder="시나리오명 입력" style="width: 130px;"> </span>
             &nbsp; &nbsp; &nbsp;
         </p>
     </div>
 
     <div class="inquiry-button">
-        <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+        <a href="#"><span class="imsi-button" onclick="search()">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
     </div>
     <br>
     <table>
@@ -81,9 +82,41 @@
         </tr>
         </tbody>
     </table>
+    <div class="page_wrap">
+        <div class="page_nation">
+            <ul class="page_ul"
+                th:if="${evaluationList.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(evaluationList.number/10)*10 + 1}, last=(${start + 9 < evaluationList.totalPages ? start + 9 : evaluationList.totalPages})">
+                <!--with: 변수 설정-->
+                <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
+                <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
+                <li class="page_li">
+                    <a class="arrow pprev" th:href="@{/TS_Assessment/TSA_Check(page=1,name=${condition.name})}"></a>
+                    <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
+                </li>
+                <li class="page_li">
+                    <a class="arrow prev"
+                       th:href="${evaluationList.first} ? '#' : @{/TS_Assessment/TSA_Check(page=${evaluationList.number},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
+                    <a th:text="${page}" th:class="${page == evaluationList.number + 1} ? 'active'"
+                       th:href="@{/TS_Assessment/TSA_Check(page=${page},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow next"
+                       th:href="${evaluationList.last} ? '#' : @{/TS_Assessment/TSA_Check(page=${evaluationList.number + 2},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow nnext"
+                       th:href="@{/TS_Assessment/TSA_Check(page=${evaluationList.totalPages},name=${condition.name})}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div class="regist-button">
-        <a href="/TS_Assessment/TSA_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-        <a href="/TS_Assessment/TSA_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+        <a href="/TS_Assessment/TSA_Register_Page"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/TS_Assessment/TSA_Modify_Page"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
     </div>
     <p class="font" style="text-align: left;">
         &nbsp;&nbsp;&nbsp;발전가능성①: 발생가능한 위험 반영 여부<br>
@@ -120,4 +153,39 @@
     </div>
 </footer>
 </body>
+<script>
+    let evaluationNameVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('name')) {
+            document.getElementById("evaluationName").value = urlParams.get('name');
+        }
+    }
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        evaluationNameVal = document.getElementById("evaluationName").value;
+
+        let conditionStr = "";
+
+        if (evaluationNameVal) {
+            conditionStr += "name=" + evaluationNameVal;
+        }
+
+        if (conditionStr == "") {
+            alert("시나리오 평가명을 입력해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 </html>
