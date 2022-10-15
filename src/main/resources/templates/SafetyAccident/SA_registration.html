@@ -2,24 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PSA관리시스템</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSA관리시스템</title>
 
-  <link rel="icon" href="favicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <!--  <link rel="stylesheet" href="static/css/SafetyAccident/SA_registration.css">-->
-  <link rel="stylesheet" href="/css/SafetyAccident/SA_registration.css">
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/SafetyAccident/SA_registration.css">
 
-
-  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 
 </head>
@@ -33,16 +32,17 @@
 
 <div class="accident-information">
 
-  <div class="regist-title">
-    <p>안전사고 정보 등록</p>
-  </div>
+    <div class="regist-title">
+        <p>안전사고 정보 등록</p>
+    </div>
 
-  <form action="/SafetyAccident/SA_registration" th:action method="post" >
+  <form action="/SafetyAccident/SA_registration" th:action method="post" th:id="accidentForm" >
     <span class="fonts">안전사고 유형&nbsp;
       <select id="incidentType" name="incidentType" onchange="ChangeValue()">
         <option value="사고">사고</option>
         <option value="재난">재난</option>
       </select></span>
+
     <br><br>
     <div class="regist-line-1">
       <p> <span class="fonts" id="ch0"> 사고일시</span>&nbsp;&nbsp;<input type="date" name="accidentDate" style="width: 150px;">
@@ -124,9 +124,9 @@
 
 
     <div class="regist-button">
-      <button onclick="location.href='/SafetyAccident/SA_check' ">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>
-      <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-      <a href="/SafetyAccident/SA_check/SA_check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+<!--      <button onclick="location.href='/SafetyAccident/SA_check' ">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>-->
+      <a href="/SafetyAccident/SA_registration" onclick="document.getElementById('accidentForm').submit();"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+      <a href="/SafetyAccident/SA_check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
   </form>
 </div>
@@ -134,22 +134,28 @@
 
 <!-- footer -->
 <footer>
-  <div class="inner">
-    <p class="title">DEVELOPED BY TEAM</p>
-    <ul class="menu">
-      <li><p>스마트 해상물류 프로젝트</p></li>
-      <li><p>항만 안전사고 대응 관리 시스템</p></li>
-    </ul>
-    <div class="info">
-      <span>MENTOR: 김인수</span>
-      <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
-      <span>FRONTEND TEAM: 송영주 주현정</span>
+    <div class="inner">
+        <p class="title">DEVELOPED BY TEAM</p>
+        <ul class="menu">
+            <li><p>스마트 해상물류 프로젝트</p></li>
+            <li><p>항만 안전사고 대응 관리 시스템</p></li>
+        </ul>
+        <div class="info">
+            <span>MENTOR: 김인수</span>
+            <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+            <span>FRONTEND TEAM: 송영주 주현정</span>
+        </div>
+        <p class="copyright">
+            <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+        </p>
     </div>
-    <p class="copyright">
-      <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
-    </p>
-  </div>
 </footer>
 </body>
-<script src="/js/SafetyAccident/SA_registration.js"> </script>
+<script src="/js/SafetyAccident/SA_registration.js"></script>
+<script>
+    function btn() {
+        alert('시나리오 결과가 저장되었습니다.');
+        location.href = "/SafetyAccident/SA_check"
+    }
+</script>
 </html>

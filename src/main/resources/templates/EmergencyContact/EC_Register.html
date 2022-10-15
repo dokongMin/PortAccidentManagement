@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PSA관리시스템</title>
 
-    <link rel="icon" href="/backend/src/main/resources/static/img/favicon.png">
+    <link rel="icon" href="/img/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,13 +35,12 @@
 
         <div class="Container">
             <div class="Emergency-Contact-line">
-                <p>
-        <span class="fonts">
+                <span class="fonts">
                 <p class="pstyle">이름</p><br><br>
-                <input type="text" name="name" id="name" placeholder="홍길동" style="width: 250px; height: 25px;"
+                <input type="text" name="name" id="name" placeholder="이름 입력" style="width: 250px; height: 25px;"
                        required><br><br><br>
                 <p class="pstyle">조직</p><br><br>
-                <input type="text" name="group" id="group" placeholder="안전관리팀" style="width: 250px; height: 25px;"
+                <input type="text" name="group" id="group" placeholder="조직명 입력" style="width: 250px; height: 25px;"
                        required><br><br><br>
                 <p class="pstyle">연락처</p><br><br>
                 <input type="text" name="phoneNumber" id="phoneNumber" placeholder="01012345678"
@@ -51,17 +50,16 @@
             </div>
 
             <div class="Emergency-Contact-line1">
-                <p>
         <span class="fonts">
                 <p class="pstyle2">소속회사</p><br><br>
-                <input type="text" name="corporation" id="corporation" placeholder="AAA회사"
+                <input type="text" name="corporation" id="corporation" placeholder="회사명 입력"
                        style="width: 250px; height: 25px;"
                        required><br><br><br>
                 <p class="pstyle2">직급</p><br><br>
-                <input type="text" name="position" id="position" placeholder="관리자" style="width: 250px; height: 25px;"
+                <input type="text" name="position" id="position" placeholder="직급 입력" style="width: 250px; height: 25px;"
                        required><br><br><br>
                 <p class="pstyle2">이메일 주소</p><br><br>
-                <input type="text" name="email" id="email" placeholder="djfkldjf@naver.com"
+                <input type="text" name="email" id="email" placeholder="이메일 입력"
                        style="width: 250px; height: 25px;"
                        required><br><br><br>
                 </span>
@@ -71,7 +69,8 @@
     </form>
     <div class="regist-button">
         <!--        <button id="EC_Registration_button">등록</button>-->
-        <a href="#"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/EmergencyContact/EC_Register"><span class="imsi-button" id="EC_Registration_button"
+                                                      name="EC_Registration_button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="/EmergencyContact/EC_Check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
 </div>

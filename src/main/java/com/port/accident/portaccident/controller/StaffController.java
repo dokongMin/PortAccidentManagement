@@ -26,12 +26,40 @@ public class StaffController {
     @PostMapping("/EC_Register")
     public String registerStaff(@RequestBody StaffDto staffDto) {
         /*TODO::혜원 영주님 - 비상연락망 등록
-         *DTO의 필드명과 동일하
-         * 게 form의 name 설정 시 DTO에 연결됩니다.
+         *DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          *(name, corporation, group, position, email, phoneNumber)
          * */
         StaffDto registerStaffDto = staffService.toServiceDto(staffDto);
         staffService.registerStaff(registerStaffDto);
+
+        return "redirect:/EmergencyContact/EC_Check";
+    }
+
+    @GetMapping("/EC_Modify_Page")
+    public String modifyStaffPage(Model model, @RequestParam("staffId") Integer staffId) {
+
+        Staff staff = staffService.findByStaffId(staffId);
+        model.addAttribute("staff", staff);
+
+        return "EmergencyContact/EC_Modify";
+    }
+
+    @PostMapping("/EC_Modify")
+    public String modifyStaff(@RequestBody StaffDto staffDto) {
+        /*TODO::혜원 영주님 - 비상연락망 수정
+         *DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
+         *(name, corporation, group, position, email, phoneNumber)
+         * */
+        StaffDto modifyStaffDto = staffService.toServiceDto(staffDto);
+        staffService.updateStaff(modifyStaffDto);
+
+        return "redirect:/EmergencyContact/EC_Check";
+    }
+
+    @PostMapping("/EC_Delete/{staffId}")
+    public String deleteStaff(@PathVariable(value = "staffId") Integer staffId) {
+        /*TODO::혜원 영주님 - 비상연락망 삭제*/
+        staffService.deleteStaff(staffId);
 
         return "redirect:/EmergencyContact/EC_Check";
     }

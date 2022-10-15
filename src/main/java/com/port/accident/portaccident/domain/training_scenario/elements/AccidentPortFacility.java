@@ -20,6 +20,7 @@ public class AccidentPortFacility {
     @Column(name = "accident_port_facility_id") // 안전 사고 항만 설비 id
     private Integer id;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "accident_port_facility_name") // 안전 사고 항만 설비명
     private PortFacility name;
 

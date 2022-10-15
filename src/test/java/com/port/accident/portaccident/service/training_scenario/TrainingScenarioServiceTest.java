@@ -449,8 +449,8 @@ public class TrainingScenarioServiceTest {
                 .completePlaningTime(LocalDateTime.now())
                 .build();
 
-        scenarioService.registerAccidentResponseActivity("SY1", accidentResponseActivityDto);
-        scenarioService.registerAccidentResponseActivity("SY1", accidentResponseActivityDto2);
+        scenarioService.registerAccidentResponseActivity(scenarioId, accidentResponseActivityDto);
+        scenarioService.registerAccidentResponseActivity(scenarioId, accidentResponseActivityDto2);
 
         //when
         List<PortFacility> portFacilityNameList = scenarioService.findAccidentPortFacilityNameByScenarioId(scenarioId);

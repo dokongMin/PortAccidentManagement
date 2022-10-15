@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -28,6 +29,10 @@ public class StaffService {
                 .email(staffDto.getEmail())
                 .phoneNumber(staffDto.getPhoneNumber())
                 .build();
+    }
+
+    public Staff findByStaffId(Integer staffId) {
+        return staffRepository.findById(staffId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
     @Transactional
