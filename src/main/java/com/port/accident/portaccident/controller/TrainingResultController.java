@@ -47,6 +47,19 @@ public class TrainingResultController {
         //TODO::태영 영주님
         /* 아래의 JSON코드 형식 참고하셔서 프론트에서 JSON 만드시면 됩니다! */
         /* JSON example
+
+        {"TrainingResult":{
+        "incidentType":"INCIDENT",
+        "name":"fwef","trainingType":
+        "VIRTUAL","place":"PLACE1",
+        "startDate":"2022-10-05",
+        "endDate":"2022-10-20",
+        "trainingArea":"zzz",
+        "trainingPortFacilityList":"CRANE",
+        "department":"zzz",
+        "trainingParticipants":"zzz,nnn,brgsr,grger"},
+        "TrainingPortFacilitys":["CRANE","CONTAINER","FORKLIFT"]}
+
         {
             "TrainingResult": {
                 "name" : "name",
