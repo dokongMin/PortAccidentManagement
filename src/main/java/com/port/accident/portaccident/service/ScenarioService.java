@@ -18,6 +18,7 @@ import com.port.accident.portaccident.repository.training_scenario.ScenarioEvalu
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
 public class ScenarioService {
     private final ScenarioRepository scenarioRepository;
@@ -105,10 +106,13 @@ public class ScenarioService {
                 .name(scenarioEvaluationDto.getName())
                 .developmentStandard1(scenarioEvaluationDto.getDevelopmentStandard1())
                 .developmentStandard2(scenarioEvaluationDto.getDevelopmentStandard2())
+                .developmentStandard3(scenarioEvaluationDto.getDevelopmentStandard3())
                 .possibleStandard1(scenarioEvaluationDto.getPossibleStandard1())
                 .possibleStandard2(scenarioEvaluationDto.getPossibleStandard2())
+                .possibleStandard3(scenarioEvaluationDto.getPossibleStandard3())
                 .completeStandard1(scenarioEvaluationDto.getCompleteStandard1())
                 .completeStandard2(scenarioEvaluationDto.getCompleteStandard2())
+                .completeStandard3(scenarioEvaluationDto.getCompleteStandard3())
                 .scenario(scenarioEvaluationDto.getScenario())
                 .build();
 
@@ -261,10 +265,12 @@ public class ScenarioService {
         return accidentResponseActivityRepository.findById(accidentResponseActivityId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
-    public Integer registerScenarioEvaluation(String scenarioName, ScenarioEvaluationDto scenarioEvaluationDto) {
-        Scenario scenario = scenarioRepository.findByName(scenarioName).get();
-        scenario.addScenarioEvaluation(scenarioEvaluationDto);
+    public Integer registerScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+        Scenario scenario = scenarioRepository.findByName(scenarioEvaluationDto.getName()).get();
 
+        scenarioEvaluationDto.setName(settingScenarioEvaluationName(scenario.getId(), scenario.getName()));
+
+        scenario.addScenarioEvaluation(scenarioEvaluationDto);
         return saveScenarioEvaluation(scenarioEvaluationDto);
     }
 
@@ -273,6 +279,19 @@ public class ScenarioService {
         validateDuplicateScenarioEvaluation(scenarioEvaluationDto); // 중복 시나리오 평가 검증
 
         return scenarioEvaluationRepository.save(scenarioEvaluationDto.toEntity()).getId();
+    }
+
+    public String settingScenarioEvaluationName(Integer scenarioId, String scenarioName) {
+        Page<String> beforeScenarioName = scenarioEvaluationRepository.findTopByNameByScenarioId(scenarioId, PageRequest.of(0, 1));
+
+        if (beforeScenarioName.getTotalPages() != 0) {
+            String[] split = beforeScenarioName.getContent().get(0).split("v");
+            scenarioName = split[0] + "v" + (Integer.parseInt(split[1]) + 1);
+        } else {
+            scenarioName += "v1";
+        }
+
+        return scenarioName;
     }
 
     private void validateDuplicateScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {

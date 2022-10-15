@@ -1,8 +1,10 @@
 package com.port.accident.portaccident.controller;
 
+import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
 import com.port.accident.portaccident.dto.training_scenario.scenario_evaluation.ScenarioEvaluationDto;
 import com.port.accident.portaccident.dto.training_scenario_result.EvaluationSearchCondition;
+import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.service.ScenarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,22 +17,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/TS_Assessment")
 public class ScenarioEvaluationController {
 
     private final ScenarioService scenarioService;
+    private final ScenarioRepository scenarioRepository;
 
     @GetMapping("/TSA_Register_Page")
-    public String registerScenarioEvaluationPage() {
+    public String registerScenarioEvaluationPage(Model model) {
+        List<Scenario> allScenarios = scenarioRepository.findAll();
+        model.addAttribute("allScenarios", allScenarios);
         return "TS_Assessment/TSA_Register";
     }
 
     @RequestMapping("/TSA_Register")
-    public String registerScenarioEvaluation(Model model,
-                                             @RequestParam(required = false, defaultValue = "") String scenarioName,
-                                             @RequestBody ScenarioEvaluationDto scenarioEvaluationDto) {
+    public String registerScenarioEvaluation(@RequestBody ScenarioEvaluationDto scenarioEvaluationDto) {
 
         /* TODO::혜원 현정님 - 시나리오 평가 등록
          * 평가를 등록할 시나리오명을 scenarioName으로 넘겨주세요!
@@ -46,9 +51,7 @@ public class ScenarioEvaluationController {
          * */
 
         ScenarioEvaluationDto registerScenarioEvaluationDto = scenarioService.toServiceScenarioEvaluation(scenarioEvaluationDto);
-        scenarioService.registerScenarioEvaluation(scenarioName, registerScenarioEvaluationDto);
-
-        model.addAttribute("scenarioName", scenarioName);
+        scenarioService.registerScenarioEvaluation(registerScenarioEvaluationDto);
 
         return "redirect:/TS_Assessment/TSA_Check";
     }
