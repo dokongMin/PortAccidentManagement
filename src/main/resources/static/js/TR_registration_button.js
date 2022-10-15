@@ -13,8 +13,13 @@ let saveTrainingResult = {
         });
 
         let scenarioId = $("select[name=scenarioSelect] option:selected").val();
-        let scenarioId = $("select[name=scenarioSelect] option:selected").val();
+        let incidentLevel = $("select[name=incidentLevelSelect] option:selected").val();
+        let incidentImpact = $("select[name=incidentImpactSelect] option:selected").val();
+        let incidentDetailType = $("select[name=incidentDetailTypeSelect] option:selected").val();
 
+        console.log("incidentLevel : "+incidentLevel);
+        console.log("incidentImpact : "+incidentImpact);
+        console.log("incidentImpact : "+incidentImpact);
 
         let traningResult = {
             scenario: scenarioId,
@@ -25,23 +30,17 @@ let saveTrainingResult = {
             place: $("#place").val(),
             startDate: new Date($("#startDate").val()),
             endDate: new Date($("#endDate").val()),
-            incidentLevel: $("#incidentLevel").val(),
+            incidentLevel: incidentLevel,
+            incidentImpact: incidentImpact,
+            incidentDetailType: incidentDetailType,
             trainingArea: $("#trainingArea").val(),
             department: $("#department").val(),
             trainingParticipants: $("#trainingParticipants").val()
         };
-        /*
 
-    private IncidentLevel incidentLevel;
-    private IncidentImpact incidentImpact;
-    private IncidentType incidentType;
-    private String incidentDetailType;
-    private String department;
-    private String trainingParticipants;
-    private String trainingArea;*/
 
         let data = {
-            TrainingResult : traningResult,
+            TrainingResult: traningResult,
             TrainingPortFacilitys: trainingPortFacilityListArr
         };
 
@@ -58,6 +57,7 @@ let saveTrainingResult = {
             location.href = "/TrainingResult/trainingResult_list"
             console.log(data);
         }).fail(function (error) {
+            alert("등록에 실패하였습니다. \n입력하지 않은 값이 있거나 이미 등록된 훈련명입니다.");
             console.log(JSON.stringify(error));
         });
     }

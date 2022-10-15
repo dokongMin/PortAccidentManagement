@@ -37,10 +37,7 @@ public class TrainingResultDto {
     private Scenario scenario;
 
     @Builder
-    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place,
-                             TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact,
-                             IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea,
-                             List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList, Scenario scenario) {
+    public TrainingResultDto(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String incidentDetailType1, String department, String trainingParticipants, String trainingArea, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -51,16 +48,12 @@ public class TrainingResultDto {
         this.incidentImpact = incidentImpact;
         this.incidentType = incidentType;
         this.incidentDetailType = incidentDetailType;
+        this.incidentDetailType = incidentDetailType1;
         this.department = department;
         this.trainingParticipants = trainingParticipants;
         this.trainingArea = trainingArea;
-        this.trainingPortFacilityList = trainingPortFacilityList;
-        this.trainingByDateList = trainingByDateList;
-//        this.trainingParticipantsList = trainingParticipantsList;
         this.scenario = scenario;
     }
-
-
 
 
     public TrainingResult toEntity() {

@@ -190,11 +190,15 @@ public class TrainingResultService {
                 matchingStringToEnumIncidentImpact(trainingResultDto, split);
             } else if (split[0].equals("incidentType")) {
                 matchingStringToEnumIncidentType(trainingResultDto, split);
+            } else if (split[0].equals("incidentDetailType")) {
+                trainingResultDto.setIncidentDetailType(split[1]);
             } else if (split[0].equals("department")) {
                 trainingResultDto.setDepartment(split[1]);
             } else if (split[0].equals("trainingArea")) {
                 trainingResultDto.setTrainingArea(split[1]);
-            }else if (split[0].equals("scenario")) {
+            } else if (split[0].equals("trainingParticipants")) {
+                trainingResultDto.setTrainingParticipants(split[1]);
+            } else if (split[0].equals("scenario")) {
                 int scenarioId = Integer.parseInt(split[1]);
                 Scenario findScenario = scenarioService.findById(scenarioId);
                 trainingResultDto.setScenario(findScenario);
@@ -209,7 +213,7 @@ public class TrainingResultService {
     }
 
     private void matchingStringToEnumIncidentType(TrainingResultDto trainingResultDto, String[] split) {
-        if (split[1].equals("ACCIDENT"))
+        if (split[1].equals("INCIDENT"))
             trainingResultDto.setIncidentType(IncidentType.INCIDENT);
         else if (split[1].equals("DISASTER"))
             trainingResultDto.setIncidentType(IncidentType.DISASTER);
