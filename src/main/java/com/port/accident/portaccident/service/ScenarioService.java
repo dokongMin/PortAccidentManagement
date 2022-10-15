@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -44,7 +45,6 @@ public class ScenarioService {
                 .incidentType(scenarioDto.getIncidentType())
                 .incidentDetailType(scenarioDto.getIncidentDetailType())
                 .portArea(scenarioDto.getPortArea())
-                .responseStage(scenarioDto.getResponseStage())
                 .build();
     }
 
@@ -87,12 +87,13 @@ public class ScenarioService {
 
     }
 
-    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<PortFacility> facilityList) {
+    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<String> facilityList) {
         List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
 
-        for (PortFacility facility : facilityList) {
+
+        for (String facility : facilityList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
-                    .name(facility)
+                    .name(PortFacility.valueOf(facility))
                     .build();
 
             facilityDtoList.add(facilityDto);
@@ -101,8 +102,8 @@ public class ScenarioService {
         return facilityDtoList;
     }
 
-    public Optional<Scenario> findById(Integer scenarioId) {
-        return scenarioRepository.findById(scenarioId);
+    public Scenario findById(Integer scenarioId) {
+        return scenarioRepository.findById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
     @Transactional
@@ -181,7 +182,8 @@ public class ScenarioService {
 
     @Transactional
     public List<PortFacility> findAccidentPortFacilityNameByScenarioId(Integer scenarioId) {
-        return accidentPortFacilityRepository.findNameByScenarioId(scenarioId);
+        return Optional.ofNullable(accidentPortFacilityRepository.findNameByScenarioId(scenarioId))
+                .orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
 
@@ -190,8 +192,8 @@ public class ScenarioService {
      * */
 
     @Transactional
-    public Integer registerAccidentResponseActivity(String scenarioName, AccidentResponseActivityDto accidentResponseActivityDto) {
-        Scenario scenario = scenarioRepository.findByName(scenarioName).get();
+    public Integer registerAccidentResponseActivity(Integer scenarioId, AccidentResponseActivityDto accidentResponseActivityDto) {
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
         scenario.addAccidentResponseActivity(accidentResponseActivityDto);
 
         return saveAccidentResponseActivity(accidentResponseActivityDto);
@@ -217,12 +219,17 @@ public class ScenarioService {
 
     @Transactional
     public List<AccidentResponseActivity> findAccidentResponseActivityByScenarioId(Integer scenarioId) {
-        return accidentResponseActivityRepository.findByScenarioId(scenarioId);
+        return Optional.ofNullable(accidentResponseActivityRepository.findByScenarioId(scenarioId))
+                .orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
     /*
      * 시나리오 평가
      * */
+
+    public AccidentResponseActivity findByAccidentResponseActivityId(Integer accidentResponseActivityId) {
+        return accidentResponseActivityRepository.findById(accidentResponseActivityId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
+    }
 
     public Integer registerScenarioEvaluation(String scenarioName, ScenarioEvaluationDto scenarioEvaluationDto) {
         Scenario scenario = scenarioRepository.findByName(scenarioName).get();

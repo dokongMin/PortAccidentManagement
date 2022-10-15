@@ -1,0 +1,42 @@
+image: gradle:alpine
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+   - chmod +x gradlew
+   - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+ paths:
+   - .gradle/wrapper
+   - .gradle/caches
+   - build/
+
+stages:
+  - build
+  - package
+
+build:
+  stage: build
+  only:
+  - master
+  script:
+  - ./gradlew clean
+  - ./gradlew build -x test
+  - echo "build"
+  artifacts:
+    paths:
+    - build/libs/*.jar
+
+# docker-build:
+#   image: docker:latest
+#   stage: package
+#   services:
+#     - docker:dind
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#   script:
+#     - docker pull $CI_REGISTRY_IMAGE:latest || true
+#     - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest .
+#     - docker push $CI_REGISTRY_IMAGE:latest

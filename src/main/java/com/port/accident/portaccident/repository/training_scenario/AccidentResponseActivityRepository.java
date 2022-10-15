@@ -15,7 +15,7 @@ public interface AccidentResponseActivityRepository extends JpaRepository<Accide
     @Override
     Optional<AccidentResponseActivity> findById(Integer id);
 
-    @Query("select a from AccidentResponseActivity a where a.scenario.id = :scenarioId")
+    @Query("select a from AccidentResponseActivity a where a.scenario.id = :scenarioId order by a.completePlaningTime asc")
     List<AccidentResponseActivity> findByScenarioId(@Param("scenarioId") Integer scenarioId);
 
 }

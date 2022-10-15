@@ -26,7 +26,7 @@ let saveTrainingResult = {
             data : JSON.stringify(data),
             contentType: "application/json"
         }).done(function (resp){
-            // alert("회원가입이 완료됐습니다.");
+            alert("시나리오 결과가 저장되었습니다.");
             location.href="/TrainingResult/trainingResult_list"
             console.log(data);
         }).fail(function (error){

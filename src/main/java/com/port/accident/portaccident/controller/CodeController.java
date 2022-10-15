@@ -129,16 +129,6 @@ public class CodeController {
         return "CommonCode/RC_Modify";
     }
 
-//    @PostMapping("/representativeCode_modify_setting")
-//    public String modifyRepCodeSetting(@RequestParam(value = "reqName") String reqName, Model model){
-//        System.out.println("reqName = " + reqName);
-//        String name = codeService.findByRepCode(reqName).getName();
-//        RepresentativeCode repCode = codeService.findByRepCode(reqName);
-//        System.out.println("name = " + name);
-//        model.addAttribute("repCode",repCode);
-////        return "redirect:/Code/representativeCode_modifyPage";
-//        return "CommonCode/RC_Modify";
-//    }
     @RequestMapping("/representativeCode_modify")
     public String modifyRepCode(@RequestBody RepresentativeCodeDto dto) {
         codeService.updateRepresentativeCode(dto.getId(), dto.getName());

@@ -1,14 +1,11 @@
 package com.port.accident.portaccident.controller;
 
 import com.port.accident.portaccident.domain.accident_management.AccidentInfo;
-import com.port.accident.portaccident.domain.accident_management.elements.CausesSafetyAccidentInfo;
-import com.port.accident.portaccident.domain.accident_management.elements.DamageFacilityInfo;
 import com.port.accident.portaccident.domain.accident_management.type.AccidentType;
 import com.port.accident.portaccident.dto.accident_management.AccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.CausesSafetyAccidentInfoDto;
 import com.port.accident.portaccident.dto.accident_management.elements.DamageFacilityInfoDto;
 import com.port.accident.portaccident.dto.accident_management.type.AccidentTypeDto;
-import com.port.accident.portaccident.dto.accident_management.type.DisasterTypeDto;
 import com.port.accident.portaccident.repository.accident_management.AccidentManagementRepository;
 import com.port.accident.portaccident.repository.accident_management.AccidentTypeRepository;
 import com.port.accident.portaccident.service.accident_management_service.AccidentManagementService;
@@ -17,7 +14,6 @@ import com.port.accident.portaccident.service.accident_management_service.Causes
 import com.port.accident.portaccident.service.accident_management_service.DamageFacilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -25,9 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -46,10 +40,13 @@ public class AccidentManagementController {
 
     /**
      * 안전사고 등록
+     *
+     * @return
      */
 
-    @GetMapping("/SA_registration")
-    public void registerAccident() {
+    @GetMapping("/SA_registration_Page")
+    public String registerAccident() {
+        return "SafetyAccident/SA_registration";
     }
 
     @PostMapping("/SA_registration")
@@ -102,13 +99,10 @@ public class AccidentManagementController {
      * 안전사고 정보 리스트 조회 페이징 & 검색
      */
     @GetMapping("/SA_check")
-    public String getAccidentInfoList(Model model, @PageableDefault(size = 2) Pageable pageable,
+    public String getAccidentInfoList(Model model,
+                                      @PageableDefault(size = 10) Pageable pageable,
                                       @RequestParam(required = false, defaultValue = "") String searchText) {
         Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
-        int startPage = Math.max(1, accidents.getPageable().getPageNumber() - 1);
-        int endPage = Math.min(accidents.getTotalPages(), accidents.getPageable().getPageNumber() + 3);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
         model.addAttribute("accidents", accidents);
         return "/SafetyAccident/SA_check";
     }

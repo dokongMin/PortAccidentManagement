@@ -38,6 +38,8 @@ public class AccidentResponseActivityServiceTest {
     @Autowired
     AccidentResponseActivityRepository accidentResponseActivityRepository;
 
+    Integer scenarioId;
+
     @Before
     public void 시나리오_등록() {
         ScenarioDto scenarioDto = ScenarioDto.builder()
@@ -62,7 +64,7 @@ public class AccidentResponseActivityServiceTest {
         accidentPortFacilityDtoList.add(accidentPortFacilityDto);
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
-        Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
+        scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
     }
 
 
@@ -76,17 +78,17 @@ public class AccidentResponseActivityServiceTest {
                 .build();
 
         //when
-        Integer activityId = scenarioService.registerAccidentResponseActivity("SY2", accidentResponseActivityDto);
+        Integer activityId = scenarioService.registerAccidentResponseActivity(scenarioId, accidentResponseActivityDto);
 
         //then
-        Scenario scenario = scenarioRepository.findByName("SY2").get();
+        Scenario scenario = scenarioRepository.findById(scenarioId).get();
 
         AccidentResponseActivity accidentResponseActivity = accidentResponseActivityRepository.findById(activityId).get();
         List<AccidentResponseActivity> accidentResponseActivityList = accidentResponseActivityRepository.findAll();
 
         assertEquals(1, accidentResponseActivityList.size());
         assertEquals(accidentResponseActivityDto.getManager(), accidentResponseActivity.getManager());
-        assertEquals(scenario.getId(), accidentResponseActivity.getScenario().getId());
+        assertEquals(scenario.getName(), accidentResponseActivity.getScenario().getName());
     }
 
     @Test
@@ -98,7 +100,7 @@ public class AccidentResponseActivityServiceTest {
                 .completePlaningTime(LocalDateTime.now())
                 .build();
 
-        Integer activityId = scenarioService.registerAccidentResponseActivity("SY2", accidentResponseActivityDto);
+        Integer activityId = scenarioService.registerAccidentResponseActivity(scenarioId, accidentResponseActivityDto);
 
         AccidentResponseActivityDto updateAccidentResponseActivityDto = AccidentResponseActivityDto.builder()
                 .id(activityId)
@@ -130,7 +132,7 @@ public class AccidentResponseActivityServiceTest {
                 .completePlaningTime(LocalDateTime.now())
                 .build();
 
-        Integer activityId = scenarioService.registerAccidentResponseActivity("SY2", accidentResponseActivityDto);
+        Integer activityId = scenarioService.registerAccidentResponseActivity(scenarioId, accidentResponseActivityDto);
 
         //when
         scenarioService.deleteAccidentResponseActivity(activityId);
