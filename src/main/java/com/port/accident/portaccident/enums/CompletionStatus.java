@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CompletionStatus {
-    NOT_COMPLETE(false),
-    COMPLETE(true);
 
-    private final boolean statusValue;
+    A("적합"),
+    B("미흡"),
+    C("부적합");
+
+    private final String statusValue;
 }

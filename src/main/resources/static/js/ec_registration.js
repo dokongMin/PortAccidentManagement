@@ -21,7 +21,7 @@ let saveStaff = {
             contentType: "application/json"
         }).done(function (resp){
             // alert("회원가입이 완료됐습니다.");
-            location.href="/EmergencyContact/EC_check"
+            location.href="/EmergencyContact/EC_Check"
             console.log(data);
         }).fail(function (error){
             console.log(JSON.stringify(error));

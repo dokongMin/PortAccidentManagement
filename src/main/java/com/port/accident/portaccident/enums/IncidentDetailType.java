@@ -10,7 +10,10 @@ public enum IncidentDetailType {
     FALL("넘어짐"),
     BUMP("부딪힘"),
     TRAP("끼임"),
-    HIT("맞음");
+    HIT("맞음"),
+    EARTHQUAKE("지진"),
+    TYPHOON("태풍"),
+    SHIP("선박사고");
 
     private final String typeValue;
 }
