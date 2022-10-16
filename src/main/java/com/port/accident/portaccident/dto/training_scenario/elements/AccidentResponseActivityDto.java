@@ -6,6 +6,7 @@ import com.port.accident.portaccident.domain.training_scenario.elements.Accident
 import com.port.accident.portaccident.enums.IncidentLevel;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -16,7 +17,10 @@ public class AccidentResponseActivityDto {
     private String comment;
     private String manager;
     private LocalDateTime completePlaningTime;
+
+    private LocalDate completePlaningDate;
     private Scenario scenario;
+    private Integer scenarioId;
 
     @Builder
     public AccidentResponseActivityDto(Integer id, String comment, String manager, LocalDateTime completePlaningTime, Scenario scenario) {
