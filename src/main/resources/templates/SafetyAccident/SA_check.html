@@ -13,9 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/SafetyAccident/SA_check.css">
-    <link rel="stylesheet" href="/css/SafetyAccident/SA_Pagination.css">
-    <link rel="stylesheet" href="/css/paging.css">
+    <link rel="stylesheet" href="../../static/css/SafetyAccident/SA_check.css">
+    <link rel="stylesheet" href="../../static/css/SafetyAccident/SA_Pagination.css">
+    <link rel="stylesheet" href="../../static/css/paging.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -23,7 +23,7 @@
 </head>
 <body>
 <!-- HEADER -->
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 
 <!--accident-information-inquiry-->
@@ -34,9 +34,9 @@
         <p>안전사고 정보 조회</p>
     </div>
     <span class="fonts">안전사고 유형&nbsp;
-    <select id="incidentType" onchange="ChangeValue(); incidentType(this);">
-      <option name="incidentType" value="none" selected="selected">&nbsp;--&nbsp;</option>
-      <option name="incidentType" value="INCIDENT">사고</option>
+    <select id="incidentType" onchange="ChangeValue(); incidentType(this); ">
+      <option name="incidentType" value="none">&nbsp;--&nbsp;</option>
+      <option name="incidentType" value="INCIDENT" >사고</option>
       <option name="incidentType" value="DISASTER">재난</option>
     </select></span>
     <br><br>
@@ -47,19 +47,16 @@
         <input type="radio" name="incidentLevel" value="LEVEL_1"> Level1
         <input type="radio" name="incidentLevel" value="LEVEL_2"> Level2
         <input type="radio" name="incidentLevel" value="LEVEL_3"> Level3 </span>
-
-            &nbsp;
-
-            <span class="fonts" id="ch2">사고 유형</span>&nbsp; <select id="incidentDetailTypeSelect"
-                                                                    onchange="incidentDetailType(this)">
-                <option name="incidentDetailType" value="none" selected="selected">&nbsp;--&nbsp;</option>
-                <option name="incidentDetailType" value="DROP">추락</option>
-                <option name="incidentDetailType" value="FALL">넘어짐</option>
-                <option name="incidentDetailType" value="BUMP">부딪힘</option>
-                <option name="incidentDetailType" value="TRAP">끼임</option>
-                <option name="incidentDetailType" value="HIT">맞음</option>
+         &nbsp;
+            <span class="fonts" id="ch2">사고 유형</span>&nbsp; 
+            <select id="incidentDetailTypeSelect" onchange="incidentDetailType(this)">
+                <option name="incidentDetailType" value="none">&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP" id="sel1">추락</option>
+                <option name="incidentDetailType" value="FALL" id="sel2">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP" id="sel3">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP" id="sel4">끼임</option>
+                <option name="incidentDetailType" value="HIT" id="sel5">맞음</option>
             </select>
-
             &nbsp;
             <br>
             <span class="fonts" id="ch4">사고 구역</span>&nbsp; <select id="trainingPlaceSelect"
@@ -261,9 +258,6 @@
         if (incidentTypeVal != 'none' && incidentTypeVal != undefined) {
             conditionStr += "incidentType=" + incidentTypeVal + "&";
         }
-        if (incidentDetailTypeVal != 'none' && incidentDetailTypeVal != undefined) {
-            conditionStr += "incidentDetailType=" + incidentDetailTypeVal;
-        }
         if (trainingPlaceVal != 'none' && trainingPlaceVal != undefined) {
             conditionStr += "TrainingPlace=" + trainingPlaceVal;
         }
@@ -277,5 +271,5 @@
     }
 
 </script>
-<script src="/js/SafetyAccident/SA_check.js"></script>
+<script src="../../static/js/SafetyAccident/SA_check.js"></script>
 </html>

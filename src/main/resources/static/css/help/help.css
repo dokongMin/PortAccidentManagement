@@ -203,21 +203,23 @@ text-align: center;
   color: white;
   font-weight: 700;
   position: absolute;
-  font-size: larger;
+  font-size: large;
   text-align: center;
+  width: 55px;
 }
 .stats:hover{cursor: pointer;}
-.ver1{top:130px; left:240px;}
+.ver1{top:130px; left:230px;}
 .ver2{top:250px; left:245px;}
 .ver3{top:320px; left:180px;}
-.ver4{top:310px; left:110px;}
+.ver4{top:320px; left:110px;}
 .ver5{top:250px; left:60px;}
 .ver6{top:140px; left:100px;}
 .ex1{
   color: black;
   font-size: 16px;
-  top: 235px;
+  top: 220px;
   left: 325px;
+  width: 175px;
 }
 .ex2{
   color: red;
