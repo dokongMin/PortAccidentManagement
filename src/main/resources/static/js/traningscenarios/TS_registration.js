@@ -5,22 +5,25 @@ let saveScenario = {
         })
     },
     save: function () {
-        var accidentPortFacilityListArr = [];
-
-        $("input:checkbox[name=accidentPortFacilityList]:checked").each(function() {
-            var checkVal = $(this).val(); // 체크된 값의 value값 가져오기
-            console.log(checkVal);
-            accidentPortFacilityListArr.push(checkVal);
+        let accidentPortFacilityList = [];
+        $("input:checkbox[name=accidentPortFacilityList]:checked").each(function (i) {
+            accidentPortFacilityList.push($(this).val());
         });
 
+        if ($("#name").val().length == 0) {
+            alert('시나리오명를 입력해주세요.');
+        } else if (accidentPortFacilityList.length == 0) {
+            alert('사고항만설비를 선택해주세요.');
+        }
+
         let data = {
-            incidentType: $("#incidentType").val(),
+            incidentType: $("#incidentType option:selected").val(),
             name: $("#name").val(),
-            incidentDetailType: $("#incidentDetailType").val(),
-            incidentLevel: $("#incidentLevel").val(),
-            incidentImpact: $("#incidentImpact").val(),
+            incidentDetailType: $("#incidentDetailType option:selected").val(),
+            incidentLevel: $("#incidentLevel:checked").val(),
+            incidentImpact: $("#incidentImpact option:selected").val(),
             portArea: $("#portArea").val(),
-            accidentPortFacilityListStr: accidentPortFacilityListArr
+            accidentPortFacilityList: accidentPortFacilityList
         };
 
         $.ajax({
@@ -30,8 +33,8 @@ let saveScenario = {
             contentType: "application/json"
         }).done(function (resp) {
             alert('시나리오가 저장되었습니다.');
-            location.href = "/"
-            console.log(data);
+            location.href = "/TrainingScenarios/TS_Check"
+            console.log(JSON.stringify(data));
         }).fail(function (error) {
             console.log(error);
         });

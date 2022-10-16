@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PSA관리시스템</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSA관리시스템</title>
 
-  <link rel="icon" href="/img/favicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/tsassessment/tsacheck.css">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/tsassessment/tsacheck.css">
+    <link rel="stylesheet" href="/css/paging.css">
 
-<script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
 <script type="module" src="/js/header.js"></script>
@@ -26,135 +28,164 @@
 
 <div class="training-scenarios-assessment-inquiry">
 
-  <div class="inquiry-title">
-    <p>대응훈련 시나리오 평가 조회</p>
-  </div>
+    <div class="inquiry-title">
+        <p>대응훈련 시나리오 평가 조회</p>
+    </div>
 
-  <div class="inquiry-line-1">
-    <p> <span class="fonts"> 시나리오명&nbsp; <input type="text" placeholder="   SY2" style="width: 130px;"> </span>
-      &nbsp; &nbsp; &nbsp;
+    <div class="inquiry-line-1">
+        <p><span class="fonts"> 시나리오명&nbsp; <input id="evaluationName" type="text" placeholder="시나리오명 입력" style="width: 130px;"> </span>
+            &nbsp; &nbsp; &nbsp;
+        </p>
+    </div>
+
+    <div class="inquiry-button">
+        <a href="#"><span class="imsi-button" onclick="search()">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
+    </div>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <td colspan="1" rowspan="2" class="fonts">Index</td>
+            <td colspan="1" rowspan="2" class="fonts">시나리오</td>
+            <td colspan="3" rowspan="1" class="fonts">발전가능성</td>
+            <td colspan="3" rowspan="1" class="fonts">적절성</td>
+            <td colspan="3" rowspan="1" class="fonts">완전성</td>
+        </tr>
+        <tr>
+            <td class="fonts">①</td>
+            <td class="fonts">②</td>
+            <td class="fonts">③</td>
+            <td class="fonts">①</td>
+            <td class="fonts">②</td>
+            <td class="fonts">③</td>
+            <td class="fonts">①</td>
+            <td class="fonts">②</td>
+            <td class="fonts">③</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${evaluationList.getTotalPages() != 0}" th:each="evaluation : ${evaluationList}">
+            <td th:text="${evaluationStat.count} + ${evaluationList.number} * 10"></td>
+            <td th:text="${evaluation.name}"></td>
+            <td th:text="${evaluation.developmentStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.developmentStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.developmentStandard3.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.possibleStandard3.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard1.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard2.getCheckValue()}"></td>
+            <td th:text="${evaluation.completeStandard3.getCheckValue()}"></td>
+        </tr>
+        <tr th:if="${evaluationList.getTotalPages() == 0}">
+            <td colspan="11">조회된 결과가 없습니다.</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="page_wrap">
+        <div class="page_nation">
+            <ul class="page_ul"
+                th:if="${evaluationList.getTotalPages() != 0}"
+                th:with="start=${T(java.lang.Math).floor(evaluationList.number/10)*10 + 1}, last=(${start + 9 < evaluationList.totalPages ? start + 9 : evaluationList.totalPages})">
+                <!--with: 변수 설정-->
+                <!--start: 현제 페이지를 통해 현재 페이지 그룹의 시작 페이지를 구하는 로직-->
+                <!--last: 전체 페이지 수와 현재 페이지 그룹의 시작 페이지를 통해 현재 페이지 그룹의 마지막 페이지를 구하는 로직-->
+                <li class="page_li">
+                    <a class="arrow pprev" th:href="@{/TS_Assessment/TSA_Check(page=1,name=${condition.name})}"></a>
+                    <!--페이지 번호, 정렬, 검색 타입, 검색어 get 방식으로 넘겨줌-->
+                </li>
+                <li class="page_li">
+                    <a class="arrow prev"
+                       th:href="${evaluationList.first} ? '#' : @{/TS_Assessment/TSA_Check(page=${evaluationList.number},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li" th:each="page: ${#numbers.sequence(start, last)}">
+                    <a th:text="${page}" th:class="${page == evaluationList.number + 1} ? 'active'"
+                       th:href="@{/TS_Assessment/TSA_Check(page=${page},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow next"
+                       th:href="${evaluationList.last} ? '#' : @{/TS_Assessment/TSA_Check(page=${evaluationList.number + 2},name=${condition.name})}"></a>
+                </li>
+                <li class="page_li">
+                    <a class="arrow nnext"
+                       th:href="@{/TS_Assessment/TSA_Check(page=${evaluationList.totalPages},name=${condition.name})}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="regist-button">
+        <a href="/TS_Assessment/TSA_Register_Page"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="/TS_Assessment/TSA_Modify_Page"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
+    </div>
+    <p class="font" style="text-align: left;">
+        &nbsp;&nbsp;&nbsp;발전가능성①: 발생가능한 위험 반영 여부<br>
+        &nbsp;&nbsp;&nbsp;발전가능성②: 피해의 인과관계 기술 여부<br>
+        &nbsp;&nbsp;&nbsp;발전가능성③: 해당 항만의 위험요소나 취약점 반영 여부<br>
+        &nbsp;&nbsp;&nbsp;적절성①: 배치된 시간과 부서의 적절성 여부<br>
+        &nbsp;&nbsp;&nbsp;적절성②: 재난 및 사고 유형별 특성 고려 여부<br>
+        &nbsp;&nbsp;&nbsp;적절성③: 훈련을 위한 적절한 장소 선택 여부<br>
+<!--        &nbsp;&nbsp;&nbsp;적절성④: 발생일자 및 날씨 반영 여부 <span style="color: red">(재난)</span><br>-->
+        &nbsp;&nbsp;&nbsp;완전성①: 물리적 피해 및 경제적 피해 명시 여부<br>
+        &nbsp;&nbsp;&nbsp;완전성②: 상황대응에 대한 내용 기술 여부<br>
+        &nbsp;&nbsp;&nbsp;완전성③: 복구 및 회복 내용 명시 여부<br>
+<!--        &nbsp;&nbsp;&nbsp;완전성④: 관련 사고 설비 포함 여부 <span style="color: red">(사고)</span><br>-->
     </p>
-  </div>
-
-  <div class="inquiry-button">
-    <a href="#"><span class="imsi-button">&nbsp;&nbsp;검색&nbsp;&nbsp;</span></a>
-  </div>
-<br>
-<table>
-<thead>
-  <tr>
-    <td colspan="1" rowspan="2" class="fonts">id</td>
-    <td colspan="1" rowspan="2" class="fonts">시나리오</td>
-    <td colspan="2" rowspan="1" class="fonts">발전가능성</td>
-    <td colspan="2" rowspan="1" class="fonts">적절성</td>
-    <td colspan="2" rowspan="1" class="fonts">완전성</td>
-  </tr>
-  <tr>
-    <td class="fonts">①</td>
-    <td class="fonts">②</td>
-    <td class="fonts">①</td>
-    <td class="fonts">②</td>
-    <td class="fonts">①</td>
-    <td class="fonts">②</td>
-  </tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>SY2</td>
-<td>적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>적합</td>
-<td>부적합</td>
-<td>적합</td>
-</tr>
-<tr>
-<td>2</td>
-<td>SR1</td>
-<td>부적합</td>
-<td>적합</td>
-<td>적합</td>
-<td>적합</td>
-<td>적합</td>
-<td>적합</td>
-</tr>
-<tr>
-<td>3</td>
-<td>SV1</td>
-<td>적합</td>
-<td>부적합</td>
-<td>적합</td>
-<td>부적합</td>
-<td>적합</td>
-<td>부적합</td>
-</tr>
-<tr>
-<td>4</td>
-<td>SR3</td>
-<td>적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>적합</td>
-<td>적합</td>
-</tr>
-<tr>
-<td>5</td>
-<td>ST1</td>
-<td>부적합</td>
-<td>적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>적합</td>
-<td>적합</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td>6</td>
-<td>SV2</td>
-<td>적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>부적합</td>
-<td>적합</td>
-</tr>
-</tfoot>
-</table>
-  <div class="regist-button">
-    <a href="/TS_Assessment/TSA_Register.html"><span class="imsi-button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
-    <a href="/TS_Assessment/TSA_Modify.html"><span class="imsi-button">&nbsp;&nbsp;수정&nbsp;&nbsp;</span></a>
-  </div>
-  <p class="font" style="text-align: left;">
-    &nbsp;&nbsp;&nbsp;발전가능성①: 사고원인 발생 가능 여부<br>
-    &nbsp;&nbsp;&nbsp;발전가능성②: 사고결과 발생 가능 여부<br>
-    &nbsp;&nbsp;&nbsp;적절성①: 계획시간 배치<br>
-    &nbsp;&nbsp;&nbsp;적절성②: 사고 대응 로직 구성<br>
-    &nbsp;&nbsp;&nbsp;완전성①: 관련 설비 포함 여부<br>
-    &nbsp;&nbsp;&nbsp;완전성②: 사고대응 설비 포함 여부<br>
-   </p>
-   <br>
+    <br>
 </div>
 
-  <!-- footer -->
-  <footer>
+<!-- footer -->
+<footer>
     <div class="inner">
-      <p class="title">DEVELOPED BY TEAM</p>
-      <ul class="menu">
-        <li><p>스마트 해상물류 프로젝트</p></li>
-        <li><p>항만 안전사고 대응 관리 시스템</p></li>
-      </ul>
-      <div class="info">
-        <span>MENTOR: 김인수</span>
-        <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
-        <span>FRONTEND TEAM: 송영주 주현정</span>
-      </div>
-      <p class="copyright">
-        <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
-      </p>
+        <p class="title">DEVELOPED BY TEAM</p>
+        <ul class="menu">
+            <li><p>스마트 해상물류 프로젝트</p></li>
+            <li><p>항만 안전사고 대응 관리 시스템</p></li>
+        </ul>
+        <div class="info">
+            <span>MENTOR: 김인수</span>
+            <span>BACKEND TEAM: 정민환 이혜원 박태영</span>
+            <span>FRONTEND TEAM: 송영주 주현정</span>
+        </div>
+        <p class="copyright">
+            <span class="this-year"></span>Copyright © PSA Management Program All Rights Reserved.
+        </p>
     </div>
-  </footer>
+</footer>
 </body>
+<script>
+    let evaluationNameVal;
+
+    const totalUrl = new URL(window.location.href);
+    const urlParams = totalUrl.searchParams;
+    window.onload = function () {
+        type = 'code';
+        if (urlParams.get('name')) {
+            document.getElementById("evaluationName").value = urlParams.get('name');
+        }
+    }
+
+    function search() {
+        let urlStr = window.location.href;
+        let split = urlStr.split('?');
+        let preUrl = new URL(split[0]);
+
+        /* input text값 가져오기 */
+        evaluationNameVal = document.getElementById("evaluationName").value;
+
+        let conditionStr = "";
+
+        if (evaluationNameVal) {
+            conditionStr += "name=" + evaluationNameVal;
+        }
+
+        if (conditionStr == "") {
+            alert("시나리오 평가명을 입력해주세요.");
+            return false;
+        }
+
+        location.replace(preUrl + "?" + conditionStr);
+    }
+
+</script>
 </html>

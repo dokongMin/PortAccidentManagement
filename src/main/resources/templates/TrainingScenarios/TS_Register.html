@@ -13,16 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/traningscenarios/tsregister.css">
+    <link rel="stylesheet" href="../../static/css/traningscenarios/tsregister.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
 </head>
 <body>
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 
 
@@ -45,19 +44,20 @@
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;
             <select id="incidentDetailType" name="incidentDetailType">
-                <option th:name="incidentDetailType" value="DROP">추락</option>
-                <option th:name="incidentDetailType" value="FALL">넘어짐</option>
-                <option th:name="incidentDetailType" value="BUMP">부딪힘</option>
-                <option th:name="incidentDetailType" value="TRAP">끼임</option>
-                <option th:name="incidentDetailType" value="HIT">맞음</option>
+                <option name="incidentDetailType" value="none" >&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP" id="sel1">추락</option>
+                <option name="incidentDetailType" value="FALL" id="sel2">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP" id="sel3">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP" id="sel4">끼임</option>
+                <option name="incidentDetailType" value="HIT" id="sel5">맞음</option>
             </select>
     </div>
 
     <div class="regist-line-2">
         <p><span class="fonts" id="ch1">사고 수준</span> &nbsp;&nbsp;
-            <input type="radio" name="incidentLevel" th:id="incidentLevel" value="LEVEL_1" checked> Level1
-            <input type="radio" name="incidentLevel" th:id="incidentLevel" value="LEVEL_2"> Level2
-            <input type="radio" name="incidentLevel" th:id="incidentLevel" value="LEVEL_3"> Level3
+            <input type="radio" th:name="incidentLevel" th:id="incidentLevel" value="LEVEL_1" checked> Level1
+            <input type="radio" th:name="incidentLevel" th:id="incidentLevel" value="LEVEL_2"> Level2
+            <input type="radio" th:name="incidentLevel" th:id="incidentLevel" value="LEVEL_3"> Level3
         </p>
     </div>
 
@@ -82,28 +82,17 @@
     </div>
 
     <div class="regist-line-4">
-        <p><span class="fonts" id="ch5">사고항만설비</span> &nbsp;
-            <input type="checkbox" name="accidentPortFacilityList" value="CRANE">크레인
+        <p><span class="fonts" id="ch5">사고항만설비</span>
+            &nbsp;<input type="checkbox" name="accidentPortFacilityList" value="CRANE">크레인
             &nbsp;<input type="checkbox" name="accidentPortFacilityList" value="CONTAINER">컨테이너
             &nbsp;<input type="checkbox" name="accidentPortFacilityList" value="FORKLIFT">지게차
             &nbsp;<input type="checkbox" name="accidentPortFacilityList" value="LADDER">사다리
         </p>
     </div>
-    <!--<div class="regist-line-4">
-        <p><span class="fonts" id="ch6">대응 단계</span> &nbsp;
-            <select id="responseStage" name="responseStage">
-                <option th:name="responseStage" value="LEVEL_1">Level1</option>
-                <option th:name="responseStage" value="LEVEL_2">Level2</option>
-                <option th:name="responseStage" value="LEVEL_3">Level3</option>
-            </select>
-        </p>
-    </div>-->
-    <div class="regist-button">
-        <!--        <button id="TS_Registration_button">등록</button>-->
 
-        <!--<a href="#">--><span class="imsi-button" th:id="TS_Registration_button" >&nbsp;&nbsp;등록&nbsp;&nbsp;</span>
-        <!--</a>-->
-        <a href="/TrainingScenarios/TS_Check"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
+    <div class="regist-button">
+        <a href="#"><span class="imsi-button" th:id="TS_Registration_button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
+        <a href="javascript:window.history.go(-1);"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
     </div>
 </div>
 

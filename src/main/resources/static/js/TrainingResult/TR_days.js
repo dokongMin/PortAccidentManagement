@@ -19,7 +19,7 @@ function Radio1() {
     const totalsum = v1 + v2 + v3 + v4;
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal1');
         const btnOpenPopup = document.querySelector('.btn-open-popup1');
         btnOpenPopup.addEventListener('click', () => {
@@ -51,7 +51,7 @@ function Radio2() {
     const totalsum = v1 + v2 + v3
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal2');
         const btnOpenPopup = document.querySelector('.btn-open-popup2');
         btnOpenPopup.addEventListener('click', () => {
@@ -91,7 +91,7 @@ function Radio3() {
     const totalsum = v1 + v2 + v3 + v4 + v5
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal3');
         const btnOpenPopup = document.querySelector('.btn-open-popup3');
         btnOpenPopup.addEventListener('click', () => {
@@ -126,7 +126,7 @@ function Radio4() {
     const total = document.getElementById("totalsum4");
     const totalsum = v1 + v2 + v3 + v4
     total.innerHTML = totalsum;
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal4');
         const btnOpenPopup = document.querySelector('.btn-open-popup4');
         btnOpenPopup.addEventListener('click', () => {
@@ -162,7 +162,7 @@ function Radio5() {
     const total = document.getElementById("totalsum5");
     const totalsum = v1 + v2 + v3 + v4
     total.innerHTML = totalsum;
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal5');
         const btnOpenPopup = document.querySelector('.btn-open-popup5');
         btnOpenPopup.addEventListener('click', () => {
@@ -197,7 +197,7 @@ function Radio6() {
     const total = document.getElementById("totalsum6");
     const totalsum = v1 + v2 + v3 + v4
     total.innerHTML = totalsum;
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal6');
         const btnOpenPopup = document.querySelector('.btn-open-popup6');
         btnOpenPopup.addEventListener('click', () => {
@@ -236,7 +236,7 @@ function Radio7() {
     const total = document.getElementById("totalsum7");
     const totalsum = v1 + v2 + v3 + v4 + v5
     total.innerHTML = totalsum;
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal7');
         const btnOpenPopup = document.querySelector('.btn-open-popup7');
         btnOpenPopup.addEventListener('click', () => {
@@ -283,7 +283,7 @@ function Radio8() {
     const total = document.getElementById("totalsum8");
     const totalsum = v1 + v2 + v3 + v4 + v5 + v6 + v7
     total.innerHTML = totalsum;
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal8');
         const btnOpenPopup = document.querySelector('.btn-open-popup8');
         btnOpenPopup.addEventListener('click', () => {
@@ -327,7 +327,7 @@ function Radio10() {
     const totalsum = v1 + v2 + v3 + v4 + v5 + v6
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal10');
         const btnOpenPopup = document.querySelector('.btn-open-popup10');
         btnOpenPopup.addEventListener('click', () => {
@@ -367,7 +367,7 @@ function Radio11() {
     const totalsum = v1 + v2 + v3 + v4 + v5
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal11');
         const btnOpenPopup = document.querySelector('.btn-open-popup11');
         btnOpenPopup.addEventListener('click', () => {
@@ -403,7 +403,7 @@ function Radio12() {
     const totalsum = v1 + v2 + v3 + v4
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal12');
         const btnOpenPopup = document.querySelector('.btn-open-popup12');
         btnOpenPopup.addEventListener('click', () => {
@@ -439,7 +439,7 @@ function Radio13() {
     const totalsum = v1 + v2 + v3 + v4
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=10) {
         const modal = document.querySelector('.modal13');
         const btnOpenPopup = document.querySelector('.btn-open-popup13');
         btnOpenPopup.addEventListener('click', () => {
@@ -483,7 +483,7 @@ function Radio14() {
     const totalsum = v1 + v2 + v3 + v4 + v5 + v6
     total.innerHTML = totalsum;
 
-    if (totalsum < 15) {
+    if (totalsum<=15) {
         const modal = document.querySelector('.modal14');
         const btnOpenPopup = document.querySelector('.btn-open-popup14');
         btnOpenPopup.addEventListener('click', () => {

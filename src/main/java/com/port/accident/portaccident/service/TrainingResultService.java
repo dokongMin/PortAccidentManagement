@@ -347,12 +347,10 @@ public class TrainingResultService {
             byDateDto.setDetails((String) stringObjectMap.get(key));
         } else if (key.toString().equals("completionCheck")) {
             count++;
-            if (stringObjectMap.get(key).toString().equals("A")) {
-                byDateDto.setCompletionCheck(CompletionStatus.A);
-            } else if (stringObjectMap.get(key).toString().equals("B")) {
-                byDateDto.setCompletionCheck(CompletionStatus.B);
-            } else if (stringObjectMap.get(key).toString().equals("C")) {
-                byDateDto.setCompletionCheck(CompletionStatus.C);
+            if (stringObjectMap.get(key).toString().equals("COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.COMPLETE);
+            } else if (stringObjectMap.get(key).toString().equals("NOT_COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.NOT_COMPLETE);
             }
         } else if (key.toString().equals("evaluationName")) {
             count++;
