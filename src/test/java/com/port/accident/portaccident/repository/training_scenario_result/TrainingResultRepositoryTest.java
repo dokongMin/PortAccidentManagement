@@ -39,7 +39,6 @@ public class TrainingResultRepositoryTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         Scenario scenario = scenarioRepository.save(scenarioDto.toEntity());
