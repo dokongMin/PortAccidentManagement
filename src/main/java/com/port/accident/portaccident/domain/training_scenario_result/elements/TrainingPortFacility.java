@@ -26,7 +26,7 @@ public class TrainingPortFacility {
     @Column(name = "training_port_facility_name")
     private PortFacility name;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;

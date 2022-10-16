@@ -68,7 +68,7 @@ public class TrainingResult {
     @Column(name = "training_port_area")
     private String trainingArea;    //훈련대상 항만구역
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class TrainingResult {
 
 
     @Builder
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea, List<TrainingPortFacility> trainingPortFacilityList, List<TrainingByDate> trainingByDateList, Scenario scenario) {
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea, List<TrainingByDate> trainingByDateList, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -98,7 +98,6 @@ public class TrainingResult {
         this.department = department;
         this.trainingParticipants = trainingParticipants;
         this.trainingArea = trainingArea;
-        this.trainingPortFacilityList = trainingPortFacilityList;
         this.trainingByDateList = trainingByDateList;
         this.scenario = scenario;
     }
