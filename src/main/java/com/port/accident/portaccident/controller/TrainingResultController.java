@@ -2,6 +2,7 @@ package com.port.accident.portaccident.controller;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
@@ -39,6 +40,10 @@ public class TrainingResultController {
 
     @GetMapping("/trainingResult_detail/{resultId}")
     public String trainingResultDetail(Model model, @PathVariable(value = "resultId") Integer resultId) {
+        TrainingResult trainingResult = resultService.findByTrainingResultId(resultId);
+        model.addAttribute("trainingResult",trainingResult);
+        model.addAttribute("scenario",trainingResult.getScenario());
+        model.addAttribute("portFacilityList",trainingResult.getTrainingPortFacilityList());
         return "TrainingResult/TR_detail";
     }
 

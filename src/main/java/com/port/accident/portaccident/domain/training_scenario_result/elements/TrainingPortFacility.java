@@ -1,6 +1,7 @@
 package com.port.accident.portaccident.domain.training_scenario_result.elements;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
 import com.port.accident.portaccident.enums.PortFacility;
 import lombok.AccessLevel;
@@ -25,6 +26,7 @@ public class TrainingPortFacility {
     @Column(name = "training_port_facility_name")
     private PortFacility name;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_result_id")
     private TrainingResult trainingResult;
