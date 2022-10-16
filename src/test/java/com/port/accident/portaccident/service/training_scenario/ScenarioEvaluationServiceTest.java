@@ -11,6 +11,7 @@ import com.port.accident.portaccident.repository.training_scenario.ScenarioEvalu
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.service.ScenarioService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,6 @@ public class ScenarioEvaluationServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -73,17 +73,20 @@ public class ScenarioEvaluationServiceTest {
     public void 시나리오_평가_등록() {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .name("SY2")
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         //when
-        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
+        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
 
         //then
         Scenario scenario = scenarioRepository.findByName("SY2").get();
@@ -96,20 +99,21 @@ public class ScenarioEvaluationServiceTest {
         assertEquals(scenario.getId(), scenarioEvaluation.getScenario().getId());
     }
 
+    @Ignore
     @Test(expected = IllegalStateException.class)
     public void 시나리오_평가_중복_예외() {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                .name("SY2v1")
+                .name("SY2")
                 .build();
 
         ScenarioEvaluationDto scenarioEvaluationDto2 = ScenarioEvaluationDto.builder()
-                .name("SY2v1")
+                .name("SY2")
                 .build();
 
         //when
-        scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
-        scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto2);
+        scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
+        scenarioService.registerScenarioEvaluation(scenarioEvaluationDto2);
 
         //then
         fail("이미 존재하는 시나리오 평가입니다.");
@@ -119,26 +123,32 @@ public class ScenarioEvaluationServiceTest {
     public void 시나리오_평가_수정() {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .name("SY2")
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
-        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
+        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
 
         ScenarioEvaluationDto updateScenarioEvaluationDto = ScenarioEvaluationDto.builder()
                 .id(scenarioEvaluationId)
-                .name("SY2v2")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.Y)
-                .completeStandard1(SuitableCheck.Y)
-                .completeStandard2(SuitableCheck.Y)
+                .name("SY2")
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
         //when
@@ -157,16 +167,19 @@ public class ScenarioEvaluationServiceTest {
     public void 시나리오_평가_삭제() {
         //given
         ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                .name("SY2v1")
-                .developmentStandard1(SuitableCheck.Y)
-                .developmentStandard2(SuitableCheck.Y)
-                .possibleStandard1(SuitableCheck.Y)
-                .possibleStandard2(SuitableCheck.N)
-                .completeStandard1(SuitableCheck.N)
-                .completeStandard2(SuitableCheck.Y)
+                .name("SY2")
+                .developmentStandard1(SuitableCheck.A)
+                .developmentStandard2(SuitableCheck.C)
+                .developmentStandard3(SuitableCheck.A)
+                .possibleStandard1(SuitableCheck.A)
+                .possibleStandard2(SuitableCheck.B)
+                .possibleStandard3(SuitableCheck.C)
+                .completeStandard1(SuitableCheck.B)
+                .completeStandard2(SuitableCheck.A)
+                .completeStandard3(SuitableCheck.C)
                 .build();
 
-        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
+        Integer scenarioEvaluationId = scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
 
         //when
         scenarioService.deleteScenarioEvaluation(scenarioEvaluationId);
@@ -181,10 +194,10 @@ public class ScenarioEvaluationServiceTest {
         //given
         IntStream.rangeClosed(1, 5).forEach(i -> {
             ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                    .name("SY2v"+i)
+                    .name("SY2")
                     .build();
 
-            scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
+            scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
         });
 
         EvaluationSearchCondition condition = new EvaluationSearchCondition();
@@ -213,16 +226,16 @@ public class ScenarioEvaluationServiceTest {
 
         IntStream.rangeClosed(1, 5).forEach(i -> {
             ScenarioEvaluationDto scenarioEvaluationDto = ScenarioEvaluationDto.builder()
-                    .name("SY2v"+i)
+                    .name("SY2")
                     .build();
 
-            scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto);
+            scenarioService.registerScenarioEvaluation(scenarioEvaluationDto);
 
             ScenarioEvaluationDto scenarioEvaluationDto2 = ScenarioEvaluationDto.builder()
-                    .name("SN2v"+i)
+                    .name("SN2")
                     .build();
 
-            scenarioService.registerScenarioEvaluation("SY2", scenarioEvaluationDto2);
+            scenarioService.registerScenarioEvaluation(scenarioEvaluationDto2);
         });
 
         EvaluationSearchCondition condition = new EvaluationSearchCondition();

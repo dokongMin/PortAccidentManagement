@@ -49,7 +49,6 @@ public class AccidentResponseActivityServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -110,7 +109,7 @@ public class AccidentResponseActivityServiceTest {
                 .build();
 
         //when
-        Integer updateActivityId = scenarioService.modifyAccidentResponseActivity(updateAccidentResponseActivityDto);
+        Integer updateActivityId = scenarioService.updateAccidentResponseActivity(updateAccidentResponseActivityDto);
 
         //then
         AccidentResponseActivity updateScenarioEvaluation = accidentResponseActivityRepository.findById(updateActivityId).get();

@@ -11,6 +11,9 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Integer>, Sc
     @Query("select s from Scenario s where s.name = :name")
     Optional<Scenario> findByName(@Param("name") String name);
 
+    @Query("select s.name from Scenario s where s.id = :scenarioId")
+    Optional<String> findNameById(Integer scenarioId);
+
     @Override
-    Optional<Scenario> findById(Integer integer);
+    Optional<Scenario> findById(Integer scenarioId);
 }

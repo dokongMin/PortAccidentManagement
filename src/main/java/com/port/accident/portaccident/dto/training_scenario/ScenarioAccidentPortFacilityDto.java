@@ -1,13 +1,13 @@
 package com.port.accident.portaccident.dto.training_scenario;
 
 
-import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.enums.*;
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 public class ScenarioAccidentPortFacilityDto {
 
@@ -18,9 +18,10 @@ public class ScenarioAccidentPortFacilityDto {
     private IncidentType incidentType;
     private IncidentDetailType incidentDetailType;
     private TrainingPlace portArea;
-//    private List<AccidentPortFacility> accidentPortFacilityList;
+    private List<PortFacility> accidentPortFacilityList = new ArrayList<>();
 
     @QueryProjection
+    @Builder
     public ScenarioAccidentPortFacilityDto(Integer id, String name, IncidentLevel incidentLevel, IncidentImpact impact,
                                            IncidentType incidentType, IncidentDetailType incidentDetailType, TrainingPlace portArea) {
         this.id = id;

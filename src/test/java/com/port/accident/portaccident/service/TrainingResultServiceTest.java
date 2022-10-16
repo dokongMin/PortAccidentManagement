@@ -54,7 +54,6 @@ public class TrainingResultServiceTest {
                 .incidentType(IncidentType.INCIDENT)
                 .incidentDetailType(IncidentDetailType.DROP)
                 .portArea(TrainingPlace.PLACE1)
-                .responseStage("2")
                 .build();
 
         AccidentPortFacilityDto accidentPortFacilityDto = AccidentPortFacilityDto.builder()
@@ -71,7 +70,7 @@ public class TrainingResultServiceTest {
         accidentPortFacilityDtoList.add(accidentPortFacilityDto2);
 
         Integer scenarioId = scenarioService.registerScenario(scenarioDto, accidentPortFacilityDtoList);
-        Scenario scenario = scenarioService.findById(scenarioId).get();
+        Scenario scenario = scenarioService.findById(scenarioId);
 
         /* create TrainingResult */
         //given
@@ -158,7 +157,7 @@ public class TrainingResultServiceTest {
 
         TrainingByDateDto dto = TrainingByDateDto.builder()
                 .details("1일차 대응훈련 수행 내용")
-                .completionCheck(CompletionStatus.A)
+                .completionCheck(CompletionStatus.COMPLETE)
                 .evaluationName("대응훈련 평가항목명")
                 .trainingResult(trainingResult)
                 .build();
@@ -168,7 +167,7 @@ public class TrainingResultServiceTest {
         TrainingByDate resultByDate = resultService.findTrainingByDateById(resultByDateId);
 
         //then
-        assertEquals(resultByDate.getCompletionCheck(), CompletionStatus.A);
+        assertEquals(resultByDate.getCompletionCheck(), CompletionStatus.COMPLETE);
         assertEquals(resultByDate.getTrainingResult().getId(), trainingResultId);
     }
 
@@ -180,7 +179,7 @@ public class TrainingResultServiceTest {
 
         TrainingByDateDto byDateDto = TrainingByDateDto.builder()
                 .details("1일차 대응훈련 수행 내용")
-                .completionCheck(CompletionStatus.A)
+                .completionCheck(CompletionStatus.COMPLETE)
                 .evaluationName("대응훈련 평가항목명")
                 .trainingResult(trainingResult)
                 .build();

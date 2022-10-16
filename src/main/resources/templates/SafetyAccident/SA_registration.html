@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/SafetyAccident/SA_registration.css">
+    <link rel="stylesheet" href="../../static/css/SafetyAccident/SA_registration.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -24,7 +24,7 @@
 </head>
 <body>
 <!-- HEADER -->
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 
 
@@ -45,15 +45,15 @@
 
     <br><br>
     <div class="regist-line-1">
-      <p> <span class="fonts" id="ch0"> 사고일시</span>&nbsp;&nbsp;<input type="date" name="accidentDate" style="width: 150px;">
+      <p> <span class="fonts"> 사고일시</span>&nbsp;&nbsp;<input type="date" name="accidentDate" style="width: 150px;">
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
         <span class="fonts" id="types">사고 유형</span>
         <select name="type" id="accidentType" th:name="accidentType">
-          <option value="추락">추락</option>
-          <option value="넘어짐">넘어짐</option>
-          <option value="부딪힘">부딪힘</option>
-          <option value="끼임">끼임</option>
-          <option value="맞음">맞음</option>
+          <option value="DROP" id="sel1">추락</option>
+          <option value="FALL" id="sel2">넘어짐</option>
+          <option value="BUMP" id="sel3">부딪힘</option>
+          <option value="TRAP" id="sel4">끼임</option>
+          <option value="HIT" id="sel5">맞음</option>
         </select>
       </p>
     </div>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="regist-line-4-5">
-      <p><span class="fonts">안전사고 발생원인</span> &nbsp; &nbsp;
+      <p><span class="fonts" >안전사고 발생원인</span> &nbsp; &nbsp;
         <checkbox th:name="causesSafetyAccidentInfoList">
           <input type="checkbox" value="부주의" name="causesSafetyAccidentInfoList" checked>부주의
           &nbsp;<input type="checkbox" value="안전관리 소홀" name="causesSafetyAccidentInfoList">안전관리 소홀
@@ -104,7 +104,7 @@
     </div>
 
     <div class="regist-line-5">
-      <p class="fonts" >사고 경위</p>
+      <p class="fonts" id="ch6">사고 경위</p>
     </div><br>
 
 
@@ -117,7 +117,7 @@
         &nbsp;&nbsp;
         <span class="fonts"> 처리담당자 연락처 &nbsp;<input type="text" placeholder=""> </span>
         &nbsp;&nbsp
-        <span class="fonts" id="ch7"> 사고자 </span> &nbsp;<input type="text" placeholder="" name="victim" id="victim">
+        <span class="fonts" id="ch31"> 사고자 </span> &nbsp;<input type="text" placeholder="" name="victim" id="victim">
         &nbsp;&nbsp;
       </p>
     </div>
@@ -151,7 +151,7 @@
     </div>
 </footer>
 </body>
-<script src="/js/SafetyAccident/SA_registration.js"></script>
+<script src="../../static/js/SafetyAccident/SA_registration.js"></script>
 <script>
     function btn() {
         alert('시나리오 결과가 저장되었습니다.');

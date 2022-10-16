@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="/css/help/help.css">
-  <script defer src="/js/help.js"> </script>
+  <link rel="stylesheet" href="../../static/css/help/help.css">
+  <script defer src="../../static/js/help.js"> </script>
 
 <script src="https://unpkg.com/react@16/umd/react.development.js"></script> 
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> 
@@ -24,7 +24,7 @@
 </head>
 <body>
   <!-- HEADER -->
-  <script type="module" src="/js/header.js"></script>
+  <script type="module" src="../../static/js/header.js"></script>
   <port-header></port-header>
   &nbsp;<br>
   &nbsp;<br>
@@ -49,7 +49,7 @@
   <p class="stats ver4">끼임<br>384</p>
   <p class="stats ver5">맞음<br>318</p>
   <p class="stats ver6">기타<br>602</p>
-  <div class="stats ex1"><p style="color: blue;display:inline;">주의</p>를 요하는 사고 유형</div>
+  <div class="stats ex1"><p style="color: blue;display:inline;">주의</p>를 요하는 사고 유형</div><br>
   <div class="stats ex2">"추락"</div>
   </div>
 
@@ -80,10 +80,10 @@
     <p style="font-weight: 700;top:300px;position: absolute; left: 229px;">단위 : 년도</p>
     <p class="rotate">단위 : 명</p>
     </div>
-    <div class="title title2">2011~2020년간 항만하역작업 사고 재해 통계</div>
+    <!-- <div class="title title2">2011~2020년간 항만하역작업 사고 재해 통계</div> -->
 
     <!-- dount2 -->
-    <div class="fullcontainer2 sec2">
+    <!-- <div class="fullcontainer2 sec2">
       <div class="container2">
         <p class="explain2">단위: 명</p>
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -100,7 +100,7 @@
       <div class="stats ex3"><p style="color: blue;display:inline;">주의</p>를 요하는 항만</div>
       <div class="stats ex4">"부산항"</div>
       <div class="stats ex5">5년간 항만 내 안전사고 통계(2015.01~2020.03)</div>
-      </div>
+    </div> -->
 
     <!-- bar chart -->
     <div class="fullbarchart">    
@@ -125,7 +125,8 @@
         노후 장비&nbsp;
         <div class="each" style="background-color: orange;"></div>
         총 기수</div> 
-      </div>  
+      </div>
+      <span style="font-weight: 700; position:relative; left: 15%;">부산 북항 노후 크레인 현황(2020)</span>  
     </div>
 
     <div class="extra">
@@ -154,6 +155,7 @@
             총 합계<br>1044명</p>
         </div>
       </div>
+      <br><br><br>
     <!-- footer -->
   <footer>
     <div class="inner">

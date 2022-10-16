@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/TrainingResult/TR_registration.css">
+    <link rel="stylesheet" href="../../static/css/TrainingResult/TR_registration.css">
 
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
@@ -24,7 +24,7 @@
 </head>
 <body>
 <!-- HEADER -->
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 
 
@@ -100,12 +100,12 @@
                 <!--        <input type="text" placeholder="Level1" value="LEVEL_1" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
 
                 <span class="fonts" id="ch2">사고 유형</span> &nbsp;
-                <select name="incidentDetailTypeSelect" onchange="incidentDetailType(this)">
-                    <option value="추락" selected>추락</option>
-                    <option value="넘어짐">넘어짐</option>
-                    <option value="부딪힘">부딪힘</option>
-                    <option value="끼임">끼임</option>
-                    <option value="맞음">맞음</option>
+                <select name="incidentDetailTypeSelect" id="incidentDetailTypeSelect"  onchange="incidentDetailType(this)">
+                    <option value="DROP" id="sel1">추락</option>
+                    <option value="FALL" id="sel2">넘어짐</option>
+                    <option value="BUMP" id="sel3">부딪힘</option>
+                    <option value="TRAP" id="sel4">끼임</option>
+                    <option value="HIT" id="sel5">맞음</option>
                 </select> &nbsp;&nbsp;
                 <!--        <input type="text" placeholder="추락" value="LEVEL_2" name="incidentLevel" th:id="incidentLevel"> &nbsp;&nbsp;-->
 
@@ -179,7 +179,7 @@
 </footer>
 </body>
 
-<script src="/js/TrainingResult/TR_registration.js"> </script>
-<script src="/js/TR_registration_button.js"></script>
+<script src="../../static/js/TrainingResult/TR_registration.js"> </script>
+<script src="../../static/js/TR_registration_button.js"></script>
 
 </html>

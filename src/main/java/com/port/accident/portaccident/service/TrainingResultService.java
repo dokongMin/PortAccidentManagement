@@ -9,6 +9,7 @@ import com.port.accident.portaccident.domain.training_scenario_result.evaluation
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultReturnToDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingParticipantsDto;
 import com.port.accident.portaccident.dto.training_scenario_result.elements.TrainingPortFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario_result.evaluation.EvaluationDetailsDto;
@@ -62,8 +63,36 @@ public class TrainingResultService {
         return byId.orElseThrow(() -> new DoesNotExistException());
     }
 
+    public TrainingResultReturnToDto findByTrainingResultIdReturnDto(Integer id) {
+        Optional<TrainingResult> byId = trainingResultRepository.findById(id);
+        if (byId.isPresent()) {
+            TrainingResult entity = byId.get();
+            TrainingResultReturnToDto dto = new TrainingResultReturnToDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setStartDate(entity.getStartDate());
+            dto.setEndDate(entity.getEndDate());
+            dto.setPlace(entity.getPlace());
+            dto.setTrainingType(entity.getTrainingType());
+            dto.setIncidentLevel(entity.getIncidentLevel());
+            dto.setIncidentImpact(entity.getIncidentImpact());
+            dto.setIncidentType(entity.getIncidentType());
+            dto.setIncidentDetailType(entity.getIncidentDetailType());
+            dto.setDepartment(entity.getDepartment());
+            dto.setTrainingParticipants(entity.getTrainingParticipants());
+            dto.setTrainingArea(entity.getTrainingArea());
+
+            List<TrainingPortFacility> allByFacility = facilityRepository.findAllByTrainingResultId(dto.getId());
+            for (TrainingPortFacility facility : allByFacility) {
+                dto.addFacility(facility.getName());
+            }
+            return dto;
+        }
+        return null;
+    }
+
     public Integer createPortFacility(TrainingPortFacility facility) {
-        TrainingPortFacility savedFacility = facilityRepository.saveAndFlush(facility);
+        TrainingPortFacility savedFacility = facilityRepository.save(facility);
         return savedFacility.getId();
     }
 
@@ -318,12 +347,10 @@ public class TrainingResultService {
             byDateDto.setDetails((String) stringObjectMap.get(key));
         } else if (key.toString().equals("completionCheck")) {
             count++;
-            if (stringObjectMap.get(key).toString().equals("A")) {
-                byDateDto.setCompletionCheck(CompletionStatus.A);
-            } else if (stringObjectMap.get(key).toString().equals("B")) {
-                byDateDto.setCompletionCheck(CompletionStatus.B);
-            } else if (stringObjectMap.get(key).toString().equals("C")) {
-                byDateDto.setCompletionCheck(CompletionStatus.C);
+            if (stringObjectMap.get(key).toString().equals("COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.COMPLETE);
+            } else if (stringObjectMap.get(key).toString().equals("NOT_COMPLETE")) {
+                byDateDto.setCompletionCheck(CompletionStatus.NOT_COMPLETE);
             }
         } else if (key.toString().equals("evaluationName")) {
             count++;
