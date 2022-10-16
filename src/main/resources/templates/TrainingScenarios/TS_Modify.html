@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/traningscenarios/tsmodify.css">
+    <link rel="stylesheet" href="../../static/css/traningscenarios/tsmodify.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 <!--training-scenarios-->
 
@@ -49,12 +49,14 @@
     <div class="regist-line-1">
         <p><span class="fonts"> 시나리오명 &nbsp;&nbsp;<input type="text" placeholder="" style="width: 250px;"> </span>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;<select>
-                <option value="">추락</option>
-                <option>넘어짐</option>
-                <option>부딪힘</option>
-                <option>끼임</option>
-                <option>맞음</option>
+            <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;
+            <select id="incidentDetailTypeSelect">
+                <option value="none" selected="selected">&nbsp;--&nbsp;</option>
+                <option value="DROP" id="sel1">추락</option>
+                <option value="FALL" id="sel2">넘어짐</option>
+                <option value="BUMP" id="sel3">부딪힘</option>
+                <option value="TRAP" id="sel4">끼임</option>
+                <option value="HIT" id="sel5">맞음</option>
             </select>
         </p>
     </div>
@@ -118,5 +120,5 @@
     </div>
 </footer>
 </body>
-<script src="/js/traningscenarios/tsmodify.js"></script>
+<script src="../../static/js/traningscenarios/tsmodify.js"></script>
 </html>

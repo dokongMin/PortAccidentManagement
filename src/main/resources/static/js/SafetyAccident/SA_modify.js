@@ -16,6 +16,26 @@ function ChangeValue() {
     el6.innerHTML = "사고 경위";
     const el7 = document.getElementById("ch7");
     el7.innerHTML = "사고자";
+
+    const sel1 = document.getElementById("sel1");
+      sel1.innerHTML = "추락";
+      const sel2 = document.getElementById("sel2");
+      sel2.innerHTML = "넘어짐";
+      const sel3 = document.getElementById("sel3");
+      sel3.innerHTML = "부딪힘";
+      document.getElementById("sel4").disabled = false;
+      document.getElementById("sel5").disabled = false;
+      const sel4 = document.getElementById("sel4");
+      sel4.innerHTML = "끼임";
+      const sel5 = document.getElementById("sel5");
+      sel5.innerHTML = "맞음";
+
+      var select=document.getElementById("accidentType");
+      select[0].value="DROP";
+      select[1].value="FALL";
+      select[2].value="BUMP";
+      select[3].value="TRAP";
+      select[4].value="HIT";
   }
   if (chose == "재난") {
     const el1 = document.getElementById("ch1");
@@ -32,5 +52,25 @@ function ChangeValue() {
     el6.innerHTML = "재난 경위";
     const el7 = document.getElementById("ch7");
     el7.innerHTML = "피해자";
+
+    const sel1 = document.getElementById("sel1");
+      sel1.innerHTML = "지진";
+      const sel2 = document.getElementById("sel2");
+      sel2.innerHTML = "태풍";
+      const sel3 = document.getElementById("sel3");
+      sel3.innerHTML = "선박 사고";
+      document.getElementById("sel4").disabled = true;
+      document.getElementById("sel5").disabled = true;
+      const sel4 = document.getElementById("sel4");
+      sel4.innerHTML = "x";
+      const sel5 = document.getElementById("sel5");
+      sel5.innerHTML = "x";
+
+      var select=document.getElementById("accidentType");
+      select[0].value="EARTHQUAKE";
+      select[1].value="TYPHOON";
+      select[2].value="SHIPACCIDENT";
+      select[3].value=null;
+      select[4].value=null;
   }
 }
