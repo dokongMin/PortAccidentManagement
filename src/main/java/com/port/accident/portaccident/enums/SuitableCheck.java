@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum SuitableCheck {
-    Y(true),
-    N(false);
+    A("적합"),
+    B("미흡"),
+    C("부적합");
 
-    private final boolean checkValue;
+    private final String checkValue;
 
 }

@@ -86,19 +86,19 @@ public class Scenario {
         this.scenarioEvaluationList = scenarioEvaluationList;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void addAccidentPortFacility(AccidentPortFacilityDto accidentPortFacilityDto) {
         accidentPortFacilityDto.setScenario(this);
         this.accidentPortFacilityList.add(accidentPortFacilityDto.toEntity());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void addAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
         accidentResponseActivityDto.setScenario(this);
         this.accidentResponseActivityList.add(accidentResponseActivityDto.toEntity());
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void addScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
         scenarioEvaluationDto.setScenario(this);
         this.scenarioEvaluationList.add(scenarioEvaluationDto.toEntity());

@@ -18,6 +18,7 @@ import com.port.accident.portaccident.repository.training_scenario.ScenarioEvalu
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 @RequiredArgsConstructor
 public class ScenarioService {
     private final ScenarioRepository scenarioRepository;
@@ -48,12 +49,39 @@ public class ScenarioService {
                 .build();
     }
 
+    public ScenarioDto toServiceScenarioDto(ScenarioAccidentPortFacilityDto scenarioAccidentPortFacilityDto) {
+        return ScenarioDto.builder()
+                .id(scenarioAccidentPortFacilityDto.getId())
+                .name(scenarioAccidentPortFacilityDto.getName())
+                .incidentLevel(scenarioAccidentPortFacilityDto.getIncidentLevel())
+                .incidentImpact(scenarioAccidentPortFacilityDto.getIncidentImpact())
+                .incidentType(scenarioAccidentPortFacilityDto.getIncidentType())
+                .incidentDetailType(scenarioAccidentPortFacilityDto.getIncidentDetailType())
+                .portArea(scenarioAccidentPortFacilityDto.getPortArea())
+                .build();
+    }
+
+/*
     public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
         List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
 
         for (AccidentPortFacilityDto accidentPortFacilityDto : accidentPortFacilityDtoList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
                     .id(accidentPortFacilityDto.getId())
+                    .name(accidentPortFacilityDto.getName())
+                    .build();
+
+            toServiceAccidentPortFacilityDtoList.add(facilityDto);
+        }
+        return toServiceAccidentPortFacilityDtoList;
+    }
+*/
+
+    public List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList(List<AccidentPortFacilityDto> facilityDtoList) {
+        List<AccidentPortFacilityDto> toServiceAccidentPortFacilityDtoList = new ArrayList<>();
+
+        for (AccidentPortFacilityDto accidentPortFacilityDto : facilityDtoList) {
+            AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
                     .name(accidentPortFacilityDto.getName())
                     .build();
 
@@ -78,22 +106,24 @@ public class ScenarioService {
                 .name(scenarioEvaluationDto.getName())
                 .developmentStandard1(scenarioEvaluationDto.getDevelopmentStandard1())
                 .developmentStandard2(scenarioEvaluationDto.getDevelopmentStandard2())
+                .developmentStandard3(scenarioEvaluationDto.getDevelopmentStandard3())
                 .possibleStandard1(scenarioEvaluationDto.getPossibleStandard1())
                 .possibleStandard2(scenarioEvaluationDto.getPossibleStandard2())
+                .possibleStandard3(scenarioEvaluationDto.getPossibleStandard3())
                 .completeStandard1(scenarioEvaluationDto.getCompleteStandard1())
                 .completeStandard2(scenarioEvaluationDto.getCompleteStandard2())
+                .completeStandard3(scenarioEvaluationDto.getCompleteStandard3())
                 .scenario(scenarioEvaluationDto.getScenario())
                 .build();
 
     }
 
-    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<String> facilityList) {
+    public List<AccidentPortFacilityDto> makeAccidentPortFacilityDtoBuilder(List<PortFacility> facilityList) {
         List<AccidentPortFacilityDto> facilityDtoList = new ArrayList<>();
 
-
-        for (String facility : facilityList) {
+        for (PortFacility facility : facilityList) {
             AccidentPortFacilityDto facilityDto = AccidentPortFacilityDto.builder()
-                    .name(PortFacility.valueOf(facility))
+                    .name(facility)
                     .build();
 
             facilityDtoList.add(facilityDto);
@@ -104,6 +134,10 @@ public class ScenarioService {
 
     public Scenario findById(Integer scenarioId) {
         return scenarioRepository.findById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
+    }
+
+    public String findNameById(Integer scenarioId) {
+        return scenarioRepository.findNameById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
     @Transactional
@@ -205,7 +239,7 @@ public class ScenarioService {
     }
 
     @Transactional
-    public Integer modifyAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
+    public Integer updateAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
         AccidentResponseActivity accidentResponseActivity = accidentResponseActivityRepository.findById(accidentResponseActivityDto.getId()).get();
         accidentResponseActivity.update(accidentResponseActivityDto);
 
@@ -231,10 +265,12 @@ public class ScenarioService {
         return accidentResponseActivityRepository.findById(accidentResponseActivityId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
 
-    public Integer registerScenarioEvaluation(String scenarioName, ScenarioEvaluationDto scenarioEvaluationDto) {
-        Scenario scenario = scenarioRepository.findByName(scenarioName).get();
-        scenario.addScenarioEvaluation(scenarioEvaluationDto);
+    public Integer registerScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {
+        Scenario scenario = scenarioRepository.findByName(scenarioEvaluationDto.getName()).get();
 
+        scenarioEvaluationDto.setName(settingScenarioEvaluationName(scenario.getId(), scenario.getName()));
+
+        scenario.addScenarioEvaluation(scenarioEvaluationDto);
         return saveScenarioEvaluation(scenarioEvaluationDto);
     }
 
@@ -243,6 +279,19 @@ public class ScenarioService {
         validateDuplicateScenarioEvaluation(scenarioEvaluationDto); // 중복 시나리오 평가 검증
 
         return scenarioEvaluationRepository.save(scenarioEvaluationDto.toEntity()).getId();
+    }
+
+    public String settingScenarioEvaluationName(Integer scenarioId, String scenarioName) {
+        Page<String> beforeScenarioName = scenarioEvaluationRepository.findTopByNameByScenarioId(scenarioId, PageRequest.of(0, 1));
+
+        if (beforeScenarioName.getTotalPages() != 0) {
+            String[] split = beforeScenarioName.getContent().get(0).split("v");
+            scenarioName = split[0] + "v" + (Integer.parseInt(split[1]) + 1);
+        } else {
+            scenarioName += "v1";
+        }
+
+        return scenarioName;
     }
 
     private void validateDuplicateScenarioEvaluation(ScenarioEvaluationDto scenarioEvaluationDto) {

@@ -25,30 +25,39 @@ public class ScenarioEvaluation {
     @Column(name = "scenario_evaluation_name") // 시나리오명
     private String name;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_develop_standard")
     private SuitableCheck developmentStandard1;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_develop_standard2")
     private SuitableCheck developmentStandard2;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_develop_standard3")
     private SuitableCheck developmentStandard3;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_possible_standard1")
     private SuitableCheck possibleStandard1;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_possible_standard2")
     private SuitableCheck possibleStandard2;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_possible_standard3")
     private SuitableCheck possibleStandard3;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_complete_standard1")
     private SuitableCheck completeStandard1;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_complete_standard2")
     private SuitableCheck completeStandard2;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "scenario_evaluation_complete_standard3")
     private SuitableCheck completeStandard3;
 

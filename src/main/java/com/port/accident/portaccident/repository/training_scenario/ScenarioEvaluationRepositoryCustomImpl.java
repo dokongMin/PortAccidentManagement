@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.port.accident.portaccident.domain.training_scenario.QScenario.scenario;
 import static org.springframework.util.ObjectUtils.isEmpty;
 import static com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.QScenarioEvaluation.scenarioEvaluation;
 
@@ -30,6 +31,7 @@ public class ScenarioEvaluationRepositoryCustomImpl implements ScenarioEvaluatio
         List<ScenarioEvaluation> content = queryFactory
                 .selectFrom(scenarioEvaluation)
                 .where(nameContains(condition.getName()))
+                .orderBy(scenarioEvaluation.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
