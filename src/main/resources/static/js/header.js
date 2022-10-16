@@ -30,8 +30,6 @@ class PortHeader extends HTMLElement {
             '                <div class="line2"></div>\n' +
             '                <li><a href="/SafetyAccident/SA_check" aria-label="submenu">안전사고 정보 조회</a></li>\n' +
             '                <li><a href="/SafetyAccident/SA_registration_Page" aria-label="submenu">안전사고 정보 등록</a></li>\n' +
-            '                <li><a href="/SafetyAccident/SA_modify" aria-label="submenu">안전사고 정보 수정</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">안전사고 정보<br>사용 중지</a></li>\n' +
             '              </ul>\n' +
             '            </li>\n' +
             '            <li><a href="#">안전사고 대응훈련<br>시나리오 관리</a>\n' +
@@ -39,8 +37,6 @@ class PortHeader extends HTMLElement {
             '                <div class="line35"></div>\n' +
             '                <li><a href="/TrainingScenarios/TS_Check" aria-label="submenu">대응훈련 시나리오 조회</a></li>\n' +
             '                <li><a href="/TrainingScenarios/TS_Register_Page" aria-label="submenu">대응훈련 시나리오 등록</a></li>\n' +
-            '                <li><a href="/TrainingScenarios/TS_Modify_Page" aria-label="submenu">대응훈련 시나리오 수정</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">대응훈련 시나리오 <br>사용 중지</a></li>\n' +
             '              </ul>\n' +
             '            </li>\n' +
             '            <li><a href="#">안전사고 대응훈련<br>시나리오 평가 관리</a>\n' +
@@ -48,8 +44,6 @@ class PortHeader extends HTMLElement {
             '                <div class="line4"></div>\n' +
             '                <li><a href="/TS_Assessment/TSA_Check" aria-label="submenu">대응훈련 시나리오 평가 조회</a></li>\n' +
             '                <li><a href="/TS_Assessment/TSA_Register_Page" aria-label="submenu">대응훈련 시나리오 평가 등록</a></li>\n' +
-            '                <li><a href="/TS_Assessment/TSA_Modify_Page" aria-label="submenu">대응훈련 시나리오 평가 수정</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">대응훈련 시나리오 평가 삭제</a></li>\n' +
             '              </ul>\n' +
             '            </li>\n' +
             '            <li><a href="#">안전사고 대응훈련<br>결과 관리</a>\n' +
@@ -58,8 +52,6 @@ class PortHeader extends HTMLElement {
             '                <li><a href="/TrainingResult/trainingResult_list" aria-label="submenu">대응훈련 결과 조회</a></li>\n' +
             '                <li><a href="/TrainingResult/trainingResult_registerPage" aria-label="submenu">대응훈련 결과 등록</a></li>\n' +
             '                <li><a href="/TrainingResult/trainingResult_daysPage" aria-label="submenu">대응훈련 일자별<br>수행 결과 등록</a></li>\n' +
-            '                <li><a href="/TrainingResult/trainingResult_modifyPage" aria-label="submenu">대응훈련 결과 수정</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">대응훈련 결과 삭제</a></li>\n' +
             '              </ul>\n' +
             '            </li>\n' +
             '            <li><a href="#">비상연락망<br>관리</a>\n' +
@@ -67,17 +59,9 @@ class PortHeader extends HTMLElement {
             '                <div class="line6"></div>\n' +
             '                <li><a href="/EmergencyContact/EC_Check" aria-label="submenu">비상연락망 조회</a></li>\n' +
             '                <li><a href="/EmergencyContact/EC_Register_Page" aria-label="submenu">비상연락망 등록</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">비상연락망 수정</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">비상연락망 삭제</a></li>\n' +
             '              </ul>\n' +
             '            </li>\n' +
-            '            <li><a href="#">help<br>&nbsp;</a>\n' +
-            '              <ul id="sub-menu">\n' +
-            '                <div class="line7"></div>\n' +
-            '                <li><a href="/help/stateaccident" aria-label="submenu">항만 안전사고 현황</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">FAQ</a></li>\n' +
-            '                <li><a href="#" aria-label="submenu">자료실</a></li>\n' +
-            '              </ul>\n' +
+            '            <li><a href="/help/stateaccident" style="position:relative; left:800px; top:-57.5px;">항만 안전사고<br>현황</a>\n' +
             '            </li>\n' +
             '          </ul>\n' +
             '        </div>\n' +

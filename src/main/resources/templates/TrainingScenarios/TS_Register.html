@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/traningscenarios/tsregister.css">
+    <link rel="stylesheet" href="../../static/css/traningscenarios/tsregister.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<script type="module" src="/js/header.js"></script>
+<script type="module" src="../../static/js/header.js"></script>
 <port-header></port-header>
 
 
@@ -45,11 +45,12 @@
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <span class="fonts" id="ch2">사고 유형</span> &nbsp;&nbsp;
             <select id="incidentDetailType" name="incidentDetailType">
-                <option th:name="incidentDetailType" value="DROP">추락</option>
-                <option th:name="incidentDetailType" value="FALL">넘어짐</option>
-                <option th:name="incidentDetailType" value="BUMP">부딪힘</option>
-                <option th:name="incidentDetailType" value="TRAP">끼임</option>
-                <option th:name="incidentDetailType" value="HIT">맞음</option>
+                <option name="incidentDetailType" value="none" >&nbsp;--&nbsp;</option>
+                <option name="incidentDetailType" value="DROP" id="sel1">추락</option>
+                <option name="incidentDetailType" value="FALL" id="sel2">넘어짐</option>
+                <option name="incidentDetailType" value="BUMP" id="sel3">부딪힘</option>
+                <option name="incidentDetailType" value="TRAP" id="sel4">끼임</option>
+                <option name="incidentDetailType" value="HIT" id="sel5">맞음</option>
             </select>
     </div>
 
@@ -127,8 +128,8 @@
     </div>
 </footer>
 </body>
-<script src="/js/traningscenarios/tsregister.js"></script>
-<script src="/js/traningscenarios/TS_registration.js"></script>
+<script src="../../static/js/traningscenarios/tsregister.js"></script>
+<script src="../../static/js/traningscenarios/TS_registration.js"></script>
 
 <script>
     function btn() {
