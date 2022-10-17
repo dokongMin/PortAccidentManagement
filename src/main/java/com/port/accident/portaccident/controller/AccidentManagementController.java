@@ -107,7 +107,7 @@ public class AccidentManagementController {
                                       @RequestParam(required = false, defaultValue = "") String searchText) {
         Page<AccidentInfo> accidents = accidentManagementRepository.findByAccidentInspectContaining(searchText, pageable);
         model.addAttribute("accidents", accidents);
-        return "/SafetyAccident/SA_check";
+        return "SafetyAccident/SA_check";
     }
 
     /**
@@ -120,6 +120,6 @@ public class AccidentManagementController {
         AccidentInfo accidentInfo = accidentManagementRepository.findById(accident_info_id).get();
         model.addAttribute("accidentInfo", accidentInfo);
         
-        return "/SafetyAccident/SA_detail";
+        return "SafetyAccident/SA_detail";
     }
 }
