@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Roboto+Mono:wght@100&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../../static/css/traningscenarios/tsregister.css">
+    <link rel="stylesheet" href="/css/traningscenarios/tsregister.css">
 
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -21,7 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-<script type="module" src="../../static/js/header.js"></script>
+<script type="module" src="/js/header.js"></script>
 <port-header></port-header>
 
 
@@ -89,7 +89,12 @@
             &nbsp;<input type="checkbox" name="accidentPortFacilityList" value="LADDER">사다리
         </p>
     </div>
-
+    <div class="regist-line-3">
+        <p class="fonts">[ 시나리오 상세 ]</p>
+    </div>
+    <div class="regist-line-5">
+        <p><textarea placeholder="시나리오 상세 정보 입력" name="trainingArea" th:id="trainingArea"></textarea></p>
+    </div>
     <div class="regist-button">
         <a href="#"><span class="imsi-button" th:id="TS_Registration_button">&nbsp;&nbsp;등록&nbsp;&nbsp;</span></a>
         <a href="javascript:window.history.go(-1);"><span class="imsi-button">&nbsp;&nbsp;취소&nbsp;&nbsp;</span></a>
