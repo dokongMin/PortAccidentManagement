@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.domain.training_scenario_result;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.evaluation.TrainingByDate;
 import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingParticipants;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Table(name = "training_result")
 @Entity
@@ -66,6 +68,7 @@ public class TrainingResult {
     @Column(name = "training_port_area")
     private String trainingArea;    //훈련대상 항만구역
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "trainingResult")
     private List<TrainingPortFacility> trainingPortFacilityList = new ArrayList<>();
 
@@ -79,8 +82,9 @@ public class TrainingResult {
     @JoinColumn(name = "scenario_id")
     private Scenario scenario;
 
+
     @Builder
-    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea, Scenario scenario) {
+    public TrainingResult(Integer id, String name, LocalDateTime startDate, LocalDateTime endDate, TrainingPlace place, TrainingType trainingType, IncidentLevel incidentLevel, IncidentImpact incidentImpact, IncidentType incidentType, String incidentDetailType, String department, String trainingParticipants, String trainingArea, List<TrainingByDate> trainingByDateList, Scenario scenario) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -94,6 +98,7 @@ public class TrainingResult {
         this.department = department;
         this.trainingParticipants = trainingParticipants;
         this.trainingArea = trainingArea;
+        this.trainingByDateList = trainingByDateList;
         this.scenario = scenario;
     }
 

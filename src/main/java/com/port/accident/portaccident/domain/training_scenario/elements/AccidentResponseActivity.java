@@ -1,5 +1,6 @@
 package com.port.accident.portaccident.domain.training_scenario.elements;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentResponseActivityDto;
 import com.port.accident.portaccident.enums.IncidentLevel;
@@ -30,6 +31,7 @@ public class AccidentResponseActivity {
     private String manager;
 
     @Column(name = "accident_response_complete_planing_time") // 사고 대응 활동 완료 계획 시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime completePlaningTime;
 
     @ManyToOne(fetch = FetchType.LAZY)

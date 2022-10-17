@@ -34,56 +34,58 @@
         <tbody>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">시나리오명</td>
-            <td colspan="1" rowspan="1">SY2</td>
+            <td colspan="1" rowspan="1" th:text="${scenario.name}"></td>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련명</td>
-            <td colspan="1" rowspan="1">추락 예방 훈련</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.name}">추락 예방 훈련</td>
         </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 종류</td>
-            <td colspan="1" rowspan="1">도상 훈련</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.trainingType}"></td>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 장소</td>
-            <td colspan="1" rowspan="1">무역항 수상구역</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.place}"></td>
         </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 시작 일시</td>
-            <td colspan="1" rowspan="1">2022-01-03</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.startDate}"></td>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 종료 일시</td>
-            <td colspan="1" rowspan="1">2022-01-04</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.endDate}"></td>
         </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">안전사고 유형</td>
-            <td colspan="1" rowspan="1">사고</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.incidentType}">사고</td>
             <td style="background-color: #f2eeee; font-weight: 600;">사고 수준</td>
-            <td colspan="1" rowspan="1">level 3</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.incidentLevel}">level 3</td>
         </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">사고 유형</td>
-            <td colspan="1" rowspan="1">추락</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.incidentDetailType}">추락</td>
             <td style="background-color: #f2eeee; font-weight: 600;">사고 영향</td>
-            <td colspan="1" rowspan="1">경상</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.incidentImpact}">경상</td>
         </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 대상 항만 설비</td>
             <td colspan="4" rowspan="1">
-                <input name="machine1" type="checkbox" disabled checked>크레인
-                <input name="machine2" type="checkbox" disabled>컨테이너
-                <input name="machine3" type="checkbox" disabled>지게차
-                <input name="machine3" type="checkbox" disabled>사다리
+                <input name="CRANE" type="checkbox" disabled >크레인
+                <input name="CONTAINER" type="checkbox" disabled>컨테이너
+                <input name="FORKLIFT" type="checkbox" disabled>지게차
+                <input name="LADDER" type="checkbox" disabled>사다리
             </td>
         </tr>
         </tbody>
         <tbody>
-        <tr><td colspan="4" style="border-left: 0.5px solid #fff; border-right: 0.5px solid #fff;"></td></tr>
+        <tr>
+            <td colspan="4" style="border-left: 0.5px solid #fff; border-right: 0.5px solid #fff;"></td>
+        </tr>
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 대상 항만 구역</td>
-            <td colspan="4" rowspan="1">인천항</td>
+            <td colspan="4" rowspan="1" th:text="${trainingResult.trainingArea}"></td>
         </tr>
 
         <tr>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 수행 부서</td>
-            <td colspan="1" rowspan="1">총괄통제부</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.department}"></td>
             <td style="background-color: #f2eeee; font-weight: 600;">훈련 참여 인원</td>
-            <td colspan="1" rowspan="1">정민환,이혜원,박태영,송영주,주현정</td>
+            <td colspan="1" rowspan="1" th:text="${trainingResult.trainingParticipants}"></td>
         </tr>
         </tbody>
     </table>
@@ -111,4 +113,22 @@
     </div>
 </footer>
 </body>
+<script th:inline="javascript">
+
+    let trainingPortFacilityList = [[${portFacilityList}]]
+
+    for (const facility of trainingPortFacilityList) {
+        if (facility == "CRANE") {
+            document.querySelector("input[name=CRANE]").checked = true;
+        } else if (facility == "CONTAINER") {
+            document.querySelector("input[name=CONTAINER]").checked = true;
+        } else if (facility == "FORKLIFT") {
+            document.querySelector("input[name=FORKLIFT]").checked = true;
+        } else if (facility == "LADDER") {
+            document.querySelector("input[name=LADDER]").checked = true;
+        }
+        console.log(facility);
+    }
+
+</script>
 </html>

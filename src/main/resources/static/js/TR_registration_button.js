@@ -17,10 +17,6 @@ let saveTrainingResult = {
         let incidentImpact = $("select[name=incidentImpactSelect] option:selected").val();
         let incidentDetailType = $("select[name=incidentDetailTypeSelect] option:selected").val();
 
-        console.log("incidentLevel : " + incidentLevel);
-        console.log("incidentImpact : " + incidentImpact);
-        console.log("incidentImpact : " + incidentImpact);
-
         let traningResult = {
             scenario: scenarioId,
             incidentType: $("#incidentType").val(),
@@ -43,9 +39,6 @@ let saveTrainingResult = {
             TrainingResult: traningResult,
             TrainingPortFacilitys: trainingPortFacilityListArr
         };
-
-
-        console.log(JSON.stringify(data));
 
         $.ajax({
             method: "POST",

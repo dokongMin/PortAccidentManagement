@@ -162,18 +162,16 @@ public class TrainingScenarioController {
 
     @GetMapping("/ARA_Register_Page/{scenarioId}")
     public String registerAccidentResponseActivityPage(Model model, @PathVariable(value = "scenarioId") Integer scenarioId) {
-
         String scenarioName = scenarioService.findNameById(scenarioId);
+
         model.addAttribute("scenarioId", scenarioId);
         model.addAttribute("scenarioName", scenarioName);
-
         return "TrainingScenarios/AccidentResponseActivity/ARA_Register";
     }
 
     @PostMapping("/ARA_Register")
     public String registerAccidentResponseActivity(RedirectAttributes redirectAttributes,
-                                                   @RequestBody AccidentResponseActivityDto accidentResponseActivityDto,
-                                                   @RequestParam Integer scenarioId) {
+                                                   @RequestBody AccidentResponseActivityDto accidentResponseActivityDto) {
         /* TODO::혜원 현정님 - 안전사고대응활동 등록
          * DTO의 필드명과 동일하게 form의 name 설정 시 DTO에 연결됩니다.
          * (id, comment, manager, completePlaningTime)
@@ -182,11 +180,11 @@ public class TrainingScenarioController {
          * */
 
         AccidentResponseActivityDto registerAccidentResponseActivityDto = scenarioService.toServiceAccidentResponseActivity(accidentResponseActivityDto);
-        scenarioService.registerAccidentResponseActivity(scenarioId, registerAccidentResponseActivityDto);
+        scenarioService.registerAccidentResponseActivity(accidentResponseActivityDto.getScenarioId(), registerAccidentResponseActivityDto);
 
-        redirectAttributes.addAttribute("scenarioId", scenarioId);
+        redirectAttributes.addAttribute("scenarioId", accidentResponseActivityDto.getScenarioId());
 
-        return "redirect:/TS_Detail/{scenarioId}";
+        return "redirect:/TrainingScenarios/TS_Detail/{scenarioId}";
     }
 
     @GetMapping("/ARA_Modify_Page")
@@ -210,6 +208,6 @@ public class TrainingScenarioController {
 
         redirectAttributes.addAttribute("scenarioId", modifyAccidentResponseActivityDto.getScenario().getId());
 
-        return "redirect:/TS_Detail/{scenarioId}";
+        return "redirect:/TrainingScenarios//TS_Detail/{scenarioId}";
     }
 }

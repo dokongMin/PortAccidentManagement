@@ -7,9 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface TrainingPortFacilityRepository extends JpaRepository<TrainingPortFacility, Integer>{
+import java.util.List;
+
+public interface TrainingPortFacilityRepository extends JpaRepository<TrainingPortFacility, Integer> {
     @Transactional
     @Modifying
     @Query("delete from TrainingPortFacility f where f.trainingResult.id =:trainingResultId")
     int deleteFacilityByTrainingResultId(Integer trainingResultId);
+
+    @Query("select f from TrainingPortFacility f where f.trainingResult.id = :trainingResultId")
+    List<TrainingPortFacility> findAllByTrainingResultId(int trainingResultId);
 }

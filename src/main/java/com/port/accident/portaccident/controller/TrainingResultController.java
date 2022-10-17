@@ -2,9 +2,11 @@ package com.port.accident.portaccident.controller;
 
 import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario_result.TrainingResult;
+import com.port.accident.portaccident.domain.training_scenario_result.elements.TrainingPortFacility;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultCondition;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultDto;
 import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultJoinScenarioDto;
+import com.port.accident.portaccident.dto.training_scenario_result.TrainingResultReturnToDto;
 import com.port.accident.portaccident.enums.*;
 import com.port.accident.portaccident.repository.training_scenario.ScenarioRepository;
 import com.port.accident.portaccident.repository.training_scenario_result.TrainingResultRepository;
@@ -39,6 +41,12 @@ public class TrainingResultController {
 
     @GetMapping("/trainingResult_detail/{resultId}")
     public String trainingResultDetail(Model model, @PathVariable(value = "resultId") Integer resultId) {
+        TrainingResult trainingResult = resultService.findByTrainingResultId(resultId);
+        TrainingResultReturnToDto dto = resultService.findByTrainingResultIdReturnDto(resultId);
+        model.addAttribute("trainingResult",dto);
+        model.addAttribute("scenario",trainingResult.getScenario());
+        model.addAttribute("portFacilityList",dto.getTrainingPortFacilityList());
+
         return "TrainingResult/TR_detail";
     }
 
