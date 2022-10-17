@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelpController {
 
     @GetMapping("/stateaccident")
-    public String graphAccidentPage(){
-        return "/help/stateaccident";
+    public String graphAccidentPage() {
+        return "help/stateaccident";
     }
 }
