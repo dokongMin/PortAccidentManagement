@@ -4,7 +4,8 @@ import com.port.accident.portaccident.domain.training_scenario.Scenario;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentPortFacility;
 import com.port.accident.portaccident.domain.training_scenario.elements.AccidentResponseActivity;
 import com.port.accident.portaccident.domain.training_scenario.scenario_evaluation.ScenarioEvaluation;
-import com.port.accident.portaccident.dto.training_scenario.ScenarioAccidentPortFacilityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioFacilityActivityDto;
+import com.port.accident.portaccident.dto.training_scenario.ScenarioFacilityDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioDto;
 import com.port.accident.portaccident.dto.training_scenario.ScenarioSearchCondition;
 import com.port.accident.portaccident.dto.training_scenario.elements.AccidentPortFacilityDto;
@@ -23,7 +24,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -50,15 +50,15 @@ public class ScenarioService {
                 .build();
     }
 
-    public ScenarioDto toServiceScenarioDto(ScenarioAccidentPortFacilityDto scenarioAccidentPortFacilityDto) {
+    public ScenarioDto toServiceScenarioDto(ScenarioFacilityActivityDto scenarioFacilityActivityDto) {
         return ScenarioDto.builder()
-                .id(scenarioAccidentPortFacilityDto.getId())
-                .name(scenarioAccidentPortFacilityDto.getName())
-                .incidentLevel(scenarioAccidentPortFacilityDto.getIncidentLevel())
-                .incidentImpact(scenarioAccidentPortFacilityDto.getIncidentImpact())
-                .incidentType(scenarioAccidentPortFacilityDto.getIncidentType())
-                .incidentDetailType(scenarioAccidentPortFacilityDto.getIncidentDetailType())
-                .portArea(scenarioAccidentPortFacilityDto.getPortArea())
+                .id(scenarioFacilityActivityDto.getId())
+                .name(scenarioFacilityActivityDto.getName())
+                .incidentLevel(scenarioFacilityActivityDto.getIncidentLevel())
+                .incidentImpact(scenarioFacilityActivityDto.getIncidentImpact())
+                .incidentType(scenarioFacilityActivityDto.getIncidentType())
+                .incidentDetailType(scenarioFacilityActivityDto.getIncidentDetailType())
+                .portArea(scenarioFacilityActivityDto.getPortArea())
                 .build();
     }
 
@@ -133,6 +133,26 @@ public class ScenarioService {
         return facilityDtoList;
     }
 
+    public List<AccidentResponseActivityDto> makeAccidentResponseActivityDtoBuilder(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+        List<AccidentResponseActivityDto> activityDtoList = new ArrayList<>();
+
+        for (AccidentResponseActivityDto accidentResponseActivityDto : accidentResponseActivityDtoList) {
+            Scenario scenario = findById(accidentResponseActivityDto.getScenarioId());
+
+            AccidentResponseActivityDto activityDto = AccidentResponseActivityDto.builder()
+                    .id(accidentResponseActivityDto.getId())
+                    .comment(accidentResponseActivityDto.getComment())
+                    .manager(accidentResponseActivityDto.getManager())
+                    .completePlaningTime(accidentResponseActivityDto.getCompletePlaningDate().atStartOfDay())
+                    .scenario(scenario)
+                    .build();
+
+            activityDtoList.add(activityDto);
+        }
+
+        return activityDtoList;
+    }
+
     public Scenario findById(Integer scenarioId) {
         return scenarioRepository.findById(scenarioId).orElseThrow(() -> new NoSuchElementException("존재하지 않는 아이디값입니다."));
     }
@@ -154,13 +174,13 @@ public class ScenarioService {
 
     @Transactional
     public Integer saveScenario(ScenarioDto scenarioDto) {
-        validateDuplicateScenario(scenarioDto); // 중복 시나리오 검증
+        validateDuplicateScenario(scenarioDto.getName()); // 중복 시나리오 검증
 
         return scenarioRepository.save(scenarioDto.toEntity()).getId();
     }
 
-    private void validateDuplicateScenario(ScenarioDto scenarioDto) {
-        Optional<Scenario> findScenario = scenarioRepository.findByName(scenarioDto.getName());
+    private void validateDuplicateScenario(String name) {
+        Optional<Scenario> findScenario = scenarioRepository.findByName(name);
 
         if (findScenario.isPresent()) {
             throw new IllegalStateException("이미 존재하는 시나리오입니다.");
@@ -176,9 +196,12 @@ public class ScenarioService {
 
 
     @Transactional
-    public Integer modifyScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList) {
+    public Integer modifyScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+        validateDuplicateScenario(scenarioDto.getName());
+
         Integer scenarioId = updateScenario(scenarioDto);
         updateAccidentPortFacility(scenarioId, accidentPortFacilityDtoList);
+        modifyAccidentResponseActivity(accidentResponseActivityDtoList);
 
         return scenarioId;
     }
@@ -211,7 +234,7 @@ public class ScenarioService {
         scenarioRepository.deleteById(scenarioId);
     }
 
-    public Page<ScenarioAccidentPortFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
+    public Page<ScenarioFacilityDto> searchPageScenario(ScenarioSearchCondition condition, Pageable pageable) {
         return scenarioRepository.searchPageScenario(condition, pageable);
     }
 
@@ -237,6 +260,13 @@ public class ScenarioService {
     @Transactional
     public Integer saveAccidentResponseActivity(AccidentResponseActivityDto accidentResponseActivityDto) {
         return accidentResponseActivityRepository.save(accidentResponseActivityDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public void modifyAccidentResponseActivity(List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
+        for (AccidentResponseActivityDto activityDto : accidentResponseActivityDtoList) {
+            updateAccidentResponseActivity(activityDto);
+        }
     }
 
     @Transactional
