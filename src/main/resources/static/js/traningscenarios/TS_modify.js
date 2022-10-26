@@ -53,8 +53,6 @@ let saveScenario = {
             accidentResponseActivityList: accidentResponseActivityList
         };
 
-        console.log(JSON.stringify(data));
-
         $.ajax({
             method: "POST",
             url: "/TrainingScenarios/TS_Modify",

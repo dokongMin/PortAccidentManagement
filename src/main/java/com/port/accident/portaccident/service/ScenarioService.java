@@ -197,7 +197,12 @@ public class ScenarioService {
 
     @Transactional
     public Integer modifyScenario(ScenarioDto scenarioDto, List<AccidentPortFacilityDto> accidentPortFacilityDtoList, List<AccidentResponseActivityDto> accidentResponseActivityDtoList) {
-        validateDuplicateScenario(scenarioDto.getName());
+        String oldName = findNameById(scenarioDto.getId());
+        String newName = scenarioDto.getName();
+
+        if(!oldName.equals(newName)) {
+            validateDuplicateScenario(newName);
+        }
 
         Integer scenarioId = updateScenario(scenarioDto);
         updateAccidentPortFacility(scenarioId, accidentPortFacilityDtoList);
